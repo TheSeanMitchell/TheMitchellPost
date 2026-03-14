@@ -1,0 +1,33 @@
+name: Update Middle East News Bot
+
+on:
+  schedule:
+    - cron: '0 * * * *'   # Runs every hour
+  workflow_dispatch:      # Allows you to run manually
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install feedparser
+
+      - name: Run the news bot
+        run: python bot.py
+
+      - name: Commit and push updated HTML
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add index.html
+          git commit -m "Auto-update: $(date)" || echo "No changes to commit"
+          git push
