@@ -4,7 +4,9 @@ import os
 import re
 import urllib.request
 
-# Keywords (whole words only) – unchanged
+print("Middle East News Bot - Starting on GitHub...")
+
+# Keywords (unchanged)
 RAW_KEYWORDS = ["iran", "iranian", "tehran", "qom",
                 "khamenei", "mojtabakhamenei", "ayatollah", "supreme leader", "president iran", "pezeshkian",
                 "iran war", "israel iran", "us iran", "iran israel war", "iran attack", "iran strike", "iran missile", "iran drone",
@@ -19,7 +21,7 @@ for kw in RAW_KEYWORDS:
     KEYWORDS.update(word.lower() for word in kw.split())
 KEYWORDS = list(KEYWORDS)
 
-# All sources (used for both top & main feed)
+# Sources (unchanged)
 ALL_SOURCES = [
     ("Global News", "https://news.google.com/rss/search?q=iran+OR+us+iran+OR+israel+iran+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("AP via Google", "https://news.google.com/rss/search?q=site:apnews.com+iran+OR+us+iran+OR+israel+iran+when:1d&hl=en-US&gl=US&ceid=US:en"),
@@ -28,12 +30,9 @@ ALL_SOURCES = [
     ("Al Jazeera via Google", "https://news.google.com/rss/search?q=site:aljazeera.com+iran+OR+israel+OR+gaza+OR+hezbollah+OR+hamas+when:1d&hl=en-US&gl=US&ceid=US:en"),
 ]
 
-# Output file for GitHub Pages (must be index.html for clean URL)
+# Output file (must be index.html for Pages root URL)
 HTML_FILE = "index.html"
 
-print("Sean Mitchell's Middle East News Bot Alpha 1.0 - Starting...")
-
-# Collect all matches from every source
 all_matches = []
 seen = set()
 
@@ -41,7 +40,7 @@ for source_name, url in ALL_SOURCES:
     count = 0
     for attempt in range(3):
         try:
-            print(f"  Fetching {source_name} (attempt {attempt+1})...")
+            print(f"Fetching {source_name} (attempt {attempt+1})...")
             req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
             with urllib.request.urlopen(req, timeout=15) as response:
                 feed = feedparser.parse(response.read().decode('utf-8', errors='ignore'))
@@ -53,12 +52,10 @@ for source_name, url in ALL_SOURCES:
                 title = entry.title.strip()
                 title_lower = title.lower()
                 link = entry.get('link', '#')
-                
                 dedup_key = (title_lower, link)
                 if dedup_key in seen:
                     continue
                 seen.add(dedup_key)
-                
                 if any(kw in title_lower for kw in KEYWORDS):
                     ts_struct = entry.get('published_parsed') or entry.get('updated_parsed')
                     ts = time.mktime(ts_struct) if ts_struct else time.time()
@@ -66,39 +63,37 @@ for source_name, url in ALL_SOURCES:
                     count += 1
             break
         except Exception as e:
-            print(f"    Attempt {attempt+1} failed: {str(e)}")
+            print(f"Attempt {attempt+1} failed: {str(e)}")
             time.sleep(2)
 
-# Strict sort by timestamp (newest first)
 all_matches.sort(reverse=True, key=lambda x: x[0])
 
-print(f"Found {len(all_matches)} unique matching headlines after deduplication.")
+print(f"Found {len(all_matches)} headlines.")
 
-html = """
+html = f"""
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sean Mitchell's Middle East News Bot Alpha 1.0</title>
+    <title>Middle East News Bot</title>
     <style>
-        body { background: #000000; color: #ffffff; font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
-        h1 { color: #ffffff; margin-bottom: 10px; }
-        .update { color: #aaaaaa; font-size: 0.9em; margin-bottom: 20px; }
-        .section-title { color: #FF0000; font-size: 1.6em; margin: 30px 0 10px; font-weight: bold; }
-        .top-divider { border: 0; height: 3px; background: #FF0000; margin: 25px 0 35px; }
-        .headline { margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid #222222; }
-        .title { color: #ffffff; }
-        .keyword { color: #00FFFF; font-weight: bold; text-decoration: underline; }
-        .link { color: #003300; text-decoration: none; margin-left: 10px; font-size: 0.9em; }
-        .link:hover { text-decoration: underline; }
+        body {{ background: #000; color: #fff; font-family: Arial; margin: 20px; line-height: 1.5; }}
+        h1 {{ color: #fff; }}
+        .update {{ color: #aaa; font-size: 0.9em; }}
+        .section-title {{ color: #f00; font-size: 1.6em; font-weight: bold; margin: 30px 0 10px; }}
+        .top-divider {{ border: 0; height: 3px; background: #f00; margin: 25px 0 35px; }}
+        .headline {{ margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid #222; }}
+        .title {{ color: #fff; }}
+        .keyword {{ color: #0ff; font-weight: bold; text-decoration: underline; }}
+        .link {{ color: #030; text-decoration: none; margin-left: 10px; font-size: 0.9em; }}
+        .link:hover {{ text-decoration: underline; }}
     </style>
 </head>
 <body>
-    <h1>Sean Mitchell's Middle East News Bot Alpha 1.0</h1>
-    <p class="update">Last updated at """ + time.strftime("%H:%M:%S") + """</p>
+    <h1>Middle East News Bot</h1>
+    <p class="update">Last updated at {time.strftime("%H:%M:%S")}</p>
 
-    <!-- Breaking News top section – top 20 most recent -->
     <h2 class="section-title">Breaking News</h2>
     <div id="top-feed">
 """
@@ -116,13 +111,12 @@ if all_matches:
                 highlighted_title = re.sub(pattern, f'<span class="keyword">{kw}</span>', highlighted_title, flags=re.IGNORECASE)
         html += f'<div class="headline"><span class="title">{highlighted_title}</span> <a class="link" href="{link}" target="_blank">[Read Article]</a></div>\n'
 else:
-    html += '<p>No breaking news available right now.</p>\n'
+    html += '<p>No breaking news right now.</p>\n'
 
 html += """
     </div>
     <hr class="top-divider">
 
-    <!-- Main balanced feed – top 80 -->
     <h2 class="section-title">All Recent Headlines</h2>
     <div id="feed">
 """
@@ -148,7 +142,12 @@ html += """
 </html>
 """
 
-with open(HTML_FILE, "w", encoding="utf-8") as f:
-    f.write(html)
+try:
+    with open(HTML_FILE, "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"Generated {HTML_FILE} successfully")
+except Exception as e:
+    print(f"Failed to write file: {str(e)}")
+    raise  # Show error in Actions log
 
-print("HTML generated successfully as index.html")
+print("Bot run complete.")
