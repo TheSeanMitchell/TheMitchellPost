@@ -75,6 +75,13 @@ all_matches.sort(reverse=True, key=lambda x: x[0])
 
 print(f"Found {len(all_matches)} headlines.")
 
+# === NEW: Time-based split to eliminate duplicates ===
+current_ts = time.time()
+six_hours_ago = current_ts - 21600  # 6 hours in seconds
+
+breaking = [item for item in all_matches if item[0] >= six_hours_ago][:20]
+all_recent = [item for item in all_matches if item not in breaking][:80]
+
 html = """
 <!DOCTYPE html>
 <html lang="en">
@@ -82,19 +89,18 @@ html = """
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Middle East News Feed by Sean Mitchell from The Mitchell Post</title>
-    <!-- Prevent browser/CDN cache -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <style>
         body { background: #121212; color: #F6CB2F; font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
-        h1 { color: #FFFFFF; margin-bottom: 10px; }
+        h1 { color: #FFFFFF; margin-bottom: 10px; text-decoration: underline; }
         .update { color: #aaaaaa; font-size: 0.9em; margin-bottom: 20px; }
         .section-title { color: #FF0000; font-size: 1.6em; margin: 30px 0 10px; font-weight: bold; }
         .top-divider { border: 0; height: 3px; background: #FF0000; margin: 25px 0 35px; }
         .headline { margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid #222222; }
         .title { color: #F6CB2F; }
-        .keyword { color: #FF0000; font-weight: bold; text-decoration: underline; }
+        .keyword { color: #00FFFF; font-weight: bold; } /* cyan, no underline */
         .link { color: #B0B0B0; text-decoration: none; margin-left: 10px; font-size: 0.9em; }
         .link:hover { text-decoration: underline; }
     </style>
@@ -107,8 +113,8 @@ html = """
     <div id="top-feed">
 """
 
-if all_matches:
-    for ts, title, source, link in all_matches[:20]:
+if breaking:
+    for ts, title, source, link in breaking:
         highlighted_title = title
         for kw in RAW_KEYWORDS:
             if ' ' in kw:
@@ -120,7 +126,7 @@ if all_matches:
                 highlighted_title = re.sub(pattern, f'<span class="keyword">{kw}</span>', highlighted_title, flags=re.IGNORECASE)
         html += f'<div class="headline"><span class="title">{highlighted_title}</span> <a class="link" href="{link}" target="_blank">[Read Article]</a></div>\n'
 else:
-    html += '<p>No breaking news available right now.</p>\n'
+    html += '<p>No breaking news in the last 6 hours.</p>\n'
 
 html += """
     </div>
@@ -130,8 +136,8 @@ html += """
     <div id="feed">
 """
 
-if all_matches:
-    for ts, title, source, link in all_matches[:80]:
+if all_recent:
+    for ts, title, source, link in all_recent:
         highlighted_title = title
         for kw in RAW_KEYWORDS:
             if ' ' in kw:
