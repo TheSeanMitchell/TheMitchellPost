@@ -75,7 +75,7 @@ all_matches.sort(reverse=True, key=lambda x: x[0])
 
 print(f"Found {len(all_matches)} headlines.")
 
-# === NEW: Time-based split to eliminate duplicates ===
+# Time-based split (last 6 hours for Breaking News, rest for All Recent – no overlap)
 current_ts = time.time()
 six_hours_ago = current_ts - 21600  # 6 hours in seconds
 
@@ -88,25 +88,26 @@ html = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Middle East News Feed by Sean Mitchell from The Mitchell Post</title>
+    <title>Sean Mitchell's Middle East News Feed</title>
+    <!-- Prevent browser/CDN cache -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <style>
-        body { background: #121212; color: #F6CB2F; font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
+        body { background: #121212; color: #FFFFFF; font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
         h1 { color: #FFFFFF; margin-bottom: 10px; text-decoration: underline; }
         .update { color: #aaaaaa; font-size: 0.9em; margin-bottom: 20px; }
         .section-title { color: #FF0000; font-size: 1.6em; margin: 30px 0 10px; font-weight: bold; }
         .top-divider { border: 0; height: 3px; background: #FF0000; margin: 25px 0 35px; }
         .headline { margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid #222222; }
-        .title { color: #F6CB2F; }
-        .keyword { color: #00FFFF; font-weight: bold; } /* cyan, no underline */
+        .title { color: #FFFFFF; }
+        .keyword { color: #F6CB2F; font-weight: bold; } /* golden, no underline */
         .link { color: #B0B0B0; text-decoration: none; margin-left: 10px; font-size: 0.9em; }
         .link:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
-    <h1>Middle East News Feed by Sean Mitchell from The Mitchell Post</h1>
+    <h1>Sean Mitchell's Middle East News Feed</h1>
     <p class="update">Last updated at """ + datetime.utcnow().strftime("%H:%M:%S UTC") + """ (auto-refreshes every few hours)</p>
 
     <h2 class="section-title">Breaking News</h2>
