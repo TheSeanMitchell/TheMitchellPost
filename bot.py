@@ -31,7 +31,7 @@ RAW_ME_KEYWORDS = ["middle east", "arab world", "gulf states", "gcc countries", 
                    "gaza humanitarian crisis", "yemen famine", "climate change middle east"]
 ME_KEYWORDS = set(word.lower() for kw in RAW_ME_KEYWORDS for word in kw.split())
 
-# US Politics & Sports (unchanged from last version)
+# US Politics (your expanded list)
 RAW_US_KEYWORDS = ["united states politics", "american politics", "us government", "federal government", "white house", "us congress", "us senate",
                    "house of representatives", "supreme court", "us constitution", "bill of rights", "federal election", "presidential election",
                    "midterm elections", "primary elections", "electoral college", "inauguration day", "state of the union", "campaign rally",
@@ -108,6 +108,11 @@ RAW_SPORTS_KEYWORDS = ["march madness", "college basketball", "arizona wildcats"
                        "villanova wildcats", "utah state aggies"]
 SPORTS_KEYWORDS = set(word.lower() for kw in RAW_SPORTS_KEYWORDS for word in kw.split())
 
+# ====================== BLOCKLISTS (prevent bleed) ======================
+ME_BLOCKLIST = {"trump", "harris", "biden", "congress", "senate", "house of representatives", "supreme court", "election", "midterm", "presidential", "republican", "democrat", "maga", "white house", "capitol", "washington dc"}
+US_BLOCKLIST = {"iran", "israel", "gaza", "hezbollah", "hamas", "hormuz", "khamenei", "netanyahu", "mbs", "mbz", "saudi", "uae", "qatar", "lebanon", "syria", "yemen", "palestine", "irgc", "houthis", "axis of resistance", "jcpoa", "snapback sanctions", "strait of hormuz"}
+SPORTS_BLOCKLIST = ME_BLOCKLIST.union(US_BLOCKLIST)
+
 # ====================== SECTION-SPECIFIC SOURCES ======================
 MIDDLE_EAST_SOURCES = [
     ("Global & Regional", "https://news.google.com/rss/search?q=middle+east+OR+iran+OR+israel+OR+gulf+OR+hezbollah+OR+hamas+OR+saudi+OR+uae+OR+qatar+OR+syria+OR+lebanon+when:1d&hl=en-US&gl=US&ceid=US:en"),
@@ -127,16 +132,15 @@ SPORTS_SOURCES = [
     ("Broad Sports", "https://news.google.com/rss/search?q=when:1d+sports+OR+ncaa+OR+college+basketball+OR+football&hl=en-US&gl=US&ceid=US:en"),
 ]
 
-# ====================== FETCH FUNCTION WITH STRONG TITLE DEDUP ======================
+# ====================== FETCH FUNCTION WITH BLOCK + REQUIRED KEYWORD ======================
 def normalize_title(title):
-    # Remove station suffix (everything after last " - ")
     if " - " in title:
         title = title.rsplit(" - ", 1)[0]
     return title.strip().lower()
 
-def fetch_section(sources, keywords):
+def fetch_section(sources, keywords, blocklist):
     matches = []
-    seen_title = set()  # Deduplicate by normalized core title
+    seen_title = set()
     for source_name, url in sources:
         for attempt in range(3):
             try:
@@ -151,8 +155,13 @@ def fetch_section(sources, keywords):
                     link = entry.get('link', '#')
                     
                     if norm_title in seen_title:
-                        continue  # Skip duplicate core headline
+                        continue
                     
+                    # Block cross-contamination
+                    if blocklist and any(block in raw_title.lower() for block in blocklist):
+                        continue
+                    
+                    # Must contain at least one keyword from this section
                     if any(kw in raw_title.lower() for kw in keywords):
                         ts_struct = entry.get('published_parsed') or entry.get('updated_parsed')
                         ts = time.mktime(ts_struct) if ts_struct else time.time()
@@ -166,9 +175,9 @@ def fetch_section(sources, keywords):
     return matches
 
 # Fetch each section
-middle_matches = fetch_section(MIDDLE_EAST_SOURCES, ME_KEYWORDS)
-us_matches = fetch_section(US_POLITICS_SOURCES, US_KEYWORDS)
-sports_matches = fetch_section(SPORTS_SOURCES, SPORTS_KEYWORDS)
+middle_matches = fetch_section(MIDDLE_EAST_SOURCES, ME_KEYWORDS, US_BLOCKLIST)
+us_matches = fetch_section(US_POLITICS_SOURCES, US_KEYWORDS, ME_BLOCKLIST)
+sports_matches = fetch_section(SPORTS_SOURCES, SPORTS_KEYWORDS, ME_BLOCKLIST.union(US_BLOCKLIST))
 
 # Time split
 current_ts = time.time()
@@ -183,7 +192,7 @@ us_recent = [item for item in us_matches if item not in us_breaking][:20]
 sports_breaking = [item for item in sports_matches if item[0] >= six_hours_ago][:20]
 sports_recent = [item for item in sports_matches if item not in sports_breaking][:20]
 
-# ====================== BUILD HTML ======================
+# ====================== BUILD HTML (unchanged) ======================
 html = """
 <!DOCTYPE html>
 <html lang="en">
