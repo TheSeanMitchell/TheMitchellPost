@@ -108,15 +108,14 @@ html = """
     <meta http-equiv="Expires" content="0">
     <style>
         body { background: #121212; color: #FFFFFF; font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
-        .header { margin-bottom: 30px; }
-        h1 { color: #FFFFFF; margin: 0; text-decoration: underline; }
-        .byline { color: #aaaaaa; font-size: 1.0em; margin: 5px 0 0 0; }
+        .header { margin-bottom: 30px; text-align: left; }
+        h1 { color: #FFFFFF; margin: 0; text-decoration: underline; font-size: 2.2em; }
+        .byline { color: #aaaaaa; font-size: 1.05em; margin: 5px 0 0 0; }
         .update { color: #aaaaaa; font-size: 0.85em; margin: 5px 0 0 0; }
         .section-title { color: #FF0000; font-size: 1.6em; margin: 30px 0 10px; font-weight: bold; text-decoration: underline; text-decoration-color: #FF0000; }
         .top-divider { border: 0; height: 3px; background: #FF0000; margin: 35px 0; }
         .headline { margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid #222222; }
         .title { color: #FFFFFF; }
-        .keyword { color: #F6CB2F; font-weight: bold; }
         .link { color: #F6CB2F; text-decoration: underline; font-size: 0.85em; margin-left: 10px; }
         .link:hover { color: #FFFFFF; }
         .container { display: flex; flex-wrap: wrap; gap: 30px; max-width: 1400px; margin: 0 auto; }
@@ -131,55 +130,7 @@ html = """
         <span class="update">updated at """ + datetime.utcnow().strftime("%H:%M:%S UTC") + """</span>
     </div>
 
-    <!-- MIDDLE EAST -->
-    <div class="container">
-        <div class="column">
-            <h2 class="section-title">Middle East Breaking News</h2>
-"""
-
-if middle_breaking:
-    for ts, title, source, link in middle_breaking:
-        highlighted_title = title
-        for kw in RAW_ME_KEYWORDS:
-            if ' ' in kw:
-                pattern = r'\b' + re.escape(kw) + r'\b'
-                highlighted_title = re.sub(pattern, f'<span class="keyword">{kw}</span>', highlighted_title, flags=re.IGNORECASE)
-        for kw in ME_KEYWORDS:
-            if ' ' not in kw and len(kw) > 2:
-                pattern = r'\b' + re.escape(kw) + r'\b'
-                highlighted_title = re.sub(pattern, f'<span class="keyword">{kw}</span>', highlighted_title, flags=re.IGNORECASE)
-        html += f'<div class="headline"><span class="title">{highlighted_title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
-else:
-    html += '<p>No breaking news in the last 6 hours.</p>\n'
-
-html += """
-        </div>
-        <div class="column">
-            <h2 class="section-title">Middle East Headlines</h2>
-"""
-
-if middle_recent:
-    for ts, title, source, link in middle_recent:
-        highlighted_title = title
-        for kw in RAW_ME_KEYWORDS:
-            if ' ' in kw:
-                pattern = r'\b' + re.escape(kw) + r'\b'
-                highlighted_title = re.sub(pattern, f'<span class="keyword">{kw}</span>', highlighted_title, flags=re.IGNORECASE)
-        for kw in ME_KEYWORDS:
-            if ' ' not in kw and len(kw) > 2:
-                pattern = r'\b' + re.escape(kw) + r'\b'
-                highlighted_title = re.sub(pattern, f'<span class="keyword">{kw}</span>', highlighted_title, flags=re.IGNORECASE)
-        html += f'<div class="headline"><span class="title">{highlighted_title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
-else:
-    html += '<p>No additional headlines right now.</p>\n'
-
-html += """
-        </div>
-    </div>
-
-    <hr class="top-divider">
-
-    <!-- US POLITICS -->
+    <!-- US POLITICS (now top) -->
     <div class="container">
         <div class="column">
             <h2 class="section-title">US Politics Breaking News</h2>
@@ -187,16 +138,7 @@ html += """
 
 if us_breaking:
     for ts, title, source, link in us_breaking:
-        highlighted_title = title
-        for kw in RAW_US_KEYWORDS:
-            if ' ' in kw:
-                pattern = r'\b' + re.escape(kw) + r'\b'
-                highlighted_title = re.sub(pattern, f'<span class="keyword">{kw}</span>', highlighted_title, flags=re.IGNORECASE)
-        for kw in US_KEYWORDS:
-            if ' ' not in kw and len(kw) > 2:
-                pattern = r'\b' + re.escape(kw) + r'\b'
-                highlighted_title = re.sub(pattern, f'<span class="keyword">{kw}</span>', highlighted_title, flags=re.IGNORECASE)
-        html += f'<div class="headline"><span class="title">{highlighted_title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+        html += f'<div class="headline"><span class="title">{title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
 else:
     html += '<p>No breaking US politics news in the last 6 hours.</p>\n'
 
@@ -208,18 +150,39 @@ html += """
 
 if us_recent:
     for ts, title, source, link in us_recent:
-        highlighted_title = title
-        for kw in RAW_US_KEYWORDS:
-            if ' ' in kw:
-                pattern = r'\b' + re.escape(kw) + r'\b'
-                highlighted_title = re.sub(pattern, f'<span class="keyword">{kw}</span>', highlighted_title, flags=re.IGNORECASE)
-        for kw in US_KEYWORDS:
-            if ' ' not in kw and len(kw) > 2:
-                pattern = r'\b' + re.escape(kw) + r'\b'
-                highlighted_title = re.sub(pattern, f'<span class="keyword">{kw}</span>', highlighted_title, flags=re.IGNORECASE)
-        html += f'<div class="headline"><span class="title">{highlighted_title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+        html += f'<div class="headline"><span class="title">{title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
 else:
     html += '<p>No additional US politics headlines right now.</p>\n'
+
+html += """
+        </div>
+    </div>
+
+    <hr class="top-divider">
+
+    <!-- MIDDLE EAST -->
+    <div class="container">
+        <div class="column">
+            <h2 class="section-title">Middle East Breaking News</h2>
+"""
+
+if middle_breaking:
+    for ts, title, source, link in middle_breaking:
+        html += f'<div class="headline"><span class="title">{title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+else:
+    html += '<p>No breaking news in the last 6 hours.</p>\n'
+
+html += """
+        </div>
+        <div class="column">
+            <h2 class="section-title">Middle East Headlines</h2>
+"""
+
+if middle_recent:
+    for ts, title, source, link in middle_recent:
+        html += f'<div class="headline"><span class="title">{title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+else:
+    html += '<p>No additional headlines right now.</p>\n'
 
 html += """
         </div>
@@ -235,16 +198,7 @@ html += """
 
 if sports_breaking:
     for ts, title, source, link in sports_breaking:
-        highlighted_title = title
-        for kw in RAW_SPORTS_KEYWORDS:
-            if ' ' in kw:
-                pattern = r'\b' + re.escape(kw) + r'\b'
-                highlighted_title = re.sub(pattern, f'<span class="keyword">{kw}</span>', highlighted_title, flags=re.IGNORECASE)
-        for kw in SPORTS_KEYWORDS:
-            if ' ' not in kw and len(kw) > 2:
-                pattern = r'\b' + re.escape(kw) + r'\b'
-                highlighted_title = re.sub(pattern, f'<span class="keyword">{kw}</span>', highlighted_title, flags=re.IGNORECASE)
-        html += f'<div class="headline"><span class="title">{highlighted_title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+        html += f'<div class="headline"><span class="title">{title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
 else:
     html += '<p>No breaking sports news in the last 6 hours.</p>\n'
 
@@ -256,16 +210,7 @@ html += """
 
 if sports_recent:
     for ts, title, source, link in sports_recent:
-        highlighted_title = title
-        for kw in RAW_SPORTS_KEYWORDS:
-            if ' ' in kw:
-                pattern = r'\b' + re.escape(kw) + r'\b'
-                highlighted_title = re.sub(pattern, f'<span class="keyword">{kw}</span>', highlighted_title, flags=re.IGNORECASE)
-        for kw in SPORTS_KEYWORDS:
-            if ' ' not in kw and len(kw) > 2:
-                pattern = r'\b' + re.escape(kw) + r'\b'
-                highlighted_title = re.sub(pattern, f'<span class="keyword">{kw}</span>', highlighted_title, flags=re.IGNORECASE)
-        html += f'<div class="headline"><span class="title">{highlighted_title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+        html += f'<div class="headline"><span class="title">{title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
 else:
     html += '<p>No additional sports headlines right now.</p>\n'
 
