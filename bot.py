@@ -51,7 +51,7 @@ ALL_SOURCES = [
     ("Al Jazeera via Google", "https://news.google.com/rss/search?q=site:aljazeera.com+iran+OR+israel+OR+gaza+OR+hezbollah+OR+hamas+when:1d&hl=en-US&gl=US&ceid=US:en"),
 ]
 
-# ====================== FETCH & SPLIT ALL SECTIONS ======================
+# ====================== FETCH & SPLIT ======================
 def fetch_section(keywords):
     matches = []
     seen = set()
@@ -83,7 +83,6 @@ middle_matches = fetch_section(ME_KEYWORDS)
 us_matches = fetch_section(US_KEYWORDS)
 sports_matches = fetch_section(SPORTS_KEYWORDS)
 
-# Time split (6 hours for Breaking, rest for Headlines)
 current_ts = time.time()
 six_hours_ago = current_ts - 21600
 
@@ -109,16 +108,16 @@ html = """
     <meta http-equiv="Expires" content="0">
     <style>
         body { background: #121212; color: #FFFFFF; font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
-        .header { display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
+        .header { margin-bottom: 30px; }
         h1 { color: #FFFFFF; margin: 0; text-decoration: underline; }
-        .byline { color: #aaaaaa; font-size: 1.0em; margin: 0; }
-        .update { color: #aaaaaa; font-size: 0.85em; margin: 0; }
-        .section-title { color: #FF0000; font-size: 1.6em; margin: 30px 0 10px; font-weight: bold; text-decoration: underline; text-decoration-color: #FFFFFF; }
+        .byline { color: #aaaaaa; font-size: 1.0em; margin: 5px 0 0 0; }
+        .update { color: #aaaaaa; font-size: 0.85em; margin: 5px 0 0 0; }
+        .section-title { color: #FF0000; font-size: 1.6em; margin: 30px 0 10px; font-weight: bold; text-decoration: underline; text-decoration-color: #FF0000; }
         .top-divider { border: 0; height: 3px; background: #FF0000; margin: 35px 0; }
         .headline { margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid #222222; }
         .title { color: #FFFFFF; }
         .keyword { color: #F6CB2F; font-weight: bold; }
-        .link { color: #A0A0A0; text-decoration: underline; font-size: 0.85em; margin-left: 10px; }
+        .link { color: #F6CB2F; text-decoration: underline; font-size: 0.85em; margin-left: 10px; }
         .link:hover { color: #FFFFFF; }
         .container { display: flex; flex-wrap: wrap; gap: 30px; max-width: 1400px; margin: 0 auto; }
         .column { flex: 1; min-width: 300px; }
@@ -132,7 +131,7 @@ html = """
         <span class="update">updated at """ + datetime.utcnow().strftime("%H:%M:%S UTC") + """</span>
     </div>
 
-    <!-- ====================== MIDDLE EAST ====================== -->
+    <!-- MIDDLE EAST -->
     <div class="container">
         <div class="column">
             <h2 class="section-title">Middle East Breaking News</h2>
@@ -180,7 +179,7 @@ html += """
 
     <hr class="top-divider">
 
-    <!-- ====================== US POLITICS ====================== -->
+    <!-- US POLITICS -->
     <div class="container">
         <div class="column">
             <h2 class="section-title">US Politics Breaking News</h2>
@@ -228,7 +227,7 @@ html += """
 
     <hr class="top-divider">
 
-    <!-- ====================== SPORTS SECTION ====================== -->
+    <!-- SPORTS -->
     <div class="container">
         <div class="column">
             <h2 class="section-title">Sports Breaking News</h2>
