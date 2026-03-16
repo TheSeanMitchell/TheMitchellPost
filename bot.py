@@ -104,14 +104,32 @@ html = """
         .keyword { color: #F6CB2F; font-weight: bold; } /* golden, no underline */
         .link { color: #B0B0B0; text-decoration: none; margin-left: 10px; font-size: 0.9em; }
         .link:hover { text-decoration: underline; }
+
+        /* Side-by-side columns */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .column {
+            flex: 1;
+            min-width: 300px;
+        }
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
     <h1>Sean Mitchell's Middle East News Feed</h1>
     <p class="update">Last updated at """ + datetime.utcnow().strftime("%H:%M:%S UTC") + """ (auto-refreshes every few hours)</p>
 
-    <h2 class="section-title">Breaking News</h2>
-    <div id="top-feed">
+    <div class="container">
+        <div class="column">
+            <h2 class="section-title">Breaking News</h2>
+            <div id="top-feed">
 """
 
 if breaking:
@@ -130,11 +148,12 @@ else:
     html += '<p>No breaking news in the last 6 hours.</p>\n'
 
 html += """
-    </div>
-    <hr class="top-divider">
+            </div>
+        </div>
 
-    <h2 class="section-title">All Recent Headlines</h2>
-    <div id="feed">
+        <div class="column">
+            <h2 class="section-title">All Recent Headlines</h2>
+            <div id="feed">
 """
 
 if all_recent:
@@ -153,6 +172,8 @@ else:
     html += '<p>No additional headlines right now.</p>\n'
 
 html += """
+            </div>
+        </div>
     </div>
 </body>
 </html>
