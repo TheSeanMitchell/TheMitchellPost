@@ -14,58 +14,53 @@ INDEX_HTML = os.path.join(CURRENT_DIR, "index.html")
 
 # ====================== KEYWORDS ======================
 # Middle East (your full list)
-RAW_ME_KEYWORDS = [
-    "middle east", "arab world", "gulf states", "gcc countries", "levant region", "maghreb region", "mena region",
-    "persian gulf", "arabian peninsula", "west asia", "red sea region", "iran", "iranian", "tehran", "qom", "mashhad",
-    "isfahan", "tabriz", "khuzestan", "israel", "israeli", "jerusalem", "tel aviv", "west bank", "gaza strip",
-    "golan heights", "saudi arabia", "saudi", "riyadh", "jeddah", "neom", "vision 2030", "united arab emirates",
-    "uae", "emirates", "abu dhabi", "dubai", "sharjah", "qatar", "doha", "kuwait", "oman", "bahrain", "iraq", "syria",
-    "lebanon", "jordan", "turkey", "egypt", "yemen", "palestine", "khamenei", "mojtabakhamenei", "ayatollah",
-    "supreme leader iran", "president iran", "pezeshkian", "netanyahu", "mohammed bin salman", "mbs", "mohammed bin zayed",
-    "mbz", "erdogan", "el sisi", "tamim bin hamad", "king abdullah jordan", "bashar al assad", "hezbollah", "hamas",
-    "irgc", "houthis", "pmf iraq", "isis", "gaza war", "israel gaza war", "gaza ceasefire", "israel lebanon conflict",
-    "yemen civil war", "red sea crisis", "syria civil war", "idlib offensive", "iran proxy network", "axis of resistance",
-    "iran nuclear program", "jcpoa", "snapback sanctions", "hormuz blockade", "strait hormuz", "oil prices", "brent crude",
-    "wti crude", "opec", "kharg island", "iran oil exports", "us centcom", "russia syria", "china iran", "abraham accords",
-    "saudi israel normalization", "iran protest", "iran unrest", "middle east war", "regional escalation", "proxy war",
-    "missile defense israel", "iron dome", "neom", "qatar world cup legacy", "middle east infrastructure", "refugee crisis",
-    "gaza humanitarian crisis", "yemen famine", "climate change middle east"
-]
+RAW_ME_KEYWORDS = ["middle east", "arab world", "gulf states", "gcc countries", "levant region", "maghreb region", "mena region",
+                   "persian gulf", "arabian peninsula", "west asia", "red sea region", "iran", "iranian", "tehran", "qom", "mashhad",
+                   "isfahan", "tabriz", "khuzestan", "israel", "israeli", "jerusalem", "tel aviv", "west bank", "gaza strip",
+                   "golan heights", "saudi arabia", "saudi", "riyadh", "jeddah", "neom", "vision 2030", "united arab emirates",
+                   "uae", "emirates", "abu dhabi", "dubai", "sharjah", "qatar", "doha", "kuwait", "oman", "bahrain", "iraq", "syria",
+                   "lebanon", "jordan", "turkey", "egypt", "yemen", "palestine", "khamenei", "mojtabakhamenei", "ayatollah",
+                   "supreme leader iran", "president iran", "pezeshkian", "netanyahu", "mohammed bin salman", "mbs", "mohammed bin zayed",
+                   "mbz", "erdogan", "el sisi", "tamim bin hamad", "king abdullah jordan", "bashar al assad", "hezbollah", "hamas",
+                   "irgc", "houthis", "pmf iraq", "isis", "gaza war", "israel gaza war", "gaza ceasefire", "israel lebanon conflict",
+                   "yemen civil war", "red sea crisis", "syria civil war", "idlib offensive", "iran proxy network", "axis of resistance",
+                   "iran nuclear program", "jcpoa", "snapback sanctions", "hormuz blockade", "strait hormuz", "oil prices", "brent crude",
+                   "wti crude", "opec", "kharg island", "iran oil exports", "us centcom", "russia syria", "china iran", "abraham accords",
+                   "saudi israel normalization", "iran protest", "iran unrest", "middle east war", "regional escalation", "proxy war",
+                   "missile defense israel", "iron dome", "neom", "qatar world cup legacy", "middle east infrastructure", "refugee crisis",
+                   "gaza humanitarian crisis", "yemen famine", "climate change middle east"]
 ME_KEYWORDS = set(word.lower() for kw in RAW_ME_KEYWORDS for word in kw.split())
 
-# US Politics (unchanged)
+# US Politics
 RAW_US_KEYWORDS = ["donald trump", "jd vance", "marco rubio", "kamala harris", "gavin newsom", "steve hilton", "joe biden",
                    "alexandria ocasio-cortez", "nancy pelosi"]
 US_KEYWORDS = set(word.lower() for kw in RAW_US_KEYWORDS for word in kw.split())
 
-# Sports (unchanged)
+# Sports
 RAW_SPORTS_KEYWORDS = ["march madness", "college basketball", "arizona wildcats", "purdue boilermakers", "miami hurricanes",
                        "villanova wildcats", "utah state aggies"]
 SPORTS_KEYWORDS = set(word.lower() for kw in RAW_SPORTS_KEYWORDS for word in kw.split())
 
-# ====================== SOURCES (broadened queries) ======================
-MIDDLE_EAST_SOURCES = [
-    ("Global & Analysis", "https://news.google.com/rss/search?q=middle+east+OR+iran+OR+israel+OR+gulf+OR+hezbollah+OR+hamas+OR+saudi+OR+uae+OR+qatar+OR+syria+OR+lebanon+OR+foreign+affairs+OR+carnegie+OR+atlantic+council+when:1d&hl=en-US&gl=US&ceid=US:en"),
-    ("Reuters & AP", "https://news.google.com/rss/search?q=when:1d+site:reuters.com+OR+site:apnews.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
-    ("FT, Economist, WSJ, NYT", "https://news.google.com/rss/search?q=when:1d+site:ft.com+OR+site:economist.com+OR+site:wsj.com+OR+site:nytimes.com+middle+east+OR+iran+OR+gulf&hl=en-US&gl=US&ceid=US:en"),
-    ("Al Jazeera & Regional", "https://news.google.com/rss/search?q=when:1d+site:aljazeera.com+OR+site:timesofisrael.com+OR+site:arabnews.com+OR+site:thenationalnews.com+iran+OR+israel+OR+gulf&hl=en-US&gl=US&ceid=US:en"),
+# ====================== MIDDLE EAST BLOCKLIST FOR US SECTION ======================
+# These terms will be blocked from appearing in US Politics headlines
+ME_BLOCKLIST = {"iran", "israeli", "gaza", "hezbollah", "hamas", "hormuz", "khamenei", "netanyahu", "mbs", "mbz",
+                "iranian", "tehran", "israel", "saudi", "uae", "qatar", "lebanon", "syria", "yemen", "palestine",
+                "irgc", "houthis", "axis of resistance", "jcpoa", "snapback sanctions", "strait of hormuz"}
+
+# Sources
+ALL_SOURCES = [
+    ("Global News", "https://news.google.com/rss/search?q=when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("AP via Google", "https://news.google.com/rss/search?q=site:apnews.com+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Reuters via Google", "https://news.google.com/rss/search?q=site:reuters.com+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Times of Israel via Google", "https://news.google.com/rss/search?q=site:timesofisrael.com+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Al Jazeera via Google", "https://news.google.com/rss/search?q=site:aljazeera.com+when:1d&hl=en-US&gl=US&ceid=US:en"),
 ]
 
-US_POLITICS_SOURCES = [
-    ("US Politics & Analysis", "https://news.google.com/rss/search?q=donald+trump+OR+us+election+OR+congress+OR+kamala+harris+OR+joe+biden+OR+republican+OR+democrat+OR+foreign+policy+when:1d&hl=en-US&gl=US&ceid=US:en"),
-    ("Major Outlets", "https://news.google.com/rss/search?q=when:1d+site:nytimes.com+OR+site:washingtonpost.com+OR+site:wsj.com+OR+site:politico.com+trump+OR+harris+OR+biden&hl=en-US&gl=US&ceid=US:en"),
-]
-
-SPORTS_SOURCES = [
-    ("Sports & College", "https://news.google.com/rss/search?q=march+madness+OR+college+basketball+OR+ncaa+tournament+OR+arizona+wildcats+OR+purdue+boilermakers+when:1d&hl=en-US&gl=US&ceid=US:en"),
-    ("Broad Sports", "https://news.google.com/rss/search?q=when:1d+sports+OR+ncaa+OR+college+basketball&hl=en-US&gl=US&ceid=US:en"),
-]
-
-# ====================== FETCH FUNCTION ======================
-def fetch_section(sources, keywords):
+# ====================== FETCH FUNCTION WITH BLOCKLIST ======================
+def fetch_section(keywords, blocklist=None):
     matches = []
-    seen_title = set()  # New: deduplicate by exact title (case-insensitive)
-    for source_name, url in sources:
+    seen_title = set()
+    for source_name, url in ALL_SOURCES:
         for attempt in range(3):
             try:
                 print(f"  Fetching {source_name}...")
@@ -77,25 +72,28 @@ def fetch_section(sources, keywords):
                     title = entry.title.strip()
                     title_lower = title.lower()
                     link = entry.get('link', '#')
-                    if title_lower in seen_title: continue  # Skip if same title already seen
+                    if title_lower in seen_title: continue
+                    
+                    # Block Middle East bleed into US section
+                    if blocklist and any(block in title_lower for block in blocklist):
+                        continue
+                        
                     if any(kw in title_lower for kw in keywords):
                         ts_struct = entry.get('published_parsed') or entry.get('updated_parsed')
                         ts = time.mktime(ts_struct) if ts_struct else time.time()
                         matches.append((ts, title, source_name, link))
                         seen_title.add(title_lower)
                 break
-            except Exception as e:
-                print(f"    Attempt {attempt+1} failed: {str(e)}")
+            except:
                 time.sleep(2)
     matches.sort(reverse=True, key=lambda x: x[0])
     return matches
 
 # Fetch each section
-middle_matches = fetch_section(MIDDLE_EAST_SOURCES, ME_KEYWORDS)
-us_matches = fetch_section(US_POLITICS_SOURCES, US_KEYWORDS)
-sports_matches = fetch_section(SPORTS_SOURCES, SPORTS_KEYWORDS)
+middle_matches = fetch_section(ME_KEYWORDS)
+us_matches = fetch_section(US_KEYWORDS, ME_BLOCKLIST)   # <-- Blocklist applied here
+sports_matches = fetch_section(SPORTS_KEYWORDS)
 
-# Time split
 current_ts = time.time()
 six_hours_ago = current_ts - 21600
 
@@ -143,7 +141,7 @@ html = """
         <span class="update">updated at """ + datetime.utcnow().strftime("%H:%M:%S UTC") + """</span>
     </div>
 
-    <!-- US POLITICS -->
+    <!-- US POLITICS (top) -->
     <div class="container">
         <div class="column">
             <h2 class="section-title">US Politics Breaking News</h2>
@@ -242,4 +240,4 @@ except Exception as e:
     print(f"ERROR saving file: {str(e)}")
 
 print("\nScript finished.")
-print("index.html saved to current directory.")
+print("Files saved to current directory.")
