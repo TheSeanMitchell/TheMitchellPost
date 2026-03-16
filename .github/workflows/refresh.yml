@@ -5,8 +5,9 @@ on:
     - cron: '*/5 * * * *'   # every 5 minutes
   workflow_dispatch:
 
+# THIS IS THE FIX - explicit write permission
 permissions:
-  contents: write   # THIS IS THE FIX - allows push
+  contents: write
 
 jobs:
   refresh:
