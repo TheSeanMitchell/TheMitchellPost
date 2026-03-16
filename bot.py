@@ -31,7 +31,7 @@ RAW_ME_KEYWORDS = ["middle east", "arab world", "gulf states", "gcc countries", 
                    "gaza humanitarian crisis", "yemen famine", "climate change middle east"]
 ME_KEYWORDS = set(word.lower() for kw in RAW_ME_KEYWORDS for word in kw.split())
 
-# US Politics (your expanded list)
+# US Politics & Sports (unchanged from last version)
 RAW_US_KEYWORDS = ["united states politics", "american politics", "us government", "federal government", "white house", "us congress", "us senate",
                    "house of representatives", "supreme court", "us constitution", "bill of rights", "federal election", "presidential election",
                    "midterm elections", "primary elections", "electoral college", "inauguration day", "state of the union", "campaign rally",
@@ -103,7 +103,7 @@ RAW_US_KEYWORDS = ["united states politics", "american politics", "us government
                    "judicial reform debate", "constitutional amendments debate", "states rights debate", "federalism debate usa"]
 US_KEYWORDS = set(word.lower() for kw in RAW_US_KEYWORDS for word in kw.split())
 
-# Sports (unchanged)
+# Sports
 RAW_SPORTS_KEYWORDS = ["march madness", "college basketball", "arizona wildcats", "purdue boilermakers", "miami hurricanes",
                        "villanova wildcats", "utah state aggies"]
 SPORTS_KEYWORDS = set(word.lower() for kw in RAW_SPORTS_KEYWORDS for word in kw.split())
@@ -127,10 +127,16 @@ SPORTS_SOURCES = [
     ("Broad Sports", "https://news.google.com/rss/search?q=when:1d+sports+OR+ncaa+OR+college+basketball+OR+football&hl=en-US&gl=US&ceid=US:en"),
 ]
 
-# ====================== FETCH FUNCTION (with title-only dedup) ======================
+# ====================== FETCH FUNCTION WITH STRONG TITLE DEDUP ======================
+def normalize_title(title):
+    # Remove station suffix (everything after last " - ")
+    if " - " in title:
+        title = title.rsplit(" - ", 1)[0]
+    return title.strip().lower()
+
 def fetch_section(sources, keywords):
     matches = []
-    seen_title = set()  # Deduplicate by exact title (case-insensitive)
+    seen_title = set()  # Deduplicate by normalized core title
     for source_name, url in sources:
         for attempt in range(3):
             try:
@@ -140,16 +146,18 @@ def fetch_section(sources, keywords):
                     feed = feedparser.parse(response.read().decode('utf-8', errors='ignore'))
                 if feed.bozo: break
                 for entry in feed.entries:
-                    title = entry.title.strip()
-                    title_lower = title.lower()
+                    raw_title = entry.title.strip()
+                    norm_title = normalize_title(raw_title)
                     link = entry.get('link', '#')
-                    if title_lower in seen_title: 
-                        continue  # Skip if same title already seen in this section
-                    if any(kw in title_lower for kw in keywords):
+                    
+                    if norm_title in seen_title:
+                        continue  # Skip duplicate core headline
+                    
+                    if any(kw in raw_title.lower() for kw in keywords):
                         ts_struct = entry.get('published_parsed') or entry.get('updated_parsed')
                         ts = time.mktime(ts_struct) if ts_struct else time.time()
-                        matches.append((ts, title, source_name, link))
-                        seen_title.add(title_lower)
+                        matches.append((ts, raw_title, source_name, link))
+                        seen_title.add(norm_title)
                 break
             except Exception as e:
                 print(f"    Attempt {attempt+1} failed: {str(e)}")
