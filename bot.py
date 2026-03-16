@@ -4,7 +4,6 @@ import os
 import re
 import urllib.request
 from datetime import datetime
-from collections import defaultdict
 
 print("Starting bot...")
 
@@ -104,7 +103,7 @@ RAW_US_KEYWORDS = ["united states politics", "american politics", "us government
                    "judicial reform debate", "constitutional amendments debate", "states rights debate", "federalism debate usa"]
 US_KEYWORDS = set(word.lower() for kw in RAW_US_KEYWORDS for word in kw.split())
 
-# Sports (unchanged)
+# Sports
 RAW_SPORTS_KEYWORDS = ["march madness", "college basketball", "arizona wildcats", "purdue boilermakers", "miami hurricanes",
                        "villanova wildcats", "utah state aggies"]
 SPORTS_KEYWORDS = set(word.lower() for kw in RAW_SPORTS_KEYWORDS for word in kw.split())
@@ -114,7 +113,7 @@ ME_BLOCKLIST = {"trump", "harris", "biden", "congress", "senate", "house of repr
 US_BLOCKLIST = {"iran", "israel", "gaza", "hezbollah", "hamas", "hormuz", "khamenei", "netanyahu", "mbs", "mbz", "saudi", "uae", "qatar", "lebanon", "syria", "yemen", "palestine", "irgc", "houthis", "axis of resistance", "jcpoa", "snapback sanctions", "strait of hormuz"}
 SPORTS_BLOCKLIST = ME_BLOCKLIST.union(US_BLOCKLIST)
 
-# ====================== SECTION-SPECIFIC SOURCES ======================
+# ====================== SECTION-SPECIFIC SOURCES (broadened for volume) ======================
 MIDDLE_EAST_SOURCES = [
     ("Global & Regional", "https://news.google.com/rss/search?q=middle+east+OR+iran+OR+israel+OR+gulf+OR+hezbollah+OR+hamas+OR+saudi+OR+uae+OR+qatar+OR+syria+OR+lebanon+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("Reuters & AP", "https://news.google.com/rss/search?q=when:1d+site:reuters.com+OR+site:apnews.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
@@ -123,19 +122,9 @@ MIDDLE_EAST_SOURCES = [
 ]
 
 US_POLITICS_SOURCES = [
-    ("Reuters Politics", "https://feeds.reuters.com/reuters/politicsNews"),
-    ("AP Top News", "https://apnews.com/rss/apf-topnews"),
-    ("NYT Politics", "https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml"),
-    ("WSJ U.S.", "https://feeds.wsj.com/wsj/us"),
-    ("WaPo Politics", "https://feeds.washingtonpost.com/rss/rss_politics"),
-    ("Politico", "https://www.politico.com/rss/politics-news.xml"),
-    ("The Hill", "https://thehill.com/homenews/feed/"),
-    ("Axios", "https://axios.com/feed"),
-    ("Bloomberg Politics", "https://feeds.bloomberg.com/politics"),
-    ("NPR Politics", "https://feeds.npr.org/1014/rss.xml"),
-    ("PBS", "https://www.pbs.org/newshour/feeds/rss/headlines"),
-    ("BBC US & Canada", "https://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml"),
-    ("Major Outlets Google", "https://news.google.com/rss/search?q=when:1d+site:nytimes.com+OR+site:washingtonpost.com+OR+site:wsj.com+OR+site:politico.com+OR+site:axios.com+trump+OR+harris+OR+biden+OR+congress&hl=en-US&gl=US&ceid=US:en"),
+    ("US Politics & Congress", "https://news.google.com/rss/search?q=donald+trump+OR+us+election+OR+congress+OR+kamala+harris+OR+joe+biden+OR+republican+OR+democrat+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Major US Outlets", "https://news.google.com/rss/search?q=when:1d+site:nytimes.com+OR+site:washingtonpost.com+OR+site:wsj.com+OR+site:politico.com+OR+site:axios.com+trump+OR+harris+OR+biden+OR+congress&hl=en-US&gl=US&ceid=US:en"),
+    ("Analysis & Policy", "https://news.google.com/rss/search?q=when:1d+site:thehill.com+OR+site:foreignaffairs.com+OR+site:foreignpolicy.com+us+politics+OR+white+house+OR+supreme+court&hl=en-US&gl=US&ceid=US:en"),
 ]
 
 SPORTS_SOURCES = [
@@ -143,7 +132,7 @@ SPORTS_SOURCES = [
     ("Broad Sports", "https://news.google.com/rss/search?q=when:1d+sports+OR+ncaa+OR+college+basketball+OR+football&hl=en-US&gl=US&ceid=US:en"),
 ]
 
-# ====================== FETCH FUNCTION WITH CAP + DEDUP ======================
+# ====================== FETCH FUNCTION (dedup + block + required keyword) ======================
 def normalize_title(title):
     if " - " in title:
         title = title.rsplit(" - ", 1)[0]
@@ -152,10 +141,7 @@ def normalize_title(title):
 def fetch_section(sources, keywords, blocklist):
     matches = []
     seen_title = set()
-    source_count = defaultdict(int)  # Max 5 per source
     for source_name, url in sources:
-        if source_count[source_name] >= 5:
-            continue
         for attempt in range(3):
             try:
                 print(f"  Fetching {source_name}...")
@@ -177,9 +163,6 @@ def fetch_section(sources, keywords, blocklist):
                         ts = time.mktime(ts_struct) if ts_struct else time.time()
                         matches.append((ts, raw_title, source_name, link))
                         seen_title.add(norm_title)
-                        source_count[source_name] += 1
-                        if source_count[source_name] >= 5:
-                            break
                 break
             except Exception as e:
                 print(f"    Attempt {attempt+1} failed: {str(e)}")
@@ -192,7 +175,7 @@ middle_matches = fetch_section(MIDDLE_EAST_SOURCES, ME_KEYWORDS, US_BLOCKLIST)
 us_matches = fetch_section(US_POLITICS_SOURCES, US_KEYWORDS, ME_BLOCKLIST)
 sports_matches = fetch_section(SPORTS_SOURCES, SPORTS_KEYWORDS, ME_BLOCKLIST.union(US_BLOCKLIST))
 
-# Time split
+# Time split + force 20 per column
 current_ts = time.time()
 six_hours_ago = current_ts - 21600
 
@@ -243,26 +226,26 @@ html = """
     <!-- US POLITICS -->
     <div class="container">
         <div class="column">
-            <h2 class="section-title">US Politics Breaking News</h2>
+            <h2 class="section-title">Breaking US News</h2>
 """
 
 if us_breaking:
     for ts, title, source, link in us_breaking:
         html += f'<div class="headline"><span class="title">{title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
 else:
-    html += '<p>No breaking US politics news in the last 6 hours.</p>\n'
+    html += '<p>No breaking US news in the last 6 hours.</p>\n'
 
 html += """
         </div>
         <div class="column">
-            <h2 class="section-title">US Politics Headlines</h2>
+            <h2 class="section-title">Today's US Headlines</h2>
 """
 
 if us_recent:
     for ts, title, source, link in us_recent:
         html += f'<div class="headline"><span class="title">{title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
 else:
-    html += '<p>No additional US politics headlines right now.</p>\n'
+    html += '<p>No additional US headlines right now.</p>\n'
 
 html += """
         </div>
@@ -285,7 +268,7 @@ else:
 html += """
         </div>
         <div class="column">
-            <h2 class="section-title">Middle East Headlines</h2>
+            <h2 class="section-title">Today's Middle East Headlines</h2>
 """
 
 if middle_recent:
@@ -315,7 +298,7 @@ else:
 html += """
         </div>
         <div class="column">
-            <h2 class="section-title">Sports Headlines</h2>
+            <h2 class="section-title">Today's Sports Headlines</h2>
 """
 
 if sports_recent:
