@@ -12,8 +12,8 @@ print(f"Saving files to current directory: {CURRENT_DIR}")
 
 INDEX_HTML = os.path.join(CURRENT_DIR, "index.html")
 
-# ====================== KEYWORDS (unchanged) ======================
-# Middle East
+# ====================== KEYWORDS ======================
+# Middle East (your full list)
 RAW_ME_KEYWORDS = ["middle east", "arab world", "gulf states", "gcc countries", "levant region", "maghreb region", "mena region",
                    "persian gulf", "arabian peninsula", "west asia", "red sea region", "iran", "iranian", "tehran", "qom", "mashhad",
                    "isfahan", "tabriz", "khuzestan", "israel", "israeli", "jerusalem", "tel aviv", "west bank", "gaza strip",
@@ -127,13 +127,14 @@ SPORTS_SOURCES = [
     ("Broad Sports", "https://news.google.com/rss/search?q=when:1d+sports+OR+ncaa+OR+college+basketball+OR+football&hl=en-US&gl=US&ceid=US:en"),
 ]
 
-# ====================== FETCH FUNCTION ======================
+# ====================== FETCH FUNCTION (with title-only dedup) ======================
 def fetch_section(sources, keywords):
     matches = []
-    seen_title = set()
+    seen_title = set()  # Deduplicate by exact title (case-insensitive)
     for source_name, url in sources:
         for attempt in range(3):
             try:
+                print(f"  Fetching {source_name}...")
                 req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
                 with urllib.request.urlopen(req, timeout=15) as response:
                     feed = feedparser.parse(response.read().decode('utf-8', errors='ignore'))
@@ -142,7 +143,8 @@ def fetch_section(sources, keywords):
                     title = entry.title.strip()
                     title_lower = title.lower()
                     link = entry.get('link', '#')
-                    if title_lower in seen_title: continue
+                    if title_lower in seen_title: 
+                        continue  # Skip if same title already seen in this section
                     if any(kw in title_lower for kw in keywords):
                         ts_struct = entry.get('published_parsed') or entry.get('updated_parsed')
                         ts = time.mktime(ts_struct) if ts_struct else time.time()
@@ -155,7 +157,7 @@ def fetch_section(sources, keywords):
     matches.sort(reverse=True, key=lambda x: x[0])
     return matches
 
-# Fetch each section with dedicated sources
+# Fetch each section
 middle_matches = fetch_section(MIDDLE_EAST_SOURCES, ME_KEYWORDS)
 us_matches = fetch_section(US_POLITICS_SOURCES, US_KEYWORDS)
 sports_matches = fetch_section(SPORTS_SOURCES, SPORTS_KEYWORDS)
