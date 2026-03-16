@@ -4,6 +4,7 @@ import os
 import re
 import urllib.request
 from datetime import datetime
+from collections import defaultdict
 
 print("Starting bot...")
 
@@ -12,8 +13,8 @@ print(f"Saving files to current directory: {CURRENT_DIR}")
 
 INDEX_HTML = os.path.join(CURRENT_DIR, "index.html")
 
-# ====================== KEYWORDS ======================
-# Middle East (your full list)
+# ====================== KEYWORDS (unchanged) ======================
+# Middle East
 RAW_ME_KEYWORDS = ["middle east", "arab world", "gulf states", "gcc countries", "levant region", "maghreb region", "mena region",
                    "persian gulf", "arabian peninsula", "west asia", "red sea region", "iran", "iranian", "tehran", "qom", "mashhad",
                    "isfahan", "tabriz", "khuzestan", "israel", "israeli", "jerusalem", "tel aviv", "west bank", "gaza strip",
@@ -31,7 +32,7 @@ RAW_ME_KEYWORDS = ["middle east", "arab world", "gulf states", "gcc countries", 
                    "gaza humanitarian crisis", "yemen famine", "climate change middle east"]
 ME_KEYWORDS = set(word.lower() for kw in RAW_ME_KEYWORDS for word in kw.split())
 
-# US Politics (your expanded list)
+# US Politics (your full list)
 RAW_US_KEYWORDS = ["united states politics", "american politics", "us government", "federal government", "white house", "us congress", "us senate",
                    "house of representatives", "supreme court", "us constitution", "bill of rights", "federal election", "presidential election",
                    "midterm elections", "primary elections", "electoral college", "inauguration day", "state of the union", "campaign rally",
@@ -113,7 +114,7 @@ ME_BLOCKLIST = {"trump", "harris", "biden", "congress", "senate", "house of repr
 US_BLOCKLIST = {"iran", "israel", "gaza", "hezbollah", "hamas", "hormuz", "khamenei", "netanyahu", "mbs", "mbz", "saudi", "uae", "qatar", "lebanon", "syria", "yemen", "palestine", "irgc", "houthis", "axis of resistance", "jcpoa", "snapback sanctions", "strait of hormuz"}
 SPORTS_BLOCKLIST = ME_BLOCKLIST.union(US_BLOCKLIST)
 
-# ====================== SECTION-SPECIFIC SOURCES (broadened for volume) ======================
+# ====================== SECTION-SPECIFIC SOURCES (prioritized + direct RSS for diversity) ======================
 MIDDLE_EAST_SOURCES = [
     ("Global & Regional", "https://news.google.com/rss/search?q=middle+east+OR+iran+OR+israel+OR+gulf+OR+hezbollah+OR+hamas+OR+saudi+OR+uae+OR+qatar+OR+syria+OR+lebanon+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("Reuters & AP", "https://news.google.com/rss/search?q=when:1d+site:reuters.com+OR+site:apnews.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
@@ -122,9 +123,20 @@ MIDDLE_EAST_SOURCES = [
 ]
 
 US_POLITICS_SOURCES = [
-    ("US Politics & Congress", "https://news.google.com/rss/search?q=donald+trump+OR+us+election+OR+congress+OR+kamala+harris+OR+joe+biden+OR+republican+OR+democrat+when:1d&hl=en-US&gl=US&ceid=US:en"),
-    ("Major US Outlets", "https://news.google.com/rss/search?q=when:1d+site:nytimes.com+OR+site:washingtonpost.com+OR+site:wsj.com+OR+site:politico.com+OR+site:axios.com+trump+OR+harris+OR+biden+OR+congress&hl=en-US&gl=US&ceid=US:en"),
-    ("Analysis & Policy", "https://news.google.com/rss/search?q=when:1d+site:thehill.com+OR+site:foreignaffairs.com+OR+site:foreignpolicy.com+us+politics+OR+white+house+OR+supreme+court&hl=en-US&gl=US&ceid=US:en"),
+    # Preferred reliable sources first (direct RSS)
+    ("AP News", "https://feeds.apnews.com/rss/apf-topnews"),
+    ("Reuters Politics", "https://feeds.reuters.com/reuters/politicsNews"),
+    ("NYT Politics", "https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml"),
+    ("WSJ", "https://feeds.wsj.com/wsj/us/politics"),
+    ("Washington Post", "https://feeds.washingtonpost.com/rss/politics"),
+    ("Politico", "https://www.politico.com/rss/politicopicks.xml"),
+    ("Axios", "https://www.axios.com/feed"),
+    ("NPR", "https://feeds.npr.org/1019/rss.xml"),
+    ("PBS", "https://www.pbs.org/newshour/feeds/rss/headlines"),
+    ("BBC US", "https://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml"),
+    ("C-SPAN", "https://www.c-span.org/rss/latestClips/"),
+    # Google fallback for volume
+    ("US Politics Google", "https://news.google.com/rss/search?q=donald+trump+OR+us+election+OR+congress+OR+kamala+harris+OR+joe+biden+OR+republican+OR+democrat+when:1d&hl=en-US&gl=US&ceid=US:en"),
 ]
 
 SPORTS_SOURCES = [
@@ -132,7 +144,7 @@ SPORTS_SOURCES = [
     ("Broad Sports", "https://news.google.com/rss/search?q=when:1d+sports+OR+ncaa+OR+college+basketball+OR+football&hl=en-US&gl=US&ceid=US:en"),
 ]
 
-# ====================== FETCH FUNCTION (dedup + block + required keyword) ======================
+# ====================== FETCH FUNCTION (hard 5-per-source cap) ======================
 def normalize_title(title):
     if " - " in title:
         title = title.rsplit(" - ", 1)[0]
@@ -141,7 +153,11 @@ def normalize_title(title):
 def fetch_section(sources, keywords, blocklist):
     matches = []
     seen_title = set()
+    source_count = defaultdict(int)
+    
     for source_name, url in sources:
+        if source_count[source_name] >= 5:
+            continue
         for attempt in range(3):
             try:
                 print(f"  Fetching {source_name}...")
@@ -150,6 +166,8 @@ def fetch_section(sources, keywords, blocklist):
                     feed = feedparser.parse(response.read().decode('utf-8', errors='ignore'))
                 if feed.bozo: break
                 for entry in feed.entries:
+                    if source_count[source_name] >= 5:
+                        break
                     raw_title = entry.title.strip()
                     norm_title = normalize_title(raw_title)
                     link = entry.get('link', '#')
@@ -163,6 +181,7 @@ def fetch_section(sources, keywords, blocklist):
                         ts = time.mktime(ts_struct) if ts_struct else time.time()
                         matches.append((ts, raw_title, source_name, link))
                         seen_title.add(norm_title)
+                        source_count[source_name] += 1
                 break
             except Exception as e:
                 print(f"    Attempt {attempt+1} failed: {str(e)}")
@@ -175,7 +194,7 @@ middle_matches = fetch_section(MIDDLE_EAST_SOURCES, ME_KEYWORDS, US_BLOCKLIST)
 us_matches = fetch_section(US_POLITICS_SOURCES, US_KEYWORDS, ME_BLOCKLIST)
 sports_matches = fetch_section(SPORTS_SOURCES, SPORTS_KEYWORDS, ME_BLOCKLIST.union(US_BLOCKLIST))
 
-# Time split + force 20 per column
+# Time split + force up to 20
 current_ts = time.time()
 six_hours_ago = current_ts - 21600
 
@@ -188,7 +207,7 @@ us_recent = [item for item in us_matches if item not in us_breaking][:20]
 sports_breaking = [item for item in sports_matches if item[0] >= six_hours_ago][:20]
 sports_recent = [item for item in sports_matches if item not in sports_breaking][:20]
 
-# ====================== BUILD HTML ======================
+# ====================== BUILD HTML (updated titles) ======================
 html = """
 <!DOCTYPE html>
 <html lang="en">
@@ -223,7 +242,7 @@ html = """
         <span class="update">updated at """ + datetime.utcnow().strftime("%H:%M:%S UTC") + """</span>
     </div>
 
-    <!-- US POLITICS -->
+    <!-- US -->
     <div class="container">
         <div class="column">
             <h2 class="section-title">Breaking US News</h2>
