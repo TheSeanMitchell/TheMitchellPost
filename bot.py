@@ -44,7 +44,7 @@ def get_friendly_source(raw_name):
             return SOURCE_MAP[key]
     return raw_name.split(" - ")[-1].strip() if " - " in raw_name else raw_name
 
-# ====================== KEYWORDS (unchanged) ======================
+# ====================== KEYWORDS (your lists) ======================
 RAW_ME_KEYWORDS = ["middle east", "arab world", "gulf states", "gcc countries", "levant", "maghreb", "mena", "persian gulf", "arabian peninsula", "west asia", "red sea", "iran", "iranian", "tehran", "qom", "mashhad", "isfahan", "tabriz", "khuzestan", "israel", "israeli", "jerusalem", "tel aviv", "west bank", "gaza", "golan", "saudi arabia", "saudi", "riyadh", "jeddah", "neom", "uae", "emirates", "abu dhabi", "dubai", "sharjah", "qatar", "doha", "kuwait", "oman", "bahrain", "iraq", "syria", "lebanon", "jordan", "turkey", "egypt", "yemen", "palestine", "khamenei", "mojtabakhamenei", "ayatollah", "supreme leader", "pezeshkian", "netanyahu", "mohammed bin salman", "mbs", "mohammed bin zayed", "mbz", "erdogan", "el sisi", "tamim", "king abdullah", "bashar al assad", "hezbollah", "hamas", "irgc", "houthis", "pmf", "isis", "gaza war", "israel gaza", "gaza ceasefire", "israel lebanon", "yemen civil war", "red sea crisis", "syria civil war", "idlib", "iran proxy", "axis of resistance", "iran nuclear", "jcpoa", "snapback sanctions", "hormuz", "strait hormuz", "oil prices", "brent crude", "wti crude", "opec", "kharg island", "iran oil exports", "centcom"]
 ME_KEYWORDS = set(word.lower() for kw in RAW_ME_KEYWORDS for word in kw.split())
 
@@ -55,11 +55,11 @@ RAW_SPORTS_KEYWORDS = ["march madness", "college basketball", "arizona wildcats"
 SPORTS_KEYWORDS = set(word.lower() for kw in RAW_SPORTS_KEYWORDS for word in kw.split())
 
 # ====================== BLOCKLISTS (strengthened for pure US stories) ======================
-ME_BLOCKLIST = {"trump", "harris", "biden", "congress", "senate", "house", "supreme court", "election", "midterm", "presidential", "republican", "democrat", "maga", "white house", "capitol", "washington dc", "oscars", "kennedy center", "tornadoes", "vernal equinox", "hyundai", "tsa", "airport security", "pope leo", "kentucky", "illinois primary", "michigan synagogue", "cuba", "china summit", "fcc", "sbf", "texas primaries"}
+ME_BLOCKLIST = {"trump", "harris", "biden", "congress", "senate", "house", "supreme court", "election", "midterm", "presidential", "republican", "democrat", "maga", "white house", "capitol", "washington dc", "oscars", "kennedy center", "tornadoes", "vernal equinox", "hyundai", "tsa", "airport security", "pope leo", "kentucky", "illinois primary", "michigan synagogue", "cuba", "china summit", "fcc", "sbf", "texas primaries", "nvidia", "foxconn", "walmart", "phonepe", "kushner", "sable offshore"}
 US_BLOCKLIST = {"iran", "israel", "gaza", "hezbollah", "hamas", "hormuz", "khamenei", "netanyahu", "mbs", "mbz", "saudi", "uae", "qatar", "lebanon", "syria", "yemen", "palestine", "irgc", "houthis", "axis of resistance", "jcpoa", "snapback sanctions", "strait of hormuz"}
 SPORTS_BLOCKLIST = ME_BLOCKLIST.union(US_BLOCKLIST)
 
-# ====================== MIDDLE EAST SOURCES — AL JAZEERA & TIMES OF ISRAEL FIRST ======================
+# ====================== MIDDLE EAST SOURCES — AL JAZEERA & TIMES OF ISRAEL FIRST + YOUR EXACT LINKS ======================
 MIDDLE_EAST_SOURCES = [
     ("Broad Middle East", "https://news.google.com/rss/search?q=middle+east+OR+iran+OR+israel+OR+gulf+OR+hezbollah+OR+hamas+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("Al Jazeera", "https://news.google.com/rss/search?q=when:1d+site:aljazeera.com+iran+OR+israel+OR+gulf+OR+hezbollah+OR+hamas&hl=en-US&gl=US&ceid=US:en"),
@@ -73,7 +73,7 @@ MIDDLE_EAST_SOURCES = [
     ("The Economist", "https://news.google.com/rss/search?q=when:1d+site:economist.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
 ]
 
-US_POLITICS_SOURCES = [  # unchanged — working well
+US_POLITICS_SOURCES = [  # unchanged — you said it was good
     ("Broad US Politics", "https://news.google.com/rss/search?q=donald+trump+OR+us+election+OR+congress+OR+kamala+harris+OR+joe+biden+OR+republican+OR+democrat+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("AP News", "https://news.google.com/rss/search?q=when:1d+site:apnews.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
     ("Reuters", "https://news.google.com/rss/search?q=when:1d+site:reuters.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
@@ -156,7 +156,7 @@ us_recent = [item for item in us_matches if item not in us_breaking][:30]
 sports_breaking = [item for item in sports_matches if item[0] >= six_hours_ago][:30]
 sports_recent = [item for item in sports_matches if item not in sports_breaking][:30]
 
-# ====================== BUILD HTML ======================
+# ====================== BUILD HTML (keywords underlined in white) ======================
 html = """
 <!DOCTYPE html>
 <html lang="en">
@@ -232,7 +232,12 @@ html += """
 if middle_breaking:
     for ts, title, source, link in middle_breaking:
         friendly = get_friendly_source(source)
-        html += f'<div class="headline"><span class="title">{title}</span> <span style="color:#aaaaaa;">[{friendly}]</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+        highlighted = title
+        for kw in ME_KEYWORDS:
+            if len(kw) > 2:
+                pattern = r'\b' + re.escape(kw) + r'\b'
+                highlighted = re.sub(pattern, f'<span style="text-decoration: underline; color: #FFFFFF;">{kw}</span>', highlighted, flags=re.IGNORECASE)
+        html += f'<div class="headline"><span class="title">{highlighted}</span> <span style="color:#aaaaaa;">[{friendly}]</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
 else:
     html += '<p>No breaking news in the last 6 hours.</p>\n'
 
@@ -245,7 +250,12 @@ html += """
 if middle_recent:
     for ts, title, source, link in middle_recent:
         friendly = get_friendly_source(source)
-        html += f'<div class="headline"><span class="title">{title}</span> <span style="color:#aaaaaa;">[{friendly}]</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+        highlighted = title
+        for kw in ME_KEYWORDS:
+            if len(kw) > 2:
+                pattern = r'\b' + re.escape(kw) + r'\b'
+                highlighted = re.sub(pattern, f'<span style="text-decoration: underline; color: #FFFFFF;">{kw}</span>', highlighted, flags=re.IGNORECASE)
+        html += f'<div class="headline"><span class="title">{highlighted}</span> <span style="color:#aaaaaa;">[{friendly}]</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
 else:
     html += '<p>No additional headlines right now.</p>\n'
 
