@@ -17,7 +17,7 @@ INDEX_HTML = os.path.join(CURRENT_DIR, "index.html")
 SOURCE_MAP = {
     "Reuters": "Reuters",
     "AP News": "AP News",
-    "The New York Times": "The New York Times",
+    "The New York Times": "NYT",
     "The Wall Street Journal": "WSJ",
     "The Washington Post": "Washington Post",
     "Politico": "Politico",
@@ -38,7 +38,7 @@ SOURCE_MAP = {
     "NCAA.com": "NCAA",
     "Global & Regional": "Global News",
     "US Politics Google": "US News",
-    # add more if you see new ones
+    "Google US Politics": "US News",
 }
 
 def get_friendly_source(raw_name):
@@ -47,14 +47,17 @@ def get_friendly_source(raw_name):
             return SOURCE_MAP[key]
     return raw_name.split(" - ")[-1].strip() if " - " in raw_name else raw_name
 
-# ====================== KEYWORDS (slightly expanded for volume) ======================
+# ====================== KEYWORDS (expanded for volume) ======================
+# Middle East
 RAW_ME_KEYWORDS = ["middle east", "arab world", "gulf states", "gcc countries", "levant", "maghreb", "mena", "persian gulf", "arabian peninsula", "west asia", "red sea", "iran", "iranian", "tehran", "qom", "mashhad", "isfahan", "tabriz", "khuzestan", "israel", "israeli", "jerusalem", "tel aviv", "west bank", "gaza", "golan", "saudi arabia", "saudi", "riyadh", "jeddah", "neom", "uae", "emirates", "abu dhabi", "dubai", "sharjah", "qatar", "doha", "kuwait", "oman", "bahrain", "iraq", "syria", "lebanon", "jordan", "turkey", "egypt", "yemen", "palestine", "khamenei", "mojtabakhamenei", "ayatollah", "supreme leader", "pezeshkian", "netanyahu", "mohammed bin salman", "mbs", "mohammed bin zayed", "mbz", "erdogan", "el sisi", "tamim", "king abdullah", "bashar al assad", "hezbollah", "hamas", "irgc", "houthis", "pmf", "isis", "gaza war", "israel gaza", "gaza ceasefire", "israel lebanon", "yemen civil war", "red sea crisis", "syria civil war", "idlib", "iran proxy", "axis of resistance", "iran nuclear", "jcpoa", "snapback sanctions", "hormuz", "strait hormuz", "oil prices", "brent crude", "wti crude", "opec", "kharg island", "iran oil exports", "centcom"]
 ME_KEYWORDS = set(word.lower() for kw in RAW_ME_KEYWORDS for word in kw.split())
 
+# US Politics (expanded)
 RAW_US_KEYWORDS = ["united states politics", "american politics", "us government", "federal government", "white house", "us congress", "us senate", "house of representatives", "supreme court", "us constitution", "bill of rights", "federal election", "presidential election", "midterm elections", "primary elections", "electoral college", "inauguration day", "state of the union", "campaign rally", "political campaign", "political debate", "voter turnout", "election day", "swing states", "battleground states", "donald trump", "trump campaign", "joe biden", "biden administration", "kamala harris", "vice president", "republican party", "democratic party", "gop", "democrat", "maga", "ron desantis", "gavin newsom", "greg abbott", "marco rubio", "ted cruz", "alexandria ocasio cortez", "aoc", "nancy pelosi", "mitch mcconnell", "chuck schumer", "hakeem jeffries", "supreme court ruling", "federal budget", "inflation united states", "us economy", "gun control", "immigration policy", "border security", "climate policy", "healthcare policy", "student loan", "abortion rights", "lgbtq rights", "culture wars", "election security", "misinformation campaigns", "political polling", "campaign finance", "super pac"]
 US_KEYWORDS = set(word.lower() for kw in RAW_US_KEYWORDS for word in kw.split())
 
-RAW_SPORTS_KEYWORDS = ["march madness", "college basketball", "arizona wildcats", "purdue boilermakers", "miami hurricanes", "villanova wildcats", "utah state aggies", "ncaa tournament", "college basketball crown", "ncaa bracket", "march madness bracket", "ncaa tournament bracket"]
+# Sports
+RAW_SPORTS_KEYWORDS = ["march madness", "college basketball", "arizona wildcats", "purdue boilermakers", "miami hurricanes", "villanova wildcats", "utah state aggies", "ncaa tournament", "college basketball crown", "ncaa bracket", "march madness bracket"]
 SPORTS_KEYWORDS = set(word.lower() for kw in RAW_SPORTS_KEYWORDS for word in kw.split())
 
 # ====================== BLOCKLISTS ======================
@@ -62,12 +65,14 @@ ME_BLOCKLIST = {"trump", "harris", "biden", "congress", "senate", "house", "supr
 US_BLOCKLIST = {"iran", "israel", "gaza", "hezbollah", "hamas", "hormuz", "khamenei", "netanyahu", "mbs", "mbz", "saudi", "uae", "qatar", "lebanon", "syria", "yemen", "palestine", "irgc", "houthis", "axis of resistance", "jcpoa", "snapback sanctions", "strait of hormuz"}
 SPORTS_BLOCKLIST = ME_BLOCKLIST.union(US_BLOCKLIST)
 
-# ====================== SECTION-SPECIFIC SOURCES (expanded for volume) ======================
+# ====================== SECTION-SPECIFIC SOURCES (prioritized reputable first + expanded) ======================
 MIDDLE_EAST_SOURCES = [
+    ("Reuters", "https://feeds.reuters.com/reuters/worldNews"),
+    ("AP News", "https://feeds.apnews.com/rss/apf-topnews"),
+    ("Al Jazeera", "https://www.aljazeera.com/xml/rss/all.xml"),
+    ("Times of Israel", "https://www.timesofisrael.com/feed/"),
     ("Global Regional", "https://news.google.com/rss/search?q=middle+east+OR+iran+OR+israel+OR+gulf+OR+hezbollah+OR+hamas+OR+saudi+OR+uae+OR+qatar+OR+syria+OR+lebanon+when:1d&hl=en-US&gl=US&ceid=US:en"),
-    ("Reuters AP", "https://news.google.com/rss/search?q=when:1d+site:reuters.com+OR+site:apnews.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
     ("NYT WSJ FT Economist", "https://news.google.com/rss/search?q=when:1d+site:nytimes.com+OR+site:wsj.com+OR+site:ft.com+OR+site:economist.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
-    ("Al Jazeera Times of Israel", "https://news.google.com/rss/search?q=when:1d+site:aljazeera.com+OR+site:timesofisrael.com+OR+site:arabnews.com+OR+site:thenationalnews.com+iran+OR+israel+OR+gulf&hl=en-US&gl=US&ceid=US:en"),
 ]
 
 US_POLITICS_SOURCES = [
@@ -90,7 +95,7 @@ SPORTS_SOURCES = [
     ("Broad Sports", "https://news.google.com/rss/search?q=when:1d+sports+OR+ncaa+OR+college+basketball+OR+football&hl=en-US&gl=US&ceid=US:en"),
 ]
 
-# ====================== FETCH FUNCTION (5-per-source + no consecutive same source) ======================
+# ====================== FETCH FUNCTION (5-per-source + no consecutive + reputable priority) ======================
 def normalize_title(title):
     if " - " in title:
         title = title.rsplit(" - ", 1)[0]
@@ -124,7 +129,6 @@ def fetch_section(sources, keywords, blocklist):
                     if blocklist and any(block in raw_title.lower() for block in blocklist):
                         continue
                     if any(kw in raw_title.lower() for kw in keywords):
-                        # Enforce no consecutive same source
                         if source_name == last_source:
                             continue
                         ts_struct = entry.get('published_parsed') or entry.get('updated_parsed')
@@ -149,16 +153,16 @@ sports_matches = fetch_section(SPORTS_SOURCES, SPORTS_KEYWORDS, ME_BLOCKLIST.uni
 current_ts = time.time()
 six_hours_ago = current_ts - 21600
 
-middle_breaking = [item for item in middle_matches if item[0] >= six_hours_ago][:20]
-middle_recent = [item for item in middle_matches if item not in middle_breaking][:20]
+middle_breaking = [item for item in middle_matches if item[0] >= six_hours_ago][:30]
+middle_recent = [item for item in middle_matches if item not in middle_breaking][:30]
 
-us_breaking = [item for item in us_matches if item[0] >= six_hours_ago][:20]
-us_recent = [item for item in us_matches if item not in us_breaking][:20]
+us_breaking = [item for item in us_matches if item[0] >= six_hours_ago][:30]
+us_recent = [item for item in us_matches if item not in us_breaking][:30]
 
-sports_breaking = [item for item in sports_matches if item[0] >= six_hours_ago][:20]
-sports_recent = [item for item in sports_matches if item not in sports_breaking][:20]
+sports_breaking = [item for item in sports_matches if item[0] >= six_hours_ago][:30]
+sports_recent = [item for item in sports_matches if item not in sports_breaking][:30]
 
-# ====================== BUILD HTML (with friendly source) ======================
+# ====================== BUILD HTML (friendly source + 30 per column) ======================
 html = """
 <!DOCTYPE html>
 <html lang="en">
