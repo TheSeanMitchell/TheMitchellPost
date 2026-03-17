@@ -13,17 +13,48 @@ print(f"Saving files to current directory: {CURRENT_DIR}")
 
 INDEX_HTML = os.path.join(CURRENT_DIR, "index.html")
 
-# ====================== EXPANDED KEYWORDS ======================
-# Middle East (expanded for volume while keeping your core list)
-RAW_ME_KEYWORDS = ["middle east", "arab world", "gulf states", "gcc countries", "levant", "maghreb", "mena", "persian gulf", "arabian peninsula", "west asia", "red sea", "iran", "iranian", "tehran", "qom", "mashhad", "isfahan", "tabriz", "khuzestan", "israel", "israeli", "jerusalem", "tel aviv", "west bank", "gaza", "golan", "saudi arabia", "saudi", "riyadh", "jeddah", "neom", "uae", "emirates", "abu dhabi", "dubai", "sharjah", "qatar", "doha", "kuwait", "oman", "bahrain", "iraq", "syria", "lebanon", "jordan", "turkey", "egypt", "yemen", "palestine", "khamenei", "mojtabakhamenei", "ayatollah", "supreme leader", "pezeshkian", "netanyahu", "mohammed bin salman", "mbs", "mohammed bin zayed", "mbz", "erdogan", "el sisi", "tamim", "king abdullah", "bashar al assad", "hezbollah", "hamas", "irgc", "houthis", "pmf", "isis", "gaza war", "israel gaza", "gaza ceasefire", "israel lebanon", "yemen civil war", "red sea crisis", "syria civil war", "idlib", "iran proxy", "axis of resistance", "iran nuclear", "jcpoa", "snapback sanctions", "hormuz", "strait hormuz", "oil prices", "brent crude", "wti crude", "opec", "kharg island", "iran oil exports", "centcom", "russia syria", "china iran", "abraham accords", "saudi israel", "iran protest", "iran unrest", "middle east war", "regional escalation", "proxy war", "iron dome"]
+# ====================== FRIENDLY SOURCE NAMES ======================
+SOURCE_MAP = {
+    "Reuters": "Reuters",
+    "AP News": "AP News",
+    "The New York Times": "The New York Times",
+    "The Wall Street Journal": "WSJ",
+    "The Washington Post": "Washington Post",
+    "Politico": "Politico",
+    "Axios": "Axios",
+    "NPR": "NPR",
+    "PBS": "PBS",
+    "BBC": "BBC",
+    "C-SPAN": "C-SPAN",
+    "The Hill": "The Hill",
+    "Al Jazeera": "Al Jazeera",
+    "Times of Israel": "Times of Israel",
+    "Financial Times": "Financial Times",
+    "The Economist": "The Economist",
+    "USA Today": "USA Today",
+    "Sports Illustrated": "Sports Illustrated",
+    "CBS Sports": "CBS Sports",
+    "FOX Sports": "FOX Sports",
+    "NCAA.com": "NCAA",
+    "Global & Regional": "Global News",
+    "US Politics Google": "US News",
+    # add more if you see new ones
+}
+
+def get_friendly_source(raw_name):
+    for key in SOURCE_MAP:
+        if key.lower() in raw_name.lower():
+            return SOURCE_MAP[key]
+    return raw_name.split(" - ")[-1].strip() if " - " in raw_name else raw_name
+
+# ====================== KEYWORDS (slightly expanded for volume) ======================
+RAW_ME_KEYWORDS = ["middle east", "arab world", "gulf states", "gcc countries", "levant", "maghreb", "mena", "persian gulf", "arabian peninsula", "west asia", "red sea", "iran", "iranian", "tehran", "qom", "mashhad", "isfahan", "tabriz", "khuzestan", "israel", "israeli", "jerusalem", "tel aviv", "west bank", "gaza", "golan", "saudi arabia", "saudi", "riyadh", "jeddah", "neom", "uae", "emirates", "abu dhabi", "dubai", "sharjah", "qatar", "doha", "kuwait", "oman", "bahrain", "iraq", "syria", "lebanon", "jordan", "turkey", "egypt", "yemen", "palestine", "khamenei", "mojtabakhamenei", "ayatollah", "supreme leader", "pezeshkian", "netanyahu", "mohammed bin salman", "mbs", "mohammed bin zayed", "mbz", "erdogan", "el sisi", "tamim", "king abdullah", "bashar al assad", "hezbollah", "hamas", "irgc", "houthis", "pmf", "isis", "gaza war", "israel gaza", "gaza ceasefire", "israel lebanon", "yemen civil war", "red sea crisis", "syria civil war", "idlib", "iran proxy", "axis of resistance", "iran nuclear", "jcpoa", "snapback sanctions", "hormuz", "strait hormuz", "oil prices", "brent crude", "wti crude", "opec", "kharg island", "iran oil exports", "centcom"]
 ME_KEYWORDS = set(word.lower() for kw in RAW_ME_KEYWORDS for word in kw.split())
 
-# US Politics (expanded for volume)
 RAW_US_KEYWORDS = ["united states politics", "american politics", "us government", "federal government", "white house", "us congress", "us senate", "house of representatives", "supreme court", "us constitution", "bill of rights", "federal election", "presidential election", "midterm elections", "primary elections", "electoral college", "inauguration day", "state of the union", "campaign rally", "political campaign", "political debate", "voter turnout", "election day", "swing states", "battleground states", "donald trump", "trump campaign", "joe biden", "biden administration", "kamala harris", "vice president", "republican party", "democratic party", "gop", "democrat", "maga", "ron desantis", "gavin newsom", "greg abbott", "marco rubio", "ted cruz", "alexandria ocasio cortez", "aoc", "nancy pelosi", "mitch mcconnell", "chuck schumer", "hakeem jeffries", "supreme court ruling", "federal budget", "inflation united states", "us economy", "gun control", "immigration policy", "border security", "climate policy", "healthcare policy", "student loan", "abortion rights", "lgbtq rights", "culture wars", "election security", "misinformation campaigns", "political polling", "campaign finance", "super pac"]
 US_KEYWORDS = set(word.lower() for kw in RAW_US_KEYWORDS for word in kw.split())
 
-# Sports (unchanged)
-RAW_SPORTS_KEYWORDS = ["march madness", "college basketball", "arizona wildcats", "purdue boilermakers", "miami hurricanes", "villanova wildcats", "utah state aggies", "ncaa tournament", "college basketball crown", "ncaa bracket"]
+RAW_SPORTS_KEYWORDS = ["march madness", "college basketball", "arizona wildcats", "purdue boilermakers", "miami hurricanes", "villanova wildcats", "utah state aggies", "ncaa tournament", "college basketball crown", "ncaa bracket", "march madness bracket", "ncaa tournament bracket"]
 SPORTS_KEYWORDS = set(word.lower() for kw in RAW_SPORTS_KEYWORDS for word in kw.split())
 
 # ====================== BLOCKLISTS ======================
@@ -31,7 +62,7 @@ ME_BLOCKLIST = {"trump", "harris", "biden", "congress", "senate", "house", "supr
 US_BLOCKLIST = {"iran", "israel", "gaza", "hezbollah", "hamas", "hormuz", "khamenei", "netanyahu", "mbs", "mbz", "saudi", "uae", "qatar", "lebanon", "syria", "yemen", "palestine", "irgc", "houthis", "axis of resistance", "jcpoa", "snapback sanctions", "strait of hormuz"}
 SPORTS_BLOCKLIST = ME_BLOCKLIST.union(US_BLOCKLIST)
 
-# ====================== SECTION-SPECIFIC SOURCES (heavily expanded for volume) ======================
+# ====================== SECTION-SPECIFIC SOURCES (expanded for volume) ======================
 MIDDLE_EAST_SOURCES = [
     ("Global Regional", "https://news.google.com/rss/search?q=middle+east+OR+iran+OR+israel+OR+gulf+OR+hezbollah+OR+hamas+OR+saudi+OR+uae+OR+qatar+OR+syria+OR+lebanon+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("Reuters AP", "https://news.google.com/rss/search?q=when:1d+site:reuters.com+OR+site:apnews.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
@@ -59,7 +90,7 @@ SPORTS_SOURCES = [
     ("Broad Sports", "https://news.google.com/rss/search?q=when:1d+sports+OR+ncaa+OR+college+basketball+OR+football&hl=en-US&gl=US&ceid=US:en"),
 ]
 
-# ====================== FETCH FUNCTION (5-per-source hard cap) ======================
+# ====================== FETCH FUNCTION (5-per-source + no consecutive same source) ======================
 def normalize_title(title):
     if " - " in title:
         title = title.rsplit(" - ", 1)[0]
@@ -69,6 +100,7 @@ def fetch_section(sources, keywords, blocklist):
     matches = []
     seen_title = set()
     source_count = defaultdict(int)
+    last_source = None
     
     for source_name, url in sources:
         if source_count[source_name] >= 5:
@@ -92,11 +124,15 @@ def fetch_section(sources, keywords, blocklist):
                     if blocklist and any(block in raw_title.lower() for block in blocklist):
                         continue
                     if any(kw in raw_title.lower() for kw in keywords):
+                        # Enforce no consecutive same source
+                        if source_name == last_source:
+                            continue
                         ts_struct = entry.get('published_parsed') or entry.get('updated_parsed')
                         ts = time.mktime(ts_struct) if ts_struct else time.time()
                         matches.append((ts, raw_title, source_name, link))
                         seen_title.add(norm_title)
                         source_count[source_name] += 1
+                        last_source = source_name
                 break
             except Exception as e:
                 print(f"    Attempt {attempt+1} failed: {str(e)}")
@@ -122,7 +158,7 @@ us_recent = [item for item in us_matches if item not in us_breaking][:20]
 sports_breaking = [item for item in sports_matches if item[0] >= six_hours_ago][:20]
 sports_recent = [item for item in sports_matches if item not in sports_breaking][:20]
 
-# ====================== BUILD HTML (updated titles) ======================
+# ====================== BUILD HTML (with friendly source) ======================
 html = """
 <!DOCTYPE html>
 <html lang="en">
@@ -165,7 +201,8 @@ html = """
 
 if us_breaking:
     for ts, title, source, link in us_breaking:
-        html += f'<div class="headline"><span class="title">{title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+        friendly = get_friendly_source(source)
+        html += f'<div class="headline"><span class="title">{title}</span> <span style="color:#aaaaaa;">[{friendly}]</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
 else:
     html += '<p>No breaking US news in the last 6 hours.</p>\n'
 
@@ -177,7 +214,8 @@ html += """
 
 if us_recent:
     for ts, title, source, link in us_recent:
-        html += f'<div class="headline"><span class="title">{title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+        friendly = get_friendly_source(source)
+        html += f'<div class="headline"><span class="title">{title}</span> <span style="color:#aaaaaa;">[{friendly}]</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
 else:
     html += '<p>No additional US headlines right now.</p>\n'
 
@@ -195,7 +233,8 @@ html += """
 
 if middle_breaking:
     for ts, title, source, link in middle_breaking:
-        html += f'<div class="headline"><span class="title">{title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+        friendly = get_friendly_source(source)
+        html += f'<div class="headline"><span class="title">{title}</span> <span style="color:#aaaaaa;">[{friendly}]</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
 else:
     html += '<p>No breaking news in the last 6 hours.</p>\n'
 
@@ -207,7 +246,8 @@ html += """
 
 if middle_recent:
     for ts, title, source, link in middle_recent:
-        html += f'<div class="headline"><span class="title">{title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+        friendly = get_friendly_source(source)
+        html += f'<div class="headline"><span class="title">{title}</span> <span style="color:#aaaaaa;">[{friendly}]</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
 else:
     html += '<p>No additional headlines right now.</p>\n'
 
@@ -225,7 +265,8 @@ html += """
 
 if sports_breaking:
     for ts, title, source, link in sports_breaking:
-        html += f'<div class="headline"><span class="title">{title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+        friendly = get_friendly_source(source)
+        html += f'<div class="headline"><span class="title">{title}</span> <span style="color:#aaaaaa;">[{friendly}]</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
 else:
     html += '<p>No breaking sports news in the last 6 hours.</p>\n'
 
@@ -237,7 +278,8 @@ html += """
 
 if sports_recent:
     for ts, title, source, link in sports_recent:
-        html += f'<div class="headline"><span class="title">{title}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+        friendly = get_friendly_source(source)
+        html += f'<div class="headline"><span class="title">{title}</span> <span style="color:#aaaaaa;">[{friendly}]</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
 else:
     html += '<p>No additional sports headlines right now.</p>\n'
 
