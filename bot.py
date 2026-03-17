@@ -36,9 +36,6 @@ SOURCE_MAP = {
     "CBS Sports": "CBS Sports",
     "FOX Sports": "FOX Sports",
     "NCAA.com": "NCAA",
-    "Global & Regional": "Global News",
-    "US Politics Google": "US News",
-    "Google US Politics": "US News",
 }
 
 def get_friendly_source(raw_name):
@@ -47,12 +44,12 @@ def get_friendly_source(raw_name):
             return SOURCE_MAP[key]
     return raw_name.split(" - ")[-1].strip() if " - " in raw_name else raw_name
 
-# ====================== KEYWORDS (expanded for volume) ======================
+# ====================== KEYWORDS (your original lists) ======================
 # Middle East
 RAW_ME_KEYWORDS = ["middle east", "arab world", "gulf states", "gcc countries", "levant", "maghreb", "mena", "persian gulf", "arabian peninsula", "west asia", "red sea", "iran", "iranian", "tehran", "qom", "mashhad", "isfahan", "tabriz", "khuzestan", "israel", "israeli", "jerusalem", "tel aviv", "west bank", "gaza", "golan", "saudi arabia", "saudi", "riyadh", "jeddah", "neom", "uae", "emirates", "abu dhabi", "dubai", "sharjah", "qatar", "doha", "kuwait", "oman", "bahrain", "iraq", "syria", "lebanon", "jordan", "turkey", "egypt", "yemen", "palestine", "khamenei", "mojtabakhamenei", "ayatollah", "supreme leader", "pezeshkian", "netanyahu", "mohammed bin salman", "mbs", "mohammed bin zayed", "mbz", "erdogan", "el sisi", "tamim", "king abdullah", "bashar al assad", "hezbollah", "hamas", "irgc", "houthis", "pmf", "isis", "gaza war", "israel gaza", "gaza ceasefire", "israel lebanon", "yemen civil war", "red sea crisis", "syria civil war", "idlib", "iran proxy", "axis of resistance", "iran nuclear", "jcpoa", "snapback sanctions", "hormuz", "strait hormuz", "oil prices", "brent crude", "wti crude", "opec", "kharg island", "iran oil exports", "centcom"]
 ME_KEYWORDS = set(word.lower() for kw in RAW_ME_KEYWORDS for word in kw.split())
 
-# US Politics (expanded)
+# US Politics
 RAW_US_KEYWORDS = ["united states politics", "american politics", "us government", "federal government", "white house", "us congress", "us senate", "house of representatives", "supreme court", "us constitution", "bill of rights", "federal election", "presidential election", "midterm elections", "primary elections", "electoral college", "inauguration day", "state of the union", "campaign rally", "political campaign", "political debate", "voter turnout", "election day", "swing states", "battleground states", "donald trump", "trump campaign", "joe biden", "biden administration", "kamala harris", "vice president", "republican party", "democratic party", "gop", "democrat", "maga", "ron desantis", "gavin newsom", "greg abbott", "marco rubio", "ted cruz", "alexandria ocasio cortez", "aoc", "nancy pelosi", "mitch mcconnell", "chuck schumer", "hakeem jeffries", "supreme court ruling", "federal budget", "inflation united states", "us economy", "gun control", "immigration policy", "border security", "climate policy", "healthcare policy", "student loan", "abortion rights", "lgbtq rights", "culture wars", "election security", "misinformation campaigns", "political polling", "campaign finance", "super pac"]
 US_KEYWORDS = set(word.lower() for kw in RAW_US_KEYWORDS for word in kw.split())
 
@@ -65,37 +62,45 @@ ME_BLOCKLIST = {"trump", "harris", "biden", "congress", "senate", "house", "supr
 US_BLOCKLIST = {"iran", "israel", "gaza", "hezbollah", "hamas", "hormuz", "khamenei", "netanyahu", "mbs", "mbz", "saudi", "uae", "qatar", "lebanon", "syria", "yemen", "palestine", "irgc", "houthis", "axis of resistance", "jcpoa", "snapback sanctions", "strait of hormuz"}
 SPORTS_BLOCKLIST = ME_BLOCKLIST.union(US_BLOCKLIST)
 
-# ====================== SECTION-SPECIFIC SOURCES (prioritized reputable first + expanded) ======================
+# ====================== INDIVIDUAL GOOGLE RSS WORKAROUNDS PER SOURCE ======================
 MIDDLE_EAST_SOURCES = [
-    ("Reuters", "https://feeds.reuters.com/reuters/worldNews"),
-    ("AP News", "https://feeds.apnews.com/rss/apf-topnews"),
-    ("Al Jazeera", "https://www.aljazeera.com/xml/rss/all.xml"),
-    ("Times of Israel", "https://www.timesofisrael.com/feed/"),
-    ("Global Regional", "https://news.google.com/rss/search?q=middle+east+OR+iran+OR+israel+OR+gulf+OR+hezbollah+OR+hamas+OR+saudi+OR+uae+OR+qatar+OR+syria+OR+lebanon+when:1d&hl=en-US&gl=US&ceid=US:en"),
-    ("NYT WSJ FT Economist", "https://news.google.com/rss/search?q=when:1d+site:nytimes.com+OR+site:wsj.com+OR+site:ft.com+OR+site:economist.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
+    ("Reuters", "https://news.google.com/rss/search?q=when:1d+site:reuters.com+middle+east+OR+iran+OR+israel+OR+gulf&hl=en-US&gl=US&ceid=US:en"),
+    ("AP News", "https://news.google.com/rss/search?q=when:1d+site:apnews.com+middle+east+OR+iran+OR+israel+OR+gulf&hl=en-US&gl=US&ceid=US:en"),
+    ("NYT", "https://news.google.com/rss/search?q=when:1d+site:nytimes.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
+    ("WSJ", "https://news.google.com/rss/search?q=when:1d+site:wsj.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
+    ("Washington Post", "https://news.google.com/rss/search?q=when:1d+site:washingtonpost.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
+    ("Financial Times", "https://news.google.com/rss/search?q=when:1d+site:ft.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
+    ("The Economist", "https://news.google.com/rss/search?q=when:1d+site:economist.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
+    ("Al Jazeera", "https://news.google.com/rss/search?q=when:1d+site:aljazeera.com+iran+OR+israel+OR+gulf&hl=en-US&gl=US&ceid=US:en"),
+    ("Times of Israel", "https://news.google.com/rss/search?q=when:1d+site:timesofisrael.com+iran+OR+israel+OR+gulf&hl=en-US&gl=US&ceid=US:en"),
+    ("Arab News", "https://news.google.com/rss/search?q=when:1d+site:arabnews.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
 ]
 
 US_POLITICS_SOURCES = [
-    ("AP News", "https://feeds.apnews.com/rss/apf-topnews"),
-    ("Reuters Politics", "https://feeds.reuters.com/reuters/politicsNews"),
-    ("NYT Politics", "https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml"),
-    ("WSJ Politics", "https://feeds.wsj.com/wsj/us/politics"),
-    ("Washington Post Politics", "https://feeds.washingtonpost.com/rss/politics"),
-    ("Politico", "https://www.politico.com/rss/politicopicks.xml"),
-    ("Axios", "https://www.axios.com/feed"),
-    ("NPR Politics", "https://feeds.npr.org/1019/rss.xml"),
-    ("PBS NewsHour", "https://www.pbs.org/newshour/feeds/rss/headlines"),
-    ("BBC US", "https://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml"),
-    ("C-SPAN", "https://www.c-span.org/rss/latestClips/"),
-    ("Google US Politics", "https://news.google.com/rss/search?q=donald+trump+OR+us+election+OR+congress+OR+kamala+harris+OR+joe+biden+OR+republican+OR+democrat+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("AP News", "https://news.google.com/rss/search?q=when:1d+site:apnews.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
+    ("Reuters", "https://news.google.com/rss/search?q=when:1d+site:reuters.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
+    ("NYT", "https://news.google.com/rss/search?q=when:1d+site:nytimes.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
+    ("WSJ", "https://news.google.com/rss/search?q=when:1d+site:wsj.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
+    ("Washington Post", "https://news.google.com/rss/search?q=when:1d+site:washingtonpost.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
+    ("Politico", "https://news.google.com/rss/search?q=when:1d+site:politico.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
+    ("Axios", "https://news.google.com/rss/search?q=when:1d+site:axios.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
+    ("NPR", "https://news.google.com/rss/search?q=when:1d+site:npr.org+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
+    ("PBS", "https://news.google.com/rss/search?q=when:1d+site:pbs.org+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
+    ("BBC", "https://news.google.com/rss/search?q=when:1d+site:bbc.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
+    ("C-SPAN", "https://news.google.com/rss/search?q=when:1d+site:c-span.org+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
+    ("The Hill", "https://news.google.com/rss/search?q=when:1d+site:thehill.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
 ]
 
 SPORTS_SOURCES = [
-    ("College Sports", "https://news.google.com/rss/search?q=march+madness+OR+college+basketball+OR+ncaa+tournament+OR+arizona+wildcats+OR+purdue+boilermakers+when:1d&hl=en-US&gl=US&ceid=US:en"),
-    ("Broad Sports", "https://news.google.com/rss/search?q=when:1d+sports+OR+ncaa+OR+college+basketball+OR+football&hl=en-US&gl=US&ceid=US:en"),
+    ("NCAA", "https://news.google.com/rss/search?q=when:1d+site:ncaa.com+march+madness+OR+college+basketball&hl=en-US&gl=US&ceid=US:en"),
+    ("CBS Sports", "https://news.google.com/rss/search?q=when:1d+site:cbssports.com+march+madness+OR+college+basketball&hl=en-US&gl=US&ceid=US:en"),
+    ("FOX Sports", "https://news.google.com/rss/search?q=when:1d+site:foxsports.com+march+madness+OR+college+basketball&hl=en-US&gl=US&ceid=US:en"),
+    ("USA Today", "https://news.google.com/rss/search?q=when:1d+site:usatoday.com+march+madness+OR+college+basketball&hl=en-US&gl=US&ceid=US:en"),
+    ("Sports Illustrated", "https://news.google.com/rss/search?q=when:1d+site:si.com+march+madness+OR+college+basketball&hl=en-US&gl=US&ceid=US:en"),
+    ("Broad Sports", "https://news.google.com/rss/search?q=when:1d+march+madness+OR+college+basketball+OR+ncaa+tournament&hl=en-US&gl=US&ceid=US:en"),
 ]
 
-# ====================== FETCH FUNCTION (5-per-source + no consecutive + reputable priority) ======================
+# ====================== FETCH FUNCTION (5-per-source + no consecutive) ======================
 def normalize_title(title):
     if " - " in title:
         title = title.rsplit(" - ", 1)[0]
@@ -162,7 +167,7 @@ us_recent = [item for item in us_matches if item not in us_breaking][:30]
 sports_breaking = [item for item in sports_matches if item[0] >= six_hours_ago][:30]
 sports_recent = [item for item in sports_matches if item not in sports_breaking][:30]
 
-# ====================== BUILD HTML (friendly source + 30 per column) ======================
+# ====================== BUILD HTML ======================
 html = """
 <!DOCTYPE html>
 <html lang="en">
