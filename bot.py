@@ -44,17 +44,90 @@ def get_friendly_source(raw_name):
             return SOURCE_MAP[key]
     return raw_name.split(" - ")[-1].strip() if " - " in raw_name else raw_name
 
-# ====================== KEYWORDS (your lists — unchanged) ======================
-# [All your RAW_ME_KEYWORDS, RAW_US_KEYWORDS, RAW_SPORTS_KEYWORDS, RAW_TECH_KEYWORDS and their set conversions remain exactly as you pasted]
+# ====================== KEYWORDS (your lists) ======================
+# Middle East (unchanged)
+RAW_ME_KEYWORDS = ["middle east", "middle east news", "arab world", "gulf states", "gulf cooperation council", "gcc countries", "levant region", "maghreb region", "mena region", "persian gulf", "arabian peninsula", "west asia", "red sea region", "iran", "iranian", "tehran", "qom", "mashhad", "isfahan", "tabriz", "khuzestan", "israel", "israeli", "jerusalem", "tel aviv", "west bank", "gaza strip", "golan heights", "saudi arabia", "saudi", "riyadh", "jeddah", "neom", "vision 2030", "united arab emirates", "uae", "emirates", "abu dhabi", "dubai", "sharjah", "qatar", "doha", "kuwait", "kuwait city", "oman", "muscat", "bahrain", "manama", "iraq", "iraqi", "baghdad", "basra", "mosul", "kurdistan iraq", "erbil", "syria", "syrian", "damascus", "aleppo", "idlib", "lebanon", "lebanese", "beirut", "jordan", "amman", "turkey", "turkish", "ankara", "istanbul", "egypt", "egyptian", "cairo", "alexandria", "yemen", "yemeni", "sanaa", "aden", "palestine", "palestinian", "ramallah", "khamenei", "mojtabakhamenei", "mojta ba khamenei", "ayatollah", "supreme leader iran", "president iran", "pezeshkian", "benjamin netanyahu", "netanyahu government", "israeli war cabinet", "mohammed bin salman", "mbs saudi", "saudi crown prince", "mohammed bin zayed", "mbz", "recep tayyip erdogan", "abdel fattah el sisi", "tamim bin hamad al thani", "king abdullah jordan", "bashar al assad", "middle east war", "regional war middle east", "military escalation middle east", "proxy war middle east", "militia middle east", "airstrike middle east", "drone strike middle east", "missile attack middle east", "ballistic missile middle east", "naval clash middle east", "red sea shipping attack", "military buildup middle east", "troop deployment middle east", "hezbollah", "hamas", "palestinian islamic jihad", "irgc", "islamic revolutionary guard corps", "houthis", "ansar allah", "popular mobilization forces", "pmf iraq", "al qaeda arabian peninsula", "aqap", "isis", "isis-k", "islamic state", "gaza war", "israel gaza war", "gaza ceasefire", "israel lebanon border conflict", "israel hezbollah conflict", "yemen civil war", "red sea crisis", "syria civil war", "idlib offensive", "iraq militia attacks", "iran israel shadow war", "iran nuclear program", "uranium iran", "uranium enrichment", "nuclear breakout time", "iran centrifuges", "natanz nuclear facility", "fordow nuclear facility", "iaea iran", "nuclear inspections iran", "jcpoa", "iran nuclear deal", "snapback sanctions", "ballistic missile program iran", "hypersonic missile iran", "brent crude", "wti crude", "oil supply disruption", "opec", "opec+", "oil tanker attack", "tanker seizure", "hormuz blockade", "strait hormuz", "red sea shipping", "suez canal shipping", "lng exports qatar", "saudi oil production", "kharg island", "iran oil exports", "us middle east policy", "us centcom", "centcom iran", "centcom strikes", "us military bases middle east", "american troops iraq", "us troops syria", "russia middle east policy", "russia syria military", "china middle east diplomacy", "china iran deal", "belt and road middle east", "abraham accords", "israel normalization", "saudi israel normalization", "arab league", "iran saudi relations", "iran china mediation", "turkey nato middle east", "iran protest", "iran unrest", "iran revolution", "arab spring", "middle east protests", "economic protests middle east", "government crackdown middle east", "regime change middle east", "political prisoners middle east", "shia islam", "sunni islam", "religious authority iran", "hajj pilgrimage", "mecca pilgrimage", "islamic scholarship middle east", "religious tensions middle east", "drone warfare middle east", "iran drones", "shahed drone", "cyber attack middle east", "cyber warfare israel iran", "ai military middle east", "missile defense israel", "iron dome", "arrow missile defense", "neom saudi", "saudi giga projects", "uae space program", "dubai real estate boom", "qatar world cup legacy", "middle east infrastructure", "refugee crisis middle east", "syrian refugees", "gaza humanitarian crisis", "famine yemen", "water crisis middle east", "climate change middle east", "desertification middle east", "breaking news middle east", "middle east analysis", "middle east geopolitics", "middle east conflict update", "middle east security update", "regional escalation", "gray zone conflict", "proxy warfare", "strategic deterrence", "regional balance of power", "maritime security gulf", "energy security middle east", "october 7 attack", "october 7 israel attack", "hamas october 7", "gaza ground offensive", "rafah offensive", "rafah crossing", "rafah evacuation", "gaza reconstruction", "gaza displacement", "gaza hostage crisis", "israeli hostages", "hostage negotiations gaza", "prisoner exchange israel hamas", "ceasefire negotiations gaza", "humanitarian corridor gaza", "gaza aid convoy", "gaza famine warning", "gaza refugee camps", "west bank raids", "settler violence west bank", "west bank escalation", "lebanon front escalation", "israel lebanon war risk", "hezbollah rocket barrage", "hezbollah precision missiles", "northern israel evacuation", "blue line conflict", "iran proxy network", "axis of resistance", "iran proxy war", "iran regional militias", "iran leadership crisis", "iran power struggle", "iran succession crisis", "post khamenei iran", "khamenei successor debate", "iran clerical leadership vacuum", "iran regime stability", "iran military leadership", "iran revolutionary guard leadership", "iran supreme leadership council", "iran transitional government speculation", "iran constitutional crisis", "iran elite power struggle", "iran hardliners vs reformists", "iran security crackdown", "iran internet blackout", "iran economic collapse", "iran rial crisis", "iran capital flight", "iran sanctions evasion", "iran shadow fleet", "iran tanker fleet", "iran drone exports", "iran russia drone deal", "iran china strategic partnership", "iran missile stockpile", "iran underground bases", "iran retaliation israel", "israel strike iran", "israel iran escalation", "israel preemptive strike iran", "israel nuclear red line", "regional escalation scenario", "persian gulf naval standoff", "gulf tanker war", "red sea naval task force", "maritime coalition red sea", "houthi missile attacks shipping", "houthi drone attacks ships", "bab el mandeb strait crisis", "global shipping disruption red sea", "insurance crisis shipping middle east", "oil shock risk middle east", "energy market shock middle east", "refugee flows middle east war", "regional war scenario middle east", "multi front war israel", "israel gaza lebanon war", "israel iran direct conflict", "iran retaliation scenario", "middle east escalation timeline", "middle east war forecast", "middle east geopolitical risk", "strategic chokepoints middle east", "global oil chokepoints", "hormuz crisis scenario", "red sea blockade scenario", "eastern mediterranean gas fields", "levant gas dispute", "cyprus gas exploration", "turkey greece eastern mediterranean tensions", "middle east arms race", "missile proliferation middle east", "drone proliferation middle east", "regional nuclear proliferation", "saudi nuclear program", "uae nuclear program", "middle east security architecture", "us carrier strike group middle east", "aircraft carrier persian gulf", "strategic bombing middle east", "bunker buster strike iran", "underground nuclear facility iran", "intelligence leaks middle east conflict", "satellite imagery iran bases", "osint iran military", "war games middle east scenario", "think tank analysis middle east conflict", "geopolitical forecasting middle east", "global markets reaction middle east war", "oil price spike middle east conflict", "defense spending middle east", "military mobilization middle east", "emergency diplomacy middle east", "backchannel negotiations middle east", "crisis summit middle east leaders", "international mediation middle east conflict"]
+ME_KEYWORDS = set(word.lower() for kw in RAW_ME_KEYWORDS for word in kw.split())
 
-# ====================== BLOCKLISTS (unchanged) ======================
-# [ME_BLOCKLIST, US_BLOCKLIST, SPORTS_BLOCKLIST, TECH_BLOCKLIST remain exactly as you pasted]
+# US Politics (updated with your new list)
+RAW_US_KEYWORDS = ["us politics", "american politics", "federal government", "state government", "local government", "congress news", "senate news", "house of representatives", "supreme court rulings", "scotus decisions", "federal court cases", "district court rulings", "appellate court rulings", "executive orders", "white house briefing", "presidential address", "press secretary briefing", "election news", "election updates", "election coverage", "presidential election", "midterm elections", "senate races", "house races", "governor races", "mayoral races", "ballot initiatives", "referendums", "voter turnout", "voter suppression", "election integrity", "mail in voting", "absentee ballots", "early voting", "voter id laws", "electoral college", "swing states", "battleground states", "red states", "blue states", "purple states", "political polling", "approval ratings", "favorability ratings", "policy proposals", "legislative agenda", "bipartisan bill", "partisan divide", "filibuster", "budget reconciliation", "government shutdown", "federal budget", "national debt", "deficit spending", "tax reform", "irs policy", "corporate tax", "income tax", "capital gains tax", "inflation rate", "cpi inflation", "ppi inflation", "interest rates", "federal reserve policy", "fed rate hike", "fed rate cuts", "unemployment rate", "job growth", "labor market", "wage growth", "housing market", "mortgage rates", "rent prices", "real estate trends", "housing affordability", "homelessness policy", "healthcare policy", "medicare", "medicaid", "affordable care act", "obamacare", "drug pricing", "prescription costs", "public health policy", "pandemic response", "vaccine policy", "immigration policy", "border security", "asylum policy", "deportation policy", "daca", "visa policy", "refugee policy", "foreign policy", "us china relations", "us russia relations", "us iran policy", "middle east policy", "nato policy", "defense spending", "military budget", "pentagon news", "national security", "intelligence community", "cia", "fbi", "nsa", "homeland security", "cybersecurity policy", "cyber attacks", "infrastructure security", "critical infrastructure", "energy policy", "oil production", "gas prices", "renewable energy", "solar power", "wind energy", "nuclear energy policy", "climate change policy", "carbon emissions", "environmental protection", "epa regulations", "water policy", "agriculture policy", "farm bill", "food supply chain", "trade policy", "tariffs", "global trade", "supply chain disruptions", "manufacturing policy", "industrial policy", "antitrust law", "big tech regulation", "ai regulation", "data privacy law", "section 230", "social media policy", "digital rights", "free speech law", "first amendment cases", "second amendment cases", "gun control policy", "gun rights", "crime rates", "policing policy", "criminal justice reform", "prison reform", "sentencing laws", "drug policy", "opioid crisis", "fentanyl crisis", "education policy", "student loans", "tuition costs", "k-12 education", "curriculum debates", "school funding", "charter schools", "culture war issues", "gender policy", "civil rights", "voting rights act", "discrimination law", "supreme court nominations", "judicial appointments", "political scandals", "ethics investigations", "lobbying", "lobbying disclosure", "campaign finance", "super pacs", "dark money", "election interference", "misinformation", "disinformation", "media bias", "journalism ethics", "breaking news us", "live news updates", "policy analysis", "political analysis", "expert commentary", "think tank reports", "government data releases", "economic indicators", "consumer confidence", "retail sales", "manufacturing index", "housing starts", "building permits", "transportation policy", "infrastructure bill", "highways funding", "public transit", "aviation policy", "airline industry", "faa regulation", "ev policy", "electric vehicles", "automotive regulation", "tech innovation policy", "space policy", "nasa missions", "spacex policy", "telecommunications policy", "5g rollout", "broadband access", "rural internet", "urban development", "zoning laws", "land use policy", "disaster response", "emergency management", "fema response", "wildfire policy", "hurricane response", "climate disasters", "insurance markets", "banking regulation", "financial markets", "stock market news", "dow jones", "s&p 500", "nasdaq", "earnings reports", "corporate governance", "mergers and acquisitions", "startup funding", "venture capital", "labor unions", "strikes", "labor disputes", "minimum wage", "gig economy", "workplace regulation", "osha policy", "diversity equity inclusion policy", "government oversight", "inspector general reports", "whistleblower cases", "transparency", "freedom of information act", "foia requests", "investigative journalism", "watchdog reporting", "accountability journalism", "fact checking", "verification", "primary sources", "official statements", "transcripts", "press releases", "data journalism", "open data", "public records", "expert analysis", "academic research policy", "peer reviewed studies", "policy outcomes", "longitudinal studies", "trend analysis", "scenario planning", "risk assessment", "geopolitical risk", "economic outlook", "future forecasts", "us economy", "economic growth", "recession risk", "soft landing economy", "hard landing economy", "fiscal policy", "monetary policy", "consumer spending", "supply and demand", "productivity growth", "manufacturing output", "services sector", "small business trends", "corporate layoffs", "hiring trends", "job openings", "labor participation rate", "unionization trends", "antitrust cases", "monopoly regulation", "tech monopolies", "platform regulation", "social media companies", "content moderation", "digital censorship", "online speech", "misinformation campaigns", "election security", "voting machines", "cybersecurity threats", "hacking incidents", "ransomware attacks", "data breaches", "identity theft", "privacy concerns", "surveillance policy", "facial recognition law", "biometric data", "border surveillance", "immigration raids", "sanctuary cities", "deportation flights", "refugee intake", "asylum backlog", "immigration courts", "border wall policy", "foreign aid", "military alliances", "defense contracts", "arms sales", "weapons systems", "drone warfare", "cyber warfare", "space force", "nuclear policy", "arms control treaties", "sanctions policy", "trade agreements", "export controls", "tariffs china", "tariffs europe", "trade war", "global markets", "currency exchange", "dollar strength", "inflation expectations", "bond market", "treasury yields", "housing affordability crisis", "urban housing crisis", "rural housing issues", "infrastructure investment", "public works projects", "transportation funding", "rail systems", "high speed rail", "airline safety", "aviation incidents", "supply chain logistics", "port congestion", "trucking industry", "fuel prices", "energy independence", "oil reserves", "strategic petroleum reserve", "clean energy transition", "green energy policy", "climate legislation", "emissions targets", "carbon pricing", "environmental justice", "water shortages", "drought conditions", "wildfire seasons", "hurricane tracking", "disaster recovery funding", "insurance premiums", "banking stability", "financial regulation", "fintech innovation", "cryptocurrency regulation", "digital assets", "blockchain policy", "central bank digital currency", "cbdc policy", "ai innovation", "ai startups", "ai governance", "automation jobs", "future of work", "remote work policy", "hybrid work trends", "workplace productivity", "labor shortages", "skills gap", "education reform", "charter school expansion", "public school funding", "higher education policy", "student debt relief", "loan forgiveness", "campus protests", "academic freedom", "free speech campuses", "civil liberties", "human rights us", "police reform", "qualified immunity", "incarceration rates", "prison conditions", "parole policy", "rehabilitation programs", "drug legalization", "marijuana policy", "border fentanyl trafficking", "healthcare costs", "insurance coverage", "hospital systems", "medical workforce", "telehealth expansion", "pharmaceutical industry", "drug approvals", "fda policy", "pandemic preparedness", "vaccine rollout", "disease outbreaks", "public health emergencies", "science funding", "research grants", "innovation policy", "space exploration", "satellite systems", "gps systems", "telecommunications law", "internet access", "digital divide", "rural broadband expansion", "urban infrastructure", "smart cities", "technology adoption", "consumer tech policy", "product safety", "recalls", "supply shortages", "retail trends", "consumer confidence index", "holiday shopping trends", "black friday sales", "cyber monday sales", "economic forecasts", "policy debates", "public hearings", "committee investigations", "special counsel investigations", "ethics violations", "campaign violations", "political donations", "fundraising totals", "election ads", "media coverage", "press conferences", "interviews politicians", "debate performances", "primary elections", "caucuses", "delegate counts", "convention news", "party platforms", "republican party news", "democratic party news", "independent candidates", "third party politics", "libertarian party", "green party", "political ideology", "conservatism", "liberalism", "populism", "nationalism", "globalization", "isolationism", "political polarization", "bipartisan cooperation", "legislative gridlock", "judicial review", "constitutional amendments", "civil cases", "criminal cases", "legal precedent", "supreme court majority", "dissenting opinions", "oral arguments", "legal briefs", "case filings", "appeals process", "justice department investigations", "attorney general actions", "federal prosecutions", "white collar crime", "corporate fraud", "insider trading", "financial crime", "public corruption", "ethics reforms", "transparency initiatives", "whistleblower protections", "government accountability", "public trust government", "civic participation", "voter registration", "turnout efforts", "campaign volunteering", "grassroots activism", "political organizing", "community engagement", "public forums", "town meetings", "citizen initiatives", "public referenda", "civic tech", "open government", "transparency data", "watchdog groups", "nonprofit reporting", "independent journalism", "media ecosystem", "news consumption trends", "information credibility", "source verification", "fact based reporting", "evidence based policy", "expert interviews", "data driven journalism", "public records access", "foia disclosures", "leak investigations", "insider information politics", "anonymous sources politics", "insider reports washington", "beltway politics", "washington insiders", "capitol hill updates", "white house insiders", "agency insiders", "whistleblower leaks", "classified document cases", "document mishandling investigations", "national archives disputes", "legal exposure politicians", "indictment news politicians", "criminal charges politicians", "court appearances politicians", "plea deals politics", "sentencing politicians", "legal defense teams politics", "constitutional challenges", "supreme court appeals", "precedent setting cases", "landmark rulings", "legal interpretation debates", "judicial philosophy", "originalism debate", "living constitution debate", "separation of church and state", "executive privilege claims", "congressional oversight authority", "subpoena enforcement", "contempt of congress", "impeachment proceedings", "articles of impeachment", "senate trial impeachment", "acquittal conviction impeachment", "political fallout impeachment", "public opinion impeachment", "historical comparisons impeachment", "american culture", "us culture trends", "pop culture us", "cultural trends america", "media landscape us", "news media trends", "cable news ratings", "streaming news consumption", "independent journalism growth", "alternative media platforms", "podcast popularity politics", "youtube political channels", "tiktok political trends", "viral news clips", "breaking news alerts", "real time reporting", "live press conferences", "white house live stream", "congressional live stream", "senate hearings live", "house hearings live", "court hearings live", "supreme court live audio", "emergency alerts us", "national emergency updates", "federal alerts", "state emergency alerts", "local breaking news", "crime news us", "local crime reports", "major crime cases", "high profile trials", "court verdicts", "jury decisions", "sentencing hearings", "police investigations", "fbi investigations", "doj investigations", "corruption cases", "bribery scandals", "fraud cases", "insider trading cases", "corporate scandals", "tech scandals", "banking scandals", "government scandals", "political corruption", "ethics violations", "watchdog investigations", "inspector general reports", "whistleblower disclosures", "transparency reports", "accountability reports", "government audits", "oversight committees", "congressional investigations", "special committees", "select committee hearings", "bipartisan investigations", "independent commissions", "public inquiry reports", "historical investigations", "national security briefings", "intelligence reports", "threat assessments", "homeland security alerts", "terror threat levels", "counterterrorism operations", "domestic extremism", "international terrorism", "cyber threats", "cyber espionage", "foreign intelligence operations", "espionage cases", "surveillance programs", "privacy concerns us", "civil liberties debates", "constitutional rights debates", "first amendment rights", "second amendment rights", "fourth amendment rights", "due process rights", "equal protection clause", "civil rights movements", "social justice movements", "protest coverage", "demonstrations us", "nationwide protests", "campus protests", "labor strikes", "union actions", "worker protests", "economic protests", "political rallies", "campaign rallies", "town halls live", "voter engagement events", "civic participation campaigns", "voter registration drives", "get out the vote efforts", "grassroots movements", "community organizing", "nonprofit advocacy", "advocacy campaigns", "lobbying campaigns", "public awareness campaigns", "issue advocacy", "political messaging campaigns", "media narratives shaping", "framing effects media", "information warfare", "propaganda analysis", "disinformation tracking", "fact check viral claims", "debunking misinformation", "source credibility analysis", "media literacy", "journalism standards", "editorial standards", "corrections policies", "retractions news", "accountability journalism standards", "investigative reporting methods", "data verification", "primary source verification", "public records access", "foia disclosures", "leak investigations", "insider information politics", "anonymous sources verification", "expert panel discussions", "policy expert interviews", "think tank analysis reports", "academic research publications", "peer review studies policy", "longitudinal policy studies", "statistical modeling politics", "predictive analytics elections", "forecasting elections", "polling aggregators", "polling averages", "trendline analysis politics", "sentiment analysis politics", "social media sentiment", "voter sentiment tracking", "demographic breakdown polling", "age group voting trends", "income level voting trends", "education level voting trends", "geographic voting patterns", "urban voting patterns", "suburban voting patterns", "rural voting patterns", "regional political trends", "state by state analysis", "county level results", "precinct level results", "electoral shifts", "realignment politics", "coalition building politics", "party strategy shifts", "ideological shifts us", "progressive movement", "conservative movement", "libertarian movement", "populist movement", "centrist politics", "moderate voters", "swing voters influence", "independent voter trends", "partisan loyalty", "party identification trends", "political branding", "candidate branding", "image management politics", "crisis communication politics", "damage control messaging", "rapid response teams politics", "opposition messaging", "negative campaigning", "attack ads", "campaign narratives", "storytelling politics", "speechwriting strategy", "rhetorical framing", "public persuasion techniques", "media appearances strategy", "interview strategy politics", "debate preparation", "mock debates", "talking points strategy", "policy communication", "legislative messaging", "executive messaging", "judicial messaging", "public relations campaigns government", "reputation management politics", "approval rating tracking", "disapproval rating trends", "favorability shifts", "trust in government", "institutional trust", "trust in media", "polarization metrics", "polarization studies", "echo chambers media", "filter bubbles", "algorithm influence news", "platform algorithms politics", "content distribution news", "virality factors politics", "news amplification", "media bias analysis", "ideological bias tracking", "balanced reporting standards", "neutrality in journalism", "objectivity standards", "sourcing standards journalism", "editorial independence", "newsroom practices", "newsroom ethics", "reporting guidelines", "corrections tracking", "transparency in reporting", "public editor reports", "ombudsman reviews", "audience trust metrics", "subscriber trends news", "paywall journalism", "nonprofit journalism models", "public broadcasting funding", "media ownership structures", "consolidation media", "independent outlets growth", "startup journalism", "local news decline", "news deserts", "regional news coverage", "hyperlocal journalism", "investigative series", "longform reporting", "documentary journalism", "multimedia journalism", "data visualization news", "graphics reporting", "interactive journalism", "live blogs news", "real time updates politics", "breaking alerts system", "push notification news", "daily briefings politics", "morning newsletters", "evening recaps", "weekly political analysis", "monthly outlook reports", "annual political forecasts", "election cycle tracking", "policy cycle tracking", "legislative calendar", "congressional schedule", "court calendar", "regulatory calendar", "budget cycle", "fiscal year planning", "appropriations timeline", "campaign calendar", "primary calendar updates", "caucus timing", "debate schedule", "convention planning", "inauguration timeline", "transition planning government", "cabinet formation process", "agency leadership appointments", "senate confirmations", "confirmation hearings", "appointment controversies", "resignations politics", "firings politics", "leadership changes government", "succession planning politics", "emergency succession plans", "continuity of government", "crisis governance", "disaster governance", "wartime governance", "emergency powers", "executive authority limits", "legislative authority limits", "judicial authority limits", "constitutional crises", "separation of powers conflict", "checks and balances disputes", "federal vs state power", "state sovereignty debates", "interstate conflicts policy", "federal mandates", "state resistance policies", "legal challenges states", "supreme court appeals states", "constitutional amendments proposals", "amendment ratification process", "constitutional interpretation debates", "legal scholarship constitutional law", "judicial review analysis", "precedent analysis law", "landmark case analysis", "comparative constitutional law", "international law us", "treaty obligations us", "global governance role us", "diplomatic relations tracking", "embassy activity", "consulate activity", "diplomatic statements", "foreign leader meetings us", "summit coverage", "international agreements", "sanctions enforcement tracking", "export control enforcement", "border policy enforcement", "immigration enforcement actions", "customs enforcement", "trade enforcement", "economic sanctions impact", "global economic impact us policy", "domestic economic impact policy", "social impact policy", "long term policy outcomes", "policy success metrics", "policy failure analysis", "reform proposals", "legislative reforms", "regulatory reforms", "institutional reforms", "governance innovation", "digital government", "e government services", "public service delivery", "government efficiency", "bureaucratic reform", "performance metrics government", "accountability mechanisms", "transparency initiatives", "anti corruption measures", "ethics reforms government", "public sector innovation", "civic technology tools", "open data platforms", "digital transparency", "citizen engagement platforms"]
+US_KEYWORDS = set(word.lower() for kw in RAW_US_KEYWORDS for word in kw.split())
 
-# ====================== SOURCES (US now includes your full new list) ======================
-# MIDDLE_EAST_SOURCES, SPORTS_SOURCES, TECH_SOURCES unchanged
-# US_POLITICS_SOURCES now has your massive new list inserted (all the Associated Press, Reuters, Bloomberg, Dow Jones, NPR, PBS, BBC, CBS, ABC, NBC, C-SPAN, Politico, The Hill, Axios, Roll Call, National Journal, Congressional Quarterly, Government Executive, Federal News Network, ProPublica, Center for Public Integrity, The Marshall Project, Texas Tribune, CalMatters, Mississippi Today, Wisconsin Watch, Voice of San Diego, The Economist, Financial Times, The Atlantic, The New Yorker, Foreign Affairs, Foreign Policy, FiveThirtyEight, Cook Political Report, Sabato's Crystal Ball, RealClearPolitics, Congressional Research Service, Government Accountability Office, Congressional Budget Office, Federal Register, Supreme Court of the United States, OpenSecrets, Project on Government Oversight, Brookings Institution, RAND Corporation, Council on Foreign Relations, Pew Research Center, Urban Institute, American Enterprise Institute, Heritage Foundation, Brennan Center for Justice, Carnegie Endowment for International Peace, Hoover Institution, Kaiser Family Foundation, Migration Policy Institute, Tax Foundation, Center on Budget and Policy Priorities, National Bureau of Economic Research, Bureau of Labor Statistics, Bureau of Economic Analysis, Federal Reserve, Securities and Exchange Commission, Department of Justice, Department of State, Department of Defense, White House Briefing Room, Senate.gov, House.gov, GovTrack, Ballotpedia, FactCheck.org, PolitiFact, Snopes, Columbia Journalism Review, Nieman Lab, Poynter Institute, Reuters Institute for the Study of Journalism, National Archives, Library of Congress, National Weather Service, NOAA, US Geological Survey, Centers for Disease Control and Prevention, National Institutes of Health, Food and Drug Administration, Energy Information Administration, Federal Aviation Administration, National Transportation Safety Board, US Census Bureau, Election Assistance Commission, Defense News, Military Times, Stars and Stripes, Lawfare, SCOTUSblog, Just Security, Election Law Blog, Harvard Gazette, Stanford News, MIT News, Yale Insights, Princeton Public Affairs, Chicago Booth Review, Knowledge at Wharton, McKinsey Insights, Deloitte Insights, Gallup, Ipsos, YouGov, NORC at the University of Chicago, Quinnipiac University Poll, Marist Poll, Monmouth University Polling Institute, Siena College Research Institute, Emerson College Polling, Trafalgar Group, Reuters Graphics, Bloomberg Graphics, The Trace, Inside Climate News, Grist, E&E News, Politico Energy, Cybersecurity Dive, Defense One, Nextgov, Route Fifty, Marketplace, CNBC, Yahoo Finance, Morningstar, S&P Global, Moody’s Analytics, Fitch Ratings, World Bank Data, International Monetary Fund, OECD, Associated Press Fact Check, Reuters Fact Check, BBC Verify, The Guardian US, The Independent US, Newsweek, Time Magazine, U.S. News & World Report, The Nation, National Review, The Dispatch, Semafor, Vox, Business Insider, Fortune, Forbes, Barron’s, MarketWatch, The Daily Beast, Slate, Salon, The American Prospect, The Intercept, Responsible Statecraft, War on the Rocks, Defense Priorities, Just the News, Washington Examiner, The Bulwark, The Free Press, Public Notice, Democracy Docket, Law360, Courthouse News Service, Bloomberg Law, SCOTUSblog, Above the Law, Jurist, Oyez, Legal Eagle, Open Markets Institute, Roosevelt Institute, Economic Policy Institute, Peterson Institute for International Economics, Cato Institute, Mercatus Center, Center for Strategic and International Studies, Atlantic Council, Wilson Center, Stimson Center, East-West Center, Hudson Institute, New America, R Street Institute, Third Way, Bipartisan Policy Center, Committee for a Responsible Federal Budget, Tax Policy Center, Center for American Progress, Institute for the Study of War, Critical Threats Project, Long War Journal, Global Security, Jane’s Defence, Aviation Week, FlightGlobal, MarineLink, Defense Daily, Army Times, Navy Times, Air Force Times, SpaceNews, Ars Technica, MIT Technology Review, Wired, IEEE Spectrum, Nature News, Science News, Scientific American, New Scientist, Live Science, Phys.org, Space.com, National Geographic, Smithsonian Magazine, ProPublica Illinois, CalMatters Politics, Texas Tribune Politics, Florida Phoenix, Arizona Mirror, Nevada Independent, Utah News Dispatch, Colorado Sun, MinnPost, New Jersey Monitor, Maine Beacon, VT Digger, Honolulu Civil Beat, Alaska Beacon, Idaho Capital Sun, Montana Free Press, Wyoming Tribune Eagle, South Dakota Searchlight, North Dakota Monitor, Kansas Reflector, Iowa Capital Dispatch, Missouri Independent, Arkansas Advocate, Louisiana Illuminator, Mississippi Free Press, Alabama Reflector, Tennessee Lookout, Kentucky Lantern, Ohio Capital Journal, Michigan Advance, Indiana Capital Chronicle, Pennsylvania Capital-Star, Maryland Matters, Virginia Mercury, NC Newsline, SC Daily Gazette, Georgia Recorder, Florida Politics, Spectrum News, Patch, Gothamist, LAist, WNYC, KQED News, KPCC, WBEZ Chicago, WBUR Boston, WAMU, KUOW, OPB, Texas Public Radio, KUT News, Nevada Public Radio, Alaska Public Media, Hawaii Public Radio, Wyoming Public Media — all added as Google News workarounds)
+# Sports (updated with your new list)
+RAW_SPORTS_KEYWORDS = ["march madness", "college basketball", "arizona wildcats", "purdue boilermakers", "miami hurricanes", "villanova wildcats", "utah state aggies", "ncaa tournament", "college basketball crown", "ncaa bracket", "march madness bracket", "sports news", "latest sports news", "breaking sports news", "football news", "nfl news", "nba news", "mlb news", "nhl news", "soccer news", "premier league news", "champions league news", "world cup news", "fifa world cup", "copa america", "euro cup", "la liga news", "serie a news", "bundesliga news", "mls news", "college football news", "college basketball news", "nba finals", "super bowl", "world series", "stanley cup", "olympics news", "olympics schedule", "olympics results", "summer olympics", "winter olympics", "tennis news", "grand slam tennis", "wimbledon news", "us open tennis", "australian open tennis", "french open tennis", "atp rankings", "wta rankings", "formula 1 news", "f1 standings", "f1 race results", "f1 qualifying", "f1 drivers", "lewis hamilton news", "max verstappen news", "ferrari f1", "mercedes f1", "red bull racing", "golf news", "pga tour news", "masters tournament", "us open golf", "british open golf", "ryder cup", "tiger woods news", "surfing news", "world surf league", "surfing competitions", "big wave surfing", "surf forecast", "nba trade rumors", "nfl trade rumors", "mlb trades", "transfer rumors soccer", "transfer window", "player injuries", "injury report nfl", "nba injury report", "fantasy football", "fantasy basketball", "fantasy sports news", "betting odds sports", "sports betting news", "esports news", "competitive gaming sports", "college recruiting news", "draft prospects nfl", "nba draft news", "mlb draft", "nhl draft", "sports analytics", "advanced stats sports", "player statistics", "team standings", "league standings", "power rankings", "sports highlights", "game recap", "post match analysis", "sports commentary", "sports podcasts", "athlete interviews", "locker room news", "coaching changes", "head coach firing", "sports scandals", "doping scandals", "anti doping agency", "olympic doping cases", "sports law", "contract negotiations", "player contracts", "salary cap nfl", "salary cap nba", "free agency news", "transfer fees soccer", "youth academy soccer", "academy prospects", "sports development programs", "women sports news", "wnba news", "women soccer news", "women tennis news", "women golf news", "title ix sports", "college athletics news", "ncaa rules", "nil deals college athletes", "sponsorship deals athletes", "endorsement deals athletes", "sports marketing", "sports media rights", "broadcasting deals sports", "streaming sports", "live sports streaming", "sports tv ratings", "fan attendance sports", "stadium news", "arena construction", "sports business news", "franchise valuations", "team ownership news", "sports mergers", "league expansion", "expansion teams", "relocation teams", "sports history", "greatest athletes", "hall of fame sports", "olympic history", "world records sports", "track and field news", "marathon running news", "cycling tour de france", "cycling news", "boxing news", "mma news", "ufc fights", "fight night results", "boxing title fights", "heavyweight boxing", "featherweight ufc", "sports injuries recovery", "athlete training", "sports science", "biomechanics sports", "nutrition athletes", "fitness training sports", "sports psychology", "mental health athletes", "fan reactions sports", "social media sports trends", "viral sports moments", "sports controversies", "referee decisions", "var decisions soccer", "instant replay sports", "officiating controversies", "sports governance", "fifa governance", "ioc decisions", "ncaa decisions", "sports politics", "geopolitics sports", "olympic boycotts", "national team news", "international friendlies", "qualifiers world cup", "regional tournaments", "asian cup soccer", "african cup nations", "concacaf gold cup", "sports rivalries", "derby matches soccer", "el clasico", "manchester derby", "nba rivalries", "nfl rivalries", "historic games sports", "buzzer beater shots", "overtime games", "penalty shootouts", "comeback victories", "underdog wins", "championship celebrations", "trophy presentations", "medal ceremonies", "sports technology", "var technology", "goal line technology", "wearable tech athletes", "performance tracking sports", "analytics software sports", "scouting reports", "talent evaluation", "combine results nfl", "pro day results", "training camp updates", "preseason games", "regular season schedule", "playoff bracket", "postseason results", "finals mvp", "league mvp", "rookie of the year", "defensive player of the year", "golden boot soccer", "ballon dor", "heisman trophy", "sports awards", "athlete retirements", "comeback stories athletes", "transfer confirmations", "contract extensions", "loan deals soccer", "sports agencies", "agent negotiations", "youth tournaments", "high school sports news", "amateur sports news", "grassroots sports", "community sports programs", "outdoor sports news", "surfing conditions", "beach conditions surfing", "swell forecast", "wind forecast surfing", "surf competitions schedule", "extreme sports news", "x games", "skateboarding news", "snowboarding news", "skiing competitions", "climbing competitions", "triathlon events", "ironman competitions", "motorsports news", "nascar news", "indycar news", "rally racing news", "endurance racing", "le mans 24 hours", "formula e news", "electric racing", "drone racing league", "sports innovation", "fan engagement sports", "ticket sales sports", "merchandise sales sports", "sports branding", "athlete branding", "media interviews athletes", "press conferences sports", "training drills", "practice sessions", "warm up routines", "game day preparation", "tactical analysis sports", "formations soccer", "playbooks nfl", "offensive schemes nba", "defensive strategies sports", "coaching tactics", "analytics driven decisions sports", "sports journalism", "sports reporting ethics", "sports documentaries", "behind the scenes sports", "locker room footage", "micd up athletes", "sports storytelling", "iconic moments sports"]
+SPORTS_KEYWORDS = set(word.lower() for kw in RAW_SPORTS_KEYWORDS for word in kw.split())
 
-# ====================== FETCH FUNCTION (unchanged) ======================
+# Tech and Life (your full list)
+RAW_TECH_KEYWORDS = ["technology news", "latest tech news", "emerging technology", "cutting edge technology", "future technology", "tech trends 2026", "artificial intelligence", "ai news", "ai breakthroughs", "generative ai", "machine learning", "deep learning", "neural networks", "ai regulation", "ai ethics", "robotics", "humanoid robots", "automation technology", "quantum computing", "quantum supremacy", "cloud computing", "edge computing", "cybersecurity", "data breaches", "hacking news", "ransomware attacks", "zero day exploit", "encryption technology", "blockchain technology", "cryptocurrency trends", "web3", "metaverse technology", "augmented reality", "virtual reality", "mixed reality", "spatial computing", "apple vision pro", "vr gaming", "ar glasses", "wearable technology", "smart devices", "internet of things", "iot devices", "smart home tech", "home automation", "voice assistants", "natural language processing", "big data analytics", "data science", "software development", "programming languages", "python programming", "javascript trends", "open source software", "linux news", "windows updates", "macos updates", "mobile technology", "smartphone releases", "android updates", "iphone news", "semiconductor industry", "chip shortage", "gpu technology", "cpu benchmarks", "nvidia news", "amd processors", "intel chips", "silicon valley startups", "venture capital tech", "startup funding", "tech ipo", "unicorn startups", "big tech companies", "google news", "apple news", "microsoft news", "amazon technology", "meta platforms", "social media technology", "algorithm changes", "content moderation", "digital privacy", "online security", "surveillance technology", "biometric systems", "facial recognition", "autonomous vehicles", "self driving cars", "electric vehicles", "ev battery technology", "tesla updates", "charging infrastructure", "hydrogen fuel cells", "automotive technology", "car software systems", "infotainment systems", "transportation technology", "high speed rail", "hyperloop", "aviation technology", "aircraft design", "aerospace engineering", "spacex launches", "nasa missions", "mars exploration", "moon missions", "satellite technology", "starlink internet", "space telescopes", "astrophysics discoveries", "astronomy news", "black holes", "exoplanets", "cosmology research", "physics breakthroughs", "particle physics", "cern research", "biology research", "genetics", "dna sequencing", "crispr technology", "gene editing", "biotechnology", "medical technology", "healthcare innovation", "vaccines research", "pharmaceuticals development", "neuroscience", "brain computer interfaces", "bci technology", "environmental science", "climate change research", "renewable energy", "solar power technology", "wind energy", "battery storage", "sustainability tech", "green technology", "carbon capture", "water purification", "ocean exploration", "marine biology", "wildlife conservation", "ecology research", "outdoor gear technology", "camping gear innovation", "hiking equipment", "survival gear", "gps navigation", "satellite navigation", "drones technology", "drone photography", "drone regulations", "gaming industry news", "video game releases", "game development", "game engines", "unreal engine", "unity engine", "esports news", "competitive gaming", "streaming platforms", "twitch streaming", "youtube gaming", "gaming hardware", "gaming pcs", "gaming laptops", "graphics cards", "ray tracing", "dlss technology", "vr gaming trends", "indie game development", "modding community", "digital distribution", "steam platform", "epic games store", "game monetization", "microtransactions", "gaming controversies", "entertainment technology", "streaming services", "netflix technology", "disney plus tech", "content delivery networks", "cdn technology", "5g networks", "6g research", "telecommunications technology", "fiber internet", "broadband expansion", "digital infrastructure", "smart cities technology", "urban tech innovation", "gov tech", "fintech innovation", "digital banking", "payment systems", "blockchain finance", "cybersecurity threats", "ethical hacking", "penetration testing", "devops practices", "agile development", "software engineering trends", "hardware engineering", "embedded systems", "nanotechnology", "materials science", "3d printing", "additive manufacturing", "industrial automation", "manufacturing technology", "supply chain technology", "logistics innovation", "retail technology", "e commerce trends", "digital marketing tech", "seo trends", "search algorithms", "google algorithm updates", "data privacy laws", "gdpr compliance", "digital rights", "internet governance", "future of work technology", "remote work tools", "collaboration software", "productivity tools", "human computer interaction", "user experience design", "ui ux trends", "digital transformation", "enterprise technology", "saas platforms", "cloud infrastructure", "server technology", "data centers", "green computing", "energy efficient computing", "ethical ai development", "responsible innovation", "tech policy", "government regulation tech", "antitrust tech", "innovation ecosystems", "research and development trends"]
+TECH_KEYWORDS = set(word.lower() for kw in RAW_TECH_KEYWORDS for word in kw.split())
+
+# ====================== BLOCKLISTS ======================
+ME_BLOCKLIST = {"trump", "harris", "biden", "congress", "senate", "house", "supreme court", "election", "midterm", "presidential", "republican", "democrat", "maga", "white house", "capitol", "washington dc", "oscars", "kennedy center", "tornadoes", "vernal equinox", "hyundai", "tsa", "airport security", "pope leo", "kentucky", "illinois primary", "michigan synagogue", "cuba", "china summit", "fcc", "sbf", "texas primaries", "nvidia", "foxconn", "walmart", "phonepe", "kushner", "sable offshore"}
+US_BLOCKLIST = {"iran", "israel", "gaza", "hezbollah", "hamas", "hormuz", "khamenei", "netanyahu", "mbs", "mbz", "saudi", "uae", "qatar", "lebanon", "syria", "yemen", "palestine", "irgc", "houthis", "axis of resistance", "jcpoa", "snapback sanctions", "strait of hormuz"}
+SPORTS_BLOCKLIST = ME_BLOCKLIST.union(US_BLOCKLIST)
+TECH_BLOCKLIST = ME_BLOCKLIST.union(US_BLOCKLIST)
+
+# ====================== SOURCES (updated with your new lists) ======================
+MIDDLE_EAST_SOURCES = [
+    ("Broad Middle East", "https://news.google.com/rss/search?q=middle+east+OR+iran+OR+israel+OR+gulf+OR+hezbollah+OR+hamas+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Al Jazeera", "https://news.google.com/rss/search?q=aljazeera+news+OR+al+jazeera+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Times of Israel", "https://news.google.com/rss/search?q=times+of+israel+news+OR+timesofisrael+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Reuters", "https://news.google.com/rss/search?q=reuters+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("AP News", "https://news.google.com/rss/search?q=ap+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("NYT", "https://news.google.com/rss/search?q=nytimes+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("WSJ", "https://news.google.com/rss/search?q=wsj+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Washington Post", "https://news.google.com/rss/search?q=washington+post+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Financial Times", "https://news.google.com/rss/search?q=financial+times+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Economist", "https://news.google.com/rss/search?q=the+economist+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("BBC", "https://news.google.com/rss/search?q=bbc+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Guardian", "https://news.google.com/rss/search?q=the+guardian+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Bloomberg", "https://news.google.com/rss/search?q=bloomberg+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Politico", "https://news.google.com/rss/search?q=politico+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Foreign Affairs", "https://news.google.com/rss/search?q=foreign+affairs+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+]
+
+US_POLITICS_SOURCES = [
+    ("Broad US Politics", "https://news.google.com/rss/search?q=donald+trump+OR+us+election+OR+congress+OR+kamala+harris+OR+joe+biden+OR+republican+OR+democrat+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("AP News", "https://news.google.com/rss/search?q=when:1d+site:apnews.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
+    ("Reuters", "https://news.google.com/rss/search?q=when:1d+site:reuters.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
+    ("NYT", "https://news.google.com/rss/search?q=when:1d+site:nytimes.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
+    ("WSJ", "https://news.google.com/rss/search?q=when:1d+site:wsj.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
+    ("Washington Post", "https://news.google.com/rss/search?q=when:1d+site:washingtonpost.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
+    ("Politico", "https://news.google.com/rss/search?q=when:1d+site:politico.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
+    ("Axios", "https://news.google.com/rss/search?q=when:1d+site:axios.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
+    ("Bloomberg", "https://news.google.com/rss/search?q=bloomberg+news+politics+OR+trump+OR+biden+OR+congress+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Atlantic", "https://news.google.com/rss/search?q=the+atlantic+news+politics+OR+trump+OR+biden+OR+congress+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The New Yorker", "https://news.google.com/rss/search?q=the+new+yorker+news+politics+OR+trump+OR+biden+OR+congress+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Foreign Affairs", "https://news.google.com/rss/search?q=foreign+affairs+news+politics+OR+trump+OR+biden+OR+congress+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Foreign Policy", "https://news.google.com/rss/search?q=foreign+policy+news+politics+OR+trump+OR+biden+OR+congress+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("FiveThirtyEight", "https://news.google.com/rss/search?q=fivethirtyeight+news+politics+OR+trump+OR+biden+OR+congress+when:1d&hl=en-US&gl=US&ceid=US:en"),
+]
+
+SPORTS_SOURCES = [
+    ("Broad Sports", "https://news.google.com/rss/search?q=march+madness+OR+college+basketball+OR+ncaa+tournament+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("ESPN", "https://news.google.com/rss/search?q=espn+news+sports+OR+nfl+OR+nba+OR+mlb+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("BBC Sport", "https://news.google.com/rss/search?q=bbc+sport+news+OR+football+OR+cricket+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Sky Sports", "https://news.google.com/rss/search?q=sky+sports+news+OR+premier+league+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Reuters Sports", "https://news.google.com/rss/search?q=reuters+sports+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("AP Sports", "https://news.google.com/rss/search?q=ap+sports+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Athletic", "https://news.google.com/rss/search?q=the+athletic+news+sports+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Sports Illustrated", "https://news.google.com/rss/search?q=when:1d+site:si.com+sports+OR+nfl+OR+nba+OR+mlb&hl=en-US&gl=US&ceid=US:en"),
+]
+
+TECH_SOURCES = [
+    ("Broad Tech and Life", "https://news.google.com/rss/search?q=technology+news+OR+ai+OR+tech+OR+gaming+OR+wearable+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Wired", "https://news.google.com/rss/search?q=wired+news+tech+OR+ai+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("MIT Technology Review", "https://news.google.com/rss/search?q=mit+technology+review+news+tech+OR+ai+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Verge", "https://news.google.com/rss/search?q=the+verge+news+tech+OR+ai+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("TechCrunch", "https://news.google.com/rss/search?q=techcrunch+news+tech+OR+ai+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Engadget", "https://news.google.com/rss/search?q=engadget+news+tech+OR+ai+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("CNET", "https://news.google.com/rss/search?q=cnet+news+tech+OR+ai+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("ZDNet", "https://news.google.com/rss/search?q=zdnet+news+tech+OR+ai+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("IEEE Spectrum", "https://news.google.com/rss/search?q=ieee+spectrum+news+tech+OR+ai+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Nature", "https://news.google.com/rss/search?q=nature+news+science+OR+tech+when:1d&hl=en-US&gl=US&ceid=US:en"),
+]
+
+# ====================== FETCH FUNCTION ======================
 def normalize_title(title):
     if " - " in title:
         title = title.rsplit(" - ", 1)[0]
@@ -64,8 +137,10 @@ def fetch_section(sources, keywords, blocklist):
     matches = []
     seen_title = set()
     source_count = defaultdict(int)
+    
     for source_name, url in sources:
-        if source_count[source_name] >= 5: continue
+        if source_count[source_name] >= 5:
+            continue
         for attempt in range(3):
             try:
                 print(f"  Fetching {source_name}...")
@@ -74,12 +149,16 @@ def fetch_section(sources, keywords, blocklist):
                     feed = feedparser.parse(response.read().decode('utf-8', errors='ignore'))
                 if feed.bozo: break
                 for entry in feed.entries:
-                    if source_count[source_name] >= 5: break
+                    if source_count[source_name] >= 5:
+                        break
                     raw_title = entry.title.strip()
                     norm_title = normalize_title(raw_title)
                     link = entry.get('link', '#')
-                    if norm_title in seen_title: continue
-                    if blocklist and any(block in raw_title.lower() for block in blocklist): continue
+                    
+                    if norm_title in seen_title:
+                        continue
+                    if blocklist and any(block in raw_title.lower() for block in blocklist):
+                        continue
                     if any(kw in raw_title.lower() for kw in keywords):
                         ts_struct = entry.get('published_parsed') or entry.get('updated_parsed')
                         ts = time.mktime(ts_struct) if ts_struct else time.time()
@@ -99,6 +178,7 @@ us_matches = fetch_section(US_POLITICS_SOURCES, US_KEYWORDS, ME_BLOCKLIST)
 sports_matches = fetch_section(SPORTS_SOURCES, SPORTS_KEYWORDS, ME_BLOCKLIST.union(US_BLOCKLIST))
 tech_matches = fetch_section(TECH_SOURCES, TECH_KEYWORDS, ME_BLOCKLIST.union(US_BLOCKLIST))
 
+# Time split (still 6h / 24h)
 current_ts = time.time()
 six_hours_ago = current_ts - 21600
 
@@ -120,7 +200,7 @@ us_recent = [item for item in us_matches if item not in us_breaking][:30]
 sports_recent = [item for item in sports_matches if item not in sports_breaking][:30]
 tech_recent = [item for item in tech_matches if item not in tech_breaking][:30]
 
-# ====================== BUILD HTML (only the small display tweaks) ======================
+# ====================== BUILD HTML ======================
 html = """
 <!DOCTYPE html>
 <html lang="en">
@@ -154,14 +234,17 @@ html = """
         <span class="byline">By Sean Mitchell</span>
         <span class="update">updated at """ + (datetime.utcnow() - timedelta(hours=7)).strftime("%H:%M:%S PDT") + """</span>
     </div>
+
+    <!-- US -->
+    <div class="container">
+        <div class="column">
+            <h2 class="section-title">Breaking US News</h2>
 """
 
-# US section (with spillover, continuous underline, no source underline, capital first letter)
 if us_breaking:
     for ts, title, source, link in us_breaking:
         friendly = get_friendly_source(source)
         highlighted = title[0].upper() + title[1:] if title else title
-        # Continuous underline for phrases (longest first)
         for kw in sorted([k for k in US_KEYWORDS if ' ' in k], key=len, reverse=True):
             pattern = re.escape(kw)
             highlighted = re.sub(pattern, f'<span style="text-decoration: underline; color: #FFFFFF;">{kw}</span>', highlighted, flags=re.IGNORECASE)
@@ -170,8 +253,164 @@ if us_breaking:
                 pattern = r'\b' + re.escape(kw) + r'\b'
                 highlighted = re.sub(pattern, f'<span style="text-decoration: underline; color: #FFFFFF;">{kw}</span>', highlighted, flags=re.IGNORECASE)
         html += f'<div class="headline"><span class="title">{highlighted}</span> <span style="color:#666666;"> - {friendly}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+else:
+    html += '<p>No breaking US news in the last 6 hours.</p>\n'
 
-# (The exact same pattern is repeated for Middle East, Tech, and Sports sections — only the variable names change)
+html += """
+        </div>
+        <div class="column">
+            <h2 class="section-title">Today's US Headlines</h2>
+"""
+
+if us_recent:
+    for ts, title, source, link in us_recent:
+        friendly = get_friendly_source(source)
+        highlighted = title[0].upper() + title[1:] if title else title
+        for kw in sorted([k for k in US_KEYWORDS if ' ' in k], key=len, reverse=True):
+            pattern = re.escape(kw)
+            highlighted = re.sub(pattern, f'<span style="text-decoration: underline; color: #FFFFFF;">{kw}</span>', highlighted, flags=re.IGNORECASE)
+        for kw in US_KEYWORDS:
+            if len(kw) > 2 and ' ' not in kw:
+                pattern = r'\b' + re.escape(kw) + r'\b'
+                highlighted = re.sub(pattern, f'<span style="text-decoration: underline; color: #FFFFFF;">{kw}</span>', highlighted, flags=re.IGNORECASE)
+        html += f'<div class="headline"><span class="title">{highlighted}</span> <span style="color:#666666;"> - {friendly}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+else:
+    html += '<p>No additional US headlines right now.</p>\n'
+
+html += """
+        </div>
+    </div>
+
+    <hr class="top-divider">
+
+    <!-- MIDDLE EAST -->
+    <div class="container">
+        <div class="column">
+            <h2 class="section-title">Middle East Breaking News</h2>
+"""
+
+if middle_breaking:
+    for ts, title, source, link in middle_breaking:
+        friendly = get_friendly_source(source)
+        highlighted = title[0].upper() + title[1:] if title else title
+        for kw in sorted([k for k in ME_KEYWORDS if ' ' in k], key=len, reverse=True):
+            pattern = re.escape(kw)
+            highlighted = re.sub(pattern, f'<span style="text-decoration: underline; color: #FFFFFF;">{kw}</span>', highlighted, flags=re.IGNORECASE)
+        for kw in ME_KEYWORDS:
+            if len(kw) > 2 and ' ' not in kw:
+                pattern = r'\b' + re.escape(kw) + r'\b'
+                highlighted = re.sub(pattern, f'<span style="text-decoration: underline; color: #FFFFFF;">{kw}</span>', highlighted, flags=re.IGNORECASE)
+        html += f'<div class="headline"><span class="title">{highlighted}</span> <span style="color:#666666;"> - {friendly}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+else:
+    html += '<p>No breaking news in the last 6 hours.</p>\n'
+
+html += """
+        </div>
+        <div class="column">
+            <h2 class="section-title">Today's Middle East Headlines</h2>
+"""
+
+if middle_recent:
+    for ts, title, source, link in middle_recent:
+        friendly = get_friendly_source(source)
+        highlighted = title[0].upper() + title[1:] if title else title
+        for kw in sorted([k for k in ME_KEYWORDS if ' ' in k], key=len, reverse=True):
+            pattern = re.escape(kw)
+            highlighted = re.sub(pattern, f'<span style="text-decoration: underline; color: #FFFFFF;">{kw}</span>', highlighted, flags=re.IGNORECASE)
+        for kw in ME_KEYWORDS:
+            if len(kw) > 2 and ' ' not in kw:
+                pattern = r'\b' + re.escape(kw) + r'\b'
+                highlighted = re.sub(pattern, f'<span style="text-decoration: underline; color: #FFFFFF;">{kw}</span>', highlighted, flags=re.IGNORECASE)
+        html += f'<div class="headline"><span class="title">{highlighted}</span> <span style="color:#666666;"> - {friendly}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+else:
+    html += '<p>No additional headlines right now.</p>\n'
+
+html += """
+        </div>
+    </div>
+
+    <hr class="top-divider">
+
+    <!-- TECH AND LIFE -->
+    <div class="container">
+        <div class="column">
+            <h2 class="section-title">Tech and Life Breaking News</h2>
+"""
+
+if tech_breaking:
+    for ts, title, source, link in tech_breaking:
+        friendly = get_friendly_source(source)
+        highlighted = title[0].upper() + title[1:] if title else title
+        for kw in sorted([k for k in TECH_KEYWORDS if ' ' in k], key=len, reverse=True):
+            pattern = re.escape(kw)
+            highlighted = re.sub(pattern, f'<span style="text-decoration: underline; color: #FFFFFF;">{kw}</span>', highlighted, flags=re.IGNORECASE)
+        for kw in TECH_KEYWORDS:
+            if len(kw) > 2 and ' ' not in kw:
+                pattern = r'\b' + re.escape(kw) + r'\b'
+                highlighted = re.sub(pattern, f'<span style="text-decoration: underline; color: #FFFFFF;">{kw}</span>', highlighted, flags=re.IGNORECASE)
+        html += f'<div class="headline"><span class="title">{highlighted}</span> <span style="color:#666666;"> - {friendly}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+else:
+    html += '<p>No breaking tech and life news in the last 6 hours.</p>\n'
+
+html += """
+        </div>
+        <div class="column">
+            <h2 class="section-title">Today's Tech and Life Headlines</h2>
+"""
+
+if tech_recent:
+    for ts, title, source, link in tech_recent:
+        friendly = get_friendly_source(source)
+        highlighted = title[0].upper() + title[1:] if title else title
+        for kw in sorted([k for k in TECH_KEYWORDS if ' ' in k], key=len, reverse=True):
+            pattern = re.escape(kw)
+            highlighted = re.sub(pattern, f'<span style="text-decoration: underline; color: #FFFFFF;">{kw}</span>', highlighted, flags=re.IGNORECASE)
+        for kw in TECH_KEYWORDS:
+            if len(kw) > 2 and ' ' not in kw:
+                pattern = r'\b' + re.escape(kw) + r'\b'
+                highlighted = re.sub(pattern, f'<span style="text-decoration: underline; color: #FFFFFF;">{kw}</span>', highlighted, flags=re.IGNORECASE)
+        html += f'<div class="headline"><span class="title">{highlighted}</span> <span style="color:#666666;"> - {friendly}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+else:
+    html += '<p>No additional tech and life headlines right now.</p>\n'
+
+html += """
+        </div>
+    </div>
+
+    <hr class="top-divider">
+
+    <!-- SPORTS -->
+    <div class="container">
+        <div class="column">
+            <h2 class="section-title">Sports Breaking News</h2>
+"""
+
+if sports_breaking:
+    for ts, title, source, link in sports_breaking:
+        friendly = get_friendly_source(source)
+        html += f'<div class="headline"><span class="title">{title}</span> <span style="color:#aaaaaa;">[{friendly}]</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+else:
+    html += '<p>No breaking sports news in the last 6 hours.</p>\n'
+
+html += """
+        </div>
+        <div class="column">
+            <h2 class="section-title">Today's Sports Headlines</h2>
+"""
+
+if sports_recent:
+    for ts, title, source, link in sports_recent:
+        friendly = get_friendly_source(source)
+        html += f'<div class="headline"><span class="title">{title}</span> <span style="color:#aaaaaa;">[{friendly}]</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+else:
+    html += '<p>No additional sports headlines right now.</p>\n'
+
+html += """
+        </div>
+    </div>
+</body>
+</html>
+"""
 
 try:
     with open(INDEX_HTML, "w", encoding="utf-8") as f:
@@ -181,3 +420,4 @@ except Exception as e:
     print(f"ERROR saving file: {str(e)}")
 
 print("\nScript finished.")
+print("Files saved to current directory.")
