@@ -232,7 +232,7 @@ html = """
     <div class="header">
         <h1>The Mitchell Post</h1>
         <span class="byline">By Sean Mitchell</span>
-        <span class="update">updated at """ + (datetime.utcnow() - timedelta(hours=7)).strftime("%H:%M:%S PDT") + """</span>
+        <span class="update">updated at """ + (datetime.utcnow() - timedelta(hours=7)).strftime("%I:%M:%S %p PDT") + """</span>
     </div>
 
     <!-- US -->
@@ -362,6 +362,38 @@ if sports_recent:
         html += f'<div class="headline"><span class="title">{title}</span> <span style="color:#aaaaaa;">[{friendly}]</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
 else:
     html += '<p>No additional sports headlines right now.</p>\n'
+
+html += """
+        </div>
+    </div>
+
+    <hr class="top-divider">
+
+    <!-- CULTURE -->
+    <div class="container">
+        <div class="column">
+            <h2 class="section-title">Culture Breaking News</h2>
+"""
+
+if culture_breaking:
+    for ts, title, source, link in culture_breaking:
+        friendly = get_friendly_source(source)
+        html += f'<div class="headline"><span class="title">{title}</span> <span style="color:#aaaaaa;">[{friendly}]</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+else:
+    html += '<p>No breaking culture news in the last 6 hours.</p>\n'
+
+html += """
+        </div>
+        <div class="column">
+            <h2 class="section-title">Today's Culture Headlines</h2>
+"""
+
+if culture_recent:
+    for ts, title, source, link in culture_recent:
+        friendly = get_friendly_source(source)
+        html += f'<div class="headline"><span class="title">{title}</span> <span style="color:#aaaaaa;">[{friendly}]</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
+else:
+    html += '<p>No additional culture headlines right now.</p>\n'
 
 html += """
         </div>
