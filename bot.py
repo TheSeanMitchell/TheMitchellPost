@@ -44,16 +44,13 @@ def get_friendly_source(raw_name):
             return SOURCE_MAP[key]
     return raw_name.split(" - ")[-1].strip() if " - " in raw_name else raw_name
 
-# ====================== KEYWORDS (your original lists) ======================
-# Middle East
+# ====================== KEYWORDS ======================
 RAW_ME_KEYWORDS = ["middle east", "arab world", "gulf states", "gcc countries", "levant", "maghreb", "mena", "persian gulf", "arabian peninsula", "west asia", "red sea", "iran", "iranian", "tehran", "qom", "mashhad", "isfahan", "tabriz", "khuzestan", "israel", "israeli", "jerusalem", "tel aviv", "west bank", "gaza", "golan", "saudi arabia", "saudi", "riyadh", "jeddah", "neom", "uae", "emirates", "abu dhabi", "dubai", "sharjah", "qatar", "doha", "kuwait", "oman", "bahrain", "iraq", "syria", "lebanon", "jordan", "turkey", "egypt", "yemen", "palestine", "khamenei", "mojtabakhamenei", "ayatollah", "supreme leader", "pezeshkian", "netanyahu", "mohammed bin salman", "mbs", "mohammed bin zayed", "mbz", "erdogan", "el sisi", "tamim", "king abdullah", "bashar al assad", "hezbollah", "hamas", "irgc", "houthis", "pmf", "isis", "gaza war", "israel gaza", "gaza ceasefire", "israel lebanon", "yemen civil war", "red sea crisis", "syria civil war", "idlib", "iran proxy", "axis of resistance", "iran nuclear", "jcpoa", "snapback sanctions", "hormuz", "strait hormuz", "oil prices", "brent crude", "wti crude", "opec", "kharg island", "iran oil exports", "centcom"]
 ME_KEYWORDS = set(word.lower() for kw in RAW_ME_KEYWORDS for word in kw.split())
 
-# US Politics
 RAW_US_KEYWORDS = ["united states politics", "american politics", "us government", "federal government", "white house", "us congress", "us senate", "house of representatives", "supreme court", "us constitution", "bill of rights", "federal election", "presidential election", "midterm elections", "primary elections", "electoral college", "inauguration day", "state of the union", "campaign rally", "political campaign", "political debate", "voter turnout", "election day", "swing states", "battleground states", "donald trump", "trump campaign", "joe biden", "biden administration", "kamala harris", "vice president", "republican party", "democratic party", "gop", "democrat", "maga", "ron desantis", "gavin newsom", "greg abbott", "marco rubio", "ted cruz", "alexandria ocasio cortez", "aoc", "nancy pelosi", "mitch mcconnell", "chuck schumer", "hakeem jeffries", "supreme court ruling", "federal budget", "inflation united states", "us economy", "gun control", "immigration policy", "border security", "climate policy", "healthcare policy", "student loan", "abortion rights", "lgbtq rights", "culture wars", "election security", "misinformation campaigns", "political polling", "campaign finance", "super pac"]
 US_KEYWORDS = set(word.lower() for kw in RAW_US_KEYWORDS for word in kw.split())
 
-# Sports
 RAW_SPORTS_KEYWORDS = ["march madness", "college basketball", "arizona wildcats", "purdue boilermakers", "miami hurricanes", "villanova wildcats", "utah state aggies", "ncaa tournament", "college basketball crown", "ncaa bracket", "march madness bracket"]
 SPORTS_KEYWORDS = set(word.lower() for kw in RAW_SPORTS_KEYWORDS for word in kw.split())
 
@@ -62,21 +59,20 @@ ME_BLOCKLIST = {"trump", "harris", "biden", "congress", "senate", "house", "supr
 US_BLOCKLIST = {"iran", "israel", "gaza", "hezbollah", "hamas", "hormuz", "khamenei", "netanyahu", "mbs", "mbz", "saudi", "uae", "qatar", "lebanon", "syria", "yemen", "palestine", "irgc", "houthis", "axis of resistance", "jcpoa", "snapback sanctions", "strait of hormuz"}
 SPORTS_BLOCKLIST = ME_BLOCKLIST.union(US_BLOCKLIST)
 
-# ====================== INDIVIDUAL GOOGLE RSS WORKAROUNDS PER SOURCE ======================
+# ====================== INDIVIDUAL GOOGLE RSS WORKAROUNDS + BROAD FALLBACK ======================
 MIDDLE_EAST_SOURCES = [
-    ("Reuters", "https://news.google.com/rss/search?q=when:1d+site:reuters.com+middle+east+OR+iran+OR+israel+OR+gulf&hl=en-US&gl=US&ceid=US:en"),
-    ("AP News", "https://news.google.com/rss/search?q=when:1d+site:apnews.com+middle+east+OR+iran+OR+israel+OR+gulf&hl=en-US&gl=US&ceid=US:en"),
+    ("Broad Middle East", "https://news.google.com/rss/search?q=middle+east+OR+iran+OR+israel+OR+gulf+OR+hezbollah+OR+hamas+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Reuters", "https://news.google.com/rss/search?q=when:1d+site:reuters.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
+    ("AP News", "https://news.google.com/rss/search?q=when:1d+site:apnews.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
     ("NYT", "https://news.google.com/rss/search?q=when:1d+site:nytimes.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
     ("WSJ", "https://news.google.com/rss/search?q=when:1d+site:wsj.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
     ("Washington Post", "https://news.google.com/rss/search?q=when:1d+site:washingtonpost.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
-    ("Financial Times", "https://news.google.com/rss/search?q=when:1d+site:ft.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
-    ("The Economist", "https://news.google.com/rss/search?q=when:1d+site:economist.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
     ("Al Jazeera", "https://news.google.com/rss/search?q=when:1d+site:aljazeera.com+iran+OR+israel+OR+gulf&hl=en-US&gl=US&ceid=US:en"),
     ("Times of Israel", "https://news.google.com/rss/search?q=when:1d+site:timesofisrael.com+iran+OR+israel+OR+gulf&hl=en-US&gl=US&ceid=US:en"),
-    ("Arab News", "https://news.google.com/rss/search?q=when:1d+site:arabnews.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
 ]
 
 US_POLITICS_SOURCES = [
+    ("Broad US Politics", "https://news.google.com/rss/search?q=donald+trump+OR+us+election+OR+congress+OR+kamala+harris+OR+joe+biden+OR+republican+OR+democrat+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("AP News", "https://news.google.com/rss/search?q=when:1d+site:apnews.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
     ("Reuters", "https://news.google.com/rss/search?q=when:1d+site:reuters.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
     ("NYT", "https://news.google.com/rss/search?q=when:1d+site:nytimes.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
@@ -84,23 +80,18 @@ US_POLITICS_SOURCES = [
     ("Washington Post", "https://news.google.com/rss/search?q=when:1d+site:washingtonpost.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
     ("Politico", "https://news.google.com/rss/search?q=when:1d+site:politico.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
     ("Axios", "https://news.google.com/rss/search?q=when:1d+site:axios.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
-    ("NPR", "https://news.google.com/rss/search?q=when:1d+site:npr.org+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
-    ("PBS", "https://news.google.com/rss/search?q=when:1d+site:pbs.org+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
-    ("BBC", "https://news.google.com/rss/search?q=when:1d+site:bbc.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
-    ("C-SPAN", "https://news.google.com/rss/search?q=when:1d+site:c-span.org+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
-    ("The Hill", "https://news.google.com/rss/search?q=when:1d+site:thehill.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
 ]
 
 SPORTS_SOURCES = [
+    ("Broad Sports", "https://news.google.com/rss/search?q=march+madness+OR+college+basketball+OR+ncaa+tournament+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("NCAA", "https://news.google.com/rss/search?q=when:1d+site:ncaa.com+march+madness+OR+college+basketball&hl=en-US&gl=US&ceid=US:en"),
     ("CBS Sports", "https://news.google.com/rss/search?q=when:1d+site:cbssports.com+march+madness+OR+college+basketball&hl=en-US&gl=US&ceid=US:en"),
     ("FOX Sports", "https://news.google.com/rss/search?q=when:1d+site:foxsports.com+march+madness+OR+college+basketball&hl=en-US&gl=US&ceid=US:en"),
     ("USA Today", "https://news.google.com/rss/search?q=when:1d+site:usatoday.com+march+madness+OR+college+basketball&hl=en-US&gl=US&ceid=US:en"),
     ("Sports Illustrated", "https://news.google.com/rss/search?q=when:1d+site:si.com+march+madness+OR+college+basketball&hl=en-US&gl=US&ceid=US:en"),
-    ("Broad Sports", "https://news.google.com/rss/search?q=when:1d+march+madness+OR+college+basketball+OR+ncaa+tournament&hl=en-US&gl=US&ceid=US:en"),
 ]
 
-# ====================== FETCH FUNCTION (5-per-source + no consecutive) ======================
+# ====================== FETCH FUNCTION (no consecutive rule removed) ======================
 def normalize_title(title):
     if " - " in title:
         title = title.rsplit(" - ", 1)[0]
@@ -110,7 +101,6 @@ def fetch_section(sources, keywords, blocklist):
     matches = []
     seen_title = set()
     source_count = defaultdict(int)
-    last_source = None
     
     for source_name, url in sources:
         if source_count[source_name] >= 5:
@@ -134,14 +124,11 @@ def fetch_section(sources, keywords, blocklist):
                     if blocklist and any(block in raw_title.lower() for block in blocklist):
                         continue
                     if any(kw in raw_title.lower() for kw in keywords):
-                        if source_name == last_source:
-                            continue
                         ts_struct = entry.get('published_parsed') or entry.get('updated_parsed')
                         ts = time.mktime(ts_struct) if ts_struct else time.time()
                         matches.append((ts, raw_title, source_name, link))
                         seen_title.add(norm_title)
                         source_count[source_name] += 1
-                        last_source = source_name
                 break
             except Exception as e:
                 print(f"    Attempt {attempt+1} failed: {str(e)}")
