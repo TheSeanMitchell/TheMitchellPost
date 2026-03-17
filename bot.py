@@ -44,7 +44,7 @@ def get_friendly_source(raw_name):
             return SOURCE_MAP[key]
     return raw_name.split(" - ")[-1].strip() if " - " in raw_name else raw_name
 
-# ====================== KEYWORDS (your lists) ======================
+# ====================== KEYWORDS ======================
 RAW_ME_KEYWORDS = ["middle east", "arab world", "gulf states", "gcc countries", "levant", "maghreb", "mena", "persian gulf", "arabian peninsula", "west asia", "red sea", "iran", "iranian", "tehran", "qom", "mashhad", "isfahan", "tabriz", "khuzestan", "israel", "israeli", "jerusalem", "tel aviv", "west bank", "gaza", "golan", "saudi arabia", "saudi", "riyadh", "jeddah", "neom", "uae", "emirates", "abu dhabi", "dubai", "sharjah", "qatar", "doha", "kuwait", "oman", "bahrain", "iraq", "syria", "lebanon", "jordan", "turkey", "egypt", "yemen", "palestine", "khamenei", "mojtabakhamenei", "ayatollah", "supreme leader", "pezeshkian", "netanyahu", "mohammed bin salman", "mbs", "mohammed bin zayed", "mbz", "erdogan", "el sisi", "tamim", "king abdullah", "bashar al assad", "hezbollah", "hamas", "irgc", "houthis", "pmf", "isis", "gaza war", "israel gaza", "gaza ceasefire", "israel lebanon", "yemen civil war", "red sea crisis", "syria civil war", "idlib", "iran proxy", "axis of resistance", "iran nuclear", "jcpoa", "snapback sanctions", "hormuz", "strait hormuz", "oil prices", "brent crude", "wti crude", "opec", "kharg island", "iran oil exports", "centcom"]
 ME_KEYWORDS = set(word.lower() for kw in RAW_ME_KEYWORDS for word in kw.split())
 
@@ -54,23 +54,28 @@ US_KEYWORDS = set(word.lower() for kw in RAW_US_KEYWORDS for word in kw.split())
 RAW_SPORTS_KEYWORDS = ["march madness", "college basketball", "arizona wildcats", "purdue boilermakers", "miami hurricanes", "villanova wildcats", "utah state aggies", "ncaa tournament", "college basketball crown", "ncaa bracket", "march madness bracket"]
 SPORTS_KEYWORDS = set(word.lower() for kw in RAW_SPORTS_KEYWORDS for word in kw.split())
 
-# ====================== BLOCKLISTS (strengthened for pure US stories) ======================
-ME_BLOCKLIST = {"trump", "harris", "biden", "congress", "senate", "house", "supreme court", "election", "midterm", "presidential", "republican", "democrat", "maga", "white house", "capitol", "washington dc", "oscars", "kennedy center", "tornadoes", "vernal equinox", "hyundai", "tsa", "airport security", "pope leo", "kentucky", "illinois primary", "michigan synagogue", "cuba", "china summit", "fcc", "sbf", "texas primaries", "nvidia", "foxconn", "walmart", "phonepe", "kushner", "sable offshore"}
+# ====================== BLOCKLISTS (strengthened to block pure US stories) ======================
+ME_BLOCKLIST = {"trump", "harris", "biden", "congress", "senate", "house", "supreme court", "election", "midterm", "presidential", "republican", "democrat", "maga", "white house", "capitol", "washington dc", "oscars", "kennedy center", "tornadoes", "vernal equinox", "hyundai", "tsa", "airport security", "pope leo", "kentucky", "illinois primary", "michigan synagogue", "cuba", "china summit", "fcc", "sbf", "texas primaries", "nvidia", "foxconn", "walmart", "phonepe", "kushner", "sable offshore", "afghanistan", "rotterdam", "cuba", "kentucky", "illinois"}
 US_BLOCKLIST = {"iran", "israel", "gaza", "hezbollah", "hamas", "hormuz", "khamenei", "netanyahu", "mbs", "mbz", "saudi", "uae", "qatar", "lebanon", "syria", "yemen", "palestine", "irgc", "houthis", "axis of resistance", "jcpoa", "snapback sanctions", "strait of hormuz"}
 SPORTS_BLOCKLIST = ME_BLOCKLIST.union(US_BLOCKLIST)
 
-# ====================== MIDDLE EAST SOURCES — AL JAZEERA & TIMES OF ISRAEL FIRST + YOUR EXACT LINKS ======================
+# ====================== MIDDLE EAST SOURCES — ONLY YOUR LIST + AL JAZEERA & TIMES OF ISRAEL FIRST + YOUR GOOGLE WORKAROUNDS ======================
 MIDDLE_EAST_SOURCES = [
     ("Broad Middle East", "https://news.google.com/rss/search?q=middle+east+OR+iran+OR+israel+OR+gulf+OR+hezbollah+OR+hamas+when:1d&hl=en-US&gl=US&ceid=US:en"),
-    ("Al Jazeera", "https://news.google.com/rss/search?q=when:1d+site:aljazeera.com+iran+OR+israel+OR+gulf+OR+hezbollah+OR+hamas&hl=en-US&gl=US&ceid=US:en"),
-    ("Times of Israel", "https://news.google.com/rss/search?q=when:1d+site:timesofisrael.com+iran+OR+israel+OR+gulf&hl=en-US&gl=US&ceid=US:en"),
-    ("Reuters", "https://news.google.com/rss/search?q=when:1d+site:reuters.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
-    ("AP News", "https://news.google.com/rss/search?q=when:1d+site:apnews.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
-    ("NYT", "https://news.google.com/rss/search?q=when:1d+site:nytimes.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
-    ("WSJ", "https://news.google.com/rss/search?q=when:1d+site:wsj.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
-    ("Washington Post", "https://news.google.com/rss/search?q=when:1d+site:washingtonpost.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
-    ("Financial Times", "https://news.google.com/rss/search?q=when:1d+site:ft.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
-    ("The Economist", "https://news.google.com/rss/search?q=when:1d+site:economist.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
+    ("Al Jazeera", "https://news.google.com/rss/search?q=aljazeera+news+OR+al+jazeera+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Times of Israel", "https://news.google.com/rss/search?q=times+of+israel+news+OR+timesofisrael+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Reuters", "https://news.google.com/rss/search?q=reuters+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("AP News", "https://news.google.com/rss/search?q=ap+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("NYT", "https://news.google.com/rss/search?q=nytimes+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("WSJ", "https://news.google.com/rss/search?q=wsj+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Washington Post", "https://news.google.com/rss/search?q=washington+post+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Financial Times", "https://news.google.com/rss/search?q=financial+times+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Economist", "https://news.google.com/rss/search?q=the+economist+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("BBC", "https://news.google.com/rss/search?q=bbc+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Guardian", "https://news.google.com/rss/search?q=the+guardian+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Bloomberg", "https://news.google.com/rss/search?q=bloomberg+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Politico", "https://news.google.com/rss/search?q=politico+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Foreign Affairs", "https://news.google.com/rss/search?q=foreign+affairs+news+middle+east+OR+iran+OR+israel+when:1d&hl=en-US&gl=US&ceid=US:en"),
 ]
 
 US_POLITICS_SOURCES = [  # unchanged — you said it was good
@@ -84,7 +89,7 @@ US_POLITICS_SOURCES = [  # unchanged — you said it was good
     ("Axios", "https://news.google.com/rss/search?q=when:1d+site:axios.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
 ]
 
-SPORTS_SOURCES = [  # unchanged
+SPORTS_SOURCES = [  # unchanged — working great
     ("Broad Sports", "https://news.google.com/rss/search?q=march+madness+OR+college+basketball+OR+ncaa+tournament+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("NCAA", "https://news.google.com/rss/search?q=when:1d+site:ncaa.com+march+madness+OR+college+basketball&hl=en-US&gl=US&ceid=US:en"),
     ("CBS Sports", "https://news.google.com/rss/search?q=when:1d+site:cbssports.com+march+madness+OR+college+basketball&hl=en-US&gl=US&ceid=US:en"),
