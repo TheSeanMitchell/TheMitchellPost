@@ -54,24 +54,26 @@ US_KEYWORDS = set(word.lower() for kw in RAW_US_KEYWORDS for word in kw.split())
 RAW_SPORTS_KEYWORDS = ["march madness", "college basketball", "arizona wildcats", "purdue boilermakers", "miami hurricanes", "villanova wildcats", "utah state aggies", "ncaa tournament", "college basketball crown", "ncaa bracket", "march madness bracket"]
 SPORTS_KEYWORDS = set(word.lower() for kw in RAW_SPORTS_KEYWORDS for word in kw.split())
 
-# ====================== BLOCKLISTS ======================
-ME_BLOCKLIST = {"trump", "harris", "biden", "congress", "senate", "house", "supreme court", "election", "midterm", "presidential", "republican", "democrat", "maga", "white house", "capitol", "washington dc"}
+# ====================== BLOCKLISTS (strengthened for pure US stories) ======================
+ME_BLOCKLIST = {"trump", "harris", "biden", "congress", "senate", "house", "supreme court", "election", "midterm", "presidential", "republican", "democrat", "maga", "white house", "capitol", "washington dc", "oscars", "kennedy center", "tornadoes", "vernal equinox", "hyundai", "tsa", "airport security", "pope leo", "kentucky", "illinois primary", "michigan synagogue"}
 US_BLOCKLIST = {"iran", "israel", "gaza", "hezbollah", "hamas", "hormuz", "khamenei", "netanyahu", "mbs", "mbz", "saudi", "uae", "qatar", "lebanon", "syria", "yemen", "palestine", "irgc", "houthis", "axis of resistance", "jcpoa", "snapback sanctions", "strait of hormuz"}
 SPORTS_BLOCKLIST = ME_BLOCKLIST.union(US_BLOCKLIST)
 
-# ====================== INDIVIDUAL GOOGLE RSS WORKAROUNDS + BROAD FALLBACK ======================
+# ====================== MIDDLE EAST SOURCES — AL JAZEERA & TIMES OF ISRAEL FIRST ======================
 MIDDLE_EAST_SOURCES = [
     ("Broad Middle East", "https://news.google.com/rss/search?q=middle+east+OR+iran+OR+israel+OR+gulf+OR+hezbollah+OR+hamas+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Al Jazeera", "https://news.google.com/rss/search?q=when:1d+site:aljazeera.com+iran+OR+israel+OR+gulf+OR+hezbollah+OR+hamas&hl=en-US&gl=US&ceid=US:en"),
+    ("Times of Israel", "https://news.google.com/rss/search?q=when:1d+site:timesofisrael.com+iran+OR+israel+OR+gulf&hl=en-US&gl=US&ceid=US:en"),
     ("Reuters", "https://news.google.com/rss/search?q=when:1d+site:reuters.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
     ("AP News", "https://news.google.com/rss/search?q=when:1d+site:apnews.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
     ("NYT", "https://news.google.com/rss/search?q=when:1d+site:nytimes.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
     ("WSJ", "https://news.google.com/rss/search?q=when:1d+site:wsj.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
     ("Washington Post", "https://news.google.com/rss/search?q=when:1d+site:washingtonpost.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
-    ("Al Jazeera", "https://news.google.com/rss/search?q=when:1d+site:aljazeera.com+iran+OR+israel+OR+gulf&hl=en-US&gl=US&ceid=US:en"),
-    ("Times of Israel", "https://news.google.com/rss/search?q=when:1d+site:timesofisrael.com+iran+OR+israel+OR+gulf&hl=en-US&gl=US&ceid=US:en"),
+    ("Financial Times", "https://news.google.com/rss/search?q=when:1d+site:ft.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
+    ("The Economist", "https://news.google.com/rss/search?q=when:1d+site:economist.com+middle+east+OR+iran+OR+israel&hl=en-US&gl=US&ceid=US:en"),
 ]
 
-US_POLITICS_SOURCES = [
+US_POLITICS_SOURCES = [  # unchanged from last working version
     ("Broad US Politics", "https://news.google.com/rss/search?q=donald+trump+OR+us+election+OR+congress+OR+kamala+harris+OR+joe+biden+OR+republican+OR+democrat+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("AP News", "https://news.google.com/rss/search?q=when:1d+site:apnews.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
     ("Reuters", "https://news.google.com/rss/search?q=when:1d+site:reuters.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
@@ -82,7 +84,7 @@ US_POLITICS_SOURCES = [
     ("Axios", "https://news.google.com/rss/search?q=when:1d+site:axios.com+trump+OR+biden+OR+harris+OR+congress+OR+election&hl=en-US&gl=US&ceid=US:en"),
 ]
 
-SPORTS_SOURCES = [
+SPORTS_SOURCES = [  # unchanged
     ("Broad Sports", "https://news.google.com/rss/search?q=march+madness+OR+college+basketball+OR+ncaa+tournament+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("NCAA", "https://news.google.com/rss/search?q=when:1d+site:ncaa.com+march+madness+OR+college+basketball&hl=en-US&gl=US&ceid=US:en"),
     ("CBS Sports", "https://news.google.com/rss/search?q=when:1d+site:cbssports.com+march+madness+OR+college+basketball&hl=en-US&gl=US&ceid=US:en"),
