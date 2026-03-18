@@ -455,43 +455,44 @@ html = """
 </head>
 <body>
                 <!-- FOUR YouTube feeds evenly spaced across the banner -->
-<div class="banner">
-    <!-- Feed 1 (leftmost) -->
-    <div class="youtube-inset" style="right: 1125px; top: -80px;">
-        <iframe 
-            src="https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
-            allow="autoplay; encrypted-media"
-            allowfullscreen>
-        </iframe>
-    </div>
+                <!-- FOUR YouTube feeds evenly spaced across the banner -->
+    <div class="banner">
+        <!-- Feed 1 (leftmost) -->
+        <div class="youtube-inset" style="right: 1125px; top: -40px;">
+            <iframe 
+                src="https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+        </div>
 
-    <!-- Feed 2 -->
-    <div class="youtube-inset" style="right: 760px; top: -80px;">
-        <iframe 
-            src="https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
-            allow="autoplay; encrypted-media"
-            allowfullscreen>
-        </iframe>
-    </div>
+        <!-- Feed 2 -->
+        <div class="youtube-inset" style="right: 760px; top: -40px;">
+            <iframe 
+                src="https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+        </div>
 
-    <!-- Feed 3 -->
-    <div class="youtube-inset" style="right: 395px; top: -80px;">
-        <iframe 
-            src="https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
-            allow="autoplay; encrypted-media"
-            allowfullscreen>
-        </iframe>
-    </div>
+        <!-- Feed 3 -->
+        <div class="youtube-inset" style="right: 395px; top: -40px;">
+            <iframe 
+                src="https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+        </div>
 
-    <!-- Feed 4 – your current eagle nest -->
-    <div class="youtube-inset" style="right: 55px; top: -80px;">
-        <iframe 
-            src="https://www.youtube.com/embed/B4-L2nfGcuE?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
-            allow="autoplay; encrypted-media"
-            allowfullscreen>
-        </iframe>
+        <!-- Feed 4 – your current eagle nest -->
+        <div class="youtube-inset" style="right: 55px; top: -40px;">
+            <iframe 
+                src="https://www.youtube.com/embed/B4-L2nfGcuE?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+        </div>
     </div>
-</div>
 
     <div class="header">
         <h1>The Mitchell Post</h1>
