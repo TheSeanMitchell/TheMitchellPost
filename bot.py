@@ -431,11 +431,10 @@ html = """
 
 .youtube-inset iframe {
     width: 100%;
-    height: 100%;
-    border: none;
-    object-fit: cover;         /* ← key fix: fills the box, crops edges if needed */
-    /* Optional: if you prefer letterboxing instead of cropping → use object-fit: contain */
-    /* object-fit: contain; */
+    height: 130%;              /* taller than container → forces vertical crop */
+    margin-top: -15%;          /* crops top bar; adjust -10% to -20% */
+    margin-bottom: -15%;       /* crops bottom bar; adjust symmetrically or differently */
+    display: block;
 }
 
 .header {
