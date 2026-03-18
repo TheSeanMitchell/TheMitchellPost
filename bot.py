@@ -419,13 +419,14 @@ html = """
 .youtube-inset {
     position: absolute;
     top: 8px;
-    right: 16px;               /* or whatever value you settled on */
-    width: 138px;
-    height: 138px;
+    right: 16px;
+    width: 220px;
+    height: 220px;
     z-index: 3;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    object-fit: cover;
 }
 
 .youtube-inset iframe {
