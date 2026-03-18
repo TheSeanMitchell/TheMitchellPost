@@ -406,8 +406,24 @@ html = """
     <meta http-equiv="Expires" content="0">
     <style>
         body { background: #121212; color: #FFFFFF; font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
-        .banner { background: #001B47; width: 100%; height: 120px; position: relative; top: 0; left: 0; z-index: 1; }
-        .header { margin-bottom: 15px; text-align: left; position: relative; z-index: 2; padding-top: 20px; }
+        .banner {
+    background: #001B47;
+    width: 100%;
+    height: 140px;          /* ← increased slightly to give comfortable space */
+    position: absolute;     /* ← key change */
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.header {
+    margin-bottom: 15px;
+    text-align: left;
+    position: relative;
+    z-index: 2;
+    padding: 30px 20px 20px 20px;   /* ← top padding pushes content down into the banner */
+    margin-top: 0;                      /* ← optional but helps */
+}
         h1 { color: #FFFFFF; margin: 0; text-decoration: underline; font-size: 2.2em; }
         .byline { color: #aaaaaa; font-size: 1.05em; margin: 5px 0 0 0; }
         .update { color: #aaaaaa; font-size: 0.85em; margin: 5px 0 0 0; }
