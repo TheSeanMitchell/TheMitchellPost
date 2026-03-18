@@ -409,7 +409,7 @@ html = """
         .banner {
     background: #001B47;
     width: 100%;
-    height: 155px;               /* slightly taller banner for breathing room */
+    height: 165px;               /* taller banner so news columns sit cleanly below */
     position: absolute;
     top: 0;
     left: 0;
@@ -418,7 +418,7 @@ html = """
 
 .youtube-inset {
     position: absolute;
-    top: 4px;                    /* raised higher — now perfectly centered */
+    top: 12px;                   /* centered vertically in the taller banner */
     right: 16px;
     width: 138px;
     height: 138px;
@@ -440,7 +440,7 @@ html = """
     position: relative;
     z-index: 2;
     padding: 25px 20px 30px 20px;
-    margin-top: -118px;          /* stronger pull-up so title sits ON the banner */
+    margin-top: -128px;          /* pulls title ON TOP of the banner */
 }
         }
         h1 { color: #FFFFFF; margin: 0; text-decoration: underline; font-size: 2.2em; }
@@ -458,9 +458,8 @@ html = """
     </style>
 </head>
 <body>
-               <!-- NEW BANNER HEADER with inset live YouTube video -->
+                   <!-- NEW BANNER HEADER with inset live YouTube video -->
     <div class="banner">
-        <!-- Small square live YouTube player – now perfectly centered -->
         <div class="youtube-inset">
             <iframe 
                 src="https://www.youtube.com/embed/B4-L2nfGcuE?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
@@ -470,7 +469,7 @@ html = """
         </div>
     </div>
 
-    <!-- Header text now sits centered ON TOP of the banner -->
+    <!-- Header text now sits cleanly ON TOP of the banner -->
     <div class="header">
         <h1>The Mitchell Post</h1>
         <span class="byline">By Sean Mitchell</span>
