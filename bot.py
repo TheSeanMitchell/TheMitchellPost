@@ -454,28 +454,28 @@ html = """
 </style>
 </head>
 <body>
-                                            <!-- EIGHT YouTube feeds — two perfect rows of four (desktop only) -->
+                                                <!-- EIGHT YouTube feeds — two perfect rows of four (desktop only) -->
     <div class="banner" style="height: 340px; position: relative;">
 
-        <!-- TOP ROW (moved down slightly for full top audio access) -->
+        <!-- TOP ROW — moved down a tiny bit for full top audio access -->
         <!-- Feed 1 -->
-        <div class="youtube-inset" style="right: 1125px; top: -20px;">
+        <div class="youtube-inset" style="right: 1125px; top: -15px;">
             <iframe src="https://www.youtube.com/embed/TBlxk1kH9dM?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
         <!-- Feed 2 -->
-        <div class="youtube-inset" style="right: 760px; top: -20px;">
+        <div class="youtube-inset" style="right: 760px; top: -15px;">
             <iframe src="https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
         <!-- Feed 3 -->
-        <div class="youtube-inset" style="right: 395px; top: -20px;">
+        <div class="youtube-inset" style="right: 395px; top: -15px;">
             <iframe src="https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
         <!-- Feed 4 -->
-        <div class="youtube-inset" style="right: 55px; top: -20px;">
+        <div class="youtube-inset" style="right: 55px; top: -15px;">
             <iframe src="https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
 
-        <!-- BOTTOM ROW (perfectly aligned below) -->
+        <!-- BOTTOM ROW -->
         <!-- Feed 5 -->
         <div class="youtube-inset" style="right: 1125px; top: 210px;">
             <iframe src="https://www.youtube.com/embed/b_ERc4vcRHI?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -484,11 +484,11 @@ html = """
         <div class="youtube-inset" style="right: 760px; top: 210px;">
             <iframe src="https://www.youtube.com/embed/Cw4larZdMQY?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
-        <!-- Feed 7 (updated) -->
+        <!-- Feed 7 (new) -->
         <div class="youtube-inset" style="right: 395px; top: 210px;">
             <iframe src="https://www.youtube.com/embed/_6dRRfnYJws?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
-        <!-- Feed 8 (updated) -->
+        <!-- Feed 8 (new) -->
         <div class="youtube-inset" style="right: 55px; top: 210px;">
             <iframe src="https://www.youtube.com/embed/pykpO5kQJ98?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
@@ -500,8 +500,8 @@ html = """
         <span class="update">updated at """ + (datetime.utcnow() - timedelta(hours=7)).strftime("%I:%M:%S %p PDT") + """</span>
     </div>
 
-    <!-- US News – text now sits almost directly under header (tiny gap only) -->
-    <div class="container" style="margin-top: 15px;">
+    <!-- US News – almost zero gap below header -->
+    <div class="container" style="margin-top: 10px;">
         <div class="column">
             <h2 class="section-title">Breaking US News</h2>
     <hr class="top-divider">
