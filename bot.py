@@ -417,15 +417,16 @@ html = """
             overflow: hidden;            /* Keeps iframe from spilling out */
         }
         .youtube-inset {
-            position: absolute;
-            top: 12px;
-            right: 16px;
-            width: 180px;
-            height: 180px;
-            z-index: 3;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    position: absolute;
+    top: 8px;                /* raised higher — was 12px; try 6px or 4px if still too low */
+    right: 16px;
+    width: 180px;
+    height: 160px;           /* slightly shorter than width to avoid bottom cutoff on 140px banner */
+    z-index: 3;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
         }
         .youtube-inset iframe {
             width: 100%;
