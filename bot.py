@@ -455,15 +455,44 @@ html = """
 </style>
 </head>
 <body>
-        <!-- NEW BANNER HEADER with YouTube video in upper right -->
+                <!-- FOUR YouTube feeds evenly spaced across the banner -->
     <div class="banner">
-        <div class="youtube-inset">
-    <iframe 
-        src="https://www.youtube.com/embed/B4-L2nfGcuE?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
-        allow="autoplay; encrypted-media"
-        allowfullscreen>
-    </iframe>
-</div>
+        <!-- Feed 1 (leftmost) -->
+        <div class="youtube-inset" style="right: 1125px; top: -110px;">
+            <iframe 
+                src="https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- Feed 2 -->
+        <div class="youtube-inset" style="right: 760px; top: -110px;">
+            <iframe 
+                src="https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- Feed 3 -->
+        <div class="youtube-inset" style="right: 395px; top: -110px;">
+            <iframe 
+                src="https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- Feed 4 – your current eagle nest (100% unchanged position & settings) -->
+        <div class="youtube-inset" style="right: 55px; top: -110px;">
+            <iframe 
+                src="https://www.youtube.com/embed/B4-L2nfGcuE?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
 
     <div class="header">
         <h1>The Mitchell Post</h1>
