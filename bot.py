@@ -405,58 +405,54 @@ html = """
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <style>
-        body { background: #121212; color: #FFFFFF; font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
-        .banner {
-    background: #001B47;
-    width: 100%;
-    height: 140px;          
-    position: absolute;     
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
+    body { background: #121212; color: #FFFFFF; font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
+    .banner {
+        background: #001B47;
+        width: 100%;
+        height: 140px;          
+        position: absolute;     
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+    .youtube-inset {
+        position: absolute;
+        top: -150px;
+        right: 90px;
+        width: 500px;
+        height: 500px;
+        z-index: 3;
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px rgba(0,0,0,0);
+        object-fit: cover;
+    }
+    .youtube-inset iframe {
+        width: 100%;
+        height: 100%;
+        clip-path: inset(30% 10% 30% 10%);
+    }
+    .header { margin-bottom: 15px; text-align: left; position: relative; z-index: 2; padding: 30px 20px 20px 20px; }
+    h1 { color: #FFFFFF; margin: 0; text-decoration: underline; font-size: 2.2em; }
+    .byline { color: #aaaaaa; font-size: 1.05em; margin: 5px 0 0 0; }
+    .update { color: #aaaaaa; font-size: 0.85em; margin: 5px 0 0 0; }
+    .section-title { color: #FF0000; font-size: 1.6em; margin: 30px 0 10px; font-weight: bold; text-decoration: underline; text-decoration-color: #FF0000; }
+    .top-divider { border: 0; height: 3px; background: #FF0000; margin: 35px 0; }
+    .headline { margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid #222222; }
+    .title { color: #FFFFFF; }
+    .link { color: #F6CB2F; text-decoration: underline; font-size: 0.85em; margin-left: 10px; }
+    .link:hover { color: #FFFFFF; }
+    .container { display: flex; flex-wrap: wrap; gap: 30px; max-width: 1400px; margin: 0 auto; }
+    .column { flex: 1; min-width: 300px; }
+    @media (max-width: 768px) { .container { flex-direction: column; } }
 
-.youtube-inset {
-    position: absolute;
-    top: -150px;
-    right: 90px;
-    width: 500px;
-    height: 500px;
-    z-index: 3;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0);
-    object-fit: cover;
-}
-
-.youtube-inset iframe {
-    width: 100%;
-    height: 100%;
-    clip-path: inset(30% 10% 30% 10%);   /* crops 12% from top and 12% from bottom */
-    /* inset(top right bottom left) — change percentages or use px: inset(20px 0 20px 0) */
-}
-
-.header {
-    margin-bottom: 15px;
-    text-align: left;
-    position: relative;
-    z-index: 2;
-    padding: 30px 20px 20px 20px;   /* ← top padding pushes content down into the banner */
-    margin-top: 0;                      /* ← optional but helps */
-}
-        h1 { color: #FFFFFF; margin: 0; text-decoration: underline; font-size: 2.2em; }
-        .byline { color: #aaaaaa; font-size: 1.05em; margin: 5px 0 0 0; }
-        .update { color: #aaaaaa; font-size: 0.85em; margin: 5px 0 0 0; }
-        .section-title { color: #FF0000; font-size: 1.6em; margin: 30px 0 10px; font-weight: bold; text-decoration: underline; text-decoration-color: #FF0000; }
-        .top-divider { border: 0; height: 3px; background: #FF0000; margin: 35px 0; }
-        .headline { margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid #222222; }
-        .title { color: #FFFFFF; }
-        .link { color: #454545; text-decoration: underline; font-size: 0.85em; margin-left: 10px; }
-        .link:hover { color: #FFFFFF; }
-        .container { display: flex; flex-wrap: wrap; gap: 30px; max-width: 1400px; margin: 0 auto; }
-        .column { flex: 1; min-width: 300px; }
-        @media (max-width: 768px) { .container { flex-direction: column; } }
-    </style>
+    /* === HIDE YOUTUBE ON MOBILE ONLY === */
+    @media (max-width: 900px) {
+        .youtube-inset {
+            display: none !important;
+        }
+    }
+</style>
 </head>
 <body>
         <!-- NEW BANNER HEADER with YouTube video in upper right -->
