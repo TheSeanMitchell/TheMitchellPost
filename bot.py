@@ -459,21 +459,24 @@ html = """
     </style>
 </head>
 <body>
-        <!-- NEW BANNER HEADER with YouTube video in upper right -->
-    <div class="banner">
-        <div class="youtube-inset">
-    <iframe 
-        src="https://www.youtube.com/embed/B4-L2nfGcuE?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
-        allow="autoplay; encrypted-media"
-        allowfullscreen>
-    </iframe>
-</div>
+        <!-- Banner + header combined into flex container -->
+<div class="banner-header">
+    <!-- Video on left (mobile) or right (desktop) -->
+    <div class="youtube-inset">
+        <iframe 
+            src="https://www.youtube.com/embed/B4-L2nfGcuE?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+        </iframe>
+    </div>
 
-    <div class="header">
+    <!-- Title text -->
+    <div class="header-text">
         <h1>The Mitchell Post</h1>
         <span class="byline">By Sean Mitchell</span>
         <span class="update">updated at """ + (datetime.utcnow() - timedelta(hours=7)).strftime("%I:%M:%S %p PDT") + """</span>
     </div>
+</div>
 
     <!-- US -->
     <div class="container">
