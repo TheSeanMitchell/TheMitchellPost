@@ -418,10 +418,10 @@ html = """
 
 .youtube-inset {
     position: absolute;
-    top: 1px;
-    right: 60px;
-    width: 300px;
-    height: 300px;
+    top: 0px;
+    right: 90px;
+    width: 500px;
+    height: 500px;
     z-index: 3;
     border-radius: 4px;
     overflow: hidden;
