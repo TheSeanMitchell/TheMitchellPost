@@ -428,10 +428,12 @@ html = """
         object-fit: cover;
     }
     .youtube-inset iframe {
-        width: 100%;
-        height: 100%;
-        clip-path: inset(22% 3% 22% 3%);
-    }
+    width: 100%;
+    height: 100%;
+    border: none;
+    object-fit: cover;          /* keeps filling the square nicely */
+    /* clip-path completely removed → no cropping anymore */
+}
     .header { margin-bottom: 15px; text-align: left; position: relative; z-index: 2; padding: 30px 20px 20px 20px; }
     h1 { color: #FFFFFF; margin: 0; text-decoration: underline; font-size: 2.2em; }
     .byline { color: #aaaaaa; font-size: 1.05em; margin: 5px 0 0 0; }
