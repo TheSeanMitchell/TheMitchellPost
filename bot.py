@@ -407,10 +407,32 @@ html = """
     <style>
         body { background: #121212; color: #FFFFFF; font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
         .banner {
+    /* your existing banner styles remain unchanged */
+    position: relative;          /* ← change from absolute to relative if it wasn't already */
+    overflow: hidden;            /* keeps the video from overflowing the banner */
+}
+
+.youtube-inset {
+    position: absolute;
+    top: 12px;                   /* small top margin inside banner */
+    right: 16px;                 /* small right margin inside banner */
+    width: 180px;                /* small square-ish size — adjust as you like */
+    height: 180px;
+    z-index: 3;                  /* above other content but inside banner */
+    border-radius: 8px;          /* soft corners — optional, looks nicer */
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);  /* subtle shadow — optional */
+}
+
+.youtube-inset iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
     background: #001B47;
     width: 100%;
     height: 140px;          /* ← increased slightly to give comfortable space */
-    position: absolute;     /* ← key change */
+    position: relative;     /* ← key change */
     top: 0;
     left: 0;
     z-index: 1;
@@ -440,13 +462,20 @@ html = """
 </head>
 <body>
     <!-- NEW BANNER HEADER -->
-    <div class="banner"></div>
-
-    <div class="header">
-        <h1>The Mitchell Post</h1>
-        <span class="byline">By Sean Mitchell</span>
-        <span class="update">updated at """ + (datetime.utcnow() - timedelta(hours=7)).strftime("%I:%M:%S %p PDT") + """</span>
+<div class="banner">
+    <!-- Embedded live YouTube video – small inset top-right -->
+    <div class="youtube-inset">
+        <iframe 
+            src="https://www.youtube.com/embed/B4-L2nfGcuE?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+        </iframe>
     </div>
+</div>
+
+<div class="header">
+    <h1>The Mitchell Post</h1>
+    ...
 
     <!-- US -->
     <div class="container">
