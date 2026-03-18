@@ -439,8 +439,8 @@ html = """
     text-align: left;
     position: relative;
     z-index: 2;
-    padding: 25px 20px 30px 20px;
-    margin-top: -128px;          /* pulls title ON TOP of the banner */
+    padding: 18px 20px 30px 20px;   /* slightly less top padding */
+    margin-top: -132px;             /* stronger pull-up so title sits centered on banner */
 }
         }
         h1 { color: #FFFFFF; margin: 0; text-decoration: underline; font-size: 2.2em; }
@@ -476,8 +476,8 @@ html = """
         <span class="update">updated at """ + (datetime.utcnow() - timedelta(hours=7)).strftime("%I:%M:%S %p PDT") + """</span>
     </div>
 
-    <!-- US -->
-    <div class="container">
+      <!-- US -->
+    <div class="container" style="margin-top: 25px;">
         <div class="column">
             <h2 class="section-title">Breaking US News</h2>
 """
