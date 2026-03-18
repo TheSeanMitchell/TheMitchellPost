@@ -436,11 +436,11 @@ html = """
     h1 { color: #FFFFFF; margin: 0; text-decoration: underline; font-size: 2.2em; }
     .byline { color: #aaaaaa; font-size: 1.05em; margin: 5px 0 0 0; }
     .update { color: #aaaaaa; font-size: 0.85em; margin: 5px 0 0 0; }
-    .section-title { color: #FF0000; font-size: 1.6em; margin: 30px 0 10px; font-weight: bold; text-decoration: underline; text-decoration-color: #FF0000; }
-    .top-divider { border: 0; height: 3px; background: #FF0000; margin: 35px 0; }
+    .section-title { color: #B30000; font-size: 1.6em; margin: 30px 0 10px; font-weight: bold; text-decoration: underline; text-decoration-color: #B30000; }
+    .top-divider { border: 0; height: 3px; background: #B30000; margin: 35px 0; }
     .headline { margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid #222222; }
     .title { color: #FFFFFF; }
-    .link { color: #F6CB2F; text-decoration: underline; font-size: 0.85em; margin-left: 10px; }
+    .link { color: #2E2E2E; text-decoration: underline; font-size: 0.85em; margin-left: 10px; }
     .link:hover { color: #FFFFFF; }
     .container { display: flex; flex-wrap: wrap; gap: 30px; max-width: 1400px; margin: 0 auto; }
     .column { flex: 1; min-width: 300px; }
