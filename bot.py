@@ -454,7 +454,7 @@ html = """
 </style>
 </head>
 <body>
-                                    <!-- EIGHT YouTube feeds — two perfect rows of four (desktop only) -->
+                                        <!-- EIGHT YouTube feeds — two perfect rows of four (desktop only) -->
     <div class="banner" style="height: 340px; position: relative;">
         <!-- TOP ROW -->
         <div class="youtube-inset" style="right: 1125px; top: -40px;">
@@ -470,7 +470,7 @@ html = """
             <iframe src="https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
 
-        <!-- BOTTOM ROW (exactly aligned below top row) -->
+        <!-- BOTTOM ROW -->
         <div class="youtube-inset" style="right: 1125px; top: 190px;">
             <iframe src="https://www.youtube.com/embed/b_ERc4vcRHI?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
@@ -491,10 +491,8 @@ html = """
         <span class="update">updated at """ + (datetime.utcnow() - timedelta(hours=7)).strftime("%I:%M:%S %p PDT") + """</span>
     </div>
 
-    <!-- News content pushed down on desktop only (mobile unaffected) -->
-    <div class="container" style="margin-top: 370px; position: relative; z-index: 2;">
-        <div class="column">
-            <h2 class="section-title">Breaking US News</h2>
+    <!-- US News – text starts right below videos (no huge gap) -->
+    <div class="container" style="margin-top: 30px;">
         <div class="column">
             <h2 class="section-title">Breaking US News</h2>
 """
