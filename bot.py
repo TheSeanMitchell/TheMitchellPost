@@ -407,23 +407,39 @@ html = """
     <style>
         body { background: #121212; color: #FFFFFF; font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
         .banner {
-    background: #001B47;
-    width: 100%;
-    height: 140px;          /* ← increased slightly to give comfortable space */
-    position: absolute;     /* ← key change */
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
-
-.header {
-    margin-bottom: 15px;
-    text-align: left;
-    position: relative;
-    z-index: 2;
-    padding: 30px 20px 20px 20px;   /* ← top padding pushes content down into the banner */
-    margin-top: 0;                      /* ← optional but helps */
-}
+            background: #001B47;
+            width: 100%;
+            height: 140px;
+            position: relative;          /* Changed to relative so absolute children work inside it */
+            top: 0;
+            left: 0;
+            z-index: 1;
+            overflow: hidden;            /* Keeps iframe from spilling out */
+        }
+        .youtube-inset {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            width: 180px;
+            height: 180px;
+            z-index: 3;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+        }
+        .youtube-inset iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .header {
+            margin-bottom: 15px;
+            text-align: left;
+            position: relative;
+            z-index: 2;
+            padding: 30px 20px 20px 20px;
+            margin-top: 0;
+        }
         h1 { color: #FFFFFF; margin: 0; text-decoration: underline; font-size: 2.2em; }
         .byline { color: #aaaaaa; font-size: 1.05em; margin: 5px 0 0 0; }
         .update { color: #aaaaaa; font-size: 0.85em; margin: 5px 0 0 0; }
@@ -439,8 +455,16 @@ html = """
     </style>
 </head>
 <body>
-    <!-- NEW BANNER HEADER -->
-    <div class="banner"></div>
+           <!-- NEW BANNER HEADER with inset live YouTube video -->
+    <div class="banner">
+        <div class="youtube-inset">
+            <iframe 
+                src="https://www.youtube.com/embed/B4-L2nfGcuE?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
 
     <div class="header">
         <h1>The Mitchell Post</h1>
