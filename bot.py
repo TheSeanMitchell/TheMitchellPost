@@ -420,8 +420,8 @@ html = """
     position: absolute;
     top: 8px;
     right: 16px;
-    width: 220px;
-    height: 220px;
+    width: 180px;
+    height: 180px;
     z-index: 3;
     border-radius: 8px;
     overflow: hidden;
