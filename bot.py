@@ -416,23 +416,20 @@ html = """
         z-index: 1;
     }
     .youtube-inset {
-        position: absolute;
-        top: -110px;
-        right: 55px;
-        width: 325px;
-        height: 325px;
-        z-index: 3;
-        border-radius: 4px;
-        overflow: hidden;
-        box-shadow: 0 2px 12px rgba(0,0,0,0);
-        object-fit: cover;
-    }
-    .youtube-inset iframe {
+    position: absolute;
+    top: -110px;
+    width: 325px;                  /* same width you already use */
+    aspect-ratio: 16 / 9;          /* YouTube's natural size — no black bars */
+    z-index: 3;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0);
+}
+
+.youtube-inset iframe {
     width: 100%;
     height: 100%;
     border: none;
-    object-fit: cover;          /* keeps filling the square nicely */
-    /* clip-path completely removed → no cropping anymore */
 }
     .header { margin-bottom: 15px; text-align: left; position: relative; z-index: 2; padding: 30px 20px 20px 20px; }
     h1 { color: #FFFFFF; margin: 0; text-decoration: underline; font-size: 2.2em; }
