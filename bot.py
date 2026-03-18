@@ -419,7 +419,7 @@ html = """
 .youtube-inset {
     position: absolute;
     top: 8px;
-    right: 16px;               /* or whatever value you settled on */
+    right: 70px;               /* or whatever value you settled on */
     width: 138px;
     height: 138px;
     z-index: 3;
@@ -429,8 +429,8 @@ html = """
 }
 
 .youtube-inset iframe {
-    width: 100%;
-    height: 100%;
+    width: 200%;
+    height: 200%;
     border: none;
     object-fit: cover;         /* ← key fix: fills the box, crops edges if needed */
     /* Optional: if you prefer letterboxing instead of cropping → use object-fit: contain */
