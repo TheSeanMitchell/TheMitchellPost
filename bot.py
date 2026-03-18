@@ -410,7 +410,7 @@ html = """
     background: #001B47;
     width: 100%;
     height: 140px;
-    position: absolute;          /* back to absolute so header can overlap it */
+    position: absolute;
     top: 0;
     left: 0;
     z-index: 1;
@@ -418,10 +418,10 @@ html = """
 
 .youtube-inset {
     position: absolute;
-    top: 10px;                   /* centered vertically in 140px banner */
+    top: 6px;                    /* raised slightly higher to center perfectly */
     right: 16px;
-    width: 140px;                /* smaller square — fits fully without crop */
-    height: 140px;               /* matches width, no bottom cutoff */
+    width: 138px;                /* smaller to guarantee full fit */
+    height: 138px;
     z-index: 3;
     border-radius: 8px;
     overflow: hidden;
@@ -439,8 +439,9 @@ html = """
     text-align: left;
     position: relative;
     z-index: 2;
-    padding: 20px 20px 40px 20px;   /* reduced top padding, increased bottom to push content down */
-    margin-top: -120px;                 /* negative margin pulls header UP onto the banner */
+    padding: 25px 20px 30px 20px;
+    margin-top: -105px;          /* pulls title back ON TOP of the banner */
+}                 /* negative margin pulls header UP onto the banner */
 }
         }
         h1 { color: #FFFFFF; margin: 0; text-decoration: underline; font-size: 2.2em; }
@@ -458,9 +459,9 @@ html = """
     </style>
 </head>
 <body>
-               <!-- Banner background first -->
+               <!-- NEW BANNER HEADER with inset live YouTube video -->
     <div class="banner">
-        <!-- Video inset inside banner -->
+        <!-- Small square live YouTube player – top-right inset -->
         <div class="youtube-inset">
             <iframe 
                 src="https://www.youtube.com/embed/B4-L2nfGcuE?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
@@ -470,7 +471,7 @@ html = """
         </div>
     </div>
 
-    <!-- Header text overlaps banner -->
+    <!-- Header text now sits ON TOP of the banner -->
     <div class="header">
         <h1>The Mitchell Post</h1>
         <span class="byline">By Sean Mitchell</span>
