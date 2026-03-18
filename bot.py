@@ -430,7 +430,7 @@ html = """
     .youtube-inset iframe {
         width: 100%;
         height: 100%;
-        clip-path: inset(30% 5% 00% 5%);
+        clip-path: inset(30% 5% 25% 5%);
     }
     .header { margin-bottom: 15px; text-align: left; position: relative; z-index: 2; padding: 30px 20px 20px 20px; }
     h1 { color: #FFFFFF; margin: 0; text-decoration: underline; font-size: 2.2em; }
