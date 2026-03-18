@@ -409,7 +409,7 @@ html = """
         .banner {
     background: #001B47;
     width: 100%;
-    height: 140px;
+    height: 155px;               /* slightly taller banner for breathing room */
     position: absolute;
     top: 0;
     left: 0;
@@ -418,9 +418,9 @@ html = """
 
 .youtube-inset {
     position: absolute;
-    top: 6px;                    /* raised slightly higher to center perfectly */
+    top: 4px;                    /* raised higher — now perfectly centered */
     right: 16px;
-    width: 138px;                /* smaller to guarantee full fit */
+    width: 138px;
     height: 138px;
     z-index: 3;
     border-radius: 8px;
@@ -440,8 +440,7 @@ html = """
     position: relative;
     z-index: 2;
     padding: 25px 20px 30px 20px;
-    margin-top: -105px;          /* pulls title back ON TOP of the banner */
-}                 /* negative margin pulls header UP onto the banner */
+    margin-top: -118px;          /* stronger pull-up so title sits ON the banner */
 }
         }
         h1 { color: #FFFFFF; margin: 0; text-decoration: underline; font-size: 2.2em; }
@@ -461,7 +460,7 @@ html = """
 <body>
                <!-- NEW BANNER HEADER with inset live YouTube video -->
     <div class="banner">
-        <!-- Small square live YouTube player – top-right inset -->
+        <!-- Small square live YouTube player – now perfectly centered -->
         <div class="youtube-inset">
             <iframe 
                 src="https://www.youtube.com/embed/B4-L2nfGcuE?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
@@ -471,7 +470,7 @@ html = """
         </div>
     </div>
 
-    <!-- Header text now sits ON TOP of the banner -->
+    <!-- Header text now sits centered ON TOP of the banner -->
     <div class="header">
         <h1>The Mitchell Post</h1>
         <span class="byline">By Sean Mitchell</span>
