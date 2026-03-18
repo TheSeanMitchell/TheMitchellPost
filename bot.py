@@ -417,10 +417,10 @@ html = """
     }
     .youtube-inset {
         position: absolute;
-        top: -120px;
-        right: 65px;
-        width: 350px;
-        height: 350px;
+        top: -110px;
+        right: 55px;
+        width: 325px;
+        height: 325px;
         z-index: 3;
         border-radius: 4px;
         overflow: hidden;
@@ -430,7 +430,7 @@ html = """
     .youtube-inset iframe {
         width: 100%;
         height: 100%;
-        clip-path: inset(30% 5% 20% 5%);
+        clip-path: inset(22% 3% 22% 3%);
     }
     .header { margin-bottom: 15px; text-align: left; position: relative; z-index: 2; padding: 30px 20px 20px 20px; }
     h1 { color: #FFFFFF; margin: 0; text-decoration: underline; font-size: 2.2em; }
