@@ -409,11 +409,23 @@ html = """
         .banner {
     background: #001B47;
     width: 100%;
-    height: 140px;          /* ← increased slightly to give comfortable space */
-    position: absolute;     /* ← key change */
+    height: 140px;          
+    position: absolute;     
     top: 0;
     left: 0;
     z-index: 1;
+}
+
+.youtube-inset {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    width: 138px;
+    height: 138px;
+    z-index: 3;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
 .header {
@@ -439,8 +451,16 @@ html = """
     </style>
 </head>
 <body>
-    <!-- NEW BANNER HEADER -->
-    <div class="banner"></div>
+        <!-- NEW BANNER HEADER with YouTube video in upper right -->
+    <div class="banner">
+        <div class="youtube-inset">
+            <iframe 
+                src="https://www.youtube.com/embed/B4-L2nfGcuE?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
 
     <div class="header">
         <h1>The Mitchell Post</h1>
