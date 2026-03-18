@@ -419,7 +419,7 @@ html = """
         position: absolute;
         top: -150px;
         right: 65px;
-        width: 30000px;
+        width: 300px;
         height: 300px;
         z-index: 3;
         border-radius: 4px;
