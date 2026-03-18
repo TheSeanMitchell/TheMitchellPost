@@ -406,83 +406,147 @@ html = """
     <meta http-equiv="Expires" content="0">
     <style>
         body { background: #121212; color: #FFFFFF; font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
-        .banner {
-    background: #001B47;
-    width: 100%;
-    height: 140px;          
-    position: absolute;     
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
+              .banner-header {
+          background: #001B47;
+          width: 100%;
+          min-height: 140px;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 15px 20px;
+          box-sizing: border-box;
+          overflow: hidden;
+      }
 
-.youtube-inset {
-    position: absolute;
-    top: -150px;
-    right: 90px;
-    width: 500px;
-    height: 500px;
-    z-index: 3;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0);
-    object-fit: cover;
-}
+      .youtube-inset {
+          width: 180px;
+          height: 180px;
+          flex-shrink: 0;
+          border-radius: 8px;
+          overflow: hidden;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+          order: 1; /* mobile: video first */
+      }
 
-.youtube-inset iframe {
-    width: 100%;
-    height: 100%;
-    clip-path: inset(30% 10% 30% 10%);   /* crops 12% from top and 12% from bottom */
-    /* inset(top right bottom left) — change percentages or use px: inset(20px 0 20px 0) */
-}
+      .youtube-inset iframe {
+          width: 100%;
+          height: 100%;
+          border: none;
+          object-fit: cover;
+          clip-path: inset(25% 0 25% 0); /* crops top/bottom black bars — adjust % as needed */
+      }
 
-.header {
-    margin-bottom: 15px;
-    text-align: left;
-    position: relative;
-    z-index: 2;
-    padding: 30px 20px 20px 20px;   /* ← top padding pushes content down into the banner */
-    margin-top: 0;                      /* ← optional but helps */
-}
-        h1 { color: #FFFFFF; margin: 0; text-decoration: underline; font-size: 2.2em; }
-        .byline { color: #aaaaaa; font-size: 1.05em; margin: 5px 0 0 0; }
-        .update { color: #aaaaaa; font-size: 0.85em; margin: 5px 0 0 0; }
-        .section-title { color: #FF0000; font-size: 1.6em; margin: 30px 0 10px; font-weight: bold; text-decoration: underline; text-decoration-color: #FF0000; }
-        .top-divider { border: 0; height: 3px; background: #FF0000; margin: 35px 0; }
-        .headline { margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid #222222; }
-        .title { color: #FFFFFF; }
-        .link { color: #454545; text-decoration: underline; font-size: 0.85em; margin-left: 10px; }
-        .link:hover { color: #FFFFFF; }
-        .container { display: flex; flex-wrap: wrap; gap: 30px; max-width: 1400px; margin: 0 auto; }
-        .column { flex: 1; min-width: 300px; }
-        @media (max-width: 768px) { .container { flex-direction: column; } }
+      .header-text {
+          text-align: left;
+          color: white;
+          flex-grow: 1;
+          padding-left: 20px;
+          order: 2;
+      }
+
+      h1 { 
+          color: #FFFFFF; 
+          margin: 0; 
+          text-decoration: underline; 
+          font-size: 2.2em; 
+      }
+      .byline { 
+          color: #aaaaaa; 
+          font-size: 1.05em; 
+          margin: 5px 0 0 0; 
+      }
+      .update { 
+          color: #aaaaaa; 
+          font-size: 0.85em; 
+          margin: 5px 0 0 0; 
+      }
+      .section-title { 
+          color: #FF0000; 
+          font-size: 1.6em; 
+          margin: 30px 0 10px; 
+          font-weight: bold; 
+          text-decoration: underline; 
+          text-decoration-color: #FF0000; 
+      }
+      .top-divider { 
+          border: 0; 
+          height: 3px; 
+          background: #FF0000; 
+          margin: 35px 0; 
+      }
+      .headline { 
+          margin-bottom: 18px; 
+          padding-bottom: 10px; 
+          border-bottom: 1px solid #222222; 
+      }
+      .title { 
+          color: #FFFFFF; 
+      }
+      .link { 
+          color: #454545; 
+          text-decoration: underline; 
+          font-size: 0.85em; 
+          margin-left: 10px; 
+      }
+      .link:hover { 
+          color: #FFFFFF; 
+      }
+      .container { 
+          display: flex; 
+          flex-wrap: wrap; 
+          gap: 30px; 
+          max-width: 1400px; 
+          margin: 0 auto; 
+      }
+      .column { 
+          flex: 1; 
+          min-width: 300px; 
+      }
+
+      @media (max-width: 768px) {
+          .banner-header {
+              flex-direction: column;
+              align-items: flex-start;
+              padding: 15px;
+              min-height: auto;
+          }
+          .youtube-inset {
+              width: 160px;
+              height: 160px;
+              margin-bottom: 12px;
+          }
+          .header-text {
+              padding-left: 0;
+          }
+          h1 {
+              font-size: 1.8em;
+          }
+      }
     </style>
 </head>
 <body>
-        <!-- Banner + header combined into flex container -->
-<div class="banner-header">
-    <!-- Video on left (mobile) or right (desktop) -->
-    <div class="youtube-inset">
-        <iframe 
-            src="https://www.youtube.com/embed/B4-L2nfGcuE?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
-            allow="autoplay; encrypted-media"
-            allowfullscreen>
-        </iframe>
-    </div>
+    <!-- Banner + header combined -->
+    <div class="banner-header">
+        <div class="youtube-inset">
+            <iframe 
+                src="https://www.youtube.com/embed/B4-L2nfGcuE?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+        </div>
 
-    <!-- Title text -->
-    <div class="header-text">
-        <h1>The Mitchell Post</h1>
-        <span class="byline">By Sean Mitchell</span>
-        <span class="update">updated at """ + (datetime.utcnow() - timedelta(hours=7)).strftime("%I:%M:%S %p PDT") + """</span>
+        <div class="header-text">
+            <h1>The Mitchell Post</h1>
+            <span class="byline">By Sean Mitchell</span>
+            <span class="update">updated at """ + (datetime.utcnow() - timedelta(hours=7)).strftime("%I:%M:%S %p PDT") + """</span>
+        </div>
     </div>
-</div>
 
     <!-- US -->
     <div class="container">
         <div class="column">
             <h2 class="section-title">Breaking US News</h2>
-"""
 
 if us_breaking:
     for ts, title, source, link in us_breaking:
