@@ -404,7 +404,7 @@ html = """
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-        <style>
+            <style>
         body { background: #121212; color: #FFFFFF; font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
         .banner {
             background: #001B47;
@@ -417,7 +417,7 @@ html = """
         }
         .youtube-inset {
             position: absolute;
-            top: 12px;                   /* exact position you loved last time */
+            top: 12px;                   /* exact position you said you loved */
             right: 16px;
             width: 138px;
             height: 138px;
@@ -437,7 +437,7 @@ html = """
             position: relative;
             z-index: 2;
             padding: 25px 20px 30px 20px;
-            margin-top: -132px;          /* pulls "The Mitchell Post" back ON TOP of banner */
+            margin-top: -132px;          /* pulls "The Mitchell Post" back ON TOP of the banner */
         }
         h1 { color: #FFFFFF; margin: 0; text-decoration: underline; font-size: 2.2em; }
         .byline { color: #aaaaaa; font-size: 1.05em; margin: 5px 0 0 0; }
@@ -473,7 +473,7 @@ html = """
     </div>
 
     <!-- ALL NEWS COLUMNS pushed down so titles are visible -->
-    <div class="container" style="margin-top: 185px;">
+    <div class="container" style="margin-top: 190px;">
         <div class="column">
             <h2 class="section-title">Breaking US News</h2>
 
