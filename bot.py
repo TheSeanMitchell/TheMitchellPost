@@ -404,44 +404,40 @@ html = """
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <style>
+        <style>
         body { background: #121212; color: #FFFFFF; font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
         .banner {
-    background: #001B47;
-    width: 100%;
-    height: 165px;               /* taller banner so news columns sit cleanly below */
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
-
-.youtube-inset {
-    position: absolute;
-    top: 12px;                   /* centered vertically in the taller banner */
-    right: 16px;
-    width: 138px;
-    height: 138px;
-    z-index: 3;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
-}
-
-.youtube-inset iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-.header {
-    margin-bottom: 15px;
-    text-align: left;
-    position: relative;
-    z-index: 2;
-    padding: 18px 20px 30px 20px;   /* slightly less top padding */
-    margin-top: -132px;             /* stronger pull-up so title sits centered on banner */
-}
+            background: #001B47;
+            width: 100%;
+            height: 165px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .youtube-inset {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            width: 138px;
+            height: 138px;
+            z-index: 3;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+        }
+        .youtube-inset iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .header {
+            margin-bottom: 15px;
+            text-align: left;
+            position: relative;
+            z-index: 2;
+            padding: 25px 20px 30px 20px;
+            margin-top: -115px;          /* adjusted to bring "The Mitchell Post" back onto the banner */
         }
         h1 { color: #FFFFFF; margin: 0; text-decoration: underline; font-size: 2.2em; }
         .byline { color: #aaaaaa; font-size: 1.05em; margin: 5px 0 0 0; }
@@ -458,7 +454,7 @@ html = """
     </style>
 </head>
 <body>
-                   <!-- NEW BANNER HEADER with inset live YouTube video -->
+    <!-- NEW BANNER HEADER with inset live YouTube video -->
     <div class="banner">
         <div class="youtube-inset">
             <iframe 
@@ -469,18 +465,17 @@ html = """
         </div>
     </div>
 
-    <!-- Header text now sits cleanly ON TOP of the banner -->
+    <!-- Header text now sits ON TOP of the banner -->
     <div class="header">
         <h1>The Mitchell Post</h1>
         <span class="byline">By Sean Mitchell</span>
         <span class="update">updated at """ + (datetime.utcnow() - timedelta(hours=7)).strftime("%I:%M:%S %p PDT") + """</span>
     </div>
 
-      <!-- US -->
-    <div class="container" style="margin-top: 25px;">
+    <!-- US - pushed down so column titles are visible -->
+    <div class="container" style="margin-top: 190px;">
         <div class="column">
             <h2 class="section-title">Breaking US News</h2>
-"""
 
 if us_breaking:
     for ts, title, source, link in us_breaking:
