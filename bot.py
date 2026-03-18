@@ -404,26 +404,41 @@ html = """
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <style>
+        <style>
         body { background: #121212; color: #FFFFFF; font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
         .banner {
-    background: #001B47;
-    width: 100%;
-    height: 140px;          /* ← increased slightly to give comfortable space */
-    position: absolute;     /* ← key change */
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
-
-.header {
-    margin-bottom: 15px;
-    text-align: left;
-    position: relative;
-    z-index: 2;
-    padding: 30px 20px 20px 20px;   /* ← top padding pushes content down into the banner */
-    margin-top: 0;                      /* ← optional but helps */
-}
+            background: #001B47;
+            width: 100%;
+            height: 165px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .youtube-inset {
+            position: absolute;
+            top: 12px;                   /* exact position you loved last time */
+            right: 16px;
+            width: 138px;
+            height: 138px;
+            z-index: 3;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+        }
+        .youtube-inset iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .header {
+            margin-bottom: 15px;
+            text-align: left;
+            position: relative;
+            z-index: 2;
+            padding: 25px 20px 30px 20px;
+            margin-top: -132px;          /* pulls "The Mitchell Post" back ON TOP of banner */
+        }
         h1 { color: #FFFFFF; margin: 0; text-decoration: underline; font-size: 2.2em; }
         .byline { color: #aaaaaa; font-size: 1.05em; margin: 5px 0 0 0; }
         .update { color: #aaaaaa; font-size: 0.85em; margin: 5px 0 0 0; }
@@ -439,20 +454,28 @@ html = """
     </style>
 </head>
 <body>
-    <!-- NEW BANNER HEADER -->
-    <div class="banner"></div>
+    <!-- BANNER + VIDEO (exact position you loved) -->
+    <div class="banner">
+        <div class="youtube-inset">
+            <iframe 
+                src="https://www.youtube.com/embed/B4-L2nfGcuE?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
 
+    <!-- Header text now sits ON TOP of the banner -->
     <div class="header">
         <h1>The Mitchell Post</h1>
         <span class="byline">By Sean Mitchell</span>
         <span class="update">updated at """ + (datetime.utcnow() - timedelta(hours=7)).strftime("%I:%M:%S %p PDT") + """</span>
     </div>
 
-    <!-- US -->
-    <div class="container">
+    <!-- ALL NEWS COLUMNS pushed down so titles are visible -->
+    <div class="container" style="margin-top: 185px;">
         <div class="column">
             <h2 class="section-title">Breaking US News</h2>
-"""
 
 if us_breaking:
     for ts, title, source, link in us_breaking:
