@@ -419,13 +419,14 @@ html = """
 .youtube-inset {
     position: absolute;
     top: 8px;
-    right: 30px; 
+    right: 16px;
     width: 138px;
     height: 138px;
     z-index: 3;
-    border-radius: 6px;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    object-fit: contain;   /* prevents the iframe from zooming in */
 }
 
 .header {
@@ -455,10 +456,10 @@ html = """
     <div class="banner">
         <div class="youtube-inset">
             <iframe 
-                src="https://www.youtube.com/embed/B4-L2nfGcuE?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1"
-                allow="autoplay; encrypted-media"
-                allowfullscreen>
-            </iframe>
+    src="https://www.youtube.com/embed/B4-L2nfGcuE?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&vq=hd720&fs=0&cc_load_policy=0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+</iframe>
         </div>
     </div>
 
