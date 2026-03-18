@@ -417,8 +417,8 @@ html = """
 }
 
 .youtube-inset {
-    position: relative;
-    top: -15px;
+    position: absolute;
+    top: -205px;
     right: 90px;
     width: 500px;
     height: 500px;
