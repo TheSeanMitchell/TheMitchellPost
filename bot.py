@@ -212,12 +212,9 @@ CULTURE_SOURCES = [
     ("Elle India", "https://news.google.com/rss/search?q=elle+india+news+fashion+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("GQ India", "https://news.google.com/rss/search?q=gq+india+news+fashion+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("Playboy", "https://news.google.com/rss/search?q=playboy+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
-    ("Hustler", "https://news.google.com/rss/search?q=hustler+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
-    ("Penthouse", "https://news.google.com/rss/search?q=penthouse+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("XBIZ", "https://news.google.com/rss/search?q=xbiz+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("AVN Magazine", "https://news.google.com/rss/search?q=avn+magazine+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("Adult Video News", "https://news.google.com/rss/search?q=adult+video+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
-    ("MyFreeCams Blog", "https://news.google.com/rss/search?q=myfreecams+blog+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("OnlyFans Blog", "https://news.google.com/rss/search?q=onlyfans+blog+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("Fancenters", "https://news.google.com/rss/search?q=fancenters+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("Pornhub News", "https://news.google.com/rss/search?q=pornhub+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
@@ -246,7 +243,6 @@ CULTURE_SOURCES = [
     ("Arte Magazine", "https://news.google.com/rss/search?q=arte+magazine+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("The Art Newspaper", "https://news.google.com/rss/search?q=the+art+newspaper+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("Juxtapositions", "https://news.google.com/rss/search?q=juxtapositions+when:1d&hl=en-US&gl=US&ceid=US:en"),
-    ("Artsy", "https://news.google.com/rss/search?q=artsy+when:1d&hl=en-US&gl=US&ceid=US:en"),
     ("Hyperallergic", "https://news.google.com/rss/search?q=hyperallergic+when:1d&hl=en-US&gl=US&ceid=US:en"),
 ]
 
