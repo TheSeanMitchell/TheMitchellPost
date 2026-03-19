@@ -454,7 +454,7 @@ html = """
 </style>
 </head>
 <body>
-                                                    <!-- EIGHT YouTube feeds — two perfect rows of four (desktop only) -->
+                                                        <!-- EIGHT YouTube feeds — two perfect rows of four (desktop only) -->
     <div class="banner" style="height: 340px; position: relative;">
 
         <!-- TOP ROW — moved down a tiny bit for full top audio access -->
@@ -494,7 +494,7 @@ html = """
         </div>
     </div>
 
-    <div class="header">
+    <div class="header" style="margin-top: 45px;">
         <h1>The Mitchell Post</h1>
         <span class="byline">By Sean Mitchell</span>
         <span class="update">updated at """ + (datetime.utcnow() - timedelta(hours=7)).strftime("%I:%M:%S %p PDT") + """</span>
@@ -504,33 +504,6 @@ html = """
     <div class="container" style="margin-top: 10px;">
         <div class="column">
             <h2 class="section-title">Breaking US News</h2>
-"""
-
-if us_breaking:
-    for ts, title, source, link in us_breaking:
-        friendly = get_friendly_source(source)
-        highlighted = title[0].upper() + title[1:] if title else title
-        html += f'<div class="headline"><span class="title">{highlighted}</span> <span style="color:#666666;"> - {friendly}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
-else:
-    html += '<p>No breaking US news in the last 6 hours.</p>\n'
-
-html += """
-        </div>
-        <div class="column">
-            <h2 class="section-title">Today's US Headlines</h2>
-"""
-
-if us_recent:
-    for ts, title, source, link in us_recent:
-        friendly = get_friendly_source(source)
-        highlighted = title[0].upper() + title[1:] if title else title
-        html += f'<div class="headline"><span class="title">{highlighted}</span> <span style="color:#666666;"> - {friendly}</span> <a class="link" href="{link}" target="_blank">[Full Article]</a></div>\n'
-else:
-    html += '<p>No additional US headlines right now.</p>\n'
-
-html += """
-        </div>
-    </div>
     
     <hr class="top-divider">
 
