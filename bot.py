@@ -664,7 +664,7 @@ html += """
         </div>
     </div>
 
-    <!-- === ONLY ONE YOUTUBE VIDEO WITH AUDIO AT A TIME === -->
+        <!-- === ONLY ONE YOUTUBE VIDEO WITH AUDIO AT A TIME (reliable version) === -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
     let players = [];
@@ -687,31 +687,26 @@ html += """
 
     function onPlayerStateChange(event) {
         if (event.data === YT.PlayerState.PLAYING) {
-            event.target.getVolume();
+            // Start checking mute state on this video
+            checkMuteState(event.target);
         }
     }
 
-    window.addEventListener('message', function(event) {
-        if (event.origin !== 'https://www.youtube.com' && event.origin !== 'https://youtube.com') return;
-
-        try {
-            const data = JSON.parse(event.data);
-            if (!data) return;
-
-            if (data.event === 'infoDelivery' && data.info && typeof data.info.volume !== 'undefined') {
-                const sendingWindow = event.source;
-                const isMuted = data.info.muted || data.info.volume === 0;
-
-                if (!isMuted) {
-                    players.forEach(function(player) {
-                        if (player.getIframe().contentWindow !== sendingWindow) {
-                            player.mute();
-                        }
-                    });
-                }
+    function checkMuteState(activePlayer) {
+        const interval = setInterval(() => {
+            const isMuted = activePlayer.isMuted();
+            if (!isMuted) {
+                // This video now has sound → mute every other video
+                players.forEach(function(player) {
+                    if (player !== activePlayer) {
+                        player.mute();
+                    }
+                });
+                // Stop checking once we acted (prevents unnecessary polling)
+                clearInterval(interval);
             }
-        } catch (err) {}
-    });
+        }, 500); // check every half second
+    }
     </script>
     <!-- === END AUTO-MUTE === -->
 
