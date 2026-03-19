@@ -439,7 +439,7 @@ html = """
     .top-divider { border: 0; height: 3px; background: #B30000; margin: 35px 0; }
     .headline { margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid #222222; }
     .title { color: #FFFFFF; }
-    .link { color: #2E2E2E; text-decoration: underline; font-size: 0.85em; margin-left: 10px; }
+    .link { color: #545454; text-decoration: underline; font-size: 0.85em; margin-left: 10px; }
     .link:hover { color: #FFFFFF; }
     .container { display: flex; flex-wrap: wrap; gap: 30px; max-width: 1400px; margin: 0 auto; }
     .column { flex: 1; min-width: 300px; }
