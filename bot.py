@@ -664,52 +664,53 @@ html += """
         </div>
     </div>
 
-        <!-- === ONLY ONE YOUTUBE VIDEO WITH AUDIO AT A TIME (reliable version) === -->
+                <!-- === ONLY ONE YOUTUBE VIDEO WITH AUDIO AT A TIME (FINAL RELIABLE VERSION) === -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
     let players = [];
 
     function onYouTubeIframeAPIReady() {
-        document.querySelectorAll('.youtube-inset iframe').forEach(function(iframe) {
-            const player = new YT.Player(iframe, {
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
+        // Small delay so all 8 iframes are fully loaded
+        setTimeout(() => {
+            document.querySelectorAll('.youtube-inset iframe').forEach(function(iframe) {
+                const player = new YT.Player(iframe, {
+                    events: {
+                        'onReady': onPlayerReady
+                    }
+                });
+                players.push(player);
             });
-            players.push(player);
-        });
+        }, 800);
     }
 
     function onPlayerReady(event) {
         event.target.mute();
     }
 
-    function onPlayerStateChange(event) {
-        if (event.data === YT.PlayerState.PLAYING) {
-            // Start checking mute state on this video
-            checkMuteState(event.target);
-        }
-    }
+    // This runs every 800ms and checks if ANY video is unmuted
+    setInterval(() => {
+        if (players.length === 0) return;
 
-    function checkMuteState(activePlayer) {
-        const interval = setInterval(() => {
-            const isMuted = activePlayer.isMuted();
-            if (!isMuted) {
-                // This video now has sound → mute every other video
-                players.forEach(function(player) {
-                    if (player !== activePlayer) {
-                        player.mute();
-                    }
-                });
-                // Stop checking once we acted (prevents unnecessary polling)
-                clearInterval(interval);
+        let hasUnmutedVideo = false;
+        let activePlayer = null;
+
+        players.forEach(player => {
+            if (!player.isMuted()) {
+                hasUnmutedVideo = true;
+                activePlayer = player;
             }
-        }, 500); // check every half second
-    }
+        });
+
+        if (hasUnmutedVideo) {
+            players.forEach(player => {
+                if (player !== activePlayer) {
+                    player.mute();
+                }
+            });
+        }
+    }, 800);
     </script>
     <!-- === END AUTO-MUTE === -->
-
 </body>
 </html>
 """
