@@ -413,6 +413,10 @@ def fetch_section(sources, keywords, blocklist):
                     feed = feedparser.parse(response.read().decode('utf-8', errors='ignore'))
                 if feed.bozo: break
                 for entry in feed.entries:
+                                    print(f"  {source_name} returned {len(feed.entries)} entries")
+                for entry in feed.entries:
+                    raw_title = entry.title.strip()
+                    print(f"    Title: {raw_title[:120]}...")
                     if source_count[source_name] >= 5:
                         break
                     raw_title = entry.title.strip()
