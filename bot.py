@@ -664,13 +664,13 @@ html += """
         </div>
     </div>
 
-                <!-- === ONLY ONE YOUTUBE VIDEO WITH AUDIO AT A TIME (FINAL RELIABLE VERSION) === -->
+                                <!-- === ONLY ONE YOUTUBE VIDEO WITH AUDIO AT A TIME (FINAL LIVE-STREAM SAFE VERSION) === -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
     let players = [];
 
     function onYouTubeIframeAPIReady() {
-        // Small delay so all 8 iframes are fully loaded
+        // Give the iframes time to fully load before creating players
         setTimeout(() => {
             document.querySelectorAll('.youtube-inset iframe').forEach(function(iframe) {
                 const player = new YT.Player(iframe, {
@@ -680,35 +680,38 @@ html += """
                 });
                 players.push(player);
             });
-        }, 800);
+        }, 1200);
     }
 
     function onPlayerReady(event) {
+        // Force mute on every video when the page first loads
         event.target.mute();
     }
 
-    // This runs every 800ms and checks if ANY video is unmuted
-    setInterval(() => {
-        if (players.length === 0) return;
+    // This is the key part that works on live streams
+    // Every time the user clicks anywhere on a player (to unmute), we mute all others
+    document.addEventListener('click', function(event) {
+        // Find if the click happened inside any of our youtube-inset containers
+        const clickedInset = event.target.closest('.youtube-inset');
+        if (!clickedInset) return;
 
-        let hasUnmutedVideo = false;
-        let activePlayer = null;
+        const clickedIframe = clickedInset.querySelector('iframe');
+        if (!clickedIframe) return;
 
-        players.forEach(player => {
-            if (!player.isMuted()) {
-                hasUnmutedVideo = true;
-                activePlayer = player;
-            }
+        // Find which player this iframe belongs to
+        const activePlayer = players.find(function(player) {
+            return player.getIframe() === clickedIframe;
         });
 
-        if (hasUnmutedVideo) {
-            players.forEach(player => {
+        if (activePlayer) {
+            // Mute every other player immediately
+            players.forEach(function(player) {
                 if (player !== activePlayer) {
                     player.mute();
                 }
             });
         }
-    }, 800);
+    });
     </script>
     <!-- === END AUTO-MUTE === -->
 </body>
