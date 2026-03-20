@@ -1460,6 +1460,13 @@ html_parts.append(f"""<!DOCTYPE html>
     .column {{ flex: 1; min-width: 300px; }}
     .section-wrap {{ padding: 0 0 10px 0; }}
 
+    /* ── Auto light mode on first visit (if system prefers light) ── */
+    @media (prefers-color-scheme: light) {{
+        body:not(.dark-forced):not(.light-mode) {{
+            background: #FFFFFF; color: #000000;
+        }}
+    }}
+
     /* ── Light mode toggle pill ── */
     .nav-spacer {{ flex: 1 1 auto; min-width: 8px; }}
     .mode-toggle {{
@@ -1510,6 +1517,19 @@ html_parts.append(f"""<!DOCTYPE html>
     body.light-mode .site-footer h1 {{ color: #000000; }}
     body.light-mode .site-footer .byline {{ color: #222222; }}
     body.light-mode .site-footer .update {{ color: #444444; }}
+    /* ── Per-section cluster tint colors ── */
+    #section-us      .cluster {{ border-left-color: #4a0000; background: #1a0505; }}
+    #section-mideast .cluster {{ border-left-color: #4a2000; background: #1a0d00; }}
+    #section-tech    .cluster {{ border-left-color: #002040; background: #060f1a; }}
+    #section-sports  .cluster {{ border-left-color: #002a18; background: #04120a; }}
+    #section-culture .cluster {{ border-left-color: #300030; background: #120512; }}
+    /* Light mode tints */
+    body.light-mode #section-us      .cluster {{ background: #fff5f5; border-left-color: #B30000; }}
+    body.light-mode #section-mideast .cluster {{ background: #fff8f0; border-left-color: #C05000; }}
+    body.light-mode #section-tech    .cluster {{ background: #f0f6ff; border-left-color: #005F9E; }}
+    body.light-mode #section-sports  .cluster {{ background: #f0fff6; border-left-color: #006B3C; }}
+    body.light-mode #section-culture .cluster {{ background: #fdf0ff; border-left-color: #6B006B; }}
+
     /* ── Site footer ── */
     .site-footer {{
         margin-top: 50px; padding: 30px 20px 40px 20px;
@@ -1663,6 +1683,20 @@ html_parts.append(f"""<!DOCTYPE html>
             background: #cccccc; color: #000000;
         }}
     }}
+    /* ── Drag-to-reorder sections ── */
+    .sections-wrapper {{ outline: none; }}
+    .section-wrap {{ cursor: default; transition: opacity 0.15s; }}
+    .section-wrap.dragging {{ opacity: 0.4; }}
+    .section-wrap.drag-over {{ outline: 2px dashed #555; outline-offset: -2px; }}
+    .drag-handle {{
+        display: inline-block; cursor: grab; opacity: 0.35;
+        font-size: 0.85em; margin-left: 10px; vertical-align: middle;
+        letter-spacing: -1px; user-select: none;
+    }}
+    .drag-handle:hover {{ opacity: 0.8; }}
+    .drag-handle:active {{ cursor: grabbing; }}
+    @media (max-width: 900px) {{ .drag-handle {{ display: none; }} }}
+
     /* ── Print stylesheet ── */
     @media print {{
         .sticky-nav, .banner, .breaking-banner, .search-bar-wrap,
@@ -1750,6 +1784,7 @@ def section_block(section_id, color_class, breaking_items, recent_items,
         f'<div class="section-title-row">'
         f'<h2 class="section-title {color_class}">{breaking_title}</h2>'
         f'<button class="section-collapse-btn" data-target="{section_id}-cols" aria-label="Collapse section" title="Collapse / expand">&#9660;</button>'
+        f'<span class="drag-handle" title="Drag to reorder">&#8942;&#8942;</span>'
         f'</div>\n'
         f'<div id="{section_id}-cols" class="section-columns">\n'
         f'{b_summary}'
@@ -1796,25 +1831,26 @@ html_parts.append('''<div class="search-bar-wrap">
 </div>
 ''')
 
-html_parts.append(section_block("section-us", "us-color",
-    us_breaking, us_recent, "Breaking US News", "Today&#39;s US Headlines"))
-html_parts.append('<hr class="top-divider">\n')
-html_parts.append(section_block("section-mideast", "mideast-color",
-    middle_breaking, middle_recent, "Middle East Breaking News", "Today&#39;s Middle East Headlines"))
-html_parts.append('<hr class="top-divider">\n')
-html_parts.append(section_block("section-tech", "tech-color",
-    tech_breaking, tech_recent, "Tech &amp; Life Breaking News", "Today&#39;s Tech &amp; Life Headlines"))
-html_parts.append('<hr class="top-divider">\n')
-html_parts.append(section_block("section-sports", "sports-color",
-    sports_breaking, sports_recent, "Sports Breaking News", "Today&#39;s Sports Headlines"))
-html_parts.append('<hr class="top-divider">\n')
-html_parts.append(section_block("section-culture", "culture-color",
-    culture_breaking, culture_recent, "Culture Breaking News", "Today&#39;s Culture Headlines"))
+# ── Build sections in user-preferred order (default order, JS reorders on page) ──
+SECTION_DATA = [
+    ("section-us",      "us-color",      us_breaking,      us_recent,      "Breaking US News",          "Today&#39;s US Headlines"),
+    ("section-mideast", "mideast-color", middle_breaking,  middle_recent,  "Middle East Breaking News", "Today&#39;s Middle East Headlines"),
+    ("section-tech",    "tech-color",    tech_breaking,    tech_recent,    "Tech &amp; Life Breaking News", "Today&#39;s Tech &amp; Life Headlines"),
+    ("section-sports",  "sports-color",  sports_breaking,  sports_recent,  "Sports Breaking News",      "Today&#39;s Sports Headlines"),
+    ("section-culture", "culture-color", culture_breaking, culture_recent, "Culture Breaking News",     "Today&#39;s Culture Headlines"),
+]
+html_parts.append('<div id="sections-wrapper">\n')
+for i, (sid, sc, bi, ri, bt, rt) in enumerate(SECTION_DATA):
+    html_parts.append(section_block(sid, sc, bi, ri, bt, rt))
+    if i < len(SECTION_DATA) - 1:
+        html_parts.append('<hr class="top-divider">\n')
+html_parts.append('</div>\n')
 
 html_parts.append("""
 <!-- ══ YOUTUBE AUTO-MUTE ══ -->
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
+// YT callback must be global
 let players = [];
 function onYouTubeIframeAPIReady() {
     setTimeout(() => {
@@ -1833,6 +1869,8 @@ function onYouTubeIframeAPIReady() {
         });
     }, 1200);
 }
+
+document.addEventListener('DOMContentLoaded', function() {
 
 // ══ READ-ARTICLE DIMMING ══
 // An article is dimmed only when the user actually clicks [Full Article] on it.
@@ -1999,34 +2037,126 @@ function onYouTubeIframeAPIReady() {
     }
 })();
 
-// Light mode toggle
+// Light mode toggle (auto detects system preference on first visit)
 (function() {
     var LKEY = 'mp_light_mode';
     var tog = document.getElementById('mode-toggle');
     var lbl = document.querySelector('#mode-toggle .mode-label');
     function applyMode(light) {
-        document.body.classList.toggle('light-mode', light);
+        document.body.classList.toggle('light-mode', !!light);
         if (lbl) lbl.textContent = light ? 'Dark' : 'Light';
     }
     var sv = null;
     try { sv = localStorage.getItem(LKEY); } catch(e) {}
-    applyMode(sv === '1');
+    if (sv === '1') {
+        applyMode(true);
+    } else if (sv === '0') {
+        applyMode(false);
+    } else {
+        var prefersLight = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
+        applyMode(prefersLight);
+    }
     if (tog) tog.addEventListener('click', function() {
         var on = document.body.classList.contains('light-mode');
         applyMode(!on);
         try { localStorage.setItem(LKEY, on ? '0' : '1'); } catch(e) {}
     });
 })();
+
+    });
+})();
+
+
+// ══ DRAG-TO-REORDER SECTIONS ══
+(function() {
+    var OKEY = 'mp_section_order';
+    var wrapper = document.getElementById('sections-wrapper');
+    if (!wrapper) return;
+
+    function getSections() {
+        return Array.from(wrapper.querySelectorAll(':scope > .section-wrap'));
+    }
+
+    function getDividers() {
+        return Array.from(wrapper.querySelectorAll(':scope > .top-divider'));
+    }
+
+    function saveOrder() {
+        var order = getSections().map(function(s) { return s.id; });
+        try { localStorage.setItem(OKEY, JSON.stringify(order)); } catch(e) {}
+    }
+
+    function restoreOrder() {
+        var saved = null;
+        try { saved = JSON.parse(localStorage.getItem(OKEY)); } catch(e) {}
+        if (!saved || !Array.isArray(saved) || saved.length === 0) return;
+        // Rebuild wrapper children in saved order, interspersing dividers
+        var sections = {};
+        getSections().forEach(function(s) { sections[s.id] = s; });
+        var divs = getDividers();
+        // Remove all children
+        while (wrapper.firstChild) wrapper.removeChild(wrapper.firstChild);
+        // Re-append in order
+        saved.forEach(function(id, i) {
+            var s = sections[id];
+            if (s) wrapper.appendChild(s);
+            if (i < saved.length - 1 && divs[i]) wrapper.appendChild(divs[i]);
+        });
+    }
+    restoreOrder();
+
+    var dragSrc = null;
+
+    function attachDrag(section) {
+        section.setAttribute('draggable', 'true');
+        section.addEventListener('dragstart', function(e) {
+            dragSrc = section;
+            setTimeout(function() { section.classList.add('dragging'); }, 0);
+            e.dataTransfer.effectAllowed = 'move';
+        });
+        section.addEventListener('dragend', function() {
+            section.classList.remove('dragging');
+            wrapper.querySelectorAll('.drag-over').forEach(function(el) {
+                el.classList.remove('drag-over');
+            });
+            saveOrder();
+        });
+        section.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            if (section !== dragSrc) section.classList.add('drag-over');
+            return false;
+        });
+        section.addEventListener('dragleave', function() {
+            section.classList.remove('drag-over');
+        });
+        section.addEventListener('drop', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            section.classList.remove('drag-over');
+            if (!dragSrc || dragSrc === section) return;
+            // Insert dragSrc before the drop target
+            wrapper.insertBefore(dragSrc, section);
+            saveOrder();
+            return false;
+        });
+    }
+
+    getSections().forEach(attachDrag);
+})();
+
+}); // end DOMContentLoaded
 </script>
 
-<footer class="site-footer">
+</body></html>
+""")
+
+html_parts.append(f'''<footer class="site-footer">
     <h1>The Mitchell Post</h1>
     <span class="byline">By Sean Mitchell</span>
     <span class="update">updated at {update_time}</span>
 </footer>
-
-</body></html>
-""")
+''')
 
 html = "".join(html_parts)
 
