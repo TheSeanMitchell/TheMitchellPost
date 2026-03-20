@@ -11,6 +11,8 @@ print("Starting bot...")
 CURRENT_DIR = os.getcwd()
 print(f"Saving files to current directory: {CURRENT_DIR}")
 INDEX_HTML = os.path.join(CURRENT_DIR, "index.html")
+
+HEADERS_FILE = os.path.join(CURRENT_DIR, '_headers')
 FEED_JSON  = os.path.join(CURRENT_DIR, "feed.json")
 
 # ====================== FRIENDLY SOURCE NAMES ======================
@@ -1280,7 +1282,6 @@ def source_summary(items):
     sources = set(get_friendly_source(it[2]) for it in items)
     return f'<p class="src-summary">{len(items)} headlines \u00b7 {len(sources)} sources</p>\n'
 
-
 # ====================== TOP STORIES STRIP ======================
 def build_top_stories(max_stories=5):
     """Pull the top multi-source clusters across all sections for the pinned strip."""
@@ -1481,64 +1482,6 @@ html_parts.append(f"""<!DOCTYPE html>
     .column {{ flex: 1; min-width: 300px; }}
     .section-wrap {{ padding: 0 0 10px 0; }}
 
-    /* ── Auto light mode on first visit (if system prefers light) ── */
-    @media (prefers-color-scheme: light) {{
-        body:not(.dark-forced):not(.light-mode) {{
-            background: #FFFFFF; color: #000000;
-        }}
-    }}
-
-    /* ── Light mode toggle pill ── */
-    .nav-spacer {{ flex: 1 1 auto; min-width: 8px; }}
-    .mode-toggle {{
-        display: flex; align-items: center; gap: 7px;
-        flex-shrink: 0; margin-left: 10px; cursor: pointer; user-select: none;
-        background: none; border: none; padding: 0; font-family: inherit;
-    }}
-    .mode-toggle .mode-label {{
-        font-size: 0.70em; color: #888888; font-weight: bold;
-        letter-spacing: 0.06em; text-transform: uppercase;
-    }}
-    .toggle-pill {{
-        width: 38px; height: 20px; border-radius: 10px;
-        background: #333333; border: 1px solid #555;
-        position: relative; transition: background 0.25s; flex-shrink: 0;
-    }}
-    .toggle-pill::after {{
-        content: ''; position: absolute; top: 2px; left: 2px;
-        width: 14px; height: 14px; border-radius: 50%;
-        background: #888888; transition: left 0.25s, background 0.25s;
-    }}
-    body.light-mode .toggle-pill {{ background: #dde0e4; border-color: #bbb; }}
-    body.light-mode .toggle-pill::after {{ left: 20px; background: #333; }}
-    body.light-mode .mode-toggle .mode-label {{ color: #555; }}
-    body.light-mode {{ background: #FFFFFF; color: #000000; }}
-    body.light-mode .sticky-nav {{ background: #F5F5F5; border-bottom-color: #B30000; }}
-    body.light-mode .sticky-nav .site-name {{ color: #000000; }}
-    body.light-mode .sticky-nav .site-name:hover {{ color: #222222; }}
-    body.light-mode .sticky-nav a {{ color: #111111; }}
-    body.light-mode .sticky-nav a:hover {{ color: #000000; }}
-    body.light-mode .breaking-banner {{ background: #B30000; color: #FFFFFF; }}
-    body.light-mode .breaking-banner .bb-label {{ background: #FFFFFF; color: #B30000; }}
-    body.light-mode .banner {{ background: #e6ecf5; }}
-    body.light-mode .title {{ color: #000000; }}
-    body.light-mode .ts-label {{ color: #444444; }}
-    body.light-mode .src-label {{ color: #333333; }}
-    body.light-mode .new-dot {{ color: #000000; }}
-    body.light-mode .src-summary {{ color: #444444; }}
-    body.light-mode .headline {{ border-bottom-color: #e4e4e4; }}
-    body.light-mode .headline.seen-item {{ opacity: 0.38; }}
-    body.light-mode .cluster {{ background: #F8F8F8; border-left-color: #ccc; border-bottom-color: #e4e4e4; }}
-    body.light-mode .cluster-badge {{ background: #e0e0e0; color: #000000; }}
-    body.light-mode .cluster-sources {{ color: #555555; }}
-    body.light-mode .cluster-item {{ border-bottom-color: #eee; }}
-    body.light-mode .link {{ color: #000000; }}
-    body.light-mode .link:hover {{ color: #000000; }}
-    body.light-mode .top-divider {{ background: #e4e4e4; }}
-    body.light-mode .site-footer {{ background: #F5F5F5; border-top-color: #e0e0e0; }}
-    body.light-mode .site-footer h1 {{ color: #000000; }}
-    body.light-mode .site-footer .byline {{ color: #222222; }}
-    body.light-mode .site-footer .update {{ color: #444444; }}
     /* ── Per-section cluster tint colors ── */
     #section-us      .cluster {{ border-left-color: #4a0000; background: #1a0505; }}
     #section-mideast .cluster {{ border-left-color: #4a2000; background: #1a0d00; }}
@@ -1546,11 +1489,6 @@ html_parts.append(f"""<!DOCTYPE html>
     #section-sports  .cluster {{ border-left-color: #002a18; background: #04120a; }}
     #section-culture .cluster {{ border-left-color: #300030; background: #120512; }}
     /* Light mode tints */
-    body.light-mode #section-us      .cluster {{ background: #fff5f5; border-left-color: #B30000; }}
-    body.light-mode #section-mideast .cluster {{ background: #fff8f0; border-left-color: #C05000; }}
-    body.light-mode #section-tech    .cluster {{ background: #f0f6ff; border-left-color: #005F9E; }}
-    body.light-mode #section-sports  .cluster {{ background: #f0fff6; border-left-color: #006B3C; }}
-    body.light-mode #section-culture .cluster {{ background: #fdf0ff; border-left-color: #6B006B; }}
 
     /* ── Site footer ── */
     .site-footer {{
@@ -1561,54 +1499,6 @@ html_parts.append(f"""<!DOCTYPE html>
     .site-footer h1 {{ font-size: 1.8em; text-decoration: underline; color: #FFFFFF; margin-bottom: 6px; }}
     .site-footer .byline {{ font-size: 0.95em; color: #888; display: block; margin-bottom: 4px; }}
     .site-footer .update {{ font-size: 0.8em; color: #555; display: block; }}
-
-    /* ── Search + AI bar ── */
-    .search-bar-wrap {{
-        max-width: 1400px; margin: 0 auto 20px auto; padding: 0 20px;
-    }}
-    .search-bar-inner {{
-        display: flex; gap: 0; background: #1a1a1a;
-        border: 1px solid #333; border-radius: 6px; overflow: hidden;
-    }}
-    .search-bar-inner input {{
-        flex: 1; background: transparent; border: none; outline: none;
-        color: #FFFFFF; font-size: 0.95em; padding: 10px 14px;
-        font-family: Arial, sans-serif;
-    }}
-    .search-bar-inner input::placeholder {{ color: #666; }}
-    .search-bar-btn {{
-        background: #1e1e1e; border: none; border-left: 1px solid #333;
-        color: #aaaaaa; font-size: 0.78em; font-weight: bold;
-        letter-spacing: 0.05em; text-transform: uppercase;
-        padding: 0 14px; cursor: pointer; transition: background 0.15s, color 0.15s;
-        white-space: nowrap;
-    }}
-    .search-bar-btn:hover {{ background: #2a2a2a; color: #FFFFFF; }}
-    .search-bar-btn.ai-btn {{ border-left-color: #333; color: #7aadff; }}
-    .search-bar-btn.ai-btn:hover {{ background: #162030; color: #FFFFFF; }}
-    /* AI response panel */
-    .ai-response-panel {{
-        display: none; margin-top: 8px; background: #161c26;
-        border: 1px solid #1e3050; border-radius: 6px;
-        padding: 14px 16px; font-size: 0.92em; line-height: 1.65;
-        color: #d0d8e8; max-height: 400px; overflow-y: auto;
-    }}
-    .ai-response-panel.active {{ display: block; }}
-    .ai-response-panel .ai-thinking {{
-        color: #7aadff; font-style: italic; animation: blink 1s step-end infinite;
-    }}
-    @keyframes blink {{ 50% {{ opacity: 0; }} }}
-    /* Light mode search */
-    body.light-mode .search-bar-inner {{
-        background: #FFFFFF; border-color: #cccccc;
-    }}
-    body.light-mode .search-bar-inner input {{ color: #000000; }}
-    body.light-mode .search-bar-inner input::placeholder {{ color: #aaaaaa; }}
-    body.light-mode .search-bar-btn {{ background: #F0F0F0; color: #333333; border-left-color: #cccccc; }}
-    body.light-mode .search-bar-btn:hover {{ background: #E0E0E0; color: #000000; }}
-    body.light-mode .search-bar-btn.ai-btn {{ color: #0055aa; }}
-    body.light-mode .search-bar-btn.ai-btn:hover {{ background: #e6eef8; color: #000000; }}
-    body.light-mode .ai-response-panel {{ background: #f0f4ff; border-color: #b0c4e8; color: #111111; }}
 
     /* ── Top Stories strip ── */
     .top-stories-strip {{
@@ -1634,12 +1524,6 @@ html_parts.append(f"""<!DOCTYPE html>
     .top-story-card .ts-headline {{ color: #FFFFFF; font-size: 0.95em; }}
     .top-story-card .ts-link {{ color: #545454; text-decoration: underline; font-size: 0.8em; margin-left: 6px; }}
     .top-story-card .ts-link:hover {{ color: #FFFFFF; }}
-    body.light-mode .top-stories-title {{ color: #555555; border-bottom-color: #e0e0e0; }}
-    body.light-mode .top-story-card {{ background: #F4F4F4; border-left-color: #B30000; }}
-    body.light-mode .top-story-card .ts-badge {{ background: #e0e0e0; color: #222222; }}
-    body.light-mode .top-story-card .ts-headline {{ color: #000000; }}
-    body.light-mode .top-story-card .ts-link {{ color: #777777; }}
-    body.light-mode .top-story-card .ts-link:hover {{ color: #000000; }}
 
     /* ── Section collapse ── */
     .section-collapse-btn {{
@@ -1698,10 +1582,8 @@ html_parts.append(f"""<!DOCTYPE html>
         .cluster {{ padding: 8px 10px 4px 10px; }}
         .cluster-badge {{ font-size: 0.78em; }}
         /* Light mode Full Article button on mobile */
-        body.light-mode .link {{
             background: #eeeeee; border-color: #999999; color: #000000;
         }}
-        body.light-mode .link:hover, body.light-mode .link:active {{
             background: #cccccc; color: #000000;
         }}
     }}
@@ -1721,7 +1603,7 @@ html_parts.append(f"""<!DOCTYPE html>
 
     /* ── Print stylesheet ── */
     @media print {{
-        .sticky-nav, .banner, .breaking-banner, .search-bar-wrap,
+        .sticky-nav, .banner, .breaking-banner,
         .top-stories-strip, .section-collapse-btn, .link,
         .site-footer .update, script {{ display: none !important; }}
         body {{ background: #FFFFFF !important; color: #000000 !important;
@@ -1753,11 +1635,6 @@ html_parts.append(f"""<!DOCTYPE html>
     <a href="#section-tech"    class="nav-tech">Tech &amp; Life</a>
     <a href="#section-sports"  class="nav-sports">Sports</a>
     <a href="#section-culture" class="nav-culture">Culture</a>
-    <span class="nav-spacer"></span>
-    <button class="mode-toggle" id="mode-toggle" title="Toggle light / dark mode" type="button">
-        <span class="mode-label" id="mode-label">Light</span>
-        <span class="toggle-pill"></span>
-    </button>
 </nav>
 
 """)
@@ -1785,14 +1662,14 @@ html_parts.append(f"""
 <!-- ══ VIDEO BANNER — desktop only, hidden on mobile via CSS ══ -->
 <div class="banner">
     <div class="video-grid">
-        <div class="youtube-inset"><iframe src="https://www.youtube.com/embed/TBlxk1kH9dM?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-        <div class="youtube-inset"><iframe src="https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-        <div class="youtube-inset"><iframe src="https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-        <div class="youtube-inset"><iframe src="https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-        <div class="youtube-inset"><iframe src="https://www.youtube.com/embed/b_ERc4vcRHI?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-        <div class="youtube-inset"><iframe src="https://www.youtube.com/embed/nya02XlHG1Q?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-        <div class="youtube-inset"><iframe src="https://www.youtube.com/embed/_6dRRfnYJws?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-        <div class="youtube-inset"><iframe src="https://www.youtube.com/embed/pykpO5kQJ98?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/TBlxk1kH9dM?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/b_ERc4vcRHI?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/nya02XlHG1Q?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/_6dRRfnYJws?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/pykpO5kQJ98?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
     </div>
 </div>
 
@@ -1848,17 +1725,6 @@ if top_stories:
     ts_html += '</div>\n'
     html_parts.append(ts_html)
 
-# ── Search + AI bar HTML ──
-html_parts.append('''<div class="search-bar-wrap">
-    <div class="search-bar-inner">
-        <input type="text" id="mp-search-input" placeholder="Search news (Enter) or ask AI (Ctrl+Enter / AI button)..." autocomplete="off" />
-        <button class="search-bar-btn" id="search-btn" title="Search Brave News">&#x1F50E; News</button>
-        <button class="search-bar-btn ai-btn" id="ai-btn" title="Ask AI — fact-check, summarize, explain">&#x2728; Ask AI</button>
-    </div>
-    <div class="ai-response-panel" id="ai-panel"></div>
-</div>
-''')
-
 # ── Build sections in user-preferred order (default order, JS reorders on page) ──
 SECTION_DATA = [
     ("section-us",      "us-color",      us_breaking,      us_recent,      "Breaking US News",          "Today&#39;s US Headlines"),
@@ -1876,13 +1742,28 @@ html_parts.append('</div>\n')
 
 html_parts.append("""
 <!-- ══ YOUTUBE AUTO-MUTE ══ -->
-<script src="https://www.youtube.com/iframe_api"></script>
-<script src="https://www.youtube.com/iframe_api"></script>
-<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-// ── YT auto-mute (must be global for YT API callback) ──
+// ── YT loader: desktop only, mobile gets zero YouTube requests ──
 var players = [];
+var IS_MOBILE = window.innerWidth <= 900;
+
+// Load YT API only on desktop — zero network cost on mobile
+if (!IS_MOBILE) {
+    var ytScript = document.createElement('script');
+    ytScript.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(ytScript);
+}
+
+if (!IS_MOBILE) {
+    // Activate iframes by moving data-src -> src
+    document.querySelectorAll('.youtube-inset iframe[data-src]').forEach(function(iframe) {
+        iframe.src = iframe.getAttribute('data-src');
+        iframe.removeAttribute('data-src');
+    });
+}
+
 function onYouTubeIframeAPIReady() {
+    if (IS_MOBILE) return;
     setTimeout(function() {
         document.querySelectorAll('.youtube-inset iframe').forEach(function(iframe) {
             var p = new YT.Player(iframe, {
@@ -1980,64 +1861,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 })();
 
-// ── SEARCH BAR ──
-(function() {
-    var input   = document.getElementById('mp-search-input');
-    var srchBtn = document.getElementById('search-btn');
-    var aiBtn   = document.getElementById('ai-btn');
-    var panel   = document.getElementById('ai-panel');
-
-    function openSearch() {
-        var q = (input ? input.value : '').trim();
-        if (!q) return;
-        // Use anchor click trick — never blocked by popup blockers
-        var a = document.createElement('a');
-        a.href = 'https://search.brave.com/news?q=' + encodeURIComponent(q);
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    }
-
-    function openAI() {
-        var q = (input ? input.value : '').trim();
-        if (!q) return;
-        if (!panel) return;
-        panel.className = 'ai-response-panel active';
-        panel.innerHTML = '<span class="ai-thinking">Thinking\u2026</span>';
-        fetch('https://api.anthropic.com/v1/messages', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                model: 'claude-sonnet-4-6',
-                max_tokens: 1000,
-                system: 'You are a news analysis assistant inside The Mitchell Post, a news aggregator. Be concise (under 250 words), factual, focused on news context and fact-checking. Plain text only, no markdown headers.',
-                messages: [{ role: 'user', content: q }]
-            })
-        })
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
-            var text = '';
-            if (data.content) { data.content.forEach(function(b) { if (b.type === 'text') text += b.text; }); }
-            else if (data.error) { text = 'Error: ' + data.error.message; }
-            if (panel) panel.innerHTML = text.replace(/\n/g, '<br>');
-        })
-        .catch(function() { if (panel) panel.innerHTML = 'Could not reach AI. Check your connection.'; });
-    }
-
-    if (srchBtn) srchBtn.addEventListener('click', function(e) { e.preventDefault(); openSearch(); });
-    if (aiBtn)   aiBtn.addEventListener('click',   function(e) { e.preventDefault(); openAI(); });
-    if (input) {
-        input.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                if (e.ctrlKey || e.metaKey) { openAI(); } else { openSearch(); }
-            }
-        });
-    }
-})();
-
 // ── DRAG-TO-REORDER SECTIONS ──
 (function() {
     var OKEY    = 'mp_section_order';
@@ -2071,23 +1894,6 @@ document.addEventListener('DOMContentLoaded', function() {
         section.addEventListener('drop',      function(e) { e.stopPropagation(); e.preventDefault(); section.classList.remove('drag-over'); if (!dragSrc || dragSrc === section) return; wrapper.insertBefore(dragSrc, section); saveOrder(); return false; });
     }
     getSections().forEach(attachDrag);
-})();
-
-// ── LIGHT / DARK MODE TOGGLE ──
-// Simple toggle, defaults to dark, no localStorage
-(function() {
-    var btn = document.getElementById('mode-toggle');
-    var lbl = btn ? btn.querySelector('.mode-label') : null;
-    // Default is dark mode — body has no light-mode class
-    // Button label shows what you'd switch TO
-    if (lbl) lbl.textContent = 'Light';
-    if (btn) {
-        btn.addEventListener('click', function() {
-            var isLight = document.body.classList.contains('light-mode');
-            document.body.classList.toggle('light-mode', !isLight);
-            if (lbl) lbl.textContent = isLight ? 'Light' : 'Dark';
-        });
-    }
 })();
 
 }); // end DOMContentLoaded
@@ -2146,6 +1952,19 @@ try:
     print(f"SUCCESS: feed.json saved ({len(feed_items)} items)")
 except Exception as e:
     print(f"WARNING: feed.json not saved: {str(e)}")
+
+# ── Write _headers for GitHub Pages caching ──
+try:
+    headers_content = """/*
+  Cache-Control: public, max-age=300, stale-while-revalidate=60
+/feed.json
+  Cache-Control: public, max-age=300
+"""
+    with open(HEADERS_FILE, "w") as hf:
+        hf.write(headers_content)
+    print("SUCCESS: _headers written")
+except Exception as e:
+    print(f"WARNING: _headers not written: {str(e)}")
 
 print("\nScript finished.")
 print("Files saved to current directory.")
