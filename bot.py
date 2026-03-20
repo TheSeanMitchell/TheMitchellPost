@@ -3,6 +3,7 @@ import time
 import calendar
 import os
 import re
+import hashlib
 import urllib.request
 from datetime import datetime, timedelta
 from collections import defaultdict
@@ -633,30 +634,21 @@ RAW_CULTURE_KEYWORDS = [
     "hbo celebrity shows","awards shows fashion highlights","celebrity makeup looks",
     "celebrity hair trends","fashion brand collaborations","influencer brand collaborations",
     "digital fashion campaigns","instagram fashion tips","tiktok fashion challenges",
-    "viral fashion content","viral entertainment content","xbiz news","avn awards",
-    "onlyfans news","adult entertainment industry","glamour photography",
+    "viral fashion content","viral entertainment content",
     "editorial photography","high end fashion shoots","luxury brand collaborations",
     "designer campaigns","fashion advertising","celebrity endorsements","product collaborations",
     "influencer marketing fashion","influencer partnerships","beauty collaborations",
     "makeup influencer trends","skincare influencer trends","sports illustrated swimsuit",
     "si swimsuit","miss universe","miss america","miss world","pageant news",
-    "miami swim week 2026","bikini runway 2026","bikini flavors resort 2026",
-    "slay swimwear 2026","papi swim 2026","bikini beach spring summer 2026",
-    "naked summer miami","sophie rain bikini","kylie jenner golden bikini 2026",
-    "alix earle pearl bikini 2026","sports illustrated swimsuit issue 2026",
-    "playboy playmates 2026","onlyfans top creators 2026","kpop demon hunters",
+    "kpop demon hunters",
     "teyana taylor red carpet 2026","2016 fashion revival 2026",
     "librarian chic fashion 2026","faux fur trend 2026","bomber jacket comeback 2026",
-    "skinny jeans 2026","knee high boots revival 2026","triangl bikinis 2026",
+    "skinny jeans 2026","knee high boots revival 2026",
     "kylie jenner lip kits revival","laufey style 2026","iris law outfits 2026",
     "pinkpantheress fashion 2026","alex consani modeling 2026","lily rose depp looks 2026",
     "gen z celeb outfits 2026","synthetic celebrities ai idols 2026",
     "immersive entertainment trends 2026","k pop comebacks 2026","blackpink tour fashion",
-    "bts solo style","newjeans runway looks","playboy centerfold 2026",
-    "glamour nude shoots 2026","high end lingerie fashion shows",
-    "swimwear catalog models 2026","fitness bikini competitors 2026",
-    "miss universe bikini round 2026","pageant modeling tips",
-    "influencer bikini try on hauls","tiktok swimsuit challenges",
+    "bts solo style","newjeans runway looks",
     "instagram modeling reels 2026","youtube fashion vlogs",
     "paris fashion week haute couture 2026","milan fashion week runway 2026",
     "new york fashion week street style","london fashion week editorials",
@@ -1234,17 +1226,19 @@ def render_column(items):
             is_hot = (now - ts) <= THIRTY_MIN
             # data-link used by JS for "seen" tracking; data-ts for breaking-news banner
             hot_dot = '<span class="new-dot" title="Published in the last 30 minutes">&#9679;</span> ' if is_hot else ''
+            safe_dtitle = display_title.replace('"', '&quot;')
             out += (
-                f'<div class="headline" data-link="{link}" data-ts="{int(ts)}">'
+                f'<div class="headline" data-link="{link}" data-ts="{int(ts)}" data-title="{safe_dtitle}" data-src="{friendly}">'
                 f'{hot_dot}'
                 f'<span class="title">{display_title}</span>'
                 f' <span class="ts-label">{time_str}</span>'
                 f' <span class="src-label">\u2014 {friendly}</span>'
                 f' <a class="link" href="{link}" target="_blank">[Full Article]</a>'
+                f'<button class="save-later-btn" data-link="{link}" data-title="{safe_dtitle}" data-src="{friendly}" title="Save for later">&#128278;</button>'
                 f'</div>\n'
             )
         else:
-            # Multi-source cluster: grouped story card
+            # Multi-source cluster: grouped story card with collapsible sub-items
             cluster.sort(key=lambda x: x[0], reverse=True)
             lead_ts, lead_title, lead_source, lead_link = cluster[0]
             display_title = lead_title[0].upper() + lead_title[1:] if lead_title else lead_title
@@ -1254,13 +1248,24 @@ def render_column(items):
             sources_list = [get_friendly_source(it[2]) for it in cluster]
             n_sources = len(sources_list)
             sources_str = ", ".join(sources_list)
+            safe_lead_title = display_title.replace('"', '&quot;')
+            lead_friendly = get_friendly_source(lead_source)
             out += (
                 f'<div class="cluster" data-ts="{int(lead_ts)}">'
                 f'<div class="cluster-header">'
                 f'{hot_dot}'
                 f'<span class="cluster-badge">{n_sources} sources</span>'
-                f'<span class="cluster-sources">{sources_str}</span>'
+                f'<button class="cluster-toggle-btn" data-target="{cluster_id}" aria-label="Expand story coverage" title="Show/hide all coverage">&#9654; Show all coverage</button>'
                 f'</div>\n'
+                f'<div class="cluster-lead">'
+                f'<span class="title">{display_title}</span>'
+                f' <span class="ts-label">{time_str}</span>'
+                f' <span class="src-label">\u2014 {lead_friendly}</span>'
+                f' <a class="link" href="{lead_link}" target="_blank">[Full Article]</a>'
+                f'<button class="save-later-btn" data-link="{lead_link}" data-title="{safe_lead_title}" data-src="{lead_friendly}" title="Save for later">&#128278;</button>'
+                f'</div>\n'
+                f'<div id="{cluster_id}" class="cluster-items-wrap collapsed">\n'
+                f'<div class="cluster-sources-line">{sources_str}</div>\n'
             )
             for ts, title, source, link in cluster:
                 friendly = get_friendly_source(source)
@@ -1274,7 +1279,8 @@ def render_column(items):
                     f' <a class="link" href="{link}" target="_blank">[Full Article]</a>'
                     f'</div>\n'
                 )
-            out += '</div>\n'
+            out += '</div>\n'  # close cluster-items-wrap
+            out += '</div>\n'  # close cluster
     return out
 
 # ====================== SOURCE COUNT SUMMARY ======================
@@ -1303,6 +1309,41 @@ def build_top_stories(max_stories=5):
     return top[:max_stories]
 
 top_stories = build_top_stories()
+
+# ====================== TRENDING TOPICS ======================
+def build_trending_topics(max_topics=10):
+    """Count keyword frequency across all sections to surface trending topics."""
+    all_items = (
+        us_breaking + us_recent +
+        middle_breaking + middle_recent +
+        tech_breaking + tech_recent +
+        sports_breaking + sports_recent +
+        culture_breaking + culture_recent
+    )
+    word_counts = defaultdict(int)
+    skip = {
+        "a","an","the","and","or","but","in","on","at","to","for","of","with",
+        "by","from","as","is","was","are","were","be","been","have","has","had",
+        "do","does","did","will","would","could","should","may","might","its",
+        "it","this","that","these","those","says","said","after","over","into",
+        "about","up","out","than","then","new","just","more","also","amid",
+        "report","reports","under","after","amid","amid","amid","amid","amid",
+        "how","why","what","who","when","where","amid","amid","now","amid",
+        "amid","amid","amid","amid","amid","amid","amid","amid","amid","amid",
+        "not","his","her","their","our","your","its","him","them","us","we",
+        "he","she","they","amid","amid","amid","amid","amid","amid","amid",
+    }
+    for ts, title, source, link in all_items:
+        words = re.findall(r'[a-zA-Z]{4,}', title.lower())
+        for w in words:
+            if w not in skip:
+                word_counts[w] += 1
+    # Only keep words that appear in 3+ headlines
+    trending = [(count, word) for word, count in word_counts.items() if count >= 3]
+    trending.sort(reverse=True)
+    return trending[:max_topics]
+
+trending_topics = build_trending_topics()
 
 # ====================== BUILD HTML ======================
 # Collect all timestamps across ALL items for the breaking-news banner check
@@ -1339,6 +1380,7 @@ html_parts.append(f"""<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Mitchell Post</title>
+    <link rel="alternate" type="application/rss+xml" title="The Mitchell Post RSS Feed" href="feed.xml">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -1739,6 +1781,180 @@ html_parts.append(f"""<!DOCTYPE html>
         .section-columns.collapsed {{ display: block !important; }}
     }}
 
+    /* ── Cluster collapsible toggle ── */
+    .cluster-lead {{ margin-bottom: 6px; }}
+    .cluster-items-wrap {{ transition: none; }}
+    .cluster-items-wrap.collapsed {{ display: none; }}
+    .cluster-toggle-btn {{
+        background: none; border: 1px solid #444; border-radius: 10px;
+        color: #888; font-size: 0.7em; padding: 2px 8px; cursor: pointer;
+        letter-spacing: 0.03em; transition: color 0.15s, border-color 0.15s;
+        margin-left: 4px; flex-shrink: 0;
+    }}
+    .cluster-toggle-btn:hover {{ color: #fff; border-color: #888; }}
+    .cluster-toggle-btn.open {{ color: #ccc; border-color: #666; }}
+    .cluster-sources-line {{
+        color: #555; font-size: 0.73em; margin-bottom: 6px;
+        padding-bottom: 4px; border-bottom: 1px solid #252525;
+    }}
+    body.light-mode .cluster-toggle-btn {{ color: #555; border-color: #aaa; }}
+    body.light-mode .cluster-toggle-btn:hover {{ color: #000; border-color: #555; }}
+    body.light-mode .cluster-sources-line {{ color: #777; border-bottom-color: #ddd; }}
+
+    /* ── Breaking banner upgrade ── */
+    .bb-close {{
+        background: none; border: none; color: rgba(255,255,255,0.6);
+        font-size: 0.85em; cursor: pointer; padding: 0 4px; flex-shrink: 0;
+        transition: color 0.15s;
+    }}
+    .bb-close:hover {{ color: #fff; }}
+
+    /* ── Updated-ago in nav ── */
+    .nav-updated-ago {{
+        font-size: 0.65em; color: #666; margin-right: 10px;
+        white-space: nowrap; flex-shrink: 0; letter-spacing: 0.02em;
+    }}
+    body.light-mode .nav-updated-ago {{ color: #999; }}
+
+    /* ── Top Stories 3-column layout ── */
+    .top-stories-3col {{
+        display: flex; gap: 0; align-items: stretch;
+    }}
+    .ts-col {{ flex: 1; min-width: 0; padding: 0 20px 0 0; }}
+    .ts-divider-left {{ border-left: 1px solid #2a2a2a; padding-left: 20px; padding-right: 0; }}
+    body.light-mode .ts-divider-left {{ border-left-color: #ddd; }}
+    @media (max-width: 900px) {{
+        .top-stories-3col {{ flex-direction: column; }}
+        .ts-divider-left {{ border-left: none; border-top: 1px solid #2a2a2a; padding-left: 0; padding-top: 14px; margin-top: 14px; }}
+        body.light-mode .ts-divider-left {{ border-top-color: #ddd; }}
+    }}
+
+    /* ── Daily Briefing card accent ── */
+    .db-card {{ border-left-color: #005F9E !important; }}
+
+    /* ── Trending Topics ── */
+    .trend-tags-wrap {{ display: flex; flex-wrap: wrap; gap: 8px; padding-top: 4px; }}
+    .trend-tag {{
+        display: inline-flex; align-items: center; gap: 6px;
+        border: 1px solid #444; border-radius: 20px;
+        padding: 4px 12px; text-decoration: none;
+        transition: background 0.15s, border-color 0.15s;
+        background: #1a1a1a;
+    }}
+    .trend-tag:hover {{ background: #252525; }}
+    .trend-word {{ color: #ddd; font-size: 0.82em; font-weight: bold; letter-spacing: 0.02em; }}
+    .trend-count {{
+        background: #333; color: #999; font-size: 0.68em;
+        padding: 1px 6px; border-radius: 8px; font-weight: bold;
+    }}
+    body.light-mode .trend-tag {{ background: #f0f0f0; border-color: #ccc; }}
+    body.light-mode .trend-tag:hover {{ background: #e4e4e4; }}
+    body.light-mode .trend-word {{ color: #222; }}
+    body.light-mode .trend-count {{ background: #ddd; color: #444; }}
+
+    /* ── Search bar on-page results ── */
+    .headline.search-hidden, .cluster.search-hidden {{ display: none !important; }}
+    .headline.search-match {{ outline: 1px solid #B30000; }}
+
+    /* ── Read Later panel ── */
+    #read-later-panel {{
+        position: fixed; top: 48px; right: 0; bottom: 0;
+        width: 340px; background: #0d0d0d; border-left: 2px solid #B30000;
+        z-index: 900; display: flex; flex-direction: column;
+        transform: translateX(100%); transition: transform 0.25s ease;
+        box-shadow: -4px 0 20px rgba(0,0,0,0.5);
+    }}
+    #read-later-panel.open {{ transform: translateX(0); }}
+    body.light-mode #read-later-panel {{ background: #f5f5f5; border-left-color: #B30000; }}
+    .rl-header {{
+        padding: 12px 16px; border-bottom: 1px solid #222;
+        display: flex; align-items: center; justify-content: space-between;
+        flex-shrink: 0;
+    }}
+    .rl-header-title {{ font-size: 0.82em; font-weight: bold; letter-spacing: 0.08em; text-transform: uppercase; color: #888; }}
+    .rl-close-btn {{
+        background: none; border: none; color: #666; font-size: 1em;
+        cursor: pointer; padding: 2px 6px; border-radius: 3px;
+        transition: color 0.15s;
+    }}
+    .rl-close-btn:hover {{ color: #fff; }}
+    body.light-mode .rl-close-btn:hover {{ color: #000; }}
+    .rl-items {{ flex: 1; overflow-y: auto; padding: 10px 16px; }}
+    .rl-empty {{ color: #555; font-size: 0.85em; padding: 20px 0; text-align: center; }}
+    body.light-mode .rl-empty {{ color: #999; }}
+    .rl-item {{
+        padding: 10px 0; border-bottom: 1px solid #1e1e1e;
+        display: flex; flex-direction: column; gap: 4px;
+    }}
+    body.light-mode .rl-item {{ border-bottom-color: #ddd; }}
+    .rl-item-title {{ color: #ddd; font-size: 0.85em; line-height: 1.4; }}
+    body.light-mode .rl-item-title {{ color: #222; }}
+    .rl-item-meta {{ display: flex; align-items: center; gap: 8px; }}
+    .rl-item-src {{ color: #666; font-size: 0.73em; }}
+    .rl-item-read {{ color: #B30000; font-size: 0.73em; text-decoration: underline; }}
+    .rl-item-remove {{ background: none; border: none; color: #555; font-size: 0.7em; cursor: pointer; margin-left: auto; }}
+    .rl-item-remove:hover {{ color: #ff4444; }}
+    .rl-clear-btn {{
+        margin: 10px 16px; padding: 6px; background: none;
+        border: 1px solid #333; border-radius: 4px; color: #666;
+        font-size: 0.75em; cursor: pointer; text-align: center;
+        transition: border-color 0.15s, color 0.15s;
+    }}
+    .rl-clear-btn:hover {{ border-color: #B30000; color: #B30000; }}
+
+    /* ── Read Later trigger button (floating) ── */
+    #rl-fab {{
+        position: fixed; bottom: 24px; left: 16px; z-index: 950;
+        background: #1a1a1a; border: 1px solid #444; border-radius: 50px;
+        padding: 8px 14px; color: #ccc; font-size: 0.78em; font-weight: bold;
+        cursor: pointer; display: none; box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+        letter-spacing: 0.04em; transition: background 0.15s;
+    }}
+    #rl-fab.has-items {{ display: flex; align-items: center; gap: 6px; }}
+    #rl-fab .rl-fab-count {{
+        background: #B30000; color: #fff; border-radius: 50%;
+        width: 18px; height: 18px; font-size: 0.75em;
+        display: flex; align-items: center; justify-content: center;
+    }}
+    #rl-fab:hover {{ background: #252525; }}
+    body.light-mode #rl-fab {{ background: #eeeeee; border-color: #bbb; color: #222; box-shadow: 0 2px 12px rgba(0,0,0,0.2); }}
+
+    /* ── Save for Later button on headlines ── */
+    .save-later-btn {{
+        background: none; border: none; color: #444; font-size: 0.72em;
+        cursor: pointer; padding: 0 3px; margin-left: 4px;
+        transition: color 0.15s; vertical-align: middle; flex-shrink: 0;
+    }}
+    .save-later-btn:hover {{ color: #B30000; }}
+    .save-later-btn.saved {{ color: #B30000; }}
+    body.light-mode .save-later-btn {{ color: #bbb; }}
+    body.light-mode .save-later-btn:hover {{ color: #B30000; }}
+
+    /* ── Footer additions ── */
+    .site-footer .mission {{
+        font-size: 0.82em; color: #666; display: block;
+        margin-bottom: 8px; max-width: 600px; margin-left: auto; margin-right: auto;
+    }}
+    body.light-mode .site-footer .mission {{ color: #777; }}
+    .homepage-wrap {{ margin-top: 22px; }}
+    .set-homepage-btn {{
+        background: none; border: 1px solid #333; border-radius: 20px;
+        color: #666; font-size: 0.78em; padding: 6px 16px; cursor: pointer;
+        transition: border-color 0.15s, color 0.15s; letter-spacing: 0.03em;
+    }}
+    .set-homepage-btn:hover {{ border-color: #888; color: #ccc; }}
+    body.light-mode .set-homepage-btn {{ border-color: #ccc; color: #888; }}
+    body.light-mode .set-homepage-btn:hover {{ border-color: #888; color: #333; }}
+    .homepage-instructions {{
+        margin-top: 14px; padding: 14px 18px;
+        background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 6px;
+        font-size: 0.8em; color: #888; line-height: 1.9; text-align: left;
+        display: inline-block; max-width: 560px;
+    }}
+    body.light-mode .homepage-instructions {{ background: #f0f0f0; border-color: #ddd; color: #555; }}
+    .homepage-instructions code {{ color: #B30000; font-size: 0.9em; }}
+    .hp-browser {{ display: block; }}
+
     </style>
 </head>
 <body>
@@ -1752,6 +1968,7 @@ html_parts.append(f"""<!DOCTYPE html>
     <a href="#section-sports"  class="nav-sports">Sports</a>
     <a href="#section-culture" class="nav-culture">Culture</a>
     <div class="light-toggle-wrap">
+        <span class="nav-updated-ago" id="nav-updated-ago" title="Time since last update"></span>
         <span class="light-toggle-label">Light</span>
         <label class="toggle-switch" title="Toggle light/dark mode">
             <input type="checkbox" id="light-mode-toggle">
@@ -1762,6 +1979,21 @@ html_parts.append(f"""<!DOCTYPE html>
 
 <!-- ══ FLOATING LIGHT/DARK TOGGLE (mobile only) ══ -->
 <button class="float-mode-btn" id="float-mode-btn" aria-label="Toggle light/dark mode">☀ Light</button>
+
+<!-- ══ READ LATER PANEL ══ -->
+<div id="read-later-panel" aria-label="Read Later">
+    <div class="rl-header">
+        <span class="rl-header-title">📌 Read Later</span>
+        <button class="rl-close-btn" id="rl-close-btn" aria-label="Close Read Later panel">&#10005;</button>
+    </div>
+    <div class="rl-items" id="rl-items">
+        <p class="rl-empty" id="rl-empty">No saved articles yet.<br>Click 🔖 next to any headline to save it.</p>
+    </div>
+    <button class="rl-clear-btn" id="rl-clear-btn">Clear all saved articles</button>
+</div>
+
+<!-- ══ READ LATER FAB ══ -->
+<button id="rl-fab" aria-label="Open Read Later panel">📌 Saved <span class="rl-fab-count" id="rl-fab-count">0</span></button>
 
 """)
 
@@ -1775,13 +2007,14 @@ if show_breaking_banner:
     banner_json = _json_banner.dumps(banner_data)
     html_parts.append(
         f'<div class="breaking-banner" id="breaking-banner">'
-        f'<span class="bb-label">BREAKING</span>'
+        f'<span class="bb-label">&#9679; BREAKING</span>'
         f'<span class="bb-text" id="bb-text"></span>'
         f'<span class="bb-time" id="bb-time"></span>'
         f'<a class="bb-link" id="bb-link" href="#" target="_blank" style="display:none">[Read]</a>'
         f'<span class="bb-counter" id="bb-counter"></span>'
+        f'<button class="bb-close" id="bb-close" aria-label="Dismiss banner" title="Dismiss">&#10005;</button>'
         f'</div>'
-        f'<script>window._bbItems = {banner_json};</script>\n'
+        f'<script>window._bbItems = {banner_json}; window._bbUpdateTs = {int(time.time())};</script>\n'
     )
 
 html_parts.append(f"""
@@ -1835,14 +2068,40 @@ def section_block(section_id, color_class, breaking_items, recent_items,
         f'</div>\n'
     )
 
+# ── Daily Briefing: top 5 stories by source count ──
+def build_daily_briefing(max_items=5):
+    """Pick top weighted stories across all sections for a daily briefing digest."""
+    all_section_items = [
+        ("US",          us_breaking + us_recent),
+        ("Middle East", middle_breaking + middle_recent),
+        ("Tech",        tech_breaking + tech_recent),
+        ("Sports",      sports_breaking + sports_recent),
+        ("Culture",     culture_breaking + culture_recent),
+    ]
+    scored = []
+    for section_label, items in all_section_items:
+        clusters = cluster_items(items, min_shared=3)
+        for cl in clusters:
+            cl.sort(key=lambda x: x[0], reverse=True)
+            # weight: source count * recency bonus
+            age_hours = (time.time() - cl[0][0]) / 3600
+            recency_bonus = max(0, 12 - age_hours) / 12
+            score = len(cl) + recency_bonus * 2
+            scored.append((score, section_label, cl))
+    scored.sort(key=lambda x: x[0], reverse=True)
+    return scored[:max_items]
+
+daily_briefing = build_daily_briefing()
+
 # ── Top Stories strip HTML ──
 if top_stories:
-    ts_html = '<div class="top-stories-strip"><p class="top-stories-title">Top Stories &mdash; Most Covered Right Now</p>\n'
+    # Build top stories cards
+    ts_cards = ''
     for n_src, lead_ts, section_label, cluster in top_stories:
         lead_ts2, lead_title, lead_source, lead_link = cluster[0]
         safe_title = lead_title.replace('<','&lt;').replace('>','&gt;')
         safe_title = safe_title[0].upper() + safe_title[1:] if safe_title else safe_title
-        ts_html += (
+        ts_cards += (
             f'<div class="top-story-card">'
             f'<span class="ts-section-tag">{section_label}</span>'
             f'<span class="ts-badge">{n_src} sources</span>'
@@ -1851,12 +2110,65 @@ if top_stories:
             f'<a class="ts-link" href="{lead_link}" target="_blank">[Read]</a>'
             f'</div>\n'
         )
-    ts_html += '</div>\n'
+
+    # Build daily briefing cards
+    db_cards = ''
+    for score, section_label, cluster in daily_briefing:
+        lead_ts2, lead_title, lead_source, lead_link = cluster[0]
+        safe_title = lead_title.replace('<','&lt;').replace('>','&gt;')
+        safe_title = safe_title[0].upper() + safe_title[1:] if safe_title else safe_title
+        n_src = len(cluster)
+        db_cards += (
+            f'<div class="top-story-card db-card">'
+            f'<span class="ts-section-tag">{section_label}</span>'
+            f'<span class="ts-badge">{n_src} sources</span>'
+            f'<span class="ts-headline">{safe_title}</span>'
+            f'<span class="ts-label"> {ts_to_pdt(lead_ts2)}</span>'
+            f'<a class="ts-link" href="{lead_link}" target="_blank">[Read]</a>'
+            f'</div>\n'
+        )
+
+    # Build trending topics tags
+    trend_tags = ''
+    SECTION_TOPIC_COLORS = {
+        "iran": "#C05000", "israel": "#C05000", "trump": "#B30000",
+        "tariff": "#B30000", "tariffs": "#B30000", "gaza": "#C05000",
+    }
+    for count, word in trending_topics:
+        color = SECTION_TOPIC_COLORS.get(word, "#444")
+        trend_tags += (
+            f'<a class="trend-tag" href="https://news.google.com/search?q={word}&hl=en-US&gl=US&ceid=US:en" '
+            f'target="_blank" style="border-color:{color}">'
+            f'<span class="trend-word">{word.title()}</span>'
+            f'<span class="trend-count">{count}</span>'
+            f'</a>\n'
+        )
+
+    ts_html = f'''<div class="top-stories-strip">
+  <div class="top-stories-3col">
+    <div class="ts-col">
+      <p class="top-stories-title">Top Stories &mdash; Most Covered Right Now</p>
+      {ts_cards}
+    </div>
+    <div class="ts-col ts-divider-left">
+      <p class="top-stories-title">Daily Briefing &mdash; Need to Know</p>
+      {db_cards}
+    </div>
+    <div class="ts-col ts-divider-left">
+      <p class="top-stories-title">Trending Topics</p>
+      <div class="trend-tags-wrap">
+        {trend_tags}
+      </div>
+    </div>
+  </div>
+</div>\n'''
     ts_html += '''<div class="search-bar-wrap">
-    <input type="text" id="news-search-input" placeholder="Search Google News... (press Enter or click Search)" aria-label="Search news">
+    <input type="text" id="news-search-input" placeholder="Search headlines on this page..." aria-label="Search news">
     <button id="news-search-btn">Search</button>
+    <span id="search-results-count" style="font-size:0.8em;color:#888;margin-left:8px;"></span>
 </div>\n'''
     html_parts.append(ts_html)
+
 
 # ── Build sections in user-preferred order (default order, JS reorders on page) ──
 SECTION_DATA = [
@@ -1938,18 +2250,53 @@ document.addEventListener('DOMContentLoaded', function() {
     if (floatBtn) floatBtn.addEventListener('click', function() { setMode(!document.body.classList.contains('light-mode')); });
 })();
 
-// ── NEWS SEARCH BAR ──
+// ── NEWS SEARCH BAR (on-page filtering) ──
 (function() {
     var input = document.getElementById('news-search-input');
     var btn   = document.getElementById('news-search-btn');
+    var countEl = document.getElementById('search-results-count');
     if (!input || !btn) return;
+
     function doSearch() {
-        var q = input.value.trim();
-        if (!q) return;
-        window.open('https://news.google.com/search?q=' + encodeURIComponent(q) + '&hl=en-US&gl=US&ceid=US:en', '_blank');
+        var q = input.value.trim().toLowerCase();
+        var all = document.querySelectorAll('.headline, .cluster');
+        var shown = 0;
+        all.forEach(function(el) {
+            if (!q) {
+                el.classList.remove('search-hidden');
+                el.classList.remove('search-match');
+            } else {
+                var text = el.textContent.toLowerCase();
+                if (text.indexOf(q) !== -1) {
+                    el.classList.remove('search-hidden');
+                    el.classList.add('search-match');
+                    shown++;
+                } else {
+                    el.classList.add('search-hidden');
+                    el.classList.remove('search-match');
+                }
+            }
+        });
+        if (countEl) {
+            countEl.textContent = q ? (shown + ' result' + (shown !== 1 ? 's' : '')) : '';
+        }
     }
+
+    function clearSearch() {
+        document.querySelectorAll('.headline, .cluster').forEach(function(el) {
+            el.classList.remove('search-hidden', 'search-match');
+        });
+        if (countEl) countEl.textContent = '';
+    }
+
     btn.addEventListener('click', doSearch);
-    input.addEventListener('keydown', function(e) { if (e.key === 'Enter') doSearch(); });
+    input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') doSearch();
+        if (e.key === 'Escape') { input.value = ''; clearSearch(); }
+    });
+    input.addEventListener('input', function() {
+        if (input.value === '') clearSearch();
+    });
 })();
 
 // ── ROTATING BREAKING BANNER ──
@@ -1961,13 +2308,14 @@ document.addEventListener('DOMContentLoaded', function() {
     var timeEl    = document.getElementById('bb-time');
     var linkEl    = document.getElementById('bb-link');
     var counterEl = document.getElementById('bb-counter');
+    var closeBtn  = document.getElementById('bb-close');
     var idx = 0;
     function show(i) {
         var item = items[i % items.length];
         if (!item) return;
         if (textEl) {
             textEl.style.animation = 'none';
-            void textEl.offsetWidth; // force reflow for animation restart
+            void textEl.offsetWidth;
             textEl.style.animation = '';
             textEl.textContent = item.title;
         }
@@ -1976,8 +2324,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (counterEl) counterEl.textContent = (i + 1) + ' / ' + items.length;
     }
     show(0);
+    var ticker = null;
     if (items.length > 1) {
-        setInterval(function() { idx = (idx + 1) % items.length; show(idx); }, 6000);
+        ticker = setInterval(function() { idx = (idx + 1) % items.length; show(idx); }, 5000);
+    }
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            banner.style.display = 'none';
+            if (ticker) clearInterval(ticker);
+        });
     }
 })();
 
@@ -2028,7 +2383,208 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 })();
 
+// ── CLUSTER EXPAND/COLLAPSE ──
+(function() {
+    document.addEventListener('click', function(e) {
+        var btn = e.target.closest('.cluster-toggle-btn');
+        if (!btn) return;
+        var targetId = btn.getAttribute('data-target');
+        var wrap = document.getElementById(targetId);
+        if (!wrap) return;
+        if (wrap.classList.contains('collapsed')) {
+            wrap.classList.remove('collapsed');
+            btn.innerHTML = '&#9660; Hide coverage';
+            btn.classList.add('open');
+        } else {
+            wrap.classList.add('collapsed');
+            btn.innerHTML = '&#9654; Show all coverage';
+            btn.classList.remove('open');
+        }
+    });
+})();
+
+// ── READ LATER ──
+(function() {
+    var RL_KEY = 'mp_read_later';
+    var panel  = document.getElementById('read-later-panel');
+    var closeBtn = document.getElementById('rl-close-btn');
+    var clearBtn = document.getElementById('rl-clear-btn');
+    var itemsEl  = document.getElementById('rl-items');
+    var emptyEl  = document.getElementById('rl-empty');
+    var fab      = document.getElementById('rl-fab');
+    var fabCount = document.getElementById('rl-fab-count');
+    if (!panel || !itemsEl) return;
+
+    var saved = [];
+    function loadSaved() {
+        try { saved = JSON.parse(localStorage.getItem(RL_KEY) || '[]'); } catch(e) { saved = []; }
+    }
+    function persistSaved() {
+        try { localStorage.setItem(RL_KEY, JSON.stringify(saved.slice(-200))); } catch(e) {}
+    }
+    function updateFab() {
+        if (!fab || !fabCount) return;
+        if (saved.length > 0) {
+            fab.classList.add('has-items');
+            fabCount.textContent = saved.length;
+        } else {
+            fab.classList.remove('has-items');
+        }
+    }
+    function renderPanel() {
+        loadSaved();
+        var existing = itemsEl.querySelectorAll('.rl-item');
+        existing.forEach(function(el) { el.remove(); });
+        if (saved.length === 0) {
+            if (emptyEl) emptyEl.style.display = 'block';
+        } else {
+            if (emptyEl) emptyEl.style.display = 'none';
+            saved.slice().reverse().forEach(function(item, revIdx) {
+                var idx = saved.length - 1 - revIdx;
+                var div = document.createElement('div');
+                div.className = 'rl-item';
+                div.innerHTML =
+                    '<span class="rl-item-title">' + item.title + '</span>' +
+                    '<div class="rl-item-meta">' +
+                    '<span class="rl-item-src">' + (item.src || '') + '</span>' +
+                    '<a class="rl-item-read" href="' + item.link + '" target="_blank">[Read]</a>' +
+                    '<button class="rl-item-remove" data-idx="' + idx + '" title="Remove">&#10005;</button>' +
+                    '</div>';
+                itemsEl.appendChild(div);
+            });
+        }
+        updateFab();
+        // Mark save buttons as saved/unsaved
+        var links = new Set(saved.map(function(s) { return s.link; }));
+        document.querySelectorAll('.save-later-btn').forEach(function(btn) {
+            if (links.has(btn.getAttribute('data-link'))) {
+                btn.classList.add('saved');
+                btn.title = 'Saved!';
+            } else {
+                btn.classList.remove('saved');
+                btn.title = 'Save for later';
+            }
+        });
+    }
+
+    // Open/close panel
+    function openPanel() { panel.classList.add('open'); renderPanel(); }
+    function closePanel() { panel.classList.remove('open'); }
+    if (closeBtn) closeBtn.addEventListener('click', closePanel);
+    if (fab) fab.addEventListener('click', function() {
+        if (panel.classList.contains('open')) closePanel();
+        else openPanel();
+    });
+
+    // Clear all
+    if (clearBtn) clearBtn.addEventListener('click', function() {
+        saved = []; persistSaved(); renderPanel();
+    });
+
+    // Remove individual
+    itemsEl.addEventListener('click', function(e) {
+        var rmBtn = e.target.closest('.rl-item-remove');
+        if (!rmBtn) return;
+        var idx = parseInt(rmBtn.getAttribute('data-idx'));
+        saved.splice(idx, 1);
+        persistSaved();
+        renderPanel();
+    });
+
+    // Save-for-later buttons on headlines
+    document.addEventListener('click', function(e) {
+        var btn = e.target.closest('.save-later-btn');
+        if (!btn) return;
+        e.preventDefault();
+        e.stopPropagation();
+        loadSaved();
+        var link  = btn.getAttribute('data-link');
+        var title = btn.getAttribute('data-title');
+        var src   = btn.getAttribute('data-src');
+        var existIdx = saved.findIndex(function(s) { return s.link === link; });
+        if (existIdx > -1) {
+            saved.splice(existIdx, 1);
+        } else {
+            saved.push({ link: link, title: title, src: src });
+        }
+        persistSaved();
+        renderPanel();
+        if (saved.length > 0 && !panel.classList.contains('open')) {
+            fab.classList.add('has-items');
+            fab.style.animation = 'none';
+            void fab.offsetWidth;
+        }
+    });
+
+    // Init
+    loadSaved();
+    updateFab();
+})();
+
+// ── UPDATED X MINUTES AGO ──
+(function() {
+    var el = document.getElementById('nav-updated-ago');
+    if (!el || !window._bbUpdateTs) return;
+    function tick() {
+        var diff = Math.floor((Date.now() / 1000) - window._bbUpdateTs);
+        var str = '';
+        if (diff < 60) str = 'Updated just now';
+        else if (diff < 3600) str = 'Updated ' + Math.floor(diff / 60) + 'm ago';
+        else str = 'Updated ' + Math.floor(diff / 3600) + 'h ago';
+        el.textContent = str;
+    }
+    tick();
+    setInterval(tick, 30000);
+})();
+
+// ── AUTO-REFRESH via feed.json polling ──
+(function() {
+    var FEED_URL = 'feed.json';
+    var POLL_MS  = 5 * 60 * 1000; // 5 minutes
+    var lastUpdated = null;
+
+    function checkForUpdates() {
+        fetch(FEED_URL + '?_=' + Date.now())
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                var newUpdated = data.updated || null;
+                if (lastUpdated === null) {
+                    lastUpdated = newUpdated;
+                    return;
+                }
+                if (newUpdated && newUpdated !== lastUpdated) {
+                    lastUpdated = newUpdated;
+                    showRefreshToast();
+                }
+            })
+            .catch(function() {});
+    }
+
+    function showRefreshToast() {
+        var toast = document.getElementById('refresh-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'refresh-toast';
+            toast.style.cssText = [
+                'position:fixed','bottom:70px','left:50%','transform:translateX(-50%)',
+                'background:#B30000','color:#fff','padding:10px 22px','border-radius:6px',
+                'font-size:0.85em','font-weight:bold','z-index:9999','cursor:pointer',
+                'box-shadow:0 4px 16px rgba(0,0,0,0.5)','letter-spacing:0.04em'
+            ].join(';');
+            toast.textContent = '🔄 New headlines available — click to refresh';
+            toast.addEventListener('click', function() { location.reload(); });
+            document.body.appendChild(toast);
+        }
+        toast.style.display = 'block';
+    }
+
+    setInterval(checkForUpdates, POLL_MS);
+    setTimeout(checkForUpdates, 10000); // first check after 10s
+})();
+
 }); // end DOMContentLoaded
+
+
 </script>
 
 </body></html>
@@ -2037,7 +2593,18 @@ document.addEventListener('DOMContentLoaded', function() {
 html_parts.append(f'''<footer class="site-footer">
     <h1>The Mitchell Post</h1>
     <span class="byline">By Sean Mitchell</span>
-    <span class="update">updated at {update_time}</span>
+    <span class="mission">Curated news from reliable sources &mdash; US, Middle East, Tech, Sports &amp; Culture &mdash; updated continuously.</span>
+    <span class="update">Last updated: {update_time}</span>
+    <div class="homepage-wrap">
+        <button class="set-homepage-btn" id="set-homepage-btn" onclick="document.getElementById(\'homepage-instructions\').style.display=document.getElementById(\'homepage-instructions\').style.display===\'block\'?\'none\':\'block\'">🏠 Set as My Homepage</button>
+        <div id="homepage-instructions" class="homepage-instructions" style="display:none">
+            <strong>How to set The Mitchell Post as your homepage:</strong><br>
+            <span class="hp-browser"><b>Chrome:</b> Settings → On startup → Open a specific page → Add <code>https://theseanmitchell.github.io/TheMitchellPost/</code></span><br>
+            <span class="hp-browser"><b>Firefox:</b> Settings → Home → Homepage → Custom URLs → paste the URL above</span><br>
+            <span class="hp-browser"><b>Safari:</b> Preferences → General → Homepage → paste the URL above</span><br>
+            <span class="hp-browser"><b>Edge:</b> Settings → Start, home, and new tabs → Open these pages → Add the URL above</span>
+        </div>
+    </div>
 </footer>
 ''')
 
@@ -2050,7 +2617,35 @@ try:
 except Exception as e:
     print(f"ERROR saving file: {str(e)}")
 
-# ── Write feed.json ──
+# ── Write RSS feed ──
+RSS_FILE = os.path.join(CURRENT_DIR, "feed.xml")
+try:
+    import xml.etree.ElementTree as ET
+    rss = ET.Element("rss", version="2.0")
+    channel = ET.SubElement(rss, "channel")
+    ET.SubElement(channel, "title").text = "The Mitchell Post"
+    ET.SubElement(channel, "link").text = "https://theseanmitchell.github.io/TheMitchellPost/"
+    ET.SubElement(channel, "description").text = "Curated news from reliable sources — US, Middle East, Tech, Sports & Culture — updated continuously."
+    ET.SubElement(channel, "language").text = "en-us"
+    ET.SubElement(channel, "lastBuildDate").text = datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S +0000")
+    rss_items = sorted(all_items_flat, key=lambda x: x[0], reverse=True)[:50]
+    for ts, title, source, link in rss_items:
+        item_el = ET.SubElement(channel, "item")
+        ET.SubElement(item_el, "title").text = title
+        ET.SubElement(item_el, "link").text = link
+        ET.SubElement(item_el, "guid").text = link
+        pub_dt = datetime.utcfromtimestamp(ts).strftime("%a, %d %b %Y %H:%M:%S +0000")
+        ET.SubElement(item_el, "pubDate").text = pub_dt
+        ET.SubElement(item_el, "source").text = get_friendly_source(source)
+    tree = ET.ElementTree(rss)
+    ET.indent(tree, space="  ")
+    with open(RSS_FILE, "wb") as rf:
+        tree.write(rf, xml_declaration=True, encoding="utf-8")
+    print(f"SUCCESS: feed.xml saved ({len(rss_items)} items)")
+except Exception as e:
+    print(f"WARNING: feed.xml not saved: {str(e)}")
+
+
 import json as _json
 try:
     feed_items = []
