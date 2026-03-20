@@ -1228,13 +1228,12 @@ def render_column(items):
             hot_dot = '<span class="new-dot" title="Published in the last 30 minutes">&#9679;</span> ' if is_hot else ''
             safe_dtitle = display_title.replace('"', '&quot;')
             out += (
-                f'<div class="headline" data-link="{link}" data-ts="{int(ts)}" data-title="{safe_dtitle}" data-src="{friendly}">'
+                f'<div class="headline" data-link="{link}" data-ts="{int(ts)}">'
                 f'{hot_dot}'
                 f'<span class="title">{display_title}</span>'
                 f' <span class="ts-label">{time_str}</span>'
                 f' <span class="src-label">\u2014 {friendly}</span>'
                 f' <a class="link" href="{link}" target="_blank">[Full Article]</a>'
-                f'<button class="save-later-btn" data-link="{link}" data-title="{safe_dtitle}" data-src="{friendly}" title="Save for later">&#128278;</button>'
                 f'</div>\n'
             )
         else:
@@ -1248,8 +1247,8 @@ def render_column(items):
             sources_list = [get_friendly_source(it[2]) for it in cluster]
             n_sources = len(sources_list)
             sources_str = ", ".join(sources_list)
-            safe_lead_title = display_title.replace('"', '&quot;')
             lead_friendly = get_friendly_source(lead_source)
+            cluster_id = "cl-" + hashlib.md5(lead_link.encode()).hexdigest()[:8]
             out += (
                 f'<div class="cluster" data-ts="{int(lead_ts)}">'
                 f'<div class="cluster-header">'
@@ -1262,7 +1261,6 @@ def render_column(items):
                 f' <span class="ts-label">{time_str}</span>'
                 f' <span class="src-label">\u2014 {lead_friendly}</span>'
                 f' <a class="link" href="{lead_link}" target="_blank">[Full Article]</a>'
-                f'<button class="save-later-btn" data-link="{lead_link}" data-title="{safe_lead_title}" data-src="{lead_friendly}" title="Save for later">&#128278;</button>'
                 f'</div>\n'
                 f'<div id="{cluster_id}" class="cluster-items-wrap collapsed">\n'
                 f'<div class="cluster-sources-line">{sources_str}</div>\n'
@@ -1980,21 +1978,6 @@ html_parts.append(f"""<!DOCTYPE html>
 <!-- ══ FLOATING LIGHT/DARK TOGGLE (mobile only) ══ -->
 <button class="float-mode-btn" id="float-mode-btn" aria-label="Toggle light/dark mode">☀ Light</button>
 
-<!-- ══ READ LATER PANEL ══ -->
-<div id="read-later-panel" aria-label="Read Later">
-    <div class="rl-header">
-        <span class="rl-header-title">📌 Read Later</span>
-        <button class="rl-close-btn" id="rl-close-btn" aria-label="Close Read Later panel">&#10005;</button>
-    </div>
-    <div class="rl-items" id="rl-items">
-        <p class="rl-empty" id="rl-empty">No saved articles yet.<br>Click 🔖 next to any headline to save it.</p>
-    </div>
-    <button class="rl-clear-btn" id="rl-clear-btn">Clear all saved articles</button>
-</div>
-
-<!-- ══ READ LATER FAB ══ -->
-<button id="rl-fab" aria-label="Open Read Later panel">📌 Saved <span class="rl-fab-count" id="rl-fab-count">0</span></button>
-
 """)
 
 # Rotating breaking news banner (all items < 1 hour)
@@ -2163,9 +2146,8 @@ if top_stories:
   </div>
 </div>\n'''
     ts_html += '''<div class="search-bar-wrap">
-    <input type="text" id="news-search-input" placeholder="Search headlines on this page..." aria-label="Search news">
+    <input type="text" id="news-search-input" placeholder="Search Google News... (press Enter or click Search)" aria-label="Search news">
     <button id="news-search-btn">Search</button>
-    <span id="search-results-count" style="font-size:0.8em;color:#888;margin-left:8px;"></span>
 </div>\n'''
     html_parts.append(ts_html)
 
@@ -2250,53 +2232,18 @@ document.addEventListener('DOMContentLoaded', function() {
     if (floatBtn) floatBtn.addEventListener('click', function() { setMode(!document.body.classList.contains('light-mode')); });
 })();
 
-// ── NEWS SEARCH BAR (on-page filtering) ──
+// ── NEWS SEARCH BAR ──
 (function() {
     var input = document.getElementById('news-search-input');
     var btn   = document.getElementById('news-search-btn');
-    var countEl = document.getElementById('search-results-count');
     if (!input || !btn) return;
-
     function doSearch() {
-        var q = input.value.trim().toLowerCase();
-        var all = document.querySelectorAll('.headline, .cluster');
-        var shown = 0;
-        all.forEach(function(el) {
-            if (!q) {
-                el.classList.remove('search-hidden');
-                el.classList.remove('search-match');
-            } else {
-                var text = el.textContent.toLowerCase();
-                if (text.indexOf(q) !== -1) {
-                    el.classList.remove('search-hidden');
-                    el.classList.add('search-match');
-                    shown++;
-                } else {
-                    el.classList.add('search-hidden');
-                    el.classList.remove('search-match');
-                }
-            }
-        });
-        if (countEl) {
-            countEl.textContent = q ? (shown + ' result' + (shown !== 1 ? 's' : '')) : '';
-        }
+        var q = input.value.trim();
+        if (!q) return;
+        window.open('https://news.google.com/search?q=' + encodeURIComponent(q) + '&hl=en-US&gl=US&ceid=US:en', '_blank');
     }
-
-    function clearSearch() {
-        document.querySelectorAll('.headline, .cluster').forEach(function(el) {
-            el.classList.remove('search-hidden', 'search-match');
-        });
-        if (countEl) countEl.textContent = '';
-    }
-
     btn.addEventListener('click', doSearch);
-    input.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') doSearch();
-        if (e.key === 'Escape') { input.value = ''; clearSearch(); }
-    });
-    input.addEventListener('input', function() {
-        if (input.value === '') clearSearch();
-    });
+    input.addEventListener('keydown', function(e) { if (e.key === 'Enter') doSearch(); });
 })();
 
 // ── ROTATING BREAKING BANNER ──
@@ -2401,124 +2348,6 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.classList.remove('open');
         }
     });
-})();
-
-// ── READ LATER ──
-(function() {
-    var RL_KEY = 'mp_read_later';
-    var panel  = document.getElementById('read-later-panel');
-    var closeBtn = document.getElementById('rl-close-btn');
-    var clearBtn = document.getElementById('rl-clear-btn');
-    var itemsEl  = document.getElementById('rl-items');
-    var emptyEl  = document.getElementById('rl-empty');
-    var fab      = document.getElementById('rl-fab');
-    var fabCount = document.getElementById('rl-fab-count');
-    if (!panel || !itemsEl) return;
-
-    var saved = [];
-    function loadSaved() {
-        try { saved = JSON.parse(localStorage.getItem(RL_KEY) || '[]'); } catch(e) { saved = []; }
-    }
-    function persistSaved() {
-        try { localStorage.setItem(RL_KEY, JSON.stringify(saved.slice(-200))); } catch(e) {}
-    }
-    function updateFab() {
-        if (!fab || !fabCount) return;
-        if (saved.length > 0) {
-            fab.classList.add('has-items');
-            fabCount.textContent = saved.length;
-        } else {
-            fab.classList.remove('has-items');
-        }
-    }
-    function renderPanel() {
-        loadSaved();
-        var existing = itemsEl.querySelectorAll('.rl-item');
-        existing.forEach(function(el) { el.remove(); });
-        if (saved.length === 0) {
-            if (emptyEl) emptyEl.style.display = 'block';
-        } else {
-            if (emptyEl) emptyEl.style.display = 'none';
-            saved.slice().reverse().forEach(function(item, revIdx) {
-                var idx = saved.length - 1 - revIdx;
-                var div = document.createElement('div');
-                div.className = 'rl-item';
-                div.innerHTML =
-                    '<span class="rl-item-title">' + item.title + '</span>' +
-                    '<div class="rl-item-meta">' +
-                    '<span class="rl-item-src">' + (item.src || '') + '</span>' +
-                    '<a class="rl-item-read" href="' + item.link + '" target="_blank">[Read]</a>' +
-                    '<button class="rl-item-remove" data-idx="' + idx + '" title="Remove">&#10005;</button>' +
-                    '</div>';
-                itemsEl.appendChild(div);
-            });
-        }
-        updateFab();
-        // Mark save buttons as saved/unsaved
-        var links = new Set(saved.map(function(s) { return s.link; }));
-        document.querySelectorAll('.save-later-btn').forEach(function(btn) {
-            if (links.has(btn.getAttribute('data-link'))) {
-                btn.classList.add('saved');
-                btn.title = 'Saved!';
-            } else {
-                btn.classList.remove('saved');
-                btn.title = 'Save for later';
-            }
-        });
-    }
-
-    // Open/close panel
-    function openPanel() { panel.classList.add('open'); renderPanel(); }
-    function closePanel() { panel.classList.remove('open'); }
-    if (closeBtn) closeBtn.addEventListener('click', closePanel);
-    if (fab) fab.addEventListener('click', function() {
-        if (panel.classList.contains('open')) closePanel();
-        else openPanel();
-    });
-
-    // Clear all
-    if (clearBtn) clearBtn.addEventListener('click', function() {
-        saved = []; persistSaved(); renderPanel();
-    });
-
-    // Remove individual
-    itemsEl.addEventListener('click', function(e) {
-        var rmBtn = e.target.closest('.rl-item-remove');
-        if (!rmBtn) return;
-        var idx = parseInt(rmBtn.getAttribute('data-idx'));
-        saved.splice(idx, 1);
-        persistSaved();
-        renderPanel();
-    });
-
-    // Save-for-later buttons on headlines
-    document.addEventListener('click', function(e) {
-        var btn = e.target.closest('.save-later-btn');
-        if (!btn) return;
-        e.preventDefault();
-        e.stopPropagation();
-        loadSaved();
-        var link  = btn.getAttribute('data-link');
-        var title = btn.getAttribute('data-title');
-        var src   = btn.getAttribute('data-src');
-        var existIdx = saved.findIndex(function(s) { return s.link === link; });
-        if (existIdx > -1) {
-            saved.splice(existIdx, 1);
-        } else {
-            saved.push({ link: link, title: title, src: src });
-        }
-        persistSaved();
-        renderPanel();
-        if (saved.length > 0 && !panel.classList.contains('open')) {
-            fab.classList.add('has-items');
-            fab.style.animation = 'none';
-            void fab.offsetWidth;
-        }
-    });
-
-    // Init
-    loadSaved();
-    updateFab();
 })();
 
 // ── UPDATED X MINUTES AGO ──
