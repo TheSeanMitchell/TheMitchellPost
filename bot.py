@@ -1163,25 +1163,147 @@ def ts_to_pdt(ts):
     dt_pdt = dt_utc + PDT_OFFSET
     return dt_pdt.strftime("%-I:%M %p PDT")
 
+# ====================== TOPIC CLUSTERING ======================
+# Groups headlines that share 3+ significant words (ignoring stopwords).
+# Headlines in a cluster are shown together under a story header with a source-count badge.
+
+STOPWORDS = {
+    "a","an","the","and","or","but","in","on","at","to","for","of","with",
+    "by","from","as","is","was","are","were","be","been","being","have",
+    "has","had","do","does","did","will","would","could","should","may",
+    "might","shall","its","it","this","that","these","those","says","say",
+    "said","after","over","into","about","up","out","than","then","new",
+    "just","more","also","amid","amid","amid","report","reports","amid",
+    "amid","under","amid","amid","amid","amid","amid","amid",
+}
+
+def headline_tokens(title):
+    words = re.findall(r'[a-zA-Z]{3,}', title.lower())
+    return set(w for w in words if w not in STOPWORDS)
+
+def cluster_items(items, min_shared=3):
+    """
+    Returns a list of clusters. Each cluster is a list of (ts, title, source, link).
+    Single-item clusters are just solo headlines. Multi-item clusters are grouped stories.
+    """
+    used = [False] * len(items)
+    clusters = []
+    token_cache = [headline_tokens(it[1]) for it in items]
+
+    for i in range(len(items)):
+        if used[i]:
+            continue
+        cluster = [items[i]]
+        used[i] = True
+        for j in range(i + 1, len(items)):
+            if used[j]:
+                continue
+            shared = len(token_cache[i] & token_cache[j])
+            if shared >= min_shared:
+                cluster.append(items[j])
+                used[j] = True
+        clusters.append(cluster)
+    return clusters
+
 # ====================== RENDER HEADLINES ======================
-def render_headlines(items, pattern=None):
+# Each item is (ts, title, source, link).
+# Items published within 30 minutes get a "new" white dot.
+# Items seen on previous visit (tracked via localStorage) get no dot.
+# Clusters of 2+ headlines about same story are grouped with a source-count badge.
+
+THIRTY_MIN = 1800
+
+def render_column(items):
+    """
+    Cluster items, then render with new-dot indicators and story grouping.
+    Returns HTML string.
+    """
+    now = time.time()
+    clusters = cluster_items(items)
     out = ""
-    for ts, title, source, link in items:
-        friendly = get_friendly_source(source)
-        time_str = ts_to_pdt(ts)
-        display_title = title[0].upper() + title[1:] if title else title
-        out += (
-            f'<div class="headline">'
-            f'<span class="title">{display_title}</span>'
-            f' <span style="color:#888888;font-size:0.8em;">{time_str}</span>'
-            f' <span style="color:#666666;"> \u2014 {friendly}</span>'
-            f' <a class="link" href="{link}" target="_blank">[Full Article]</a>'
-            f'</div>\n'
-        )
+    for cluster in clusters:
+        if len(cluster) == 1:
+            ts, title, source, link = cluster[0]
+            friendly = get_friendly_source(source)
+            time_str = ts_to_pdt(ts)
+            display_title = title[0].upper() + title[1:] if title else title
+            is_hot = (now - ts) <= THIRTY_MIN
+            # data-link used by JS for "seen" tracking; data-ts for breaking-news banner
+            hot_dot = '<span class="new-dot" title="Published in the last 30 minutes">&#9679;</span> ' if is_hot else ''
+            out += (
+                f'<div class="headline" data-link="{link}" data-ts="{int(ts)}">'
+                f'{hot_dot}'
+                f'<span class="title">{display_title}</span>'
+                f' <span class="ts-label">{time_str}</span>'
+                f' <span class="src-label">\u2014 {friendly}</span>'
+                f' <a class="link" href="{link}" target="_blank">[Full Article]</a>'
+                f'</div>\n'
+            )
+        else:
+            # Multi-source cluster: grouped story card
+            cluster.sort(key=lambda x: x[0], reverse=True)
+            lead_ts, lead_title, lead_source, lead_link = cluster[0]
+            display_title = lead_title[0].upper() + lead_title[1:] if lead_title else lead_title
+            time_str = ts_to_pdt(lead_ts)
+            is_hot = (now - lead_ts) <= THIRTY_MIN
+            hot_dot = '<span class="new-dot" title="Published in the last 30 minutes">&#9679;</span> ' if is_hot else ''
+            sources_list = [get_friendly_source(it[2]) for it in cluster]
+            n_sources = len(sources_list)
+            sources_str = ", ".join(sources_list)
+            out += (
+                f'<div class="cluster" data-ts="{int(lead_ts)}">'
+                f'<div class="cluster-header">'
+                f'{hot_dot}'
+                f'<span class="cluster-badge">{n_sources} sources</span>'
+                f'<span class="cluster-sources">{sources_str}</span>'
+                f'</div>\n'
+            )
+            for ts, title, source, link in cluster:
+                friendly = get_friendly_source(source)
+                ts_str = ts_to_pdt(ts)
+                dtitle = title[0].upper() + title[1:] if title else title
+                out += (
+                    f'<div class="cluster-item" data-link="{link}">'
+                    f'<span class="title">{dtitle}</span>'
+                    f' <span class="ts-label">{ts_str}</span>'
+                    f' <span class="src-label">\u2014 {friendly}</span>'
+                    f' <a class="link" href="{link}" target="_blank">[Full Article]</a>'
+                    f'</div>\n'
+                )
+            out += '</div>\n'
     return out
 
+# ====================== SOURCE COUNT SUMMARY ======================
+def source_summary(items):
+    sources = set(get_friendly_source(it[2]) for it in items)
+    return f'<p class="src-summary">{len(items)} headlines \u00b7 {len(sources)} sources</p>\n'
+
 # ====================== BUILD HTML ======================
+# Collect all timestamps across ALL items for the breaking-news banner check
+all_items_flat = (
+    us_breaking + us_recent +
+    middle_breaking + middle_recent +
+    sports_breaking + sports_recent +
+    tech_breaking + tech_recent +
+    culture_breaking + culture_recent
+)
+most_recent_ts = max((it[0] for it in all_items_flat), default=0)
+show_breaking_banner = (time.time() - most_recent_ts) <= THIRTY_MIN
+breaking_banner_title = ""
+if show_breaking_banner:
+    newest = max(all_items_flat, key=lambda x: x[0])
+    breaking_banner_title = newest[1][:120]
+
 update_time = (datetime.utcnow() + PDT_OFFSET).strftime("%I:%M:%S %p PDT")
+
+# Section color map for nav bar accents
+SECTION_COLORS = {
+    "us":      "#B30000",
+    "mideast": "#C05000",
+    "tech":    "#005F9E",
+    "sports":  "#006B3C",
+    "culture": "#6B006B",
+}
 
 html_parts = []
 html_parts.append(f"""<!DOCTYPE html>
@@ -1194,42 +1316,220 @@ html_parts.append(f"""<!DOCTYPE html>
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <style>
+    /* ── Reset & base ── */
     * {{ box-sizing: border-box; margin: 0; padding: 0; }}
-    body {{ background: #121212; color: #FFFFFF; font-family: Arial, sans-serif; line-height: 1.5; }}
-    .banner {{ background: #001B47; width: 100%; height: 340px; position: relative; }}
-    .youtube-inset {{
-        position: absolute; width: 325px; aspect-ratio: 16 / 9;
-        z-index: 3; border-radius: 4px; overflow: hidden;
+    html {{ scroll-behavior: smooth; }}
+    body {{ background: #121212; color: #FFFFFF; font-family: Arial, sans-serif; line-height: 1.6;
+            padding-top: 48px; /* clearance for sticky nav */ }}
+
+    /* ── Sticky nav bar ── */
+    .sticky-nav {{
+        position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+        background: #0A0A0A; border-bottom: 2px solid #B30000;
+        display: flex; align-items: center; gap: 0; height: 48px;
+        padding: 0 16px; overflow-x: auto; white-space: nowrap;
     }}
-    .youtube-inset iframe {{ width: 100%; height: 100%; border: none; }}
+    .sticky-nav .site-name {{
+        font-size: 1em; font-weight: bold; color: #FFFFFF;
+        margin-right: 20px; flex-shrink: 0; letter-spacing: 0.03em;
+    }}
+    .sticky-nav a {{
+        display: inline-block; padding: 0 14px; height: 48px; line-height: 48px;
+        color: #cccccc; text-decoration: none; font-size: 0.82em;
+        font-weight: bold; letter-spacing: 0.05em; text-transform: uppercase;
+        border-left: 3px solid transparent; transition: color 0.15s, border-color 0.15s;
+        flex-shrink: 0;
+    }}
+    .sticky-nav a:hover {{ color: #FFFFFF; }}
+    .sticky-nav a.nav-us     {{ border-left-color: {SECTION_COLORS["us"]}; }}
+    .sticky-nav a.nav-mideast{{ border-left-color: {SECTION_COLORS["mideast"]}; }}
+    .sticky-nav a.nav-tech   {{ border-left-color: {SECTION_COLORS["tech"]}; }}
+    .sticky-nav a.nav-sports {{ border-left-color: {SECTION_COLORS["sports"]}; }}
+    .sticky-nav a.nav-culture{{ border-left-color: {SECTION_COLORS["culture"]}; }}
+
+    /* ── Breaking news banner ── */
+    .breaking-banner {{
+        background: #B30000; color: #FFFFFF;
+        padding: 10px 20px; font-size: 0.92em; font-weight: bold;
+        display: flex; align-items: center; gap: 10px;
+        animation: pulse-bg 2s ease-in-out infinite alternate;
+    }}
+    .breaking-banner .bb-label {{
+        background: #FFFFFF; color: #B30000;
+        padding: 2px 8px; border-radius: 3px;
+        font-size: 0.78em; letter-spacing: 0.08em; flex-shrink: 0;
+    }}
+    @keyframes pulse-bg {{
+        from {{ background: #B30000; }}
+        to   {{ background: #8B0000; }}
+    }}
+
+    /* ── Video banner — desktop only ── */
+    .banner {{ background: #001B47; width: 100%; position: relative; overflow: hidden; }}
+    /* Desktop: 2 rows of 4 in a CSS grid */
+    .video-grid {{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, auto);
+        gap: 8px;
+        padding: 10px;
+    }}
+    .youtube-inset {{ border-radius: 4px; overflow: hidden; aspect-ratio: 16/9; width: 100%; }}
+    .youtube-inset iframe {{ width: 100%; height: 100%; border: none; display: block; }}
+
+    /* ── Header ── */
     .header {{ padding: 14px 20px 10px 20px; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }}
     h1 {{ color: #FFFFFF; text-decoration: underline; font-size: 2.2em; }}
     .byline {{ color: #aaaaaa; font-size: 1.05em; }}
     .update {{ color: #aaaaaa; font-size: 0.85em; }}
-    .section-title {{ color: #B30000; font-size: 1.6em; margin: 0 0 10px; font-weight: bold; text-decoration: underline; text-decoration-color: #B30000; }}
-    .top-divider {{ border: 0; height: 3px; background: #B30000; margin: 28px 0; }}
-    .headline {{ margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #222222; }}
-    .title {{ color: #FFFFFF; }}
-    .link {{ color: #545454; text-decoration: underline; font-size: 0.85em; margin-left: 6px; }}
+
+    /* ── Section titles and layout ── */
+    .section-title {{
+        font-size: 1.6em; margin: 0 0 6px; font-weight: bold;
+        text-decoration: underline; text-decoration-thickness: 2px;
+    }}
+    .section-title.us-color     {{ color: {SECTION_COLORS["us"]};      text-decoration-color: {SECTION_COLORS["us"]}; }}
+    .section-title.mideast-color{{ color: {SECTION_COLORS["mideast"]}; text-decoration-color: {SECTION_COLORS["mideast"]}; }}
+    .section-title.tech-color   {{ color: {SECTION_COLORS["tech"]};    text-decoration-color: {SECTION_COLORS["tech"]}; }}
+    .section-title.sports-color {{ color: {SECTION_COLORS["sports"]};  text-decoration-color: {SECTION_COLORS["sports"]}; }}
+    .section-title.culture-color{{ color: {SECTION_COLORS["culture"]}; text-decoration-color: {SECTION_COLORS["culture"]}; }}
+
+    .top-divider {{ border: 0; height: 3px; background: #222222; margin: 28px 0; }}
+    .src-summary {{ color: #666666; font-size: 0.78em; margin-bottom: 12px; }}
+
+    /* ── Headlines ── */
+    .headline {{
+        margin-bottom: 14px; padding-bottom: 10px;
+        border-bottom: 1px solid #222222; line-height: 1.5;
+    }}
+    .headline.seen-item {{ opacity: 0.55; }}
+    .title {{ color: #FFFFFF; font-size: 1em; }}
+    .ts-label {{ color: #888888; font-size: 0.78em; margin-left: 4px; }}
+    .src-label {{ color: #666666; font-size: 0.88em; }}
+    .new-dot {{ color: #FFFFFF; font-size: 0.55em; vertical-align: middle; margin-right: 2px; }}
+
+    /* ── Story clusters ── */
+    .cluster {{
+        margin-bottom: 16px; padding: 10px 12px 4px 12px;
+        border-left: 3px solid #444; border-bottom: 1px solid #222222;
+        background: #1a1a1a;
+    }}
+    .cluster-header {{ margin-bottom: 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }}
+    .cluster-badge {{
+        background: #333; color: #cccccc; font-size: 0.72em;
+        padding: 2px 7px; border-radius: 10px; font-weight: bold;
+        letter-spacing: 0.04em; flex-shrink: 0;
+    }}
+    .cluster-sources {{ color: #555555; font-size: 0.75em; }}
+    .cluster-item {{
+        margin-bottom: 8px; padding-bottom: 8px;
+        border-bottom: 1px solid #262626; line-height: 1.5;
+    }}
+    .cluster-item:last-child {{ border-bottom: none; margin-bottom: 0; }}
+    .cluster-item.seen-item {{ opacity: 0.55; }}
+
+    /* ── Full Article link ── */
+    .link {{
+        color: #545454; text-decoration: underline;
+        font-size: 0.85em; margin-left: 6px;
+        display: inline-block; padding: 0;
+    }}
     .link:hover {{ color: #FFFFFF; }}
+
+    /* ── Layout containers ── */
     .container {{ display: flex; flex-wrap: wrap; gap: 30px; max-width: 1400px; margin: 0 auto; padding: 0 20px; }}
     .column {{ flex: 1; min-width: 300px; }}
     .section-wrap {{ padding: 0 0 10px 0; }}
-    @media (max-width: 768px) {{ .container {{ flex-direction: column; }} }}
-    @media (max-width: 900px) {{ .youtube-inset {{ display: none !important; }} }}
+
+    /* ── Mobile overrides ── */
+    @media (max-width: 900px) {{
+        /* Hide video section entirely — don't even load layout space */
+        .banner {{ display: none !important; }}
+
+        body {{ padding-top: 48px; font-size: 16px; }}
+
+        .sticky-nav {{ gap: 0; padding: 0 8px; }}
+        .sticky-nav .site-name {{ font-size: 0.85em; margin-right: 10px; }}
+        .sticky-nav a {{ padding: 0 10px; font-size: 0.72em; }}
+
+        .header {{ padding: 10px 14px 8px 14px; gap: 8px; }}
+        h1 {{ font-size: 1.6em; }}
+
+        .container {{ flex-direction: column; gap: 0; padding: 0 14px; }}
+        .column {{ min-width: 0; width: 100%; }}
+
+        /* Larger tap targets for headlines */
+        .headline, .cluster-item {{
+            padding-bottom: 14px;
+            margin-bottom: 16px;
+        }}
+        .title {{ font-size: 1.05em; line-height: 1.55; }}
+
+        /* Full Article button — large, easy to tap */
+        .link {{
+            display: inline-block;
+            margin-top: 6px;
+            margin-left: 0;
+            padding: 6px 12px;
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #aaaaaa;
+        }}
+        .link:hover, .link:active {{ background: #2a2a2a; color: #FFFFFF; }}
+
+        .ts-label {{ font-size: 0.82em; }}
+        .src-summary {{ font-size: 0.82em; }}
+        .section-title {{ font-size: 1.3em; }}
+        .top-divider {{ margin: 18px 0; }}
+
+        /* Cluster cards on mobile */
+        .cluster {{ padding: 8px 10px 4px 10px; }}
+        .cluster-badge {{ font-size: 0.78em; }}
+    }}
     </style>
 </head>
 <body>
+
+<!-- ══ STICKY NAVIGATION BAR ══ -->
+<nav class="sticky-nav">
+    <span class="site-name">The Mitchell Post</span>
+    <a href="#section-us"      class="nav-us">US News</a>
+    <a href="#section-mideast" class="nav-mideast">Middle East</a>
+    <a href="#section-tech"    class="nav-tech">Tech &amp; Life</a>
+    <a href="#section-sports"  class="nav-sports">Sports</a>
+    <a href="#section-culture" class="nav-culture">Culture</a>
+</nav>
+
+""")
+
+# Breaking news banner (only if something published in last 30 min)
+if show_breaking_banner:
+    safe_title = breaking_banner_title.replace('<','&lt;').replace('>','&gt;')
+    html_parts.append(
+        f'<div class="breaking-banner">'
+        f'<span class="bb-label">BREAKING</span>'
+        f'<span>{safe_title}</span>'
+        f'</div>\n'
+    )
+
+html_parts.append(f"""
+<!-- ══ VIDEO BANNER — desktop only, hidden on mobile via CSS ══ -->
 <div class="banner">
-    <div class="youtube-inset" style="right:1125px;top:10px;"><iframe src="https://www.youtube.com/embed/TBlxk1kH9dM?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-    <div class="youtube-inset" style="right:760px;top:10px;"><iframe src="https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-    <div class="youtube-inset" style="right:395px;top:10px;"><iframe src="https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-    <div class="youtube-inset" style="right:55px;top:10px;"><iframe src="https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-    <div class="youtube-inset" style="right:1125px;top:185px;"><iframe src="https://www.youtube.com/embed/b_ERc4vcRHI?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-    <div class="youtube-inset" style="right:760px;top:185px;"><iframe src="https://www.youtube.com/embed/nya02XlHG1Q?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-    <div class="youtube-inset" style="right:395px;top:185px;"><iframe src="https://www.youtube.com/embed/_6dRRfnYJws?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-    <div class="youtube-inset" style="right:55px;top:185px;"><iframe src="https://www.youtube.com/embed/pykpO5kQJ98?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+    <div class="video-grid">
+        <div class="youtube-inset"><iframe src="https://www.youtube.com/embed/TBlxk1kH9dM?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe src="https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe src="https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe src="https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe src="https://www.youtube.com/embed/b_ERc4vcRHI?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe src="https://www.youtube.com/embed/nya02XlHG1Q?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe src="https://www.youtube.com/embed/_6dRRfnYJws?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe src="https://www.youtube.com/embed/pykpO5kQJ98?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+    </div>
 </div>
+
+<!-- ══ MASTHEAD ══ -->
 <div class="header">
     <h1>The Mitchell Post</h1>
     <span class="byline">By Sean Mitchell</span>
@@ -1237,37 +1537,46 @@ html_parts.append(f"""<!DOCTYPE html>
 </div>
 """)
 
-def section_html(breaking, recent, pattern, breaking_title, recent_title, empty_msg_b, empty_msg_r):
-    out = '<div class="section-wrap"><div class="container">\n'
-    out += f'<div class="column"><h2 class="section-title">{breaking_title}</h2>\n'
-    out += render_headlines(breaking, pattern) if breaking else f'<p>{empty_msg_b}</p>\n'
-    out += '</div>\n'
-    out += f'<div class="column"><h2 class="section-title">{recent_title}</h2>\n'
-    out += render_headlines(recent, pattern) if recent else f'<p>{empty_msg_r}</p>\n'
-    out += '</div>\n</div></div>\n'
-    return out
+def section_block(section_id, color_class, breaking_items, recent_items,
+                  breaking_title, recent_title):
+    b_summary = source_summary(breaking_items) if breaking_items else ''
+    r_summary = source_summary(recent_items) if recent_items else ''
+    b_content = render_column(breaking_items) if breaking_items else '<p style="color:#666">No breaking news in the last 3 hours.</p>\n'
+    r_content = render_column(recent_items) if recent_items else '<p style="color:#666">No additional headlines right now.</p>\n'
+    return (
+        f'<div id="{section_id}" class="section-wrap">\n'
+        f'<div class="container">\n'
+        f'<div class="column">\n'
+        f'<h2 class="section-title {color_class}">{breaking_title}</h2>\n'
+        f'{b_summary}'
+        f'{b_content}'
+        f'</div>\n'
+        f'<div class="column">\n'
+        f'<h2 class="section-title {color_class}">{recent_title}</h2>\n'
+        f'{r_summary}'
+        f'{r_content}'
+        f'</div>\n'
+        f'</div>\n'
+        f'</div>\n'
+    )
 
-html_parts.append(section_html(us_breaking, us_recent, US_PATTERN,
-    "Breaking US News", "Today's US Headlines",
-    "No breaking US news in the last 3 hours.", "No additional US headlines right now."))
+html_parts.append(section_block("section-us", "us-color",
+    us_breaking, us_recent, "Breaking US News", "Today&#39;s US Headlines"))
 html_parts.append('<hr class="top-divider">\n')
-html_parts.append(section_html(middle_breaking, middle_recent, ME_PATTERN,
-    "Middle East Breaking News", "Today's Middle East Headlines",
-    "No breaking Middle East news in the last 3 hours.", "No additional Middle East headlines right now."))
+html_parts.append(section_block("section-mideast", "mideast-color",
+    middle_breaking, middle_recent, "Middle East Breaking News", "Today&#39;s Middle East Headlines"))
 html_parts.append('<hr class="top-divider">\n')
-html_parts.append(section_html(tech_breaking, tech_recent, TECH_PATTERN,
-    "Tech and Life Breaking News", "Today's Tech and Life Headlines",
-    "No breaking tech and life news in the last 3 hours.", "No additional tech and life headlines right now."))
+html_parts.append(section_block("section-tech", "tech-color",
+    tech_breaking, tech_recent, "Tech &amp; Life Breaking News", "Today&#39;s Tech &amp; Life Headlines"))
 html_parts.append('<hr class="top-divider">\n')
-html_parts.append(section_html(sports_breaking, sports_recent, SPORTS_PATTERN,
-    "Sports Breaking News", "Today's Sports Headlines",
-    "No breaking sports news in the last 3 hours.", "No additional sports headlines right now."))
+html_parts.append(section_block("section-sports", "sports-color",
+    sports_breaking, sports_recent, "Sports Breaking News", "Today&#39;s Sports Headlines"))
 html_parts.append('<hr class="top-divider">\n')
-html_parts.append(section_html(culture_breaking, culture_recent, CULTURE_PATTERN,
-    "Culture Breaking News", "Today's Culture Headlines",
-    "No breaking culture news in the last 3 hours.", "No additional culture headlines right now."))
+html_parts.append(section_block("section-culture", "culture-color",
+    culture_breaking, culture_recent, "Culture Breaking News", "Today&#39;s Culture Headlines"))
 
 html_parts.append("""
+<!-- ══ YOUTUBE AUTO-MUTE ══ -->
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
 let players = [];
@@ -1288,6 +1597,38 @@ function onYouTubeIframeAPIReady() {
         });
     }, 1200);
 }
+
+// ══ NEW-SINCE-LAST-VISIT: dim articles the user has already seen ══
+// On each load we compare current article links against what was stored last visit.
+// Articles NOT in the stored set get a white dot (handled in Python above).
+// After marking, we save the current full set so next visit can diff against it.
+(function() {
+    const STORE_KEY = 'mp_seen_links';
+    let seenLinks = new Set();
+    try {
+        const raw = localStorage.getItem(STORE_KEY);
+        if (raw) seenLinks = new Set(JSON.parse(raw));
+    } catch(e) {}
+
+    // Collect all article links on page
+    const currentLinks = [];
+    document.querySelectorAll('[data-link]').forEach(el => {
+        const lnk = el.getAttribute('data-link');
+        if (lnk) currentLinks.push(lnk);
+        // Dim items that were seen on a prior visit (and are NOT hot/new)
+        if (seenLinks.has(lnk) && !el.querySelector('.new-dot')) {
+            el.classList.add('seen-item');
+        }
+    });
+
+    // Save everything visible now as "seen" for next visit
+    try {
+        const merged = [...seenLinks, ...currentLinks];
+        // Keep the set from growing unbounded — cap at 2000 entries
+        const trimmed = merged.slice(-2000);
+        localStorage.setItem(STORE_KEY, JSON.stringify(trimmed));
+    } catch(e) {}
+})();
 </script>
 </body></html>
 """)
