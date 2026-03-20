@@ -1377,12 +1377,6 @@ html_parts.append(f"""<!DOCTYPE html>
     .youtube-inset {{ border-radius: 4px; overflow: hidden; aspect-ratio: 16/9; width: 100%; }}
     .youtube-inset iframe {{ width: 100%; height: 100%; border: none; display: block; }}
 
-    /* ── Header ── */
-    .header {{ padding: 14px 20px 10px 20px; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }}
-    h1 {{ color: #FFFFFF; text-decoration: underline; font-size: 2.2em; }}
-    .byline {{ color: #aaaaaa; font-size: 1.05em; }}
-    .update {{ color: #aaaaaa; font-size: 0.85em; }}
-
     /* ── Section titles and layout ── */
     .section-title {{
         font-size: 1.6em; margin: 0 0 6px; font-weight: bold;
@@ -1441,6 +1435,66 @@ html_parts.append(f"""<!DOCTYPE html>
     .column {{ flex: 1; min-width: 300px; }}
     .section-wrap {{ padding: 0 0 10px 0; }}
 
+    /* ── Light mode toggle pill ── */
+    .nav-spacer {{ flex: 1 1 auto; min-width: 8px; }}
+    .mode-toggle {{
+        display: flex; align-items: center; gap: 7px;
+        flex-shrink: 0; margin-left: 10px; cursor: pointer; user-select: none;
+    }}
+    .mode-toggle .mode-label {{
+        font-size: 0.70em; color: #888888; font-weight: bold;
+        letter-spacing: 0.06em; text-transform: uppercase;
+    }}
+    .toggle-pill {{
+        width: 38px; height: 20px; border-radius: 10px;
+        background: #333333; border: 1px solid #555;
+        position: relative; transition: background 0.25s; flex-shrink: 0;
+    }}
+    .toggle-pill::after {{
+        content: ''; position: absolute; top: 2px; left: 2px;
+        width: 14px; height: 14px; border-radius: 50%;
+        background: #888888; transition: left 0.25s, background 0.25s;
+    }}
+    body.light-mode .toggle-pill {{ background: #dde0e4; border-color: #bbb; }}
+    body.light-mode .toggle-pill::after {{ left: 20px; background: #333; }}
+    body.light-mode .mode-toggle .mode-label {{ color: #555; }}
+    body.light-mode {{ background: #FFFFFF; color: #111111; }}
+    body.light-mode .sticky-nav {{ background: #F5F5F5; border-bottom-color: #B30000; }}
+    body.light-mode .sticky-nav .site-name {{ color: #111111; }}
+    body.light-mode .sticky-nav .site-name:hover {{ color: #555; }}
+    body.light-mode .sticky-nav a {{ color: #444; }}
+    body.light-mode .sticky-nav a:hover {{ color: #111111; }}
+    body.light-mode .breaking-banner {{ background: #B30000; color: #FFFFFF; }}
+    body.light-mode .breaking-banner .bb-label {{ background: #FFFFFF; color: #B30000; }}
+    body.light-mode .banner {{ background: #e6ecf5; }}
+    body.light-mode .title {{ color: #111111; }}
+    body.light-mode .ts-label {{ color: #777; }}
+    body.light-mode .src-label {{ color: #888; }}
+    body.light-mode .new-dot {{ color: #333; }}
+    body.light-mode .src-summary {{ color: #999; }}
+    body.light-mode .headline {{ border-bottom-color: #e4e4e4; }}
+    body.light-mode .headline.seen-item {{ opacity: 0.42; }}
+    body.light-mode .cluster {{ background: #F8F8F8; border-left-color: #ccc; border-bottom-color: #e4e4e4; }}
+    body.light-mode .cluster-badge {{ background: #e0e0e0; color: #333; }}
+    body.light-mode .cluster-sources {{ color: #aaa; }}
+    body.light-mode .cluster-item {{ border-bottom-color: #eee; }}
+    body.light-mode .link {{ color: #888; }}
+    body.light-mode .link:hover {{ color: #111; }}
+    body.light-mode .top-divider {{ background: #e4e4e4; }}
+    body.light-mode .site-footer {{ background: #F5F5F5; border-top-color: #e0e0e0; }}
+    body.light-mode .site-footer h1 {{ color: #111111; }}
+    body.light-mode .site-footer .byline {{ color: #555; }}
+    body.light-mode .site-footer .update {{ color: #888; }}
+    /* ── Site footer ── */
+    .site-footer {{
+        margin-top: 50px; padding: 30px 20px 40px 20px;
+        border-top: 2px solid #222222; text-align: center;
+        background: #0d0d0d; color: #555;
+    }}
+    .site-footer h1 {{ font-size: 1.8em; text-decoration: underline; color: #FFFFFF; margin-bottom: 6px; }}
+    .site-footer .byline {{ font-size: 0.95em; color: #888; display: block; margin-bottom: 4px; }}
+    .site-footer .update {{ font-size: 0.8em; color: #555; display: block; }}
+
     /* ── Mobile overrides ── */
     @media (max-width: 900px) {{
         /* Hide video section entirely — don't even load layout space */
@@ -1451,9 +1505,6 @@ html_parts.append(f"""<!DOCTYPE html>
         .sticky-nav {{ gap: 0; padding: 0 8px; }}
         .sticky-nav .site-name {{ font-size: 0.85em; margin-right: 10px; }}
         .sticky-nav a {{ padding: 0 10px; font-size: 0.72em; }}
-
-        .header {{ padding: 10px 14px 8px 14px; gap: 8px; }}
-        h1 {{ font-size: 1.6em; }}
 
         .container {{ flex-direction: column; gap: 0; padding: 0 14px; }}
         .column {{ min-width: 0; width: 100%; }}
@@ -1487,6 +1538,13 @@ html_parts.append(f"""<!DOCTYPE html>
         /* Cluster cards on mobile */
         .cluster {{ padding: 8px 10px 4px 10px; }}
         .cluster-badge {{ font-size: 0.78em; }}
+        /* Light mode Full Article button on mobile */
+        body.light-mode .link {{
+            background: #eeeeee; border-color: #cccccc; color: #555;
+        }}
+        body.light-mode .link:hover, body.light-mode .link:active {{
+            background: #dddddd; color: #111111;
+        }}
     }}
     </style>
 </head>
@@ -1494,12 +1552,17 @@ html_parts.append(f"""<!DOCTYPE html>
 
 <!-- ══ STICKY NAVIGATION BAR ══ -->
 <nav class="sticky-nav">
-    <span class="site-name">The Mitchell Post</span>
+    <a href="#" class="site-name" aria-label="Back to top">The Mitchell Post</a>
     <a href="#section-us"      class="nav-us">US News</a>
     <a href="#section-mideast" class="nav-mideast">Middle East</a>
     <a href="#section-tech"    class="nav-tech">Tech &amp; Life</a>
     <a href="#section-sports"  class="nav-sports">Sports</a>
     <a href="#section-culture" class="nav-culture">Culture</a>
+    <span class="nav-spacer"></span>
+    <label class="mode-toggle" id="mode-toggle" title="Toggle light / dark mode">
+        <span class="mode-label" id="mode-label">Light</span>
+        <span class="toggle-pill"></span>
+    </label>
 </nav>
 
 """)
@@ -1529,12 +1592,6 @@ html_parts.append(f"""
     </div>
 </div>
 
-<!-- ══ MASTHEAD ══ -->
-<div class="header">
-    <h1>The Mitchell Post</h1>
-    <span class="byline">By Sean Mitchell</span>
-    <span class="update">updated at {update_time}</span>
-</div>
 """)
 
 def section_block(section_id, color_class, breaking_items, recent_items,
@@ -1629,7 +1686,33 @@ function onYouTubeIframeAPIReady() {
         localStorage.setItem(STORE_KEY, JSON.stringify(trimmed));
     } catch(e) {}
 })();
+
+// Light mode toggle
+(function() {
+    var LKEY = 'mp_light_mode';
+    var tog = document.getElementById('mode-toggle');
+    var lbl = document.querySelector('#mode-toggle .mode-label');
+    function applyMode(light) {
+        document.body.classList.toggle('light-mode', light);
+        if (lbl) lbl.textContent = light ? 'Dark' : 'Light';
+    }
+    var sv = null;
+    try { sv = localStorage.getItem(LKEY); } catch(e) {}
+    applyMode(sv === '1');
+    if (tog) tog.addEventListener('click', function() {
+        var on = document.body.classList.contains('light-mode');
+        applyMode(!on);
+        try { localStorage.setItem(LKEY, on ? '0' : '1'); } catch(e) {}
+    });
+})();
 </script>
+
+<footer class="site-footer">
+    <h1>The Mitchell Post</h1>
+    <span class="byline">By Sean Mitchell</span>
+    <span class="update">updated at {update_time}</span>
+</footer>
+
 </body></html>
 """)
 
