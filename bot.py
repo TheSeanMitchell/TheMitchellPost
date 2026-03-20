@@ -1491,6 +1491,7 @@ html_parts.append(f"""<!DOCTYPE html>
     .mode-toggle {{
         display: flex; align-items: center; gap: 7px;
         flex-shrink: 0; margin-left: 10px; cursor: pointer; user-select: none;
+        background: none; border: none; padding: 0; font-family: inherit;
     }}
     .mode-toggle .mode-label {{
         font-size: 0.70em; color: #888888; font-weight: bold;
@@ -1751,14 +1752,10 @@ html_parts.append(f"""<!DOCTYPE html>
     <a href="#section-sports"  class="nav-sports">Sports</a>
     <a href="#section-culture" class="nav-culture">Culture</a>
     <span class="nav-spacer"></span>
-    <label class="mode-toggle" id="mode-toggle" title="Toggle light / dark mode">
+    <button class="mode-toggle" id="mode-toggle" title="Toggle light / dark mode" type="button">
         <span class="mode-label" id="mode-label">Light</span>
         <span class="toggle-pill"></span>
-    </label>
-    <label class="mode-toggle" id="font-toggle" title="Toggle font size" style="margin-left:6px;">
-        <span class="mode-label" id="font-label">Large</span>
-        <span class="toggle-pill" id="font-pill"></span>
-    </label>
+    </button>
 </nav>
 
 """)
@@ -1776,7 +1773,7 @@ if show_breaking_banner:
         f'<span class="bb-label">BREAKING</span>'
         f'<span class="bb-text" id="bb-text"></span>'
         f'<span class="bb-time" id="bb-time"></span>'
-        f'<a class="bb-link" id="bb-link" href="#" target="_blank">[Read]</a>'
+        f'<a class="bb-link" id="bb-link" href="#" target="_blank" style="display:none">[Read]</a>'
         f'<span class="bb-counter" id="bb-counter"></span>'
         f'</div>'
         f'<script>window._bbItems = {banner_json};</script>\n'
@@ -1879,8 +1876,9 @@ html_parts.append("""
 <!-- ══ YOUTUBE AUTO-MUTE ══ -->
 <script src="https://www.youtube.com/iframe_api"></script>
 <script src="https://www.youtube.com/iframe_api"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-// ── YT auto-mute (global so YT API can call it) ──
+// ── YT auto-mute (must be global for YT API callback) ──
 var players = [];
 function onYouTubeIframeAPIReady() {
     setTimeout(function() {
@@ -1907,19 +1905,25 @@ document.addEventListener('DOMContentLoaded', function() {
 // ── ROTATING BREAKING BANNER ──
 (function() {
     var items = window._bbItems || [];
-    if (!items.length) return;
+    var banner = document.getElementById('breaking-banner');
+    if (!items.length || !banner) return;
     var textEl    = document.getElementById('bb-text');
     var timeEl    = document.getElementById('bb-time');
     var linkEl    = document.getElementById('bb-link');
     var counterEl = document.getElementById('bb-counter');
     var idx = 0;
     function show(i) {
-        var item = items[i];
+        var item = items[i % items.length];
         if (!item) return;
-        if (textEl)    { textEl.style.animation='none'; textEl.offsetHeight; textEl.style.animation=''; textEl.textContent = item.title; }
+        if (textEl) {
+            textEl.style.animation = 'none';
+            void textEl.offsetWidth; // force reflow for animation restart
+            textEl.style.animation = '';
+            textEl.textContent = item.title;
+        }
         if (timeEl)    timeEl.textContent = item.time;
-        if (linkEl)    linkEl.href = item.link;
-        if (counterEl) counterEl.textContent = (i+1) + ' / ' + items.length;
+        if (linkEl)  { linkEl.href = item.link; linkEl.style.display = 'inline'; }
+        if (counterEl) counterEl.textContent = (i + 1) + ' / ' + items.length;
     }
     show(0);
     if (items.length > 1) {
@@ -1943,25 +1947,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var article = link.closest('[data-link]') || link.closest('.top-story-card');
         if (!article) return;
         var lnk = article.getAttribute('data-link') || link.getAttribute('href');
-        if (lnk) { readLinks.add(lnk); article.classList.add('seen-item'); saveRead(); }
-    });
-})();
-
-// ── FONT SIZE TOGGLE ──
-(function() {
-    var FKEY = 'mp_large_text';
-    var tog = document.getElementById('font-toggle');
-    var lbl = document.getElementById('font-label');
-    function applyFont(large) {
-        document.body.classList.toggle('large-text', !!large);
-        if (lbl) lbl.textContent = large ? 'Normal' : 'Large';
-    }
-    var sv = null; try { sv = localStorage.getItem(FKEY); } catch(e) {}
-    applyFont(sv === '1');
-    if (tog) tog.addEventListener('click', function() {
-        var on = document.body.classList.contains('large-text');
-        applyFont(!on);
-        try { localStorage.setItem(FKEY, on ? '0' : '1'); } catch(e) {}
+        if (lnk && lnk !== '#') { readLinks.add(lnk); article.classList.add('seen-item'); saveRead(); }
     });
 })();
 
@@ -1972,48 +1958,59 @@ document.addEventListener('DOMContentLoaded', function() {
     try { var raw = localStorage.getItem(CKEY); if (raw) collapsed = new Set(JSON.parse(raw)); } catch(e) {}
     function saveCollapsed() { try { localStorage.setItem(CKEY, JSON.stringify([...collapsed])); } catch(e) {} }
     collapsed.forEach(function(id) {
-        var el = document.getElementById(id);
-        if (el) { el.classList.add('collapsed'); }
+        var el  = document.getElementById(id);
         var btn = document.querySelector('[data-target="' + id + '"]');
+        if (el)  el.classList.add('collapsed');
         if (btn) btn.innerHTML = '&#9654;';
     });
     document.addEventListener('click', function(e) {
         var btn = e.target.closest('.section-collapse-btn');
         if (!btn) return;
         var targetId = btn.getAttribute('data-target');
-        var target = document.getElementById(targetId);
+        var target   = document.getElementById(targetId);
         if (!target) return;
-        var isCollapsed = target.classList.contains('collapsed');
-        if (isCollapsed) { target.classList.remove('collapsed'); btn.innerHTML = '&#9660;'; collapsed.delete(targetId); }
-        else             { target.classList.add('collapsed');    btn.innerHTML = '&#9654;'; collapsed.add(targetId); }
+        if (target.classList.contains('collapsed')) {
+            target.classList.remove('collapsed'); btn.innerHTML = '&#9660;'; collapsed.delete(targetId);
+        } else {
+            target.classList.add('collapsed');    btn.innerHTML = '&#9654;'; collapsed.add(targetId);
+        }
         saveCollapsed();
     });
 })();
 
-// ── SEARCH + AI BAR ──
+// ── SEARCH BAR ──
 (function() {
     var input   = document.getElementById('mp-search-input');
     var srchBtn = document.getElementById('search-btn');
     var aiBtn   = document.getElementById('ai-btn');
     var panel   = document.getElementById('ai-panel');
 
-    function doSearch() {
-        var q = input ? input.value.trim() : '';
+    function openSearch() {
+        var q = (input ? input.value : '').trim();
         if (!q) return;
-        window.open('https://search.brave.com/news?q=' + encodeURIComponent(q), '_blank');
+        // Use anchor click trick — never blocked by popup blockers
+        var a = document.createElement('a');
+        a.href = 'https://search.brave.com/news?q=' + encodeURIComponent(q);
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     }
 
-    function doAI() {
-        var q = input ? input.value.trim() : '';
+    function openAI() {
+        var q = (input ? input.value : '').trim();
         if (!q) return;
-        if (panel) { panel.className = 'ai-response-panel active'; panel.innerHTML = '<span class="ai-thinking">Thinking...</span>'; }
+        if (!panel) return;
+        panel.className = 'ai-response-panel active';
+        panel.innerHTML = '<span class="ai-thinking">Thinking\u2026</span>';
         fetch('https://api.anthropic.com/v1/messages', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 model: 'claude-sonnet-4-6',
                 max_tokens: 1000,
-                system: 'You are a news analysis assistant embedded in The Mitchell Post, a news aggregator. Answer questions concisely and factually, focused on news context, fact-checking, and geopolitical analysis. Keep responses under 250 words unless a longer answer is truly needed. Use plain text, no markdown headers.',
+                system: 'You are a news analysis assistant inside The Mitchell Post, a news aggregator. Be concise (under 250 words), factual, focused on news context and fact-checking. Plain text only, no markdown headers.',
                 messages: [{ role: 'user', content: q }]
             })
         })
@@ -2024,15 +2021,17 @@ document.addEventListener('DOMContentLoaded', function() {
             else if (data.error) { text = 'Error: ' + data.error.message; }
             if (panel) panel.innerHTML = text.replace(/\n/g, '<br>');
         })
-        .catch(function() { if (panel) panel.innerHTML = 'Could not reach AI. Check your connection or API key.'; });
+        .catch(function() { if (panel) panel.innerHTML = 'Could not reach AI. Check your connection.'; });
     }
 
-    if (srchBtn) srchBtn.addEventListener('click', doSearch);
-    if (aiBtn)   aiBtn.addEventListener('click', doAI);
+    if (srchBtn) srchBtn.addEventListener('click', function(e) { e.preventDefault(); openSearch(); });
+    if (aiBtn)   aiBtn.addEventListener('click',   function(e) { e.preventDefault(); openAI(); });
     if (input) {
         input.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); doAI(); }
-            else if (e.key === 'Enter') { e.preventDefault(); doSearch(); }
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                if (e.ctrlKey || e.metaKey) { openAI(); } else { openSearch(); }
+            }
         });
     }
 })();
@@ -2042,82 +2041,67 @@ document.addEventListener('DOMContentLoaded', function() {
     var OKEY    = 'mp_section_order';
     var wrapper = document.getElementById('sections-wrapper');
     if (!wrapper) return;
-
     function getSections() { return Array.from(wrapper.querySelectorAll(':scope > .section-wrap')); }
     function getDividers() { return Array.from(wrapper.querySelectorAll(':scope > .top-divider')); }
-
     function saveOrder() {
-        var order = getSections().map(function(s) { return s.id; });
-        try { localStorage.setItem(OKEY, JSON.stringify(order)); } catch(e) {}
+        try { localStorage.setItem(OKEY, JSON.stringify(getSections().map(function(s) { return s.id; }))); } catch(e) {}
     }
-
     function restoreOrder() {
         var saved = null;
         try { saved = JSON.parse(localStorage.getItem(OKEY)); } catch(e) {}
-        if (!saved || !Array.isArray(saved) || !saved.length) return;
-        var sections = {};
-        getSections().forEach(function(s) { sections[s.id] = s; });
+        if (!saved || !saved.length) return;
+        var smap = {}; getSections().forEach(function(s) { smap[s.id] = s; });
         var dividers = getDividers();
         while (wrapper.firstChild) wrapper.removeChild(wrapper.firstChild);
         saved.forEach(function(id, i) {
-            if (sections[id]) wrapper.appendChild(sections[id]);
+            if (smap[id]) wrapper.appendChild(smap[id]);
             if (i < saved.length - 1 && dividers[i]) wrapper.appendChild(dividers[i]);
         });
     }
     restoreOrder();
-
     var dragSrc = null;
     function attachDrag(section) {
         section.setAttribute('draggable', 'true');
-        section.addEventListener('dragstart', function(e) {
-            dragSrc = section;
-            setTimeout(function() { section.classList.add('dragging'); }, 0);
-            e.dataTransfer.effectAllowed = 'move';
-        });
-        section.addEventListener('dragend', function() {
-            section.classList.remove('dragging');
-            wrapper.querySelectorAll('.drag-over').forEach(function(el) { el.classList.remove('drag-over'); });
-            saveOrder();
-        });
-        section.addEventListener('dragover', function(e) {
-            e.preventDefault(); e.dataTransfer.dropEffect = 'move';
-            if (section !== dragSrc) section.classList.add('drag-over');
-            return false;
-        });
-        section.addEventListener('dragleave', function() { section.classList.remove('drag-over'); });
-        section.addEventListener('drop', function(e) {
-            e.stopPropagation(); e.preventDefault();
-            section.classList.remove('drag-over');
-            if (!dragSrc || dragSrc === section) return;
-            wrapper.insertBefore(dragSrc, section);
-            saveOrder();
-            return false;
-        });
+        section.addEventListener('dragstart', function(e) { dragSrc = section; setTimeout(function() { section.classList.add('dragging'); }, 0); e.dataTransfer.effectAllowed = 'move'; });
+        section.addEventListener('dragend',   function()  { section.classList.remove('dragging'); wrapper.querySelectorAll('.drag-over').forEach(function(el) { el.classList.remove('drag-over'); }); saveOrder(); });
+        section.addEventListener('dragover',  function(e) { e.preventDefault(); if (section !== dragSrc) section.classList.add('drag-over'); return false; });
+        section.addEventListener('dragleave', function()  { section.classList.remove('drag-over'); });
+        section.addEventListener('drop',      function(e) { e.stopPropagation(); e.preventDefault(); section.classList.remove('drag-over'); if (!dragSrc || dragSrc === section) return; wrapper.insertBefore(dragSrc, section); saveOrder(); return false; });
     }
     getSections().forEach(attachDrag);
 })();
 
-// ── LIGHT MODE TOGGLE (auto detects system preference on first visit) ──
+// ── LIGHT / DARK MODE TOGGLE ──
+// Uses a <button> (not <label>) for reliable click on all devices/browsers
 (function() {
     var LKEY = 'mp_light_mode';
-    var tog  = document.getElementById('mode-toggle');
-    var lbl  = document.querySelector('#mode-toggle .mode-label');
+    var btn  = document.getElementById('mode-toggle');
+    var lbl  = btn ? btn.querySelector('.mode-label') : null;
+
     function applyMode(light) {
         document.body.classList.toggle('light-mode', !!light);
         if (lbl) lbl.textContent = light ? 'Dark' : 'Light';
     }
-    var sv = null; try { sv = localStorage.getItem(LKEY); } catch(e) {}
+
+    // Determine initial mode
+    var sv = null;
+    try { sv = localStorage.getItem(LKEY); } catch(e) {}
     if (sv === '1')      { applyMode(true); }
     else if (sv === '0') { applyMode(false); }
     else {
         var prefersLight = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
         applyMode(prefersLight);
     }
-    if (tog) tog.addEventListener('click', function() {
-        var on = document.body.classList.contains('light-mode');
-        applyMode(!on);
-        try { localStorage.setItem(LKEY, on ? '0' : '1'); } catch(e) {}
-    });
+
+    // Click handler on the button
+    if (btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            var isLight = document.body.classList.contains('light-mode');
+            applyMode(!isLight);
+            try { localStorage.setItem(LKEY, isLight ? '0' : '1'); } catch(e2) {}
+        });
+    }
 })();
 
 }); // end DOMContentLoaded
