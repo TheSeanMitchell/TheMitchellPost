@@ -10,6 +10,7 @@ print("Starting bot...")
 CURRENT_DIR = os.getcwd()
 print(f"Saving files to current directory: {CURRENT_DIR}")
 INDEX_HTML = os.path.join(CURRENT_DIR, "index.html")
+FEED_JSON  = os.path.join(CURRENT_DIR, "feed.json")
 
 # ====================== FRIENDLY SOURCE NAMES ======================
 SOURCE_MAP = {
@@ -1278,6 +1279,29 @@ def source_summary(items):
     sources = set(get_friendly_source(it[2]) for it in items)
     return f'<p class="src-summary">{len(items)} headlines \u00b7 {len(sources)} sources</p>\n'
 
+
+# ====================== TOP STORIES STRIP ======================
+def build_top_stories(max_stories=5):
+    """Pull the top multi-source clusters across all sections for the pinned strip."""
+    all_section_items = [
+        ("US",          us_breaking + us_recent),
+        ("Middle East", middle_breaking + middle_recent),
+        ("Tech",        tech_breaking + tech_recent),
+        ("Sports",      sports_breaking + sports_recent),
+        ("Culture",     culture_breaking + culture_recent),
+    ]
+    top = []
+    for section_label, items in all_section_items:
+        clusters = cluster_items(items, min_shared=3)
+        multi = [cl for cl in clusters if len(cl) >= 2]
+        for cl in multi:
+            cl.sort(key=lambda x: x[0], reverse=True)
+            top.append((len(cl), cl[0][0], section_label, cl))
+    top.sort(key=lambda x: (x[0], x[1]), reverse=True)
+    return top[:max_stories]
+
+top_stories = build_top_stories()
+
 # ====================== BUILD HTML ======================
 # Collect all timestamps across ALL items for the breaking-news banner check
 all_items_flat = (
@@ -1320,7 +1344,8 @@ html_parts.append(f"""<!DOCTYPE html>
     * {{ box-sizing: border-box; margin: 0; padding: 0; }}
     html {{ scroll-behavior: smooth; }}
     body {{ background: #121212; color: #FFFFFF; font-family: Arial, sans-serif; line-height: 1.6;
-            padding-top: 48px; /* clearance for sticky nav */ }}
+            padding-top: 48px; font-size: 15px; }}
+    body.large-text {{ font-size: 19px; }}
 
     /* ── Sticky nav bar ── */
     .sticky-nav {{
@@ -1495,6 +1520,98 @@ html_parts.append(f"""<!DOCTYPE html>
     .site-footer .byline {{ font-size: 0.95em; color: #888; display: block; margin-bottom: 4px; }}
     .site-footer .update {{ font-size: 0.8em; color: #555; display: block; }}
 
+    /* ── Search + AI bar ── */
+    .search-bar-wrap {{
+        max-width: 1400px; margin: 0 auto 20px auto; padding: 0 20px;
+    }}
+    .search-bar-inner {{
+        display: flex; gap: 0; background: #1a1a1a;
+        border: 1px solid #333; border-radius: 6px; overflow: hidden;
+    }}
+    .search-bar-inner input {{
+        flex: 1; background: transparent; border: none; outline: none;
+        color: #FFFFFF; font-size: 0.95em; padding: 10px 14px;
+        font-family: Arial, sans-serif;
+    }}
+    .search-bar-inner input::placeholder {{ color: #666; }}
+    .search-bar-btn {{
+        background: #1e1e1e; border: none; border-left: 1px solid #333;
+        color: #aaaaaa; font-size: 0.78em; font-weight: bold;
+        letter-spacing: 0.05em; text-transform: uppercase;
+        padding: 0 14px; cursor: pointer; transition: background 0.15s, color 0.15s;
+        white-space: nowrap;
+    }}
+    .search-bar-btn:hover {{ background: #2a2a2a; color: #FFFFFF; }}
+    .search-bar-btn.ai-btn {{ border-left-color: #333; color: #7aadff; }}
+    .search-bar-btn.ai-btn:hover {{ background: #162030; color: #FFFFFF; }}
+    /* AI response panel */
+    .ai-response-panel {{
+        display: none; margin-top: 8px; background: #161c26;
+        border: 1px solid #1e3050; border-radius: 6px;
+        padding: 14px 16px; font-size: 0.92em; line-height: 1.65;
+        color: #d0d8e8; max-height: 400px; overflow-y: auto;
+    }}
+    .ai-response-panel.active {{ display: block; }}
+    .ai-response-panel .ai-thinking {{
+        color: #7aadff; font-style: italic; animation: blink 1s step-end infinite;
+    }}
+    @keyframes blink {{ 50% {{ opacity: 0; }} }}
+    /* Light mode search */
+    body.light-mode .search-bar-inner {{
+        background: #FFFFFF; border-color: #cccccc;
+    }}
+    body.light-mode .search-bar-inner input {{ color: #000000; }}
+    body.light-mode .search-bar-inner input::placeholder {{ color: #aaaaaa; }}
+    body.light-mode .search-bar-btn {{ background: #F0F0F0; color: #333333; border-left-color: #cccccc; }}
+    body.light-mode .search-bar-btn:hover {{ background: #E0E0E0; color: #000000; }}
+    body.light-mode .search-bar-btn.ai-btn {{ color: #0055aa; }}
+    body.light-mode .search-bar-btn.ai-btn:hover {{ background: #e6eef8; color: #000000; }}
+    body.light-mode .ai-response-panel {{ background: #f0f4ff; border-color: #b0c4e8; color: #111111; }}
+
+    /* ── Top Stories strip ── */
+    .top-stories-strip {{
+        max-width: 1400px; margin: 0 auto 20px auto; padding: 0 20px;
+    }}
+    .top-stories-title {{
+        font-size: 0.72em; font-weight: bold; letter-spacing: 0.1em;
+        text-transform: uppercase; color: #888888; margin-bottom: 10px;
+        padding-bottom: 4px; border-bottom: 1px solid #2a2a2a;
+    }}
+    .top-story-card {{
+        background: #1a1a1a; border-left: 3px solid #B30000;
+        padding: 10px 14px; margin-bottom: 8px; border-radius: 2px;
+    }}
+    .top-story-card .ts-section-tag {{
+        font-size: 0.68em; font-weight: bold; letter-spacing: 0.08em;
+        text-transform: uppercase; margin-right: 8px; opacity: 0.7;
+    }}
+    .top-story-card .ts-badge {{
+        background: #333; color: #ccc; font-size: 0.68em;
+        padding: 1px 6px; border-radius: 8px; margin-right: 8px;
+    }}
+    .top-story-card .ts-headline {{ color: #FFFFFF; font-size: 0.95em; }}
+    .top-story-card .ts-link {{ color: #545454; text-decoration: underline; font-size: 0.8em; margin-left: 6px; }}
+    .top-story-card .ts-link:hover {{ color: #FFFFFF; }}
+    body.light-mode .top-stories-title {{ color: #555555; border-bottom-color: #e0e0e0; }}
+    body.light-mode .top-story-card {{ background: #F4F4F4; border-left-color: #B30000; }}
+    body.light-mode .top-story-card .ts-badge {{ background: #e0e0e0; color: #222222; }}
+    body.light-mode .top-story-card .ts-headline {{ color: #000000; }}
+    body.light-mode .top-story-card .ts-link {{ color: #777777; }}
+    body.light-mode .top-story-card .ts-link:hover {{ color: #000000; }}
+
+    /* ── Section collapse ── */
+    .section-collapse-btn {{
+        background: none; border: none; cursor: pointer;
+        color: inherit; font-size: 1em; padding: 0 0 0 8px;
+        line-height: 1; opacity: 0.6; transition: opacity 0.15s;
+        vertical-align: middle; flex-shrink: 0;
+    }}
+    .section-collapse-btn:hover {{ opacity: 1; }}
+    .section-title-row {{ display: flex; align-items: center; margin-bottom: 6px; }}
+    .section-title-row .section-title {{ margin-bottom: 0; }}
+    .section-columns {{ transition: none; }}
+    .section-columns.collapsed {{ display: none; }}
+
     /* ── Mobile overrides ── */
     @media (max-width: 900px) {{
         /* Hide video section entirely — don't even load layout space */
@@ -1546,6 +1663,28 @@ html_parts.append(f"""<!DOCTYPE html>
             background: #cccccc; color: #000000;
         }}
     }}
+    /* ── Print stylesheet ── */
+    @media print {{
+        .sticky-nav, .banner, .breaking-banner, .search-bar-wrap,
+        .top-stories-strip, .section-collapse-btn, .link,
+        .site-footer .update, script {{ display: none !important; }}
+        body {{ background: #FFFFFF !important; color: #000000 !important;
+                font-size: 11pt; padding-top: 0 !important; }}
+        .container {{ display: block !important; }}
+        .column {{ width: 100% !important; }}
+        .headline, .cluster {{ border-color: #cccccc !important; background: none !important; }}
+        .title {{ color: #000000 !important; font-size: 10pt; }}
+        .ts-label, .src-label {{ color: #444444 !important; }}
+        .section-title {{ color: #000000 !important; border-bottom: 1pt solid #000; }}
+        .cluster {{ border-left-color: #000 !important; }}
+        .cluster-badge {{ background: #eee !important; color: #000 !important; }}
+        a {{ color: #000000 !important; text-decoration: none !important; }}
+        .site-footer {{ border-top: 1pt solid #000 !important;
+                        background: none !important; color: #000 !important; }}
+        .site-footer h1 {{ color: #000000 !important; }}
+        .section-columns.collapsed {{ display: block !important; }}
+    }}
+
     </style>
 </head>
 <body>
@@ -1562,6 +1701,10 @@ html_parts.append(f"""<!DOCTYPE html>
     <label class="mode-toggle" id="mode-toggle" title="Toggle light / dark mode">
         <span class="mode-label" id="mode-label">Light</span>
         <span class="toggle-pill"></span>
+    </label>
+    <label class="mode-toggle" id="font-toggle" title="Toggle font size" style="margin-left:6px;">
+        <span class="mode-label" id="font-label">Large</span>
+        <span class="toggle-pill" id="font-pill"></span>
     </label>
 </nav>
 
@@ -1604,18 +1747,54 @@ def section_block(section_id, color_class, breaking_items, recent_items,
         f'<div id="{section_id}" class="section-wrap">\n'
         f'<div class="container">\n'
         f'<div class="column">\n'
-        f'<h2 class="section-title {color_class}">{breaking_title}</h2>\n'
+        f'<div class="section-title-row">'
+        f'<h2 class="section-title {color_class}">{breaking_title}</h2>'
+        f'<button class="section-collapse-btn" data-target="{section_id}-cols" aria-label="Collapse section" title="Collapse / expand">&#9660;</button>'
+        f'</div>\n'
+        f'<div id="{section_id}-cols" class="section-columns">\n'
         f'{b_summary}'
         f'{b_content}'
         f'</div>\n'
+        f'</div>\n'
         f'<div class="column">\n'
-        f'<h2 class="section-title {color_class}">{recent_title}</h2>\n'
+        f'<div class="section-title-row">'
+        f'<h2 class="section-title {color_class}">{recent_title}</h2>'
+        f'</div>\n'
         f'{r_summary}'
         f'{r_content}'
         f'</div>\n'
         f'</div>\n'
         f'</div>\n'
     )
+
+# ── Top Stories strip HTML ──
+if top_stories:
+    ts_html = '<div class="top-stories-strip"><p class="top-stories-title">Top Stories &mdash; Most Covered Right Now</p>\n'
+    for n_src, lead_ts, section_label, cluster in top_stories:
+        lead_ts2, lead_title, lead_source, lead_link = cluster[0]
+        safe_title = lead_title.replace('<','&lt;').replace('>','&gt;')
+        safe_title = safe_title[0].upper() + safe_title[1:] if safe_title else safe_title
+        ts_html += (
+            f'<div class="top-story-card">'
+            f'<span class="ts-section-tag">{section_label}</span>'
+            f'<span class="ts-badge">{n_src} sources</span>'
+            f'<span class="ts-headline">{safe_title}</span>'
+            f'<a class="ts-link" href="{lead_link}" target="_blank">[Read]</a>'
+            f'</div>\n'
+        )
+    ts_html += '</div>\n'
+    html_parts.append(ts_html)
+
+# ── Search + AI bar HTML ──
+html_parts.append('''<div class="search-bar-wrap">
+    <div class="search-bar-inner">
+        <input type="text" id="mp-search-input" placeholder="Search news (Enter) or ask AI (Ctrl+Enter / AI button)..." autocomplete="off" />
+        <button class="search-bar-btn" id="search-btn" title="Search Brave News">&#x1F50E; News</button>
+        <button class="search-bar-btn ai-btn" id="ai-btn" title="Ask AI — fact-check, summarize, explain">&#x2728; Ask AI</button>
+    </div>
+    <div class="ai-response-panel" id="ai-panel"></div>
+</div>
+''')
 
 html_parts.append(section_block("section-us", "us-color",
     us_breaking, us_recent, "Breaking US News", "Today&#39;s US Headlines"))
@@ -1697,6 +1876,129 @@ function onYouTubeIframeAPIReady() {
     });
 })();
 
+// ══ FONT SIZE TOGGLE ══
+(function() {
+    var FKEY = 'mp_large_text';
+    var tog  = document.getElementById('font-toggle');
+    var lbl  = document.getElementById('font-label');
+    function applyFont(large) {
+        document.body.classList.toggle('large-text', large);
+        if (lbl) lbl.textContent = large ? 'Normal' : 'Large';
+    }
+    var sv = null;
+    try { sv = localStorage.getItem(FKEY); } catch(e) {}
+    applyFont(sv === '1');
+    if (tog) tog.addEventListener('click', function() {
+        var on = document.body.classList.contains('large-text');
+        applyFont(!on);
+        try { localStorage.setItem(FKEY, on ? '0' : '1'); } catch(e) {}
+    });
+})();
+
+// ══ SECTION COLLAPSE ══
+(function() {
+    var CKEY = 'mp_collapsed';
+    var collapsed = new Set();
+    try {
+        var raw = localStorage.getItem(CKEY);
+        if (raw) collapsed = new Set(JSON.parse(raw));
+    } catch(e) {}
+
+    function saveCollapsed() {
+        try { localStorage.setItem(CKEY, JSON.stringify([...collapsed])); } catch(e) {}
+    }
+
+    // Restore collapsed state
+    collapsed.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) {
+            el.classList.add('collapsed');
+            var btn = document.querySelector('[data-target="' + id + '"]');
+            if (btn) btn.innerHTML = '&#9654;';
+        }
+    });
+
+    // Click handler for all collapse buttons
+    document.addEventListener('click', function(e) {
+        var btn = e.target.closest('.section-collapse-btn');
+        if (!btn) return;
+        var targetId = btn.getAttribute('data-target');
+        var target = document.getElementById(targetId);
+        if (!target) return;
+        var isCollapsed = target.classList.contains('collapsed');
+        if (isCollapsed) {
+            target.classList.remove('collapsed');
+            btn.innerHTML = '&#9660;';
+            collapsed.delete(targetId);
+        } else {
+            target.classList.add('collapsed');
+            btn.innerHTML = '&#9654;';
+            collapsed.add(targetId);
+        }
+        saveCollapsed();
+    });
+})();
+
+// ══ SEARCH + AI BAR ══
+(function() {
+    var input   = document.getElementById('mp-search-input');
+    var srchBtn = document.getElementById('search-btn');
+    var aiBtn   = document.getElementById('ai-btn');
+    var panel   = document.getElementById('ai-panel');
+
+    function doSearch() {
+        var q = input ? input.value.trim() : '';
+        if (!q) return;
+        window.open('https://search.brave.com/news?q=' + encodeURIComponent(q), '_blank');
+    }
+
+    function doAI() {
+        var q = input ? input.value.trim() : '';
+        if (!q) return;
+        panel.className = 'ai-response-panel active';
+        panel.innerHTML = '<span class="ai-thinking">Thinking...</span>';
+
+        var systemPrompt = 'You are a news analysis assistant embedded in The Mitchell Post, a news aggregator. ' +
+            'Answer questions concisely and factually. Focus on news context, fact-checking, and geopolitical analysis. ' +
+            'Keep responses under 250 words unless a longer answer is truly needed. Use plain text, no markdown headers.';
+
+        fetch('https://api.anthropic.com/v1/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                model: 'claude-sonnet-4-6',
+                max_tokens: 1000,
+                system: systemPrompt,
+                messages: [{ role: 'user', content: q }]
+            })
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            var text = '';
+            if (data.content && data.content.length > 0) {
+                data.content.forEach(function(block) {
+                    if (block.type === 'text') text += block.text;
+                });
+            } else if (data.error) {
+                text = 'Error: ' + data.error.message;
+            }
+            panel.innerHTML = text.replace(/\n/g, '<br>');
+        })
+        .catch(function(err) {
+            panel.innerHTML = 'Could not reach AI. Check your connection.';
+        });
+    }
+
+    if (srchBtn) srchBtn.addEventListener('click', doSearch);
+    if (aiBtn)   aiBtn.addEventListener('click', doAI);
+    if (input) {
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { doAI(); }
+            else if (e.key === 'Enter') { doSearch(); }
+        });
+    }
+})();
+
 // Light mode toggle
 (function() {
     var LKEY = 'mp_light_mode';
@@ -1734,6 +2036,41 @@ try:
     print(f"SUCCESS: index.html saved to {INDEX_HTML}")
 except Exception as e:
     print(f"ERROR saving file: {str(e)}")
+
+# ── Write feed.json ──
+import json as _json
+try:
+    feed_items = []
+    sections = [
+        ("US News",      us_breaking + us_recent),
+        ("Middle East",  middle_breaking + middle_recent),
+        ("Tech & Life",  tech_breaking + tech_recent),
+        ("Sports",       sports_breaking + sports_recent),
+        ("Culture",      culture_breaking + culture_recent),
+    ]
+    for section_name, items in sections:
+        for ts, title, source, link in items:
+            feed_items.append({
+                "section":   section_name,
+                "title":     title,
+                "source":    get_friendly_source(source),
+                "link":      link,
+                "published": datetime.utcfromtimestamp(ts).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            })
+    feed_items.sort(key=lambda x: x["published"], reverse=True)
+    feed_doc = {
+        "version":       "1.1",
+        "title":         "The Mitchell Post",
+        "home_page_url": "https://mitchellpost.github.io",
+        "description":   "Curated news across US, Middle East, Tech, Sports, and Culture",
+        "updated":       (datetime.utcnow()).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "items": feed_items
+    }
+    with open(FEED_JSON, "w", encoding="utf-8") as fj:
+        _json.dump(feed_doc, fj, ensure_ascii=False, indent=2)
+    print(f"SUCCESS: feed.json saved ({len(feed_items)} items)")
+except Exception as e:
+    print(f"WARNING: feed.json not saved: {str(e)}")
 
 print("\nScript finished.")
 print("Files saved to current directory.")
