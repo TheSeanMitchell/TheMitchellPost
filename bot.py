@@ -1419,8 +1419,9 @@ def render_column(items):
             # data-link used by JS for "seen" tracking; data-ts for breaking-news banner
             hot_dot = '<span class="new-dot" title="Published in the last 30 minutes">&#9679;</span> ' if is_hot else ''
             safe_dtitle = display_title.replace('"', '&quot;')
+            anchor_id = "hl-" + hashlib.md5(link.encode()).hexdigest()[:8]
             out += (
-                f'<div class="headline" data-link="{link}" data-ts="{int(ts)}">'
+                f'<div id="{anchor_id}" class="headline" data-link="{link}" data-ts="{int(ts)}">'
                 f'{hot_dot}'
                 f'<span class="title">{display_title}</span>'
                 f' <span class="ts-label">{time_str}</span>'
@@ -1442,7 +1443,7 @@ def render_column(items):
             lead_friendly = get_friendly_source(lead_source)
             cluster_id = "cl-" + hashlib.md5(lead_link.encode()).hexdigest()[:8]
             out += (
-                f'<div class="cluster" data-ts="{int(lead_ts)}">'
+                f'<div id="{cluster_id}-anchor" class="cluster" data-ts="{int(lead_ts)}">'
                 f'<div class="cluster-header">'
                 f'{hot_dot}'
                 f'<span class="cluster-badge">{n_sources} sources</span>'
@@ -1632,10 +1633,6 @@ html_parts.append(f"""<!DOCTYPE html>
     .breaking-banner .bb-time {{
         display: none;
     }}
-    .breaking-banner .bb-link {{
-        color: #ffcccc; font-size: 0.78em; flex-shrink: 0; text-decoration: underline;
-    }}
-    .breaking-banner .bb-link:hover {{ color: #FFFFFF; }}
     .breaking-banner .bb-counter {{
         font-size: 0.72em; opacity: 0.6; flex-shrink: 0;
     }}
@@ -2022,6 +2019,16 @@ html_parts.append(f"""<!DOCTYPE html>
         body.light-mode .ts-divider-left {{ border-top-color: #ddd; }}
     }}
 
+    /* ── MRO jump-to-story label ── */
+    .mro-jump {{
+        color: #545454; font-size: 0.78em; margin-left: 6px;
+        text-decoration: underline; cursor: pointer;
+        transition: color 0.15s;
+    }}
+    .mro-card:hover .mro-jump {{ color: #FFFFFF; }}
+    body.light-mode .mro-jump {{ color: #888; }}
+    body.light-mode .mro-card:hover .mro-jump {{ color: #000; }}
+
     /* ── Daily Briefing card accent ── */
     .db-card {{ border-left-color: #005F9E !important; }}
 
@@ -2189,7 +2196,6 @@ if show_breaking_banner:
         f'<span class="bb-label">&#9679; BREAKING</span>'
         f'<span class="bb-text" id="bb-text"></span>'
         f'<span class="bb-time" id="bb-time"></span>'
-        f'<a class="bb-link" id="bb-link" href="#" target="_blank" style="display:none">[Read]</a>'
         f'<span class="bb-counter" id="bb-counter"></span>'
         f'<button class="bb-close" id="bb-close" aria-label="Dismiss banner" title="Dismiss">&#10005;</button>'
         f'</div>'
@@ -2312,12 +2318,20 @@ if top_stories or daily_briefing:
         for section_label, cluster, n_src, lead_ts2, lead_title, lead_link in cards:
             safe_title = lead_title.replace('<','&lt;').replace('>','&gt;')
             safe_title = safe_title[0].upper() + safe_title[1:] if safe_title else safe_title
+            # Build the same anchor ID used by render_column for this story
+            link_hash = hashlib.md5(lead_link.encode()).hexdigest()[:8]
+            # Could be a cluster lead (cl-HASH-anchor) or a single headline (hl-HASH)
+            # We embed both candidates; JS will find whichever exists
+            anchor_cluster = f"cl-{link_hash}-anchor"
+            anchor_single  = f"hl-{link_hash}"
             html += (
-                f'<div class="top-story-card">'
+                f'<div class="top-story-card mro-card" '
+                f'data-anchor-cluster="{anchor_cluster}" data-anchor-single="{anchor_single}" '
+                f'style="cursor:pointer" title="Jump to story on this page">'
                 f'<span class="ts-section-tag">{section_label}</span>'
                 f'<span class="ts-badge">{n_src} sources</span>'
                 f'<span class="ts-headline">{safe_title}</span>'
-                f'<a class="ts-link" href="{lead_link}" target="_blank">[Read]</a>'
+                f'<span class="ts-link mro-jump">[↓ Go to story]</span>'
                 f'</div>\n'
             )
         return html
@@ -2420,7 +2434,43 @@ function onYouTubeIframeAPIReady() {
 
 document.addEventListener('DOMContentLoaded', function() {
 
-// ── LIGHT MODE TOGGLE ──
+// ── MRO CARD SMOOTH SCROLL ──
+(function() {
+    var NAV_HEIGHT = 56; // sticky nav height + a little breathing room
+    document.querySelectorAll('.mro-card').forEach(function(card) {
+        card.addEventListener('click', function() {
+            var anchorCluster = card.getAttribute('data-anchor-cluster');
+            var anchorSingle  = card.getAttribute('data-anchor-single');
+            var target = document.getElementById(anchorCluster) || document.getElementById(anchorSingle);
+            if (!target) return;
+            // If the story is inside a collapsed section, expand it first
+            var section = target.closest('.section-columns');
+            if (section && section.classList.contains('collapsed')) {
+                section.classList.remove('collapsed');
+                var btn = document.querySelector('[data-target="' + section.id + '"]');
+                if (btn) btn.textContent = '▼';
+            }
+            // If it's a cluster that's collapsed, expand it
+            var clusterItems = target.querySelector('.cluster-items-wrap');
+            if (clusterItems && clusterItems.classList.contains('collapsed')) {
+                clusterItems.classList.remove('collapsed');
+                var toggleBtn = target.querySelector('.cluster-toggle-btn');
+                if (toggleBtn) { toggleBtn.textContent = '▲ Hide coverage'; toggleBtn.classList.add('open'); }
+            }
+            var top = target.getBoundingClientRect().top + window.pageYOffset - NAV_HEIGHT;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+            // Brief highlight flash
+            target.style.transition = 'outline 0s';
+            target.style.outline = '2px solid #B30000';
+            setTimeout(function() {
+                target.style.transition = 'outline 0.8s';
+                target.style.outline = 'none';
+            }, 1200);
+        });
+    });
+})();
+
+
 (function() {
     var LKEY = 'mp_light_mode';
     var toggle = document.getElementById('light-mode-toggle');
@@ -2461,7 +2511,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!items.length || !banner) return;
     var textEl    = document.getElementById('bb-text');
     var timeEl    = document.getElementById('bb-time');
-    var linkEl    = document.getElementById('bb-link');
     var counterEl = document.getElementById('bb-counter');
     var closeBtn  = document.getElementById('bb-close');
     var idx = 0;
@@ -2475,7 +2524,6 @@ document.addEventListener('DOMContentLoaded', function() {
             textEl.textContent = item.title;
         }
         if (timeEl)    timeEl.textContent = item.time;
-        if (linkEl)  { linkEl.href = item.link; linkEl.style.display = 'inline'; }
         if (counterEl) counterEl.textContent = (i + 1) + ' / ' + items.length;
     }
     show(0);
