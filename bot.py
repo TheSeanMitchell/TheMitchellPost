@@ -224,6 +224,13 @@ RAW_ME_KEYWORDS = [
     "shahed drone","cyber warfare israel iran","iran war","iran strikes",
     "iran nuclear strikes","operation midnight hammer","iran regime change",
     "irgc strikes","hormuz strait","us israel iran","maximum pressure iran",
+    "qatar's energy","missile sites","missile threat","war rages","drone","drones",
+    "dubai property","oil","energy price","oil fields","military operations",
+    "crude","crude oil","crude exports","tanker","scarcity","rifle",
+    "jews","jewish","israelis","rare earth","vaccine","ground troops",
+    "muslim","lebenon","energy shock","gas-dependent","satellite images","flooding",
+    "nuclear","nuclear energy","kurds","northern iraq","nowruz","top leaders",
+    "energy fallout","humanitarian","humanitarian aid","nuclear submarine",
 ]
 ME_KEYWORDS = set(kw.lower() for kw in RAW_ME_KEYWORDS)
 
@@ -393,6 +400,27 @@ RAW_US_KEYWORDS = [
     "death penalty","border fentanyl","cartel violence","asylum seeker","deportation flight",
     "sanctuary city","immigration court backlog","daca dreamers","visa overstays",
     "chain migration","h1b visa abuse","ai job loss","automation unemployment",
+    "hawaii","marines","amphibious","assault ship","nato allies",
+    "strait of hormuz","missile sites","missile threat","war rages","drone","drones",
+    "wall street","inflation","energy price","stocks","american","americans",
+    "americans expect","americans worry","oil fields","military operations","crude",
+    "crude oil","crude exports","us households","cuba","tanker","scarcity","rifle",
+    "harvard","jeffrey epstein","epstein","ghislaine maxwell","epstein files",
+    "clinton","bill clinton","hillary clinton","kamala harris","gavin newsom",
+    "steven hilton","us election","election campaign","campaign season","sam altman",
+    "openai","rare earth","amazon","vaccine","kc-135","ground troops","new jersey",
+    "mexico","costa rica","costa rican","judge","deportation","deport","deported",
+    "immigration law","pump","wallet","financial crisis","financial","energy shock",
+    "gas-dependent","world cup","satellite images","us deploys","us deployment",
+    "pete hegseth","new york times","homeland security","executive order","flooding",
+    "summer heat","southwest","climate change","governor","swalwell","california",
+    "dea","prosecutors","probe","drug traffickers","overweight","obese","obesity",
+    "fbi agents","cia agents","nuclear","nuclear energy","top leaders","campaigns",
+    "campaign for governor","mail ballots","mail-in ballots","election day","pentagon",
+    "energy fallout","humanitarian","humanitarian aid","protestor","protestors",
+    "corpus christi","michigan","immigration operation","florida","boston",
+    "fuel tax","police","police officer","police officers","nuclear submarine",
+    "reporters","mar-a-lago","palm beach",
     "minimum wage hike","union strike","labor shortage","school choice","curriculum battle",
     "critical race theory","gender ideology","trans athlete","women sports","title ix",
     "biological sex","pronoun debate","big tech monopoly","google antitrust","amazon breakup",
@@ -522,6 +550,10 @@ RAW_SPORTS_KEYWORDS = [
     "march madness scores 2026","super bowl 2026","winter olympics 2026",
     "nfl draft 2026","nba playoffs 2026","mlb opening day 2026","nhl stanley cup 2026",
     "kentucky derby 2026","wimbledon 2026","us open 2026","masters 2026",
+    "world cup","boxing","world boxing","wembley","golf","olympics","olympic",
+    "overtime","brackets","huge lead","all-time","champ","champion","boxer","fighter",
+    "competition","chess","surfing","surfing event","surfing events","surf",
+    "f1","race","races","racing","f1 race","f1 races","f1 racing",
 ]
 SPORTS_KEYWORDS = set(kw.lower() for kw in RAW_SPORTS_KEYWORDS)
 
@@ -631,6 +663,12 @@ RAW_TECH_KEYWORDS = [
     "breakout searches 2026","labubu collectible","kpop demon hunters",
     "viral media hits","ai tools trend","chatgpt searches 2026","ai overviews google",
     "gemini ai","tiktok 2026","streaming consolidation 2026",
+    "drone","drones","messaging apps","smartphone","smartphones","kc-135","iphone",
+    "spyware","satellite","satellites","netflix","amazon video","hulu video",
+    "paramount+","streaming","streamers","streamer","stream","meteor","meteorite",
+    "asteroid","nuclear","nuclear energy","tech","tech tips","ai regulation",
+    "ai","ai laws","nasa","moon","moon rocket","moon rockets","launch","new study",
+    "data","data center","data centers","data harvesting","technology",
 ]
 TECH_KEYWORDS = set(kw.lower() for kw in RAW_TECH_KEYWORDS)
 
@@ -739,6 +777,18 @@ RAW_CULTURE_KEYWORDS = [
     "remixing classics hollywood 2026","great depression chic fashion 2026",
     "repair aesthetic longevity 2026","grandma hobbies 2026","wellness rooms local 2026",
     "mahjong mania searches 2026","year in search 2026",
+    "project hail mary","chuck norris","millennial","collectible","collectibles",
+    "banksy","artist banksy","coffee","cacao","coffee prices","coffee beans","rural",
+    "world cup","world boxing","photography","pictures","this week in pictures",
+    "style","vanity fair","oscars","afterparty","netflix","amazon video","hulu video",
+    "paramount+","streaming","streamers","streamer","stream","archeology","social media",
+    "social-media","archeological","world tourism","world business","world travel",
+    "european travel","world travel","top travel","travel destinations","around the world",
+    "meteor","meteorite","asteroid","sake","recycling","recycle","cafe","restaurant",
+    "overweight","obese","obesity","microshifting","exercise","tech","tech tips",
+    "cancer","shampoo","brain","healthy","health","wealth","wisdom","k pop","k-pop",
+    "bts","new study","animals","nature","wildlife","reality star","globe","global",
+    "global concert","global concerts",
 ]
 CULTURE_KEYWORDS = set(kw.lower() for kw in RAW_CULTURE_KEYWORDS)
 
@@ -823,6 +873,19 @@ RAW_WORLD_KEYWORDS = [
     "asia south korea k drama 2026","asia vietnam manufacturing 2026",
     "europe france macron news 2026","japan fukuoka food 2026",
     "japan kyoto temple tourism 2026","thailand chiang mai digital nomad 2026",
+    "amphibious","assault ship","nato allies","strait of hormuz","missile sites",
+    "missile threat","war rages","drone","drones","oil","inflation","energy price",
+    "stocks","oil fields","military operations","crude","crude oil","crude exports",
+    "tanker","scarcity","rifle","rare earth","spain","spanish","vaccine",
+    "ground troops","king charles","caribbean","norway","crown princess","crown",
+    "epstein","jeffrey epstein","energy shock","gas-dependent","security concerns",
+    "world cup","taiwan","taiwan's","bts","world tourism","world business",
+    "world travel","france","french","macron","europe","european travel","flooding",
+    "around the world","sake","overweight","obese","obesity","fukushima",
+    "fukushima reactor","nuclear","nuclear energy","rhinos","uganda","ukraine",
+    "russia","top leaders","energy fallout","humanitarian","humanitarian aid",
+    "russian tanker","czech","vatican","mining industries","mining","faslane",
+    "nuclear submarine",
 ]
 WORLD_KEYWORDS = set(kw.lower() for kw in RAW_WORLD_KEYWORDS)
 
