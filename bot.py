@@ -1,5 +1,6 @@
 import feedparser
 import time
+import calendar
 import os
 import re
 import urllib.request
@@ -1093,7 +1094,7 @@ def fetch_section(sources, keywords, pattern, blocklist):
                         continue
                     if title_matches_keywords(title_lower, pattern):
                         ts_struct = entry.get('published_parsed') or entry.get('updated_parsed')
-                        ts = time.mktime(ts_struct) if ts_struct else time.time()
+                        ts = calendar.timegm(ts_struct) if ts_struct else time.time()
                         matches.append((ts, raw_title, source_name, link))
                         seen_title.add(norm_title)
                         source_count[url] += 1
@@ -1312,8 +1313,9 @@ all_items_flat = (
     culture_breaking + culture_recent
 )
 ONE_HOUR = 3600
+BANNER_WINDOW = THREE_HOURS  # use same 3h window as breaking section
 hot_items = sorted(
-    [it for it in all_items_flat if (time.time() - it[0]) <= ONE_HOUR],
+    [it for it in all_items_flat if (time.time() - it[0]) <= BANNER_WINDOW],
     key=lambda x: x[0], reverse=True
 )
 show_breaking_banner = len(hot_items) > 0
@@ -2072,34 +2074,18 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 
 // ── LIGHT / DARK MODE TOGGLE ──
-// Uses a <button> (not <label>) for reliable click on all devices/browsers
+// Simple toggle, defaults to dark, no localStorage
 (function() {
-    var LKEY = 'mp_light_mode';
-    var btn  = document.getElementById('mode-toggle');
-    var lbl  = btn ? btn.querySelector('.mode-label') : null;
-
-    function applyMode(light) {
-        document.body.classList.toggle('light-mode', !!light);
-        if (lbl) lbl.textContent = light ? 'Dark' : 'Light';
-    }
-
-    // Determine initial mode
-    var sv = null;
-    try { sv = localStorage.getItem(LKEY); } catch(e) {}
-    if (sv === '1')      { applyMode(true); }
-    else if (sv === '0') { applyMode(false); }
-    else {
-        var prefersLight = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
-        applyMode(prefersLight);
-    }
-
-    // Click handler on the button
+    var btn = document.getElementById('mode-toggle');
+    var lbl = btn ? btn.querySelector('.mode-label') : null;
+    // Default is dark mode — body has no light-mode class
+    // Button label shows what you'd switch TO
+    if (lbl) lbl.textContent = 'Light';
     if (btn) {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
+        btn.addEventListener('click', function() {
             var isLight = document.body.classList.contains('light-mode');
-            applyMode(!isLight);
-            try { localStorage.setItem(LKEY, isLight ? '0' : '1'); } catch(e2) {}
+            document.body.classList.toggle('light-mode', !isLight);
+            if (lbl) lbl.textContent = isLight ? 'Light' : 'Dark';
         });
     }
 })();
