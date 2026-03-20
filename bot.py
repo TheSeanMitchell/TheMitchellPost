@@ -1458,33 +1458,33 @@ html_parts.append(f"""<!DOCTYPE html>
     body.light-mode .toggle-pill {{ background: #dde0e4; border-color: #bbb; }}
     body.light-mode .toggle-pill::after {{ left: 20px; background: #333; }}
     body.light-mode .mode-toggle .mode-label {{ color: #555; }}
-    body.light-mode {{ background: #FFFFFF; color: #111111; }}
+    body.light-mode {{ background: #FFFFFF; color: #000000; }}
     body.light-mode .sticky-nav {{ background: #F5F5F5; border-bottom-color: #B30000; }}
-    body.light-mode .sticky-nav .site-name {{ color: #111111; }}
-    body.light-mode .sticky-nav .site-name:hover {{ color: #555; }}
-    body.light-mode .sticky-nav a {{ color: #444; }}
-    body.light-mode .sticky-nav a:hover {{ color: #111111; }}
+    body.light-mode .sticky-nav .site-name {{ color: #000000; }}
+    body.light-mode .sticky-nav .site-name:hover {{ color: #222222; }}
+    body.light-mode .sticky-nav a {{ color: #111111; }}
+    body.light-mode .sticky-nav a:hover {{ color: #000000; }}
     body.light-mode .breaking-banner {{ background: #B30000; color: #FFFFFF; }}
     body.light-mode .breaking-banner .bb-label {{ background: #FFFFFF; color: #B30000; }}
     body.light-mode .banner {{ background: #e6ecf5; }}
-    body.light-mode .title {{ color: #111111; }}
-    body.light-mode .ts-label {{ color: #777; }}
-    body.light-mode .src-label {{ color: #888; }}
-    body.light-mode .new-dot {{ color: #333; }}
-    body.light-mode .src-summary {{ color: #999; }}
+    body.light-mode .title {{ color: #000000; }}
+    body.light-mode .ts-label {{ color: #444444; }}
+    body.light-mode .src-label {{ color: #333333; }}
+    body.light-mode .new-dot {{ color: #000000; }}
+    body.light-mode .src-summary {{ color: #444444; }}
     body.light-mode .headline {{ border-bottom-color: #e4e4e4; }}
-    body.light-mode .headline.seen-item {{ opacity: 0.42; }}
+    body.light-mode .headline.seen-item {{ opacity: 0.38; }}
     body.light-mode .cluster {{ background: #F8F8F8; border-left-color: #ccc; border-bottom-color: #e4e4e4; }}
-    body.light-mode .cluster-badge {{ background: #e0e0e0; color: #333; }}
-    body.light-mode .cluster-sources {{ color: #aaa; }}
+    body.light-mode .cluster-badge {{ background: #e0e0e0; color: #000000; }}
+    body.light-mode .cluster-sources {{ color: #555555; }}
     body.light-mode .cluster-item {{ border-bottom-color: #eee; }}
-    body.light-mode .link {{ color: #888; }}
-    body.light-mode .link:hover {{ color: #111; }}
+    body.light-mode .link {{ color: #000000; }}
+    body.light-mode .link:hover {{ color: #000000; }}
     body.light-mode .top-divider {{ background: #e4e4e4; }}
     body.light-mode .site-footer {{ background: #F5F5F5; border-top-color: #e0e0e0; }}
-    body.light-mode .site-footer h1 {{ color: #111111; }}
-    body.light-mode .site-footer .byline {{ color: #555; }}
-    body.light-mode .site-footer .update {{ color: #888; }}
+    body.light-mode .site-footer h1 {{ color: #000000; }}
+    body.light-mode .site-footer .byline {{ color: #222222; }}
+    body.light-mode .site-footer .update {{ color: #444444; }}
     /* ── Site footer ── */
     .site-footer {{
         margin-top: 50px; padding: 30px 20px 40px 20px;
@@ -1540,10 +1540,10 @@ html_parts.append(f"""<!DOCTYPE html>
         .cluster-badge {{ font-size: 0.78em; }}
         /* Light mode Full Article button on mobile */
         body.light-mode .link {{
-            background: #eeeeee; border-color: #cccccc; color: #555;
+            background: #eeeeee; border-color: #999999; color: #000000;
         }}
         body.light-mode .link:hover, body.light-mode .link:active {{
-            background: #dddddd; color: #111111;
+            background: #cccccc; color: #000000;
         }}
     }}
     </style>
@@ -1655,36 +1655,46 @@ function onYouTubeIframeAPIReady() {
     }, 1200);
 }
 
-// ══ NEW-SINCE-LAST-VISIT: dim articles the user has already seen ══
-// On each load we compare current article links against what was stored last visit.
-// Articles NOT in the stored set get a white dot (handled in Python above).
-// After marking, we save the current full set so next visit can diff against it.
+// ══ READ-ARTICLE DIMMING ══
+// An article is dimmed only when the user actually clicks [Full Article] on it.
+// We store clicked links in localStorage under mp_read_links.
+// On each page load we restore the dim state for previously-clicked articles.
 (function() {
-    const STORE_KEY = 'mp_seen_links';
-    let seenLinks = new Set();
+    const READ_KEY = 'mp_read_links';
+    let readLinks = new Set();
     try {
-        const raw = localStorage.getItem(STORE_KEY);
-        if (raw) seenLinks = new Set(JSON.parse(raw));
+        const raw = localStorage.getItem(READ_KEY);
+        if (raw) readLinks = new Set(JSON.parse(raw));
     } catch(e) {}
 
-    // Collect all article links on page
-    const currentLinks = [];
+    function saveRead() {
+        try {
+            const arr = [...readLinks].slice(-2000);
+            localStorage.setItem(READ_KEY, JSON.stringify(arr));
+        } catch(e) {}
+    }
+
+    // On load: dim any article the user previously clicked
     document.querySelectorAll('[data-link]').forEach(el => {
         const lnk = el.getAttribute('data-link');
-        if (lnk) currentLinks.push(lnk);
-        // Dim items that were seen on a prior visit (and are NOT hot/new)
-        if (seenLinks.has(lnk) && !el.querySelector('.new-dot')) {
+        if (lnk && readLinks.has(lnk)) {
             el.classList.add('seen-item');
         }
     });
 
-    // Save everything visible now as "seen" for next visit
-    try {
-        const merged = [...seenLinks, ...currentLinks];
-        // Keep the set from growing unbounded — cap at 2000 entries
-        const trimmed = merged.slice(-2000);
-        localStorage.setItem(STORE_KEY, JSON.stringify(trimmed));
-    } catch(e) {}
+    // On click of a [Full Article] link: mark parent article as read
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('.link');
+        if (!link) return;
+        const article = link.closest('[data-link]');
+        if (!article) return;
+        const lnk = article.getAttribute('data-link');
+        if (lnk) {
+            readLinks.add(lnk);
+            article.classList.add('seen-item');
+            saveRead();
+        }
+    });
 })();
 
 // Light mode toggle
