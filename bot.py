@@ -1136,7 +1136,24 @@ us_breaking,      us_recent      = split_breaking_daily(us_matches)
 middle_breaking,  middle_recent  = split_breaking_daily(middle_matches)
 sports_breaking,  sports_recent  = split_breaking_daily(sports_matches)
 tech_breaking,    tech_recent    = split_breaking_daily(tech_matches)
-culture_breaking, culture_recent = split_breaking_daily(culture_matches)
+def split_culture(all_matches, max_items=MAX_ITEMS):
+    SEVENTY_TWO_HOURS = 72 * 3600
+    now = time.time()
+    breaking_raw = [m for m in all_matches if (now - m[0]) <= THREE_HOURS]
+    daily_raw    = [m for m in all_matches if THREE_HOURS < (now - m[0]) <= SEVENTY_TWO_HOURS]
+    breaking_filled = list(breaking_raw[:max_items])
+    if len(breaking_filled) < max_items:
+        needed = max_items - len(breaking_filled)
+        spillover = [m for m in daily_raw if m not in breaking_filled]
+        breaking_filled.extend(spillover[:needed])
+    daily_filled = [m for m in daily_raw if m not in breaking_filled][:max_items]
+    if len(daily_filled) < max_items:
+        needed = max_items - len(daily_filled)
+        spillover = [m for m in breaking_raw if m not in daily_filled and m not in breaking_filled[:max_items]]
+        daily_filled.extend(spillover[:needed])
+    return breaking_filled[:max_items], daily_filled[:max_items]
+
+culture_breaking, culture_recent = split_culture(culture_matches)
 
 # ====================== PDT TIMESTAMP ======================
 PDT_OFFSET = timedelta(hours=-7)
@@ -1146,28 +1163,16 @@ def ts_to_pdt(ts):
     dt_pdt = dt_utc + PDT_OFFSET
     return dt_pdt.strftime("%-I:%M %p PDT")
 
-# ====================== RENDER HEADLINES (per-column keyword cap = 2) ======================
-def render_headlines(items, pattern, max_kw_per_col=2):
-    kw_col_count = defaultdict(int)
+# ====================== RENDER HEADLINES ======================
+def render_headlines(items, pattern=None):
     out = ""
     for ts, title, source, link in items:
         friendly = get_friendly_source(source)
         time_str = ts_to_pdt(ts)
-
-        def replace_match(m):
-            phrase = m.group(0).lower()
-            if kw_col_count[phrase] < max_kw_per_col:
-                kw_col_count[phrase] += 1
-                return f'<span style="background-color:#FFE100;color:#000000;border-radius:2px;padding:0 2px;">{m.group(0)}</span>'
-            return m.group(0)
-
-        highlighted = pattern.sub(replace_match, title)
-        if highlighted:
-            highlighted = highlighted[0].upper() + highlighted[1:]
-
+        display_title = title[0].upper() + title[1:] if title else title
         out += (
             f'<div class="headline">'
-            f'<span class="title">{highlighted}</span>'
+            f'<span class="title">{display_title}</span>'
             f' <span style="color:#888888;font-size:0.8em;">{time_str}</span>'
             f' <span style="color:#666666;"> \u2014 {friendly}</span>'
             f' <a class="link" href="{link}" target="_blank">[Full Article]</a>'
