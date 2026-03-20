@@ -121,6 +121,33 @@ SOURCE_MAP = {
     "A.V. Club": "AV Club", "NME": "NME", "Consequence of Sound": "CoS",
     "Stereogum": "Stereogum", "Screen Rant": "Screen Rant", "Collider": "Collider",
     "Literary Hub": "Lit Hub", "Publishers Weekly": "PW", "Book Riot": "Book Riot",
+    # Asia / Europe / World
+    "Nikkei Asia": "Nikkei Asia", "Nikkei Asia Review": "Nikkei Asia",
+    "Japan Times": "Japan Times", "The Japan News": "Japan News",
+    "Asahi Shimbun": "Asahi Shimbun", "Mainichi Shimbun": "Mainichi",
+    "Yomiuri Shimbun": "Yomiuri", "Sankei Shimbun": "Sankei",
+    "NHK World": "NHK World", "Kyodo News": "Kyodo News",
+    "Bangkok Post": "Bangkok Post", "The Nation Thailand": "Nation TH",
+    "Thai PBS": "Thai PBS", "Straits Times": "Straits Times",
+    "South China Morning Post": "SCMP", "Korea Herald": "Korea Herald",
+    "The Korea Times": "Korea Times", "Hindustan Times": "Hindustan Times",
+    "The Hindu": "The Hindu", "Euronews": "Euronews",
+    "France 24": "France 24", "Deutsche Welle": "DW",
+    "Politico Europe": "Politico EU", "The Local": "The Local",
+    "Irish Times": "Irish Times", "Irish Independent": "Irish Indep",
+    "La Repubblica": "La Repubblica", "Corriere della Sera": "Corriere",
+    "Il Sole 24 Ore": "Il Sole", "Frankfurter Allgemeine": "FAZ",
+    "Suddeutsche Zeitung": "SZ", "Die Welt": "Die Welt",
+    "Le Figaro": "Le Figaro", "Liberation": "Liberation",
+    "La Vanguardia": "La Vanguardia", "El Mundo": "El Mundo",
+    "Neue Zurcher Zeitung": "NZZ", "Neue Zuercher Zeitung": "NZZ",
+    "VnExpress": "VnExpress", "Philippine Daily Inquirer": "Phil Inquirer",
+    "The Jakarta Post": "Jakarta Post", "The Star Malaysia": "Star Malaysia",
+    "The Australian": "The Australian", "Sydney Morning Herald": "SMH",
+    "Bloomberg Asia": "Bloomberg Asia", "The Diplomat": "The Diplomat",
+    "Asia Times": "Asia Times", "East Asia Forum": "East Asia Forum",
+    "Eurasia Review": "Eurasia Review", "Japan Forward": "Japan Forward",
+    "The Cambodia Daily": "Cambodia Daily", "Myanmar Times": "Myanmar Times",
 }
 
 def get_friendly_source(raw_name):
@@ -715,12 +742,107 @@ RAW_CULTURE_KEYWORDS = [
 ]
 CULTURE_KEYWORDS = set(kw.lower() for kw in RAW_CULTURE_KEYWORDS)
 
+RAW_WORLD_KEYWORDS = [
+    # Europe broad
+    "europe","european union","eu","eurozone","european parliament","european commission",
+    "european council","nato","schengen","brexit","uk politics","united kingdom",
+    "england","scotland","wales","northern ireland","ireland","france","germany",
+    "italy","spain","portugal","netherlands","belgium","austria","switzerland",
+    "sweden","norway","denmark","finland","poland","czech republic","hungary",
+    "romania","bulgaria","greece","croatia","serbia","ukraine","russia",
+    "macron","scholz","meloni","sanchez","sunak","starmer","tusk","orban",
+    "eu summit","eu elections","eu budget","eu sanctions","eu migration",
+    "eu climate","eu energy","eu trade","eu economy","eu enlargement",
+    "european central bank","ecb","euro currency","eurozone inflation",
+    "eu russia sanctions","ukraine war","ukraine russia","kyiv","zelenskyy",
+    "putin russia","moscow","kremlin","nato expansion","nato summit",
+    "european heatwave","europe flooding","europe wildfires","europe drought",
+    # Asia broad
+    "asia","southeast asia","east asia","south asia","central asia","pacific asia",
+    "asean","apec","asia pacific","indo pacific","quad alliance",
+    "china","chinese","beijing","shanghai","hong kong","taiwan","taipei",
+    "taiwan strait","south china sea","xi jinping","cpc","communist party china",
+    "japan","japanese","tokyo","osaka","kyoto","hiroshima","nagasaki",
+    "fumio kishida","shigeru ishiba","bank of japan","yen","nikkei",
+    "south korea","korean","seoul","busan","yoon suk yeol","korea peninsula",
+    "north korea","pyongyang","kim jong un","dprk","korea nuclear",
+    "india","indian","new delhi","mumbai","modi","bjp","congress party india",
+    "pakistan","islamabad","pakistan army","imran khan",
+    "bangladesh","dhaka","myanmar","yangon","junta myanmar",
+    "thailand","bangkok","phuket","chiang mai","thai government","thai politics",
+    "vietnam","hanoi","ho chi minh","vietnam economy","vietnam manufacturing",
+    "indonesia","jakarta","bali","jokowi","prabowo","indonesia election",
+    "malaysia","kuala lumpur","anwar ibrahim","malaysia economy",
+    "singapore","singapore economy","singapore tech","lee hsien loong",
+    "philippines","manila","marcos","philippine sea","south china sea dispute",
+    "cambodia","phnom penh","laos","vientiane","brunei",
+    "sri lanka","colombo","nepal","kathmandu","bhutan",
+    "australia","sydney","canberra","albanese","australia china",
+    "new zealand","wellington","auckland","ardern","luxon",
+    # Global / World
+    "global economy","world economy","imf","world bank","g7","g20",
+    "wto","trade war","global trade","supply chain","semiconductor",
+    "global inflation","global recession","global markets","foreign exchange",
+    "united nations","un security council","un general assembly","un resolution",
+    "international court","icc","international law","global diplomacy",
+    "climate change global","cop30","paris agreement","global warming",
+    "global health","who","pandemic","disease outbreak",
+    "international relations","geopolitics","foreign policy global",
+    "global migration","refugee crisis","human rights global",
+    "global technology","ai global","semiconductor global","tech rivalry",
+    "global energy","lng","natural gas","oil global","opec global",
+    "space exploration","nasa","spacex global","esa","jaxa",
+    # Search terms from attached document
+    "reuters europe news","associated press asia","agence france-presse europe",
+    "bbc europe news","financial times europe","le monde international",
+    "der spiegel","el pais europe","the guardian asia","nikkei asia review",
+    "japan times news","asahi shimbun english","nhk world japan","kyodo news english",
+    "bangkok post thailand","straits times singapore","south china morning post",
+    "korea herald news","hindustan times asia","euronews europe","france 24 asia",
+    "deutsche welle asia","politico europe","the local europe","irish times",
+    "nikkei japan economy 2026","japan times tokyo 2026","bangkok post tourism 2026",
+    "straits times singapore tech 2026","europe eu election 2026",
+    "asia china india relations 2026","japan yen currency 2026",
+    "thailand tourism boom 2026","europe heatwave summer 2026",
+    "japan cherry blossom forecast 2026","thailand songkran festival 2026",
+    "europe ukraine update 2026","asia semiconductor supply 2026",
+    "japan osaka expo 2026","europe germany election 2026",
+    "asia kpop global tour 2026","japan mount fuji climbing 2026",
+    "europe paris olympics legacy 2026","asia taiwan strait tensions 2026",
+    "europe italy venice flooding 2026","asia indonesia bali volcano 2026",
+    "japan hokkaido ski 2026","europe uk starmer government 2026",
+    "asia philippines south china sea 2026","japan nagoya tech hub 2026",
+    "europe spain election 2026","asia malaysia economy 2026",
+    "europe netherlands climate 2026","asia cambodia angkor wat 2026",
+    "japan sapporo snow festival 2026","europe sweden nato 2026",
+    "asia laos mekong river 2026","europe portugal wildfires 2026",
+    "asia myanmar border 2026","europe poland ukraine border 2026",
+    "asia singapore formula one 2026","europe denmark green energy 2026",
+    "europe finland arctic 2026","japan wakayama temples 2026",
+    "nikkei japan stock market 2026","europe brexit impact 2026",
+    "asia south korea k drama 2026","asia vietnam manufacturing 2026",
+    "europe france macron news 2026","japan fukuoka food 2026",
+    "japan kyoto temple tourism 2026","thailand chiang mai digital nomad 2026",
+]
+WORLD_KEYWORDS = set(kw.lower() for kw in RAW_WORLD_KEYWORDS)
+
 # ====================== BLOCKLISTS ======================
 ME_BLOCKLIST    = {"trump"}
 US_BLOCKLIST    = {"iran"}
 SPORTS_BLOCKLIST = set()
 TECH_BLOCKLIST   = set()
 CULTURE_BLOCKLIST= set()
+WORLD_BLOCKLIST  = set()
+
+# ── Job posting filter (site-wide) ──
+JOB_FILTER_PHRASES = [
+    "hiring", " job ", "jobs ", "career", "associate -",
+    "full time", "part time", "per hour", "salary", "apply now",
+    "job opening", "now hiring", "we're hiring", "open position",
+    "sales associate", "retail associate", "warehouse associate",
+    "customer service rep", "customer service associate",
+    "store manager", "assistant manager", "team member",
+]
 
 # Pre-compile all patterns once
 ME_PATTERN      = make_keyword_pattern(ME_KEYWORDS)
@@ -728,6 +850,7 @@ US_PATTERN      = make_keyword_pattern(US_KEYWORDS)
 SPORTS_PATTERN  = make_keyword_pattern(SPORTS_KEYWORDS)
 TECH_PATTERN    = make_keyword_pattern(TECH_KEYWORDS)
 CULTURE_PATTERN = make_keyword_pattern(CULTURE_KEYWORDS)
+WORLD_PATTERN   = make_keyword_pattern(WORLD_KEYWORDS)
 
 # ====================== SOURCES ======================
 MIDDLE_EAST_SOURCES = [
@@ -1052,7 +1175,72 @@ CULTURE_SOURCES = [
     ("W Magazine","https://news.google.com/rss/search?q=w+magazine+fashion+when:1d&hl=en-US&gl=US&ceid=US:en"),
 ]
 
-# ====================== FETCH FUNCTION ======================
+WORLD_SOURCES = [
+    # Broad sweeps
+    ("Broad World","https://news.google.com/rss/search?q=europe+OR+asia+OR+japan+OR+china+OR+india+OR+uk+OR+france+OR+germany+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Broad Asia","https://news.google.com/rss/search?q=asia+pacific+OR+southeast+asia+OR+east+asia+OR+south+asia+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Broad Europe","https://news.google.com/rss/search?q=european+union+OR+nato+OR+ukraine+OR+eu+summit+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    # Global wires
+    ("Reuters World","https://news.google.com/rss/search?q=reuters+europe+OR+reuters+asia+OR+reuters+world+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Associated Press World","https://news.google.com/rss/search?q=associated+press+europe+OR+associated+press+asia+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Agence France-Presse","https://news.google.com/rss/search?q=afp+europe+OR+afp+asia+OR+agence+france+presse+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("BBC World","https://news.google.com/rss/search?q=bbc+news+europe+OR+bbc+news+asia+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Economist","https://news.google.com/rss/search?q=the+economist+europe+OR+the+economist+asia+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Financial Times","https://news.google.com/rss/search?q=financial+times+europe+OR+financial+times+asia+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Bloomberg World","https://news.google.com/rss/search?q=bloomberg+europe+OR+bloomberg+asia+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Al Jazeera World","https://news.google.com/rss/search?q=al+jazeera+europe+OR+al+jazeera+asia+OR+al+jazeera+world+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    # Europe
+    ("Euronews","https://news.google.com/rss/search?q=euronews+europe+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("France 24","https://news.google.com/rss/search?q=france24+europe+OR+france24+world+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Deutsche Welle","https://news.google.com/rss/search?q=dw+news+europe+OR+dw+news+asia+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Guardian Europe","https://news.google.com/rss/search?q=the+guardian+europe+OR+the+guardian+world+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Politico Europe","https://news.google.com/rss/search?q=politico+europe+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Le Monde","https://news.google.com/rss/search?q=le+monde+international+OR+le+monde+europe+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Der Spiegel","https://news.google.com/rss/search?q=der+spiegel+international+OR+spiegel+europe+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("El Pais","https://news.google.com/rss/search?q=el+pais+europe+OR+el+pais+international+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Times of London","https://news.google.com/rss/search?q=the+times+london+europe+OR+times+of+london+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Telegraph Europe","https://news.google.com/rss/search?q=the+telegraph+europe+OR+telegraph+world+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Irish Times","https://news.google.com/rss/search?q=irish+times+europe+OR+irish+times+international+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Local Europe","https://news.google.com/rss/search?q=the+local+europe+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Neue Zurcher Zeitung","https://news.google.com/rss/search?q=neue+zurcher+zeitung+OR+nzz+international+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("La Repubblica","https://news.google.com/rss/search?q=la+repubblica+italy+europe+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Le Figaro","https://news.google.com/rss/search?q=le+figaro+france+europe+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Frankfurter Allgemeine","https://news.google.com/rss/search?q=frankfurter+allgemeine+OR+faz+germany+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Aftenposten","https://news.google.com/rss/search?q=aftenposten+norway+scandinavia+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Dagens Nyheter","https://news.google.com/rss/search?q=dagens+nyheter+sweden+europe+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Rzeczpospolita","https://news.google.com/rss/search?q=rzeczpospolita+poland+europe+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    # Japan
+    ("Nikkei Asia","https://news.google.com/rss/search?q=nikkei+asia+japan+economy+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Japan Times","https://news.google.com/rss/search?q=japan+times+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Asahi Shimbun English","https://news.google.com/rss/search?q=asahi+shimbun+english+japan+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("NHK World","https://news.google.com/rss/search?q=nhk+world+japan+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Kyodo News","https://news.google.com/rss/search?q=kyodo+news+japan+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Japan Forward","https://news.google.com/rss/search?q=japan+forward+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    # Southeast Asia
+    ("Bangkok Post","https://news.google.com/rss/search?q=bangkok+post+thailand+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Nation Thailand","https://news.google.com/rss/search?q=the+nation+thailand+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Straits Times","https://news.google.com/rss/search?q=straits+times+singapore+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("South China Morning Post","https://news.google.com/rss/search?q=south+china+morning+post+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Jakarta Post","https://news.google.com/rss/search?q=jakarta+post+indonesia+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Star Malaysia","https://news.google.com/rss/search?q=the+star+malaysia+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("VnExpress","https://news.google.com/rss/search?q=vnexpress+vietnam+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Philippine Daily Inquirer","https://news.google.com/rss/search?q=philippine+daily+inquirer+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Diplomat","https://news.google.com/rss/search?q=the+diplomat+asia+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Asia Times","https://news.google.com/rss/search?q=asia+times+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    # Korea / India
+    ("Korea Herald","https://news.google.com/rss/search?q=korea+herald+south+korea+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Korea Times","https://news.google.com/rss/search?q=korea+times+seoul+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Hindustan Times","https://news.google.com/rss/search?q=hindustan+times+india+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Hindu","https://news.google.com/rss/search?q=the+hindu+india+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    # Pacific
+    ("The Australian","https://news.google.com/rss/search?q=the+australian+asia+OR+the+australian+world+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Sydney Morning Herald","https://news.google.com/rss/search?q=sydney+morning+herald+asia+OR+smh+world+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    # Think tanks / analysis
+    ("East Asia Forum","https://news.google.com/rss/search?q=east+asia+forum+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Eurasia Review","https://news.google.com/rss/search?q=eurasia+review+news+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Foreign Affairs World","https://news.google.com/rss/search?q=foreign+affairs+europe+OR+foreign+affairs+asia+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Council on Foreign Relations","https://news.google.com/rss/search?q=cfr+europe+OR+cfr+asia+OR+council+foreign+relations+world+when:1d&hl=en-US&gl=US&ceid=US:en"),
+]
 def normalize_title(title):
     if " - " in title:
         title = title.rsplit(" - ", 1)[0]
@@ -1086,6 +1274,8 @@ def fetch_section(sources, keywords, pattern, blocklist):
                     title_lower = raw_title.lower()
                     if blocklist and any(block in title_lower for block in blocklist):
                         continue
+                    if any(phrase in title_lower for phrase in JOB_FILTER_PHRASES):
+                        continue
                     if title_matches_keywords(title_lower, pattern):
                         ts_struct = entry.get('published_parsed') or entry.get('updated_parsed')
                         ts = calendar.timegm(ts_struct) if ts_struct else time.time()
@@ -1106,6 +1296,7 @@ us_matches      = fetch_section(US_POLITICS_SOURCES, US_KEYWORDS, US_PATTERN, US
 sports_matches  = fetch_section(SPORTS_SOURCES, SPORTS_KEYWORDS, SPORTS_PATTERN, SPORTS_BLOCKLIST)
 tech_matches    = fetch_section(TECH_SOURCES, TECH_KEYWORDS, TECH_PATTERN, TECH_BLOCKLIST)
 culture_matches = fetch_section(CULTURE_SOURCES, CULTURE_KEYWORDS, CULTURE_PATTERN, CULTURE_BLOCKLIST)
+world_matches   = fetch_section(WORLD_SOURCES, WORLD_KEYWORDS, WORLD_PATTERN, WORLD_BLOCKLIST)
 
 # ====================== TIME SPLIT (3h breaking / 21h daily, bidirectional spillover) ======================
 THREE_HOURS      = 3 * 3600
@@ -1150,6 +1341,7 @@ def split_culture(all_matches, max_items=MAX_ITEMS):
     return breaking_filled[:max_items], daily_filled[:max_items]
 
 culture_breaking, culture_recent = split_culture(culture_matches)
+world_breaking,   world_recent   = split_breaking_daily(world_matches)
 
 # ====================== PDT TIMESTAMP ======================
 PDT_OFFSET = timedelta(hours=-7)
@@ -1292,6 +1484,7 @@ def build_top_stories(max_stories=5):
     all_section_items = [
         ("US",          us_breaking + us_recent),
         ("Middle East", middle_breaking + middle_recent),
+        ("World",       world_breaking + world_recent),
         ("Tech",        tech_breaking + tech_recent),
         ("Sports",      sports_breaking + sports_recent),
         ("Culture",     culture_breaking + culture_recent),
@@ -1314,6 +1507,7 @@ def build_trending_topics(max_topics=10):
     all_items = (
         us_breaking + us_recent +
         middle_breaking + middle_recent +
+        world_breaking + world_recent +
         tech_breaking + tech_recent +
         sports_breaking + sports_recent +
         culture_breaking + culture_recent
@@ -1348,6 +1542,7 @@ trending_topics = build_trending_topics()
 all_items_flat = (
     us_breaking + us_recent +
     middle_breaking + middle_recent +
+    world_breaking + world_recent +
     sports_breaking + sports_recent +
     tech_breaking + tech_recent +
     culture_breaking + culture_recent
@@ -1366,6 +1561,7 @@ update_time = (datetime.utcnow() + PDT_OFFSET).strftime("%I:%M:%S %p PDT")
 SECTION_COLORS = {
     "us":      "#B30000",
     "mideast": "#C05000",
+    "world":   "#2E7D9A",
     "tech":    "#005F9E",
     "sports":  "#006B3C",
     "culture": "#6B006B",
@@ -1411,6 +1607,7 @@ html_parts.append(f"""<!DOCTYPE html>
     .sticky-nav a:hover {{ color: #FFFFFF; }}
     .sticky-nav a.nav-us     {{ border-left-color: {SECTION_COLORS["us"]}; }}
     .sticky-nav a.nav-mideast{{ border-left-color: {SECTION_COLORS["mideast"]}; }}
+    .sticky-nav a.nav-world  {{ border-left-color: {SECTION_COLORS["world"]}; }}
     .sticky-nav a.nav-tech   {{ border-left-color: {SECTION_COLORS["tech"]}; }}
     .sticky-nav a.nav-sports {{ border-left-color: {SECTION_COLORS["sports"]}; }}
     .sticky-nav a.nav-culture{{ border-left-color: {SECTION_COLORS["culture"]}; }}
@@ -1471,6 +1668,7 @@ html_parts.append(f"""<!DOCTYPE html>
     }}
     .section-title.us-color     {{ color: {SECTION_COLORS["us"]};      text-decoration-color: {SECTION_COLORS["us"]}; }}
     .section-title.mideast-color{{ color: {SECTION_COLORS["mideast"]}; text-decoration-color: {SECTION_COLORS["mideast"]}; }}
+    .section-title.world-color  {{ color: {SECTION_COLORS["world"]};   text-decoration-color: {SECTION_COLORS["world"]}; }}
     .section-title.tech-color   {{ color: {SECTION_COLORS["tech"]};    text-decoration-color: {SECTION_COLORS["tech"]}; }}
     .section-title.sports-color {{ color: {SECTION_COLORS["sports"]};  text-decoration-color: {SECTION_COLORS["sports"]}; }}
     .section-title.culture-color{{ color: {SECTION_COLORS["culture"]}; text-decoration-color: {SECTION_COLORS["culture"]}; }}
@@ -1525,6 +1723,7 @@ html_parts.append(f"""<!DOCTYPE html>
     /* ── Per-section cluster tint colors ── */
     #section-us      .cluster {{ border-left-color: #4a0000; background: #1a0505; }}
     #section-mideast .cluster {{ border-left-color: #4a2000; background: #1a0d00; }}
+    #section-world   .cluster {{ border-left-color: #0d3040; background: #051218; }}
     #section-tech    .cluster {{ border-left-color: #002040; background: #060f1a; }}
     #section-sports  .cluster {{ border-left-color: #002a18; background: #04120a; }}
     #section-culture .cluster {{ border-left-color: #300030; background: #120512; }}
@@ -1962,6 +2161,7 @@ html_parts.append(f"""<!DOCTYPE html>
     <a href="#" class="site-name" aria-label="Back to top">The Mitchell Post</a>
     <a href="#section-us"      class="nav-us">US News</a>
     <a href="#section-mideast" class="nav-mideast">Middle East</a>
+    <a href="#section-world"   class="nav-world">Asia, Europe &amp; World</a>
     <a href="#section-tech"    class="nav-tech">Tech &amp; Life</a>
     <a href="#section-sports"  class="nav-sports">Sports</a>
     <a href="#section-culture" class="nav-culture">Culture</a>
@@ -2057,6 +2257,7 @@ def build_daily_briefing(max_items=5):
     all_section_items = [
         ("US",          us_breaking + us_recent),
         ("Middle East", middle_breaking + middle_recent),
+        ("World",       world_breaking + world_recent),
         ("Tech",        tech_breaking + tech_recent),
         ("Sports",      sports_breaking + sports_recent),
         ("Culture",     culture_breaking + culture_recent),
@@ -2150,6 +2351,7 @@ if top_stories:
 SECTION_DATA = [
     ("section-us",      "us-color",      us_breaking,      us_recent,      "Breaking US News",          "Today&#39;s US Headlines"),
     ("section-mideast", "mideast-color", middle_breaking,  middle_recent,  "Middle East Breaking News", "Today&#39;s Middle East Headlines"),
+    ("section-world",   "world-color",   world_breaking,   world_recent,   "Asia, Europe &amp; World Breaking", "Today&#39;s Asia, Europe &amp; World Headlines"),
     ("section-tech",    "tech-color",    tech_breaking,    tech_recent,    "Tech &amp; Life Breaking News", "Today&#39;s Tech &amp; Life Headlines"),
     ("section-sports",  "sports-color",  sports_breaking,  sports_recent,  "Sports Breaking News",      "Today&#39;s Sports Headlines"),
     ("section-culture", "culture-color", culture_breaking, culture_recent, "Culture Breaking News",     "Today&#39;s Culture Headlines"),
@@ -2416,7 +2618,7 @@ document.addEventListener('DOMContentLoaded', function() {
 html_parts.append(f'''<footer class="site-footer">
     <h1>The Mitchell Post</h1>
     <span class="byline">By Sean Mitchell</span>
-    <span class="mission">Curated news from reliable sources &mdash; US, Middle East, Tech, Sports &amp; Culture &mdash; updated continuously.</span>
+    <span class="mission">Curated news from reliable sources &mdash; US, Middle East, Asia/Europe/World, Tech, Sports &amp; Culture &mdash; updated continuously.</span>
     <span class="update">Last updated: {update_time}</span>
     <div class="homepage-wrap">
         <button class="set-homepage-btn" id="set-homepage-btn" onclick="document.getElementById(\'homepage-instructions\').style.display=document.getElementById(\'homepage-instructions\').style.display===\'block\'?\'none\':\'block\'">🏠 Set as My Homepage</button>
@@ -2473,11 +2675,12 @@ import json as _json
 try:
     feed_items = []
     sections = [
-        ("US News",      us_breaking + us_recent),
-        ("Middle East",  middle_breaking + middle_recent),
-        ("Tech & Life",  tech_breaking + tech_recent),
-        ("Sports",       sports_breaking + sports_recent),
-        ("Culture",      culture_breaking + culture_recent),
+        ("US News",               us_breaking + us_recent),
+        ("Middle East",           middle_breaking + middle_recent),
+        ("Asia, Europe & World",  world_breaking + world_recent),
+        ("Tech & Life",           tech_breaking + tech_recent),
+        ("Sports",                sports_breaking + sports_recent),
+        ("Culture",               culture_breaking + culture_recent),
     ]
     for section_name, items in sections:
         for ts, title, source, link in items:
@@ -2493,7 +2696,7 @@ try:
         "version":       "1.1",
         "title":         "The Mitchell Post",
         "home_page_url": "https://mitchellpost.github.io",
-        "description":   "Curated news across US, Middle East, Tech, Sports, and Culture",
+        "description":   "Curated news across US, Middle East, Asia/Europe/World, Tech, Sports, and Culture",
         "updated":       (datetime.utcnow()).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "items": feed_items
     }
