@@ -1479,7 +1479,7 @@ def source_summary(items):
     return f'<p class="src-summary">{len(items)} headlines \u00b7 {len(sources)} sources</p>\n'
 
 # ====================== TOP STORIES STRIP ======================
-def build_top_stories(max_stories=5):
+def build_top_stories(max_stories=10):
     """Pull the top multi-source clusters across all sections for the pinned strip."""
     all_section_items = [
         ("US",          us_breaking + us_recent),
@@ -1548,7 +1548,7 @@ all_items_flat = (
     culture_breaking + culture_recent
 )
 ONE_HOUR = 3600
-BANNER_WINDOW = THREE_HOURS  # use same 3h window as breaking section
+BANNER_WINDOW = 45 * 60  # 45-minute window for breaking news banner
 hot_items = sorted(
     [it for it in all_items_flat if (time.time() - it[0]) <= BANNER_WINDOW],
     key=lambda x: x[0], reverse=True
@@ -1630,7 +1630,7 @@ html_parts.append(f"""<!DOCTYPE html>
         animation: slidein 0.4s ease;
     }}
     .breaking-banner .bb-time {{
-        font-size: 0.76em; opacity: 0.8; flex-shrink: 0;
+        display: none;
     }}
     .breaking-banner .bb-link {{
         color: #ffcccc; font-size: 0.78em; flex-shrink: 0; text-decoration: underline;
@@ -1920,6 +1920,7 @@ html_parts.append(f"""<!DOCTYPE html>
 
         .ts-label {{ font-size: 0.82em; }}
         .src-summary {{ font-size: 0.82em; }}
+        .bb-counter {{ display: none !important; }}
         .section-title {{ font-size: 1.3em; }}
         .top-divider {{ margin: 18px 0; }}
 
@@ -1999,12 +2000,7 @@ html_parts.append(f"""<!DOCTYPE html>
     body.light-mode .cluster-sources-line {{ color: #777; border-bottom-color: #ddd; }}
 
     /* ── Breaking banner upgrade ── */
-    .bb-close {{
-        background: none; border: none; color: rgba(255,255,255,0.6);
-        font-size: 0.85em; cursor: pointer; padding: 0 4px; flex-shrink: 0;
-        transition: color 0.15s;
-    }}
-    .bb-close:hover {{ color: #fff; }}
+    .bb-close {{ display: none; }}
 
     /* ── Updated-ago in nav ── */
     .nav-updated-ago {{
@@ -2252,7 +2248,7 @@ def section_block(section_id, color_class, breaking_items, recent_items,
     )
 
 # ── Daily Briefing: top 5 stories by source count ──
-def build_daily_briefing(max_items=5):
+def build_daily_briefing(max_items=10):
     """Pick top weighted stories across all sections for a daily briefing digest."""
     all_section_items = [
         ("US",          us_breaking + us_recent),
@@ -2277,40 +2273,57 @@ def build_daily_briefing(max_items=5):
 
 daily_briefing = build_daily_briefing()
 
-# ── Top Stories strip HTML ──
-if top_stories:
-    # Build top stories cards
-    ts_cards = ''
-    for n_src, lead_ts, section_label, cluster in top_stories:
-        lead_ts2, lead_title, lead_source, lead_link = cluster[0]
-        safe_title = lead_title.replace('<','&lt;').replace('>','&gt;')
-        safe_title = safe_title[0].upper() + safe_title[1:] if safe_title else safe_title
-        ts_cards += (
-            f'<div class="top-story-card">'
-            f'<span class="ts-section-tag">{section_label}</span>'
-            f'<span class="ts-badge">{n_src} sources</span>'
-            f'<span class="ts-headline">{safe_title}</span>'
-            f'<span class="ts-label"> {ts_to_pdt(lead_ts2)}</span>'
-            f'<a class="ts-link" href="{lead_link}" target="_blank">[Read]</a>'
-            f'</div>\n'
-        )
+# ── Most Reported On strip HTML ──
+if top_stories or daily_briefing:
+    # Merge top_stories and daily_briefing into a single deduped ranked list of 10
+    # top_stories: list of (n_src, lead_ts, section_label, cluster)
+    # daily_briefing: list of (score, section_label, cluster)
+    seen_headlines = set()
+    combined_cards = []
 
-    # Build daily briefing cards
-    db_cards = ''
-    for score, section_label, cluster in daily_briefing:
+    def _card_entry(section_label, cluster, n_src):
         lead_ts2, lead_title, lead_source, lead_link = cluster[0]
-        safe_title = lead_title.replace('<','&lt;').replace('>','&gt;')
-        safe_title = safe_title[0].upper() + safe_title[1:] if safe_title else safe_title
-        n_src = len(cluster)
-        db_cards += (
-            f'<div class="top-story-card db-card">'
-            f'<span class="ts-section-tag">{section_label}</span>'
-            f'<span class="ts-badge">{n_src} sources</span>'
-            f'<span class="ts-headline">{safe_title}</span>'
-            f'<span class="ts-label"> {ts_to_pdt(lead_ts2)}</span>'
-            f'<a class="ts-link" href="{lead_link}" target="_blank">[Read]</a>'
-            f'</div>\n'
-        )
+        norm = normalize_title(lead_title)
+        return norm, section_label, cluster, n_src, lead_ts2, lead_title, lead_link
+
+    # First pass: top_stories
+    for n_src, lead_ts, section_label, cluster in top_stories:
+        norm, sl, cl, ns, lts, lt, ll = _card_entry(section_label, cluster, n_src)
+        if norm not in seen_headlines:
+            seen_headlines.add(norm)
+            combined_cards.append((sl, cl, ns, lts, lt, ll))
+
+    # Second pass: daily_briefing (skip already-seen)
+    for score, section_label, cluster in daily_briefing:
+        norm, sl, cl, ns, lts, lt, ll = _card_entry(section_label, cluster, len(cluster))
+        if norm not in seen_headlines:
+            seen_headlines.add(norm)
+            combined_cards.append((sl, cl, ns, lts, lt, ll))
+
+    # Trim to 10
+    combined_cards = combined_cards[:10]
+
+    # Split into two columns of 5
+    col1_cards = combined_cards[:5]
+    col2_cards = combined_cards[5:10]
+
+    def render_mro_cards(cards):
+        html = ''
+        for section_label, cluster, n_src, lead_ts2, lead_title, lead_link in cards:
+            safe_title = lead_title.replace('<','&lt;').replace('>','&gt;')
+            safe_title = safe_title[0].upper() + safe_title[1:] if safe_title else safe_title
+            html += (
+                f'<div class="top-story-card">'
+                f'<span class="ts-section-tag">{section_label}</span>'
+                f'<span class="ts-badge">{n_src} sources</span>'
+                f'<span class="ts-headline">{safe_title}</span>'
+                f'<a class="ts-link" href="{lead_link}" target="_blank">[Read]</a>'
+                f'</div>\n'
+            )
+        return html
+
+    col1_html = render_mro_cards(col1_cards)
+    col2_html = render_mro_cards(col2_cards)
 
     # Build trending topics tags
     trend_tags = ''
@@ -2329,14 +2342,13 @@ if top_stories:
         )
 
     ts_html = f'''<div class="top-stories-strip">
+  <p class="top-stories-title">Most Reported On</p>
   <div class="top-stories-2col">
     <div class="ts-col">
-      <p class="top-stories-title">Top Stories &mdash; Most Covered Right Now</p>
-      {ts_cards}
+      {col1_html}
     </div>
     <div class="ts-col ts-divider-left">
-      <p class="top-stories-title">Daily Briefing &mdash; Need to Know</p>
-      {db_cards}
+      {col2_html}
     </div>
   </div>
 </div>\n'''
@@ -2618,7 +2630,7 @@ document.addEventListener('DOMContentLoaded', function() {
 html_parts.append(f'''<footer class="site-footer">
     <h1>The Mitchell Post</h1>
     <span class="byline">By Sean Mitchell</span>
-    <span class="mission">Curated news from reliable sources &mdash; US, Middle East, Asia/Europe/World, Tech, Sports &amp; Culture &mdash; updated continuously.</span>
+    <span class="mission">Curated news from reliable sources updated regularly.</span>
     <span class="update">Last updated: {update_time}</span>
     <div class="homepage-wrap">
         <button class="set-homepage-btn" id="set-homepage-btn" onclick="document.getElementById(\'homepage-instructions\').style.display=document.getElementById(\'homepage-instructions\').style.display===\'block\'?\'none\':\'block\'">🏠 Set as My Homepage</button>
