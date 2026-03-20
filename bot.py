@@ -1311,12 +1311,12 @@ all_items_flat = (
     tech_breaking + tech_recent +
     culture_breaking + culture_recent
 )
-most_recent_ts = max((it[0] for it in all_items_flat), default=0)
-show_breaking_banner = (time.time() - most_recent_ts) <= THIRTY_MIN
-breaking_banner_title = ""
-if show_breaking_banner:
-    newest = max(all_items_flat, key=lambda x: x[0])
-    breaking_banner_title = newest[1][:120]
+ONE_HOUR = 3600
+hot_items = sorted(
+    [it for it in all_items_flat if (time.time() - it[0]) <= ONE_HOUR],
+    key=lambda x: x[0], reverse=True
+)
+show_breaking_banner = len(hot_items) > 0
 
 update_time = (datetime.utcnow() + PDT_OFFSET).strftime("%I:%M:%S %p PDT")
 
@@ -1372,21 +1372,40 @@ html_parts.append(f"""<!DOCTYPE html>
     .sticky-nav a.nav-sports {{ border-left-color: {SECTION_COLORS["sports"]}; }}
     .sticky-nav a.nav-culture{{ border-left-color: {SECTION_COLORS["culture"]}; }}
 
-    /* ── Breaking news banner ── */
+    /* ── Breaking news banner (rotating) ── */
     .breaking-banner {{
         background: #B30000; color: #FFFFFF;
-        padding: 10px 20px; font-size: 0.92em; font-weight: bold;
-        display: flex; align-items: center; gap: 10px;
-        animation: pulse-bg 2s ease-in-out infinite alternate;
+        padding: 9px 16px; font-size: 0.88em; font-weight: bold;
+        display: flex; align-items: center; gap: 10px; flex-wrap: nowrap;
+        animation: pulse-bg 3s ease-in-out infinite alternate;
+        overflow: hidden;
     }}
     .breaking-banner .bb-label {{
         background: #FFFFFF; color: #B30000;
-        padding: 2px 8px; border-radius: 3px;
-        font-size: 0.78em; letter-spacing: 0.08em; flex-shrink: 0;
+        padding: 2px 8px; border-radius: 3px; font-size: 0.76em;
+        letter-spacing: 0.08em; flex-shrink: 0;
+    }}
+    .breaking-banner .bb-text {{
+        flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        animation: slidein 0.4s ease;
+    }}
+    .breaking-banner .bb-time {{
+        font-size: 0.76em; opacity: 0.8; flex-shrink: 0;
+    }}
+    .breaking-banner .bb-link {{
+        color: #ffcccc; font-size: 0.78em; flex-shrink: 0; text-decoration: underline;
+    }}
+    .breaking-banner .bb-link:hover {{ color: #FFFFFF; }}
+    .breaking-banner .bb-counter {{
+        font-size: 0.72em; opacity: 0.6; flex-shrink: 0;
     }}
     @keyframes pulse-bg {{
         from {{ background: #B30000; }}
-        to   {{ background: #8B0000; }}
+        to   {{ background: #8a0000; }}
+    }}
+    @keyframes slidein {{
+        from {{ opacity: 0; transform: translateY(4px); }}
+        to   {{ opacity: 1; transform: translateY(0); }}
     }}
 
     /* ── Video banner — desktop only ── */
@@ -1744,14 +1763,23 @@ html_parts.append(f"""<!DOCTYPE html>
 
 """)
 
-# Breaking news banner (only if something published in last 30 min)
+# Rotating breaking news banner (all items < 1 hour)
 if show_breaking_banner:
-    safe_title = breaking_banner_title.replace('<','&lt;').replace('>','&gt;')
+    import json as _json_banner
+    banner_data = [
+        {"title": it[1][:140].replace('"', '&quot;'), "link": it[3], "time": ts_to_pdt(it[0])}
+        for it in hot_items[:20]
+    ]
+    banner_json = _json_banner.dumps(banner_data)
     html_parts.append(
-        f'<div class="breaking-banner">'
+        f'<div class="breaking-banner" id="breaking-banner">'
         f'<span class="bb-label">BREAKING</span>'
-        f'<span>{safe_title}</span>'
-        f'</div>\n'
+        f'<span class="bb-text" id="bb-text"></span>'
+        f'<span class="bb-time" id="bb-time"></span>'
+        f'<a class="bb-link" id="bb-link" href="#" target="_blank">[Read]</a>'
+        f'<span class="bb-counter" id="bb-counter"></span>'
+        f'</div>'
+        f'<script>window._bbItems = {banner_json};</script>\n'
     )
 
 html_parts.append(f"""
@@ -1814,6 +1842,7 @@ if top_stories:
             f'<span class="ts-section-tag">{section_label}</span>'
             f'<span class="ts-badge">{n_src} sources</span>'
             f'<span class="ts-headline">{safe_title}</span>'
+            f'<span class="ts-label"> {ts_to_pdt(lead_ts2)}</span>'
             f'<a class="ts-link" href="{lead_link}" target="_blank">[Read]</a>'
             f'</div>\n'
         )
@@ -1849,18 +1878,21 @@ html_parts.append('</div>\n')
 html_parts.append("""
 <!-- ══ YOUTUBE AUTO-MUTE ══ -->
 <script src="https://www.youtube.com/iframe_api"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-// YT callback must be global
-let players = [];
+// ── YT auto-mute (global so YT API can call it) ──
+var players = [];
 function onYouTubeIframeAPIReady() {
-    setTimeout(() => {
-        document.querySelectorAll('.youtube-inset iframe').forEach(iframe => {
-            const p = new YT.Player(iframe, {
+    setTimeout(function() {
+        document.querySelectorAll('.youtube-inset iframe').forEach(function(iframe) {
+            var p = new YT.Player(iframe, {
                 events: {
-                    onReady: e => { e.target.mute(); },
-                    onStateChange: e => {
+                    onReady: function(e) { e.target.mute(); },
+                    onStateChange: function(e) {
                         if (e.data === YT.PlayerState.PLAYING) {
-                            players.forEach(other => { if (other !== e.target) other.mute(); });
+                            players.forEach(function(other) {
+                                if (other !== e.target) other.mute();
+                            });
                         }
                     }
                 }
@@ -1872,59 +1904,59 @@ function onYouTubeIframeAPIReady() {
 
 document.addEventListener('DOMContentLoaded', function() {
 
-// ══ READ-ARTICLE DIMMING ══
-// An article is dimmed only when the user actually clicks [Full Article] on it.
-// We store clicked links in localStorage under mp_read_links.
-// On each page load we restore the dim state for previously-clicked articles.
+// ── ROTATING BREAKING BANNER ──
 (function() {
-    const READ_KEY = 'mp_read_links';
-    let readLinks = new Set();
-    try {
-        const raw = localStorage.getItem(READ_KEY);
-        if (raw) readLinks = new Set(JSON.parse(raw));
-    } catch(e) {}
-
-    function saveRead() {
-        try {
-            const arr = [...readLinks].slice(-2000);
-            localStorage.setItem(READ_KEY, JSON.stringify(arr));
-        } catch(e) {}
+    var items = window._bbItems || [];
+    if (!items.length) return;
+    var textEl    = document.getElementById('bb-text');
+    var timeEl    = document.getElementById('bb-time');
+    var linkEl    = document.getElementById('bb-link');
+    var counterEl = document.getElementById('bb-counter');
+    var idx = 0;
+    function show(i) {
+        var item = items[i];
+        if (!item) return;
+        if (textEl)    { textEl.style.animation='none'; textEl.offsetHeight; textEl.style.animation=''; textEl.textContent = item.title; }
+        if (timeEl)    timeEl.textContent = item.time;
+        if (linkEl)    linkEl.href = item.link;
+        if (counterEl) counterEl.textContent = (i+1) + ' / ' + items.length;
     }
+    show(0);
+    if (items.length > 1) {
+        setInterval(function() { idx = (idx + 1) % items.length; show(idx); }, 6000);
+    }
+})();
 
-    // On load: dim any article the user previously clicked
-    document.querySelectorAll('[data-link]').forEach(el => {
-        const lnk = el.getAttribute('data-link');
-        if (lnk && readLinks.has(lnk)) {
-            el.classList.add('seen-item');
-        }
+// ── READ-ARTICLE DIMMING (click-only) ──
+(function() {
+    var READ_KEY = 'mp_read_links';
+    var readLinks = new Set();
+    try { var raw = localStorage.getItem(READ_KEY); if (raw) readLinks = new Set(JSON.parse(raw)); } catch(e) {}
+    function saveRead() { try { localStorage.setItem(READ_KEY, JSON.stringify([...readLinks].slice(-2000))); } catch(e) {} }
+    document.querySelectorAll('[data-link]').forEach(function(el) {
+        var lnk = el.getAttribute('data-link');
+        if (lnk && readLinks.has(lnk)) el.classList.add('seen-item');
     });
-
-    // On click of a [Full Article] link: mark parent article as read
     document.addEventListener('click', function(e) {
-        const link = e.target.closest('.link');
+        var link = e.target.closest('.link, .ts-link');
         if (!link) return;
-        const article = link.closest('[data-link]');
+        var article = link.closest('[data-link]') || link.closest('.top-story-card');
         if (!article) return;
-        const lnk = article.getAttribute('data-link');
-        if (lnk) {
-            readLinks.add(lnk);
-            article.classList.add('seen-item');
-            saveRead();
-        }
+        var lnk = article.getAttribute('data-link') || link.getAttribute('href');
+        if (lnk) { readLinks.add(lnk); article.classList.add('seen-item'); saveRead(); }
     });
 })();
 
-// ══ FONT SIZE TOGGLE ══
+// ── FONT SIZE TOGGLE ──
 (function() {
     var FKEY = 'mp_large_text';
-    var tog  = document.getElementById('font-toggle');
-    var lbl  = document.getElementById('font-label');
+    var tog = document.getElementById('font-toggle');
+    var lbl = document.getElementById('font-label');
     function applyFont(large) {
-        document.body.classList.toggle('large-text', large);
+        document.body.classList.toggle('large-text', !!large);
         if (lbl) lbl.textContent = large ? 'Normal' : 'Large';
     }
-    var sv = null;
-    try { sv = localStorage.getItem(FKEY); } catch(e) {}
+    var sv = null; try { sv = localStorage.getItem(FKEY); } catch(e) {}
     applyFont(sv === '1');
     if (tog) tog.addEventListener('click', function() {
         var on = document.body.classList.contains('large-text');
@@ -1933,30 +1965,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 })();
 
-// ══ SECTION COLLAPSE ══
+// ── SECTION COLLAPSE ──
 (function() {
     var CKEY = 'mp_collapsed';
     var collapsed = new Set();
-    try {
-        var raw = localStorage.getItem(CKEY);
-        if (raw) collapsed = new Set(JSON.parse(raw));
-    } catch(e) {}
-
-    function saveCollapsed() {
-        try { localStorage.setItem(CKEY, JSON.stringify([...collapsed])); } catch(e) {}
-    }
-
-    // Restore collapsed state
+    try { var raw = localStorage.getItem(CKEY); if (raw) collapsed = new Set(JSON.parse(raw)); } catch(e) {}
+    function saveCollapsed() { try { localStorage.setItem(CKEY, JSON.stringify([...collapsed])); } catch(e) {} }
     collapsed.forEach(function(id) {
         var el = document.getElementById(id);
-        if (el) {
-            el.classList.add('collapsed');
-            var btn = document.querySelector('[data-target="' + id + '"]');
-            if (btn) btn.innerHTML = '&#9654;';
-        }
+        if (el) { el.classList.add('collapsed'); }
+        var btn = document.querySelector('[data-target="' + id + '"]');
+        if (btn) btn.innerHTML = '&#9654;';
     });
-
-    // Click handler for all collapse buttons
     document.addEventListener('click', function(e) {
         var btn = e.target.closest('.section-collapse-btn');
         if (!btn) return;
@@ -1964,20 +1984,13 @@ document.addEventListener('DOMContentLoaded', function() {
         var target = document.getElementById(targetId);
         if (!target) return;
         var isCollapsed = target.classList.contains('collapsed');
-        if (isCollapsed) {
-            target.classList.remove('collapsed');
-            btn.innerHTML = '&#9660;';
-            collapsed.delete(targetId);
-        } else {
-            target.classList.add('collapsed');
-            btn.innerHTML = '&#9654;';
-            collapsed.add(targetId);
-        }
+        if (isCollapsed) { target.classList.remove('collapsed'); btn.innerHTML = '&#9660;'; collapsed.delete(targetId); }
+        else             { target.classList.add('collapsed');    btn.innerHTML = '&#9654;'; collapsed.add(targetId); }
         saveCollapsed();
     });
 })();
 
-// ══ SEARCH + AI BAR ══
+// ── SEARCH + AI BAR ──
 (function() {
     var input   = document.getElementById('mp-search-input');
     var srchBtn = document.getElementById('search-btn');
@@ -1993,93 +2006,45 @@ document.addEventListener('DOMContentLoaded', function() {
     function doAI() {
         var q = input ? input.value.trim() : '';
         if (!q) return;
-        panel.className = 'ai-response-panel active';
-        panel.innerHTML = '<span class="ai-thinking">Thinking...</span>';
-
-        var systemPrompt = 'You are a news analysis assistant embedded in The Mitchell Post, a news aggregator. ' +
-            'Answer questions concisely and factually. Focus on news context, fact-checking, and geopolitical analysis. ' +
-            'Keep responses under 250 words unless a longer answer is truly needed. Use plain text, no markdown headers.';
-
+        if (panel) { panel.className = 'ai-response-panel active'; panel.innerHTML = '<span class="ai-thinking">Thinking...</span>'; }
         fetch('https://api.anthropic.com/v1/messages', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 model: 'claude-sonnet-4-6',
                 max_tokens: 1000,
-                system: systemPrompt,
+                system: 'You are a news analysis assistant embedded in The Mitchell Post, a news aggregator. Answer questions concisely and factually, focused on news context, fact-checking, and geopolitical analysis. Keep responses under 250 words unless a longer answer is truly needed. Use plain text, no markdown headers.',
                 messages: [{ role: 'user', content: q }]
             })
         })
         .then(function(r) { return r.json(); })
         .then(function(data) {
             var text = '';
-            if (data.content && data.content.length > 0) {
-                data.content.forEach(function(block) {
-                    if (block.type === 'text') text += block.text;
-                });
-            } else if (data.error) {
-                text = 'Error: ' + data.error.message;
-            }
-            panel.innerHTML = text.replace(/\n/g, '<br>');
+            if (data.content) { data.content.forEach(function(b) { if (b.type === 'text') text += b.text; }); }
+            else if (data.error) { text = 'Error: ' + data.error.message; }
+            if (panel) panel.innerHTML = text.replace(/\n/g, '<br>');
         })
-        .catch(function(err) {
-            panel.innerHTML = 'Could not reach AI. Check your connection.';
-        });
+        .catch(function() { if (panel) panel.innerHTML = 'Could not reach AI. Check your connection or API key.'; });
     }
 
     if (srchBtn) srchBtn.addEventListener('click', doSearch);
     if (aiBtn)   aiBtn.addEventListener('click', doAI);
     if (input) {
         input.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { doAI(); }
-            else if (e.key === 'Enter') { doSearch(); }
+            if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); doAI(); }
+            else if (e.key === 'Enter') { e.preventDefault(); doSearch(); }
         });
     }
 })();
 
-// Light mode toggle (auto detects system preference on first visit)
+// ── DRAG-TO-REORDER SECTIONS ──
 (function() {
-    var LKEY = 'mp_light_mode';
-    var tog = document.getElementById('mode-toggle');
-    var lbl = document.querySelector('#mode-toggle .mode-label');
-    function applyMode(light) {
-        document.body.classList.toggle('light-mode', !!light);
-        if (lbl) lbl.textContent = light ? 'Dark' : 'Light';
-    }
-    var sv = null;
-    try { sv = localStorage.getItem(LKEY); } catch(e) {}
-    if (sv === '1') {
-        applyMode(true);
-    } else if (sv === '0') {
-        applyMode(false);
-    } else {
-        var prefersLight = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
-        applyMode(prefersLight);
-    }
-    if (tog) tog.addEventListener('click', function() {
-        var on = document.body.classList.contains('light-mode');
-        applyMode(!on);
-        try { localStorage.setItem(LKEY, on ? '0' : '1'); } catch(e) {}
-    });
-})();
-
-    });
-})();
-
-
-// ══ DRAG-TO-REORDER SECTIONS ══
-(function() {
-    var OKEY = 'mp_section_order';
+    var OKEY    = 'mp_section_order';
     var wrapper = document.getElementById('sections-wrapper');
     if (!wrapper) return;
 
-    function getSections() {
-        return Array.from(wrapper.querySelectorAll(':scope > .section-wrap'));
-    }
-
-    function getDividers() {
-        return Array.from(wrapper.querySelectorAll(':scope > .top-divider'));
-    }
+    function getSections() { return Array.from(wrapper.querySelectorAll(':scope > .section-wrap')); }
+    function getDividers() { return Array.from(wrapper.querySelectorAll(':scope > .top-divider')); }
 
     function saveOrder() {
         var order = getSections().map(function(s) { return s.id; });
@@ -2089,24 +2054,19 @@ document.addEventListener('DOMContentLoaded', function() {
     function restoreOrder() {
         var saved = null;
         try { saved = JSON.parse(localStorage.getItem(OKEY)); } catch(e) {}
-        if (!saved || !Array.isArray(saved) || saved.length === 0) return;
-        // Rebuild wrapper children in saved order, interspersing dividers
+        if (!saved || !Array.isArray(saved) || !saved.length) return;
         var sections = {};
         getSections().forEach(function(s) { sections[s.id] = s; });
-        var divs = getDividers();
-        // Remove all children
+        var dividers = getDividers();
         while (wrapper.firstChild) wrapper.removeChild(wrapper.firstChild);
-        // Re-append in order
         saved.forEach(function(id, i) {
-            var s = sections[id];
-            if (s) wrapper.appendChild(s);
-            if (i < saved.length - 1 && divs[i]) wrapper.appendChild(divs[i]);
+            if (sections[id]) wrapper.appendChild(sections[id]);
+            if (i < saved.length - 1 && dividers[i]) wrapper.appendChild(dividers[i]);
         });
     }
     restoreOrder();
 
     var dragSrc = null;
-
     function attachDrag(section) {
         section.setAttribute('draggable', 'true');
         section.addEventListener('dragstart', function(e) {
@@ -2116,33 +2076,48 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         section.addEventListener('dragend', function() {
             section.classList.remove('dragging');
-            wrapper.querySelectorAll('.drag-over').forEach(function(el) {
-                el.classList.remove('drag-over');
-            });
+            wrapper.querySelectorAll('.drag-over').forEach(function(el) { el.classList.remove('drag-over'); });
             saveOrder();
         });
         section.addEventListener('dragover', function(e) {
-            e.preventDefault();
-            e.dataTransfer.dropEffect = 'move';
+            e.preventDefault(); e.dataTransfer.dropEffect = 'move';
             if (section !== dragSrc) section.classList.add('drag-over');
             return false;
         });
-        section.addEventListener('dragleave', function() {
-            section.classList.remove('drag-over');
-        });
+        section.addEventListener('dragleave', function() { section.classList.remove('drag-over'); });
         section.addEventListener('drop', function(e) {
-            e.stopPropagation();
-            e.preventDefault();
+            e.stopPropagation(); e.preventDefault();
             section.classList.remove('drag-over');
             if (!dragSrc || dragSrc === section) return;
-            // Insert dragSrc before the drop target
             wrapper.insertBefore(dragSrc, section);
             saveOrder();
             return false;
         });
     }
-
     getSections().forEach(attachDrag);
+})();
+
+// ── LIGHT MODE TOGGLE (auto detects system preference on first visit) ──
+(function() {
+    var LKEY = 'mp_light_mode';
+    var tog  = document.getElementById('mode-toggle');
+    var lbl  = document.querySelector('#mode-toggle .mode-label');
+    function applyMode(light) {
+        document.body.classList.toggle('light-mode', !!light);
+        if (lbl) lbl.textContent = light ? 'Dark' : 'Light';
+    }
+    var sv = null; try { sv = localStorage.getItem(LKEY); } catch(e) {}
+    if (sv === '1')      { applyMode(true); }
+    else if (sv === '0') { applyMode(false); }
+    else {
+        var prefersLight = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
+        applyMode(prefersLight);
+    }
+    if (tog) tog.addEventListener('click', function() {
+        var on = document.body.classList.contains('light-mode');
+        applyMode(!on);
+        try { localStorage.setItem(LKEY, on ? '0' : '1'); } catch(e) {}
+    });
 })();
 
 }); // end DOMContentLoaded
