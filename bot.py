@@ -1488,7 +1488,113 @@ html_parts.append(f"""<!DOCTYPE html>
     #section-tech    .cluster {{ border-left-color: #002040; background: #060f1a; }}
     #section-sports  .cluster {{ border-left-color: #002a18; background: #04120a; }}
     #section-culture .cluster {{ border-left-color: #300030; background: #120512; }}
-    /* Light mode tints */
+    /* ── Light mode overrides ── */
+    body.light-mode {{
+        background: #FFFFFF !important;
+        color: #000000 !important;
+    }}
+    body.light-mode .sticky-nav {{
+        background: #F0F0F0 !important;
+        border-bottom-color: #B30000 !important;
+    }}
+    body.light-mode .sticky-nav .site-name {{ color: #000000 !important; }}
+    body.light-mode .sticky-nav a {{ color: #333333 !important; }}
+    body.light-mode .sticky-nav a:hover {{ color: #000000 !important; }}
+    body.light-mode .breaking-banner {{ background: #B30000 !important; }}
+    body.light-mode .banner {{ background: #D8E4F0 !important; }}
+    body.light-mode .title {{ color: #000000 !important; }}
+    body.light-mode .ts-label {{ color: #555555 !important; }}
+    body.light-mode .src-label {{ color: #444444 !important; }}
+    body.light-mode .link {{ color: #333333 !important; }}
+    body.light-mode .link:hover {{ color: #000000 !important; }}
+    body.light-mode .top-divider {{ background: #CCCCCC !important; }}
+    body.light-mode .src-summary {{ color: #555555 !important; }}
+    body.light-mode .headline {{ border-bottom-color: #CCCCCC !important; }}
+    body.light-mode .cluster {{
+        background: #F5F5F5 !important;
+        border-left-color: #999999 !important;
+    }}
+    body.light-mode .cluster-item {{ border-bottom-color: #DDDDDD !important; }}
+    body.light-mode .cluster-badge {{ background: #DDDDDD !important; color: #000000 !important; }}
+    body.light-mode .cluster-sources {{ color: #555555 !important; }}
+    body.light-mode .top-story-card {{ background: #F0F0F0 !important; }}
+    body.light-mode .top-stories-title {{ color: #444444 !important; border-bottom-color: #CCCCCC !important; }}
+    body.light-mode .ts-headline {{ color: #000000 !important; }}
+    body.light-mode .ts-link {{ color: #333333 !important; }}
+    body.light-mode .ts-link:hover {{ color: #000000 !important; }}
+    body.light-mode .ts-badge {{ background: #DDDDDD !important; color: #000000 !important; }}
+    body.light-mode .site-footer {{
+        background: #EEEEEE !important;
+        border-top-color: #CCCCCC !important;
+        color: #333333 !important;
+    }}
+    body.light-mode .site-footer h1 {{ color: #000000 !important; }}
+    body.light-mode .site-footer .byline {{ color: #444444 !important; }}
+    body.light-mode .site-footer .update {{ color: #666666 !important; }}
+    body.light-mode #section-us      .cluster {{ border-left-color: #B30000 !important; background: #FFF0F0 !important; }}
+    body.light-mode #section-mideast .cluster {{ border-left-color: #C05000 !important; background: #FFF5EE !important; }}
+    body.light-mode #section-tech    .cluster {{ border-left-color: #005F9E !important; background: #EEF4FB !important; }}
+    body.light-mode #section-sports  .cluster {{ border-left-color: #006B3C !important; background: #EEF8F3 !important; }}
+    body.light-mode #section-culture .cluster {{ border-left-color: #6B006B !important; background: #F8EEF8 !important; }}
+    body.light-mode .search-bar-wrap {{ background: #EEEEEE !important; border-color: #CCCCCC !important; }}
+    body.light-mode .search-bar-wrap input {{
+        background: #FFFFFF !important; color: #000000 !important;
+        border-color: #AAAAAA !important;
+    }}
+    body.light-mode .search-bar-wrap input::placeholder {{ color: #888888 !important; }}
+    body.light-mode .search-bar-wrap button {{
+        background: #B30000 !important; color: #FFFFFF !important;
+    }}
+
+    /* ── Light mode toggle slider ── */
+    .light-toggle-wrap {{
+        display: flex; align-items: center; gap: 7px;
+        margin-left: auto; flex-shrink: 0; padding-left: 16px;
+    }}
+    .light-toggle-label {{
+        font-size: 0.72em; color: #aaaaaa; letter-spacing: 0.04em;
+        text-transform: uppercase; user-select: none; white-space: nowrap;
+    }}
+    body.light-mode .light-toggle-label {{ color: #444444; }}
+    .toggle-switch {{ position: relative; display: inline-block; width: 36px; height: 20px; flex-shrink: 0; }}
+    .toggle-switch input {{ opacity: 0; width: 0; height: 0; }}
+    .toggle-slider {{
+        position: absolute; cursor: pointer; inset: 0;
+        background: #333; border-radius: 20px; transition: background 0.2s;
+    }}
+    .toggle-slider:before {{
+        content: ""; position: absolute;
+        width: 14px; height: 14px; border-radius: 50%;
+        left: 3px; top: 3px;
+        background: #aaaaaa; transition: transform 0.2s, background 0.2s;
+    }}
+    .toggle-switch input:checked + .toggle-slider {{ background: #dddddd; }}
+    .toggle-switch input:checked + .toggle-slider:before {{
+        transform: translateX(16px); background: #000000;
+    }}
+
+    /* ── Search bar ── */
+    .search-bar-wrap {{
+        max-width: 1400px; margin: 0 auto 18px auto; padding: 12px 20px;
+        background: #1a1a1a; border-top: 1px solid #2a2a2a;
+        border-bottom: 1px solid #2a2a2a;
+        display: flex; align-items: center; gap: 10px;
+    }}
+    .search-bar-wrap input {{
+        flex: 1; padding: 8px 14px; border-radius: 4px;
+        border: 1px solid #444; background: #121212; color: #FFFFFF;
+        font-size: 0.95em; outline: none;
+        transition: border-color 0.15s;
+    }}
+    .search-bar-wrap input:focus {{ border-color: #B30000; }}
+    .search-bar-wrap input::placeholder {{ color: #666; }}
+    .search-bar-wrap button {{
+        padding: 8px 18px; border-radius: 4px; border: none;
+        background: #B30000; color: #FFFFFF; font-size: 0.9em;
+        font-weight: bold; cursor: pointer; letter-spacing: 0.04em;
+        transition: background 0.15s; white-space: nowrap;
+    }}
+    .search-bar-wrap button:hover {{ background: #8a0000; }}
 
     /* ── Site footer ── */
     .site-footer {{
@@ -1635,6 +1741,13 @@ html_parts.append(f"""<!DOCTYPE html>
     <a href="#section-tech"    class="nav-tech">Tech &amp; Life</a>
     <a href="#section-sports"  class="nav-sports">Sports</a>
     <a href="#section-culture" class="nav-culture">Culture</a>
+    <div class="light-toggle-wrap">
+        <span class="light-toggle-label">Light</span>
+        <label class="toggle-switch" title="Toggle light/dark mode">
+            <input type="checkbox" id="light-mode-toggle">
+            <span class="toggle-slider"></span>
+        </label>
+    </div>
 </nav>
 
 """)
@@ -1723,6 +1836,10 @@ if top_stories:
             f'</div>\n'
         )
     ts_html += '</div>\n'
+    ts_html += '''<div class="search-bar-wrap">
+    <input type="text" id="news-search-input" placeholder="Search Google News... (press Enter or click Search)" aria-label="Search news">
+    <button id="news-search-btn">Search</button>
+</div>\n'''
     html_parts.append(ts_html)
 
 # ── Build sections in user-preferred order (default order, JS reorders on page) ──
@@ -1784,6 +1901,37 @@ function onYouTubeIframeAPIReady() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+
+// ── LIGHT MODE TOGGLE ──
+(function() {
+    var LKEY = 'mp_light_mode';
+    var toggle = document.getElementById('light-mode-toggle');
+    if (!toggle) return;
+    function setMode(on) {
+        if (on) { document.body.classList.add('light-mode'); toggle.checked = true; }
+        else     { document.body.classList.remove('light-mode'); toggle.checked = false; }
+        try { localStorage.setItem(LKEY, on ? '1' : '0'); } catch(e) {}
+    }
+    // Restore preference
+    var saved = null;
+    try { saved = localStorage.getItem(LKEY); } catch(e) {}
+    if (saved === '1') setMode(true);
+    toggle.addEventListener('change', function() { setMode(toggle.checked); });
+})();
+
+// ── NEWS SEARCH BAR ──
+(function() {
+    var input = document.getElementById('news-search-input');
+    var btn   = document.getElementById('news-search-btn');
+    if (!input || !btn) return;
+    function doSearch() {
+        var q = input.value.trim();
+        if (!q) return;
+        window.open('https://news.google.com/search?q=' + encodeURIComponent(q) + '&hl=en-US&gl=US&ceid=US:en', '_blank');
+    }
+    btn.addEventListener('click', doSearch);
+    input.addEventListener('keydown', function(e) { if (e.key === 'Enter') doSearch(); });
+})();
 
 // ── ROTATING BREAKING BANNER ──
 (function() {
