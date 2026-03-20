@@ -1688,24 +1688,34 @@ html_parts.append(f"""<!DOCTYPE html>
         .cluster {{ padding: 8px 10px 4px 10px; }}
         .cluster-badge {{ font-size: 0.78em; }}
         /* Light mode Full Article button on mobile */
-            background: #eeeeee; border-color: #999999; color: #000000;
+        body.light-mode .link {{
+            background: #eeeeee !important;
+            border-color: #999999 !important;
+            color: #000000 !important;
         }}
-            background: #cccccc; color: #000000;
+        body.light-mode .link:hover, body.light-mode .link:active {{
+            background: #cccccc !important;
+            color: #000000 !important;
         }}
     }}
-    /* ── Drag-to-reorder sections ── */
-    .sections-wrapper {{ outline: none; }}
-    .section-wrap {{ cursor: default; transition: opacity 0.15s; }}
-    .section-wrap.dragging {{ opacity: 0.4; }}
-    .section-wrap.drag-over {{ outline: 2px dashed #555; outline-offset: -2px; }}
-    .drag-handle {{
-        display: inline-block; cursor: grab; opacity: 0.35;
-        font-size: 0.85em; margin-left: 10px; vertical-align: middle;
-        letter-spacing: -1px; user-select: none;
+    /* ── Floating light/dark toggle for mobile ── */
+    .float-mode-btn {{
+        display: none;
+        position: fixed; bottom: 20px; right: 16px; z-index: 2000;
+        background: #222; color: #fff; border: 1px solid #444;
+        border-radius: 50px; padding: 8px 14px;
+        font-size: 0.78em; font-weight: bold; letter-spacing: 0.04em;
+        cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        transition: background 0.2s, color 0.2s;
+        user-select: none;
     }}
-    .drag-handle:hover {{ opacity: 0.8; }}
-    .drag-handle:active {{ cursor: grabbing; }}
-    @media (max-width: 900px) {{ .drag-handle {{ display: none; }} }}
+    body.light-mode .float-mode-btn {{
+        background: #eeeeee; color: #000000; border-color: #bbbbbb;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }}
+    @media (max-width: 900px) {{
+        .float-mode-btn {{ display: block; }}
+    }}
 
     /* ── Print stylesheet ── */
     @media print {{
@@ -1749,6 +1759,9 @@ html_parts.append(f"""<!DOCTYPE html>
         </label>
     </div>
 </nav>
+
+<!-- ══ FLOATING LIGHT/DARK TOGGLE (mobile only) ══ -->
+<button class="float-mode-btn" id="float-mode-btn" aria-label="Toggle light/dark mode">☀ Light</button>
 
 """)
 
@@ -1801,12 +1814,14 @@ def section_block(section_id, color_class, breaking_items, recent_items,
         f'<div class="section-title-row">'
         f'<h2 class="section-title {color_class}">{breaking_title}</h2>'
         f'<button class="section-collapse-btn" data-target="{section_id}-cols" aria-label="Collapse section" title="Collapse / expand">&#9660;</button>'
-        f'<span class="drag-handle" title="Drag to reorder">&#8942;&#8942;</span>'
+        f'</div>\n'
+        f'</div>\n'
         f'</div>\n'
         f'<div id="{section_id}-cols" class="section-columns">\n'
+        f'<div class="container">\n'
+        f'<div class="column">\n'
         f'{b_summary}'
         f'{b_content}'
-        f'</div>\n'
         f'</div>\n'
         f'<div class="column">\n'
         f'<div class="section-title-row">'
@@ -1814,6 +1829,7 @@ def section_block(section_id, color_class, breaking_items, recent_items,
         f'</div>\n'
         f'{r_summary}'
         f'{r_content}'
+        f'</div>\n'
         f'</div>\n'
         f'</div>\n'
         f'</div>\n'
@@ -1906,10 +1922,12 @@ document.addEventListener('DOMContentLoaded', function() {
 (function() {
     var LKEY = 'mp_light_mode';
     var toggle = document.getElementById('light-mode-toggle');
+    var floatBtn = document.getElementById('float-mode-btn');
     if (!toggle) return;
     function setMode(on) {
         if (on) { document.body.classList.add('light-mode'); toggle.checked = true; }
         else     { document.body.classList.remove('light-mode'); toggle.checked = false; }
+        if (floatBtn) floatBtn.textContent = on ? '🌙 Dark' : '☀ Light';
         try { localStorage.setItem(LKEY, on ? '1' : '0'); } catch(e) {}
     }
     // Restore preference
@@ -1917,6 +1935,7 @@ document.addEventListener('DOMContentLoaded', function() {
     try { saved = localStorage.getItem(LKEY); } catch(e) {}
     if (saved === '1') setMode(true);
     toggle.addEventListener('change', function() { setMode(toggle.checked); });
+    if (floatBtn) floatBtn.addEventListener('click', function() { setMode(!document.body.classList.contains('light-mode')); });
 })();
 
 // ── NEWS SEARCH BAR ──
@@ -2007,41 +2026,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         saveCollapsed();
     });
-})();
-
-// ── DRAG-TO-REORDER SECTIONS ──
-(function() {
-    var OKEY    = 'mp_section_order';
-    var wrapper = document.getElementById('sections-wrapper');
-    if (!wrapper) return;
-    function getSections() { return Array.from(wrapper.querySelectorAll(':scope > .section-wrap')); }
-    function getDividers() { return Array.from(wrapper.querySelectorAll(':scope > .top-divider')); }
-    function saveOrder() {
-        try { localStorage.setItem(OKEY, JSON.stringify(getSections().map(function(s) { return s.id; }))); } catch(e) {}
-    }
-    function restoreOrder() {
-        var saved = null;
-        try { saved = JSON.parse(localStorage.getItem(OKEY)); } catch(e) {}
-        if (!saved || !saved.length) return;
-        var smap = {}; getSections().forEach(function(s) { smap[s.id] = s; });
-        var dividers = getDividers();
-        while (wrapper.firstChild) wrapper.removeChild(wrapper.firstChild);
-        saved.forEach(function(id, i) {
-            if (smap[id]) wrapper.appendChild(smap[id]);
-            if (i < saved.length - 1 && dividers[i]) wrapper.appendChild(dividers[i]);
-        });
-    }
-    restoreOrder();
-    var dragSrc = null;
-    function attachDrag(section) {
-        section.setAttribute('draggable', 'true');
-        section.addEventListener('dragstart', function(e) { dragSrc = section; setTimeout(function() { section.classList.add('dragging'); }, 0); e.dataTransfer.effectAllowed = 'move'; });
-        section.addEventListener('dragend',   function()  { section.classList.remove('dragging'); wrapper.querySelectorAll('.drag-over').forEach(function(el) { el.classList.remove('drag-over'); }); saveOrder(); });
-        section.addEventListener('dragover',  function(e) { e.preventDefault(); if (section !== dragSrc) section.classList.add('drag-over'); return false; });
-        section.addEventListener('dragleave', function()  { section.classList.remove('drag-over'); });
-        section.addEventListener('drop',      function(e) { e.stopPropagation(); e.preventDefault(); section.classList.remove('drag-over'); if (!dragSrc || dragSrc === section) return; wrapper.insertBefore(dragSrc, section); saveOrder(); return false; });
-    }
-    getSections().forEach(attachDrag);
 })();
 
 }); // end DOMContentLoaded
