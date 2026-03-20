@@ -1814,15 +1814,15 @@ html_parts.append(f"""<!DOCTYPE html>
     }}
     body.light-mode .nav-updated-ago {{ color: #999; }}
 
-    /* ── Top Stories 3-column layout ── */
-    .top-stories-3col {{
-        display: flex; gap: 0; align-items: stretch;
+    /* ── Top Stories 2-column layout ── */
+    .top-stories-2col {{
+        display: flex; gap: 0; align-items: stretch; width: 100%;
     }}
-    .ts-col {{ flex: 1; min-width: 0; padding: 0 20px 0 0; }}
-    .ts-divider-left {{ border-left: 1px solid #2a2a2a; padding-left: 20px; padding-right: 0; }}
+    .ts-col {{ flex: 1; min-width: 0; padding: 0 24px 0 0; }}
+    .ts-divider-left {{ border-left: 1px solid #2a2a2a; padding-left: 24px; padding-right: 0; }}
     body.light-mode .ts-divider-left {{ border-left-color: #ddd; }}
     @media (max-width: 900px) {{
-        .top-stories-3col {{ flex-direction: column; }}
+        .top-stories-2col {{ flex-direction: column; }}
         .ts-divider-left {{ border-left: none; border-top: 1px solid #2a2a2a; padding-left: 0; padding-top: 14px; margin-top: 14px; }}
         body.light-mode .ts-divider-left {{ border-top-color: #ddd; }}
     }}
@@ -2128,7 +2128,7 @@ if top_stories:
         )
 
     ts_html = f'''<div class="top-stories-strip">
-  <div class="top-stories-3col">
+  <div class="top-stories-2col">
     <div class="ts-col">
       <p class="top-stories-title">Top Stories &mdash; Most Covered Right Now</p>
       {ts_cards}
@@ -2136,12 +2136,6 @@ if top_stories:
     <div class="ts-col ts-divider-left">
       <p class="top-stories-title">Daily Briefing &mdash; Need to Know</p>
       {db_cards}
-    </div>
-    <div class="ts-col ts-divider-left">
-      <p class="top-stories-title">Trending Topics</p>
-      <div class="trend-tags-wrap">
-        {trend_tags}
-      </div>
     </div>
   </div>
 </div>\n'''
