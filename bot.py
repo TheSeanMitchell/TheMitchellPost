@@ -1369,10 +1369,26 @@ def headline_tokens(title):
     words = re.findall(r'[a-zA-Z]{3,}', title.lower())
     return set(w for w in words if w not in STOPWORDS)
 
+# Sources that produce high volumes of short, similarly-worded blurbs and should
+# never be the seed of a cluster or count toward a multi-source cluster badge.
+CLUSTER_EXCLUDED_SOURCES = {
+    "just jared", "justjared", "just jared jr",
+    "hollywood life", "hollywoodlife",
+}
+
+def _is_cluster_excluded(source_name):
+    return any(excl in source_name.lower() for excl in CLUSTER_EXCLUDED_SOURCES)
+
 def cluster_items(items, min_shared=3):
     """
     Returns a list of clusters. Each cluster is a list of (ts, title, source, link).
     Single-item clusters are just solo headlines. Multi-item clusters are grouped stories.
+
+    Rules:
+    - Sources in CLUSTER_EXCLUDED_SOURCES are never used as a cluster seed and
+      are never merged into another cluster — they always appear solo.
+    - A single source can contribute at most 1 article to any given cluster,
+      so a multi-source badge always reflects genuine cross-outlet coverage.
     """
     used = [False] * len(items)
     clusters = []
@@ -1381,15 +1397,30 @@ def cluster_items(items, min_shared=3):
     for i in range(len(items)):
         if used[i]:
             continue
+        seed_ts, seed_title, seed_source, seed_link = items[i]
+        # Excluded sources always go solo — never seed a cluster
+        if _is_cluster_excluded(seed_source):
+            used[i] = True
+            clusters.append([items[i]])
+            continue
         cluster = [items[i]]
         used[i] = True
+        sources_in_cluster = {seed_source.lower()}
         for j in range(i + 1, len(items)):
             if used[j]:
+                continue
+            ts_j, title_j, source_j, link_j = items[j]
+            # Excluded sources never join a cluster
+            if _is_cluster_excluded(source_j):
+                continue
+            # One article per source per cluster
+            if source_j.lower() in sources_in_cluster:
                 continue
             shared = len(token_cache[i] & token_cache[j])
             if shared >= min_shared:
                 cluster.append(items[j])
                 used[j] = True
+                sources_in_cluster.add(source_j.lower())
         clusters.append(cluster)
     return clusters
 
