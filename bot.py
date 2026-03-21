@@ -2288,6 +2288,7 @@ html_parts.append(f"""<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Mitchell Post</title>
     <link rel="alternate" type="application/rss+xml" title="The Mitchell Post RSS Feed" href="feed.xml">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%23121212'/><rect x='2' y='2' width='60' height='60' rx='7' fill='none' stroke='%23B30000' stroke-width='3'/><text x='32' y='46' font-family='Arial,sans-serif' font-size='28' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'>MP</text></svg>">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -2318,6 +2319,7 @@ html_parts.append(f"""<!DOCTYPE html>
         flex-shrink: 0;
     }}
     .sticky-nav a:hover {{ color: #FFFFFF; }}
+    .sticky-nav a.nav-active {{ color: #FFFFFF; background: rgba(255,255,255,0.06); }}
     .sticky-nav a.nav-us     {{ border-left-color: {SECTION_COLORS["us"]}; }}
     .sticky-nav a.nav-mideast{{ border-left-color: {SECTION_COLORS["mideast"]}; }}
     .sticky-nav a.nav-world  {{ border-left-color: {SECTION_COLORS["world"]}; }}
@@ -2479,9 +2481,9 @@ html_parts.append(f"""<!DOCTYPE html>
         border-top-color: #CCCCCC !important;
         color: #333333 !important;
     }}
-    body.light-mode .site-footer h1 {{ color: #000000 !important; }}
-    body.light-mode .site-footer .byline {{ color: #444444 !important; }}
-    body.light-mode .site-footer .update {{ color: #666666 !important; }}
+    body.light-mode .site-footer h1 {{ color: #888888 !important; }}
+    body.light-mode .site-footer .byline {{ color: #555555 !important; }}
+    body.light-mode .site-footer .update {{ color: #777777 !important; }}
     body.light-mode #section-us       .cluster {{ border-left-color: #B30000 !important; background: #FFF0F0 !important; }}
     body.light-mode #section-mideast  .cluster {{ border-left-color: #C05000 !important; background: #FFF5EE !important; }}
     body.light-mode #section-tech     .cluster {{ border-left-color: #005F9E !important; background: #EEF4FB !important; }}
@@ -2550,13 +2552,27 @@ html_parts.append(f"""<!DOCTYPE html>
 
     /* ── Site footer ── */
     .site-footer {{
-        margin-top: 50px; padding: 30px 20px 40px 20px;
+        margin-top: 50px; padding: 30px 20px 50px 20px;
         border-top: 2px solid #222222; text-align: center;
         background: #0d0d0d; color: #555;
     }}
-    .site-footer h1 {{ font-size: 1.8em; text-decoration: underline; color: #FFFFFF; margin-bottom: 6px; }}
-    .site-footer .byline {{ font-size: 0.95em; color: #888; display: block; margin-bottom: 4px; }}
-    .site-footer .update {{ font-size: 0.8em; color: #555; display: block; }}
+    .site-footer h1 {{ font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.08em; color: #555; margin-bottom: 4px; }}
+    .site-footer .byline {{ font-size: 0.85em; color: #666; display: block; margin-bottom: 4px; }}
+    .site-footer .update {{ font-size: 0.78em; color: #444; display: block; }}
+
+    /* ── Back to Top button ── */
+    .back-to-top-btn {{
+        display: block; margin: 32px auto 0 auto;
+        background: none; border: 2px solid #B30000;
+        color: #FFFFFF; font-size: 2em; font-weight: bold;
+        letter-spacing: 0.06em; padding: 18px 48px;
+        border-radius: 6px; cursor: pointer;
+        transition: background 0.18s, color 0.18s;
+        text-transform: uppercase;
+    }}
+    .back-to-top-btn:hover {{ background: #B30000; color: #fff; }}
+    body.light-mode .back-to-top-btn {{ color: #000; border-color: #B30000; }}
+    body.light-mode .back-to-top-btn:hover {{ background: #B30000; color: #fff; }}
 
     /* ── Top Stories strip ── */
     .top-stories-strip {{
@@ -2568,13 +2584,21 @@ html_parts.append(f"""<!DOCTYPE html>
         padding-bottom: 4px; border-bottom: 1px solid #2a2a2a;
     }}
     .top-story-card {{
-        background: #1a1a1a; border-left: 3px solid #B30000;
+        background: #1a0505; border-left: 3px solid #B30000;
         padding: 10px 14px; margin-bottom: 8px; border-radius: 2px;
     }}
     .top-story-card .ts-section-tag {{
         font-size: 0.68em; font-weight: bold; letter-spacing: 0.08em;
-        text-transform: uppercase; margin-right: 8px; opacity: 0.7;
+        text-transform: uppercase; margin-right: 8px;
+        padding: 1px 6px; border-radius: 8px; display: inline-block;
     }}
+    .ts-section-us      {{ background: #4a0000; color: #ffaaaa; }}
+    .ts-section-mideast {{ background: #4a2000; color: #ffcc99; }}
+    .ts-section-world   {{ background: #0d3040; color: #99ccee; }}
+    .ts-section-tech    {{ background: #002040; color: #99bbdd; }}
+    .ts-section-business{{ background: #3d2d00; color: #ddcc88; }}
+    .ts-section-sports  {{ background: #002a18; color: #88ddaa; }}
+    .ts-section-culture {{ background: #300030; color: #ddaadd; }}
     .top-story-card .ts-badge {{
         background: #333; color: #ccc; font-size: 0.68em;
         padding: 1px 6px; border-radius: 8px; margin-right: 8px;
@@ -2714,6 +2738,14 @@ html_parts.append(f"""<!DOCTYPE html>
 
     /* ── Breaking banner upgrade ── */
     .bb-close {{ display: none; }}
+    .bb-section-pill {{
+        font-size: 0.7em; font-weight: bold; letter-spacing: 0.07em;
+        text-transform: uppercase; padding: 2px 7px; border-radius: 3px;
+        flex-shrink: 0; margin-left: 4px;
+    }}
+    @media (max-width: 900px) {{
+        .bb-section-pill {{ display: none !important; }}
+    }}
 
     /* ── Updated-ago in nav ── */
     .nav-updated-ago {{
@@ -2772,80 +2804,6 @@ html_parts.append(f"""<!DOCTYPE html>
     .headline.search-hidden, .cluster.search-hidden {{ display: none !important; }}
     .headline.search-match {{ outline: 1px solid #B30000; }}
 
-    /* ── Read Later panel ── */
-    #read-later-panel {{
-        position: fixed; top: 48px; right: 0; bottom: 0;
-        width: 340px; background: #0d0d0d; border-left: 2px solid #B30000;
-        z-index: 900; display: flex; flex-direction: column;
-        transform: translateX(100%); transition: transform 0.25s ease;
-        box-shadow: -4px 0 20px rgba(0,0,0,0.5);
-    }}
-    #read-later-panel.open {{ transform: translateX(0); }}
-    body.light-mode #read-later-panel {{ background: #f5f5f5; border-left-color: #B30000; }}
-    .rl-header {{
-        padding: 12px 16px; border-bottom: 1px solid #222;
-        display: flex; align-items: center; justify-content: space-between;
-        flex-shrink: 0;
-    }}
-    .rl-header-title {{ font-size: 0.82em; font-weight: bold; letter-spacing: 0.08em; text-transform: uppercase; color: #888; }}
-    .rl-close-btn {{
-        background: none; border: none; color: #666; font-size: 1em;
-        cursor: pointer; padding: 2px 6px; border-radius: 3px;
-        transition: color 0.15s;
-    }}
-    .rl-close-btn:hover {{ color: #fff; }}
-    body.light-mode .rl-close-btn:hover {{ color: #000; }}
-    .rl-items {{ flex: 1; overflow-y: auto; padding: 10px 16px; }}
-    .rl-empty {{ color: #555; font-size: 0.85em; padding: 20px 0; text-align: center; }}
-    body.light-mode .rl-empty {{ color: #999; }}
-    .rl-item {{
-        padding: 10px 0; border-bottom: 1px solid #1e1e1e;
-        display: flex; flex-direction: column; gap: 4px;
-    }}
-    body.light-mode .rl-item {{ border-bottom-color: #ddd; }}
-    .rl-item-title {{ color: #ddd; font-size: 0.85em; line-height: 1.4; }}
-    body.light-mode .rl-item-title {{ color: #222; }}
-    .rl-item-meta {{ display: flex; align-items: center; gap: 8px; }}
-    .rl-item-src {{ color: #666; font-size: 0.73em; }}
-    .rl-item-read {{ color: #B30000; font-size: 0.73em; text-decoration: underline; }}
-    .rl-item-remove {{ background: none; border: none; color: #555; font-size: 0.7em; cursor: pointer; margin-left: auto; }}
-    .rl-item-remove:hover {{ color: #ff4444; }}
-    .rl-clear-btn {{
-        margin: 10px 16px; padding: 6px; background: none;
-        border: 1px solid #333; border-radius: 4px; color: #666;
-        font-size: 0.75em; cursor: pointer; text-align: center;
-        transition: border-color 0.15s, color 0.15s;
-    }}
-    .rl-clear-btn:hover {{ border-color: #B30000; color: #B30000; }}
-
-    /* ── Read Later trigger button (floating) ── */
-    #rl-fab {{
-        position: fixed; bottom: 24px; left: 16px; z-index: 950;
-        background: #1a1a1a; border: 1px solid #444; border-radius: 50px;
-        padding: 8px 14px; color: #ccc; font-size: 0.78em; font-weight: bold;
-        cursor: pointer; display: none; box-shadow: 0 2px 12px rgba(0,0,0,0.5);
-        letter-spacing: 0.04em; transition: background 0.15s;
-    }}
-    #rl-fab.has-items {{ display: flex; align-items: center; gap: 6px; }}
-    #rl-fab .rl-fab-count {{
-        background: #B30000; color: #fff; border-radius: 50%;
-        width: 18px; height: 18px; font-size: 0.75em;
-        display: flex; align-items: center; justify-content: center;
-    }}
-    #rl-fab:hover {{ background: #252525; }}
-    body.light-mode #rl-fab {{ background: #eeeeee; border-color: #bbb; color: #222; box-shadow: 0 2px 12px rgba(0,0,0,0.2); }}
-
-    /* ── Save for Later button on headlines ── */
-    .save-later-btn {{
-        background: none; border: none; color: #444; font-size: 0.72em;
-        cursor: pointer; padding: 0 3px; margin-left: 4px;
-        transition: color 0.15s; vertical-align: middle; flex-shrink: 0;
-    }}
-    .save-later-btn:hover {{ color: #B30000; }}
-    .save-later-btn.saved {{ color: #B30000; }}
-    body.light-mode .save-later-btn {{ color: #bbb; }}
-    body.light-mode .save-later-btn:hover {{ color: #B30000; }}
-
     /* ── Footer additions ── */
     .site-footer .mission {{
         font-size: 0.82em; color: #666; display: block;
@@ -2887,7 +2845,7 @@ html_parts.append(f"""<!DOCTYPE html>
     <a href="#section-culture"  class="nav-culture">Culture</a>
     <div class="light-toggle-wrap">
         <span class="nav-updated-ago" id="nav-updated-ago" title="Time since last update"></span>
-        <span class="light-toggle-label">Light</span>
+        <span class="light-toggle-label">Dark/Light Mode</span>
         <label class="toggle-switch" title="Toggle light/dark mode">
             <input type="checkbox" id="light-mode-toggle">
             <span class="toggle-slider"></span>
@@ -2896,15 +2854,39 @@ html_parts.append(f"""<!DOCTYPE html>
 </nav>
 
 <!-- ══ FLOATING LIGHT/DARK TOGGLE (mobile only) ══ -->
-<button class="float-mode-btn" id="float-mode-btn" aria-label="Toggle light/dark mode">☀ Light</button>
+<button class="float-mode-btn" id="float-mode-btn" aria-label="Toggle light/dark mode">Dark/Light Mode</button>
 
 """)
 
 # Rotating breaking news banner (all items < 1 hour)
 if show_breaking_banner:
     import json as _json_banner
+    # Build a quick lookup: link -> section label
+    _link_to_section = {}
+    for _sec_label, _sec_items in [
+        ("US", us_breaking + us_recent),
+        ("Middle East", middle_breaking + middle_recent),
+        ("World", world_breaking + world_recent),
+        ("Tech", tech_breaking + tech_recent),
+        ("Business", business_breaking + business_recent),
+        ("Sports", sports_breaking + sports_recent),
+        ("Culture", culture_breaking + culture_recent),
+    ]:
+        for _ts, _ttl, _src, _lnk in _sec_items:
+            if _lnk not in _link_to_section:
+                _link_to_section[_lnk] = _sec_label
+    _section_colors_bb = {
+        "US": "#B30000", "Middle East": "#C05000", "World": "#2E7D9A",
+        "Tech": "#005F9E", "Business": "#8B6914", "Sports": "#006B3C", "Culture": "#6B006B",
+    }
     banner_data = [
-        {"title": it[1][:140].replace('"', '&quot;'), "link": it[3], "time": ts_to_pdt(it[0])}
+        {
+            "title": it[1][:140].replace('"', '&quot;'),
+            "link":  it[3],
+            "time":  ts_to_pdt(it[0]),
+            "section": _link_to_section.get(it[3], ""),
+            "scolor":  _section_colors_bb.get(_link_to_section.get(it[3], ""), "#555"),
+        }
         for it in hot_items[:20]
     ]
     banner_json = _json_banner.dumps(banner_data)
@@ -2912,6 +2894,7 @@ if show_breaking_banner:
         f'<div class="breaking-banner" id="breaking-banner">'
         f'<span class="bb-label">&#9679; BREAKING</span>'
         f'<span class="bb-text" id="bb-text"></span>'
+        f'<span class="bb-section-pill" id="bb-section-pill" style="display:none"></span>'
         f'<span class="bb-time" id="bb-time"></span>'
         f'<span class="bb-counter" id="bb-counter"></span>'
         f'<button class="bb-close" id="bb-close" aria-label="Dismiss banner" title="Dismiss">&#10005;</button>'
@@ -2919,22 +2902,7 @@ if show_breaking_banner:
         f'<script>window._bbItems = {banner_json}; window._bbUpdateTs = {int(time.time())};</script>\n'
     )
 
-html_parts.append(f"""
-<!-- ══ VIDEO BANNER — desktop only, hidden on mobile via CSS ══ -->
-<div class="banner">
-    <div class="video-grid">
-        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/TBlxk1kH9dM?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/b_ERc4vcRHI?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/nya02XlHG1Q?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/_6dRRfnYJws?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/pykpO5kQJ98?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-    </div>
-</div>
-
-""")
+html_parts.append("")  # Video banner moved below MRO strip — see after search bar
 
 def section_block(section_id, color_class, breaking_items, recent_items,
                   breaking_title, recent_title):
@@ -3033,6 +3001,15 @@ if top_stories or daily_briefing:
 
     def render_mro_cards(cards):
         html = ''
+        section_css_map = {
+            "US":          "ts-section-us",
+            "Middle East": "ts-section-mideast",
+            "World":       "ts-section-world",
+            "Tech":        "ts-section-tech",
+            "Business":    "ts-section-business",
+            "Sports":      "ts-section-sports",
+            "Culture":     "ts-section-culture",
+        }
         for section_label, cluster, n_src, lead_ts2, lead_title, lead_link in cards:
             safe_title = lead_title.replace('<','&lt;').replace('>','&gt;')
             safe_title = safe_title[0].upper() + safe_title[1:] if safe_title else safe_title
@@ -3042,11 +3019,12 @@ if top_stories or daily_briefing:
             # We embed both candidates; JS will find whichever exists
             anchor_cluster = f"cl-{link_hash}-anchor"
             anchor_single  = f"hl-{link_hash}"
+            tag_css = section_css_map.get(section_label, "")
             html += (
                 f'<div class="top-story-card mro-card" '
                 f'data-anchor-cluster="{anchor_cluster}" data-anchor-single="{anchor_single}" '
                 f'style="cursor:pointer" title="Jump to story on this page">'
-                f'<span class="ts-section-tag">{section_label}</span>'
+                f'<span class="ts-section-tag {tag_css}">{section_label}</span>'
                 f'<span class="ts-badge">{n_src} sources</span>'
                 f'<span class="ts-headline">{safe_title}</span>'
                 f'<span class="ts-link mro-jump">[↓ Go to story]</span>'
@@ -3085,8 +3063,22 @@ if top_stories or daily_briefing:
   </div>
 </div>\n'''
     ts_html += '''<div class="search-bar-wrap">
-    <input type="text" id="news-search-input" placeholder="Search Google News... (press Enter or click Search)" aria-label="Search news">
+    <input type="text" id="news-search-input" placeholder="Search headlines on this page... (Enter for Google News)" aria-label="Search news">
     <button id="news-search-btn">Search</button>
+    <span id="search-result-count" style="font-size:0.8em;color:#888;white-space:nowrap;"></span>
+</div>\n'''
+    ts_html += '''<!-- ══ VIDEO BANNER — desktop only, hidden on mobile via CSS ══ -->
+<div class="banner">
+    <div class="video-grid">
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/TBlxk1kH9dM?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/b_ERc4vcRHI?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/nya02XlHG1Q?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/_6dRRfnYJws?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/pykpO5kQJ98?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+    </div>
 </div>\n'''
     html_parts.append(ts_html)
 
@@ -3198,7 +3190,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function setMode(on) {
         if (on) { document.body.classList.add('light-mode'); toggle.checked = true; }
         else     { document.body.classList.remove('light-mode'); toggle.checked = false; }
-        if (floatBtn) floatBtn.textContent = on ? '🌙 Dark' : '☀ Light';
+        if (floatBtn) floatBtn.textContent = 'Dark/Light Mode';
         try { localStorage.setItem(LKEY, on ? '1' : '0'); } catch(e) {}
     }
     // Restore preference
@@ -3209,18 +3201,94 @@ document.addEventListener('DOMContentLoaded', function() {
     if (floatBtn) floatBtn.addEventListener('click', function() { setMode(!document.body.classList.contains('light-mode')); });
 })();
 
-// ── NEWS SEARCH BAR ──
+// ── NEWS SEARCH BAR — two-tier: live filter first, Google News fallback ──
 (function() {
     var input = document.getElementById('news-search-input');
     var btn   = document.getElementById('news-search-btn');
+    var countEl = document.getElementById('search-result-count');
     if (!input || !btn) return;
-    function doSearch() {
+
+    var allHeadlines = Array.from(document.querySelectorAll('.headline, .cluster'));
+
+    function clearFilter() {
+        allHeadlines.forEach(function(el) {
+            el.classList.remove('search-hidden', 'search-match');
+        });
+        if (countEl) countEl.textContent = '';
+    }
+
+    function liveFilter(q) {
+        if (!q) { clearFilter(); return; }
+        var lower = q.toLowerCase();
+        var matches = 0;
+        allHeadlines.forEach(function(el) {
+            var text = (el.textContent || '').toLowerCase();
+            if (text.indexOf(lower) !== -1) {
+                el.classList.remove('search-hidden');
+                el.classList.add('search-match');
+                matches++;
+            } else {
+                el.classList.add('search-hidden');
+                el.classList.remove('search-match');
+            }
+        });
+        if (countEl) {
+            if (matches > 0) {
+                countEl.textContent = matches + ' match' + (matches !== 1 ? 'es' : '') + ' on this page';
+                countEl.style.color = '#aaa';
+            } else {
+                countEl.textContent = 'No matches — try Google News \u2192';
+                countEl.style.color = '#B30000';
+                countEl.style.cursor = 'pointer';
+                countEl.onclick = function() {
+                    window.open('https://news.google.com/search?q=' + encodeURIComponent(input.value.trim()) + '&hl=en-US&gl=US&ceid=US:en', '_blank');
+                };
+            }
+        }
+    }
+
+    function googleFallback() {
         var q = input.value.trim();
         if (!q) return;
         window.open('https://news.google.com/search?q=' + encodeURIComponent(q) + '&hl=en-US&gl=US&ceid=US:en', '_blank');
     }
-    btn.addEventListener('click', doSearch);
-    input.addEventListener('keydown', function(e) { if (e.key === 'Enter') doSearch(); });
+
+    var debounceTimer = null;
+    input.addEventListener('input', function() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(function() { liveFilter(input.value.trim()); }, 180);
+    });
+
+    input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            var q = input.value.trim();
+            // If there are live matches, Enter just keeps filter; if none, go to Google News
+            var matches = document.querySelectorAll('.search-match').length;
+            if (matches === 0 && q) googleFallback();
+        }
+        if (e.key === 'Escape') { input.value = ''; clearFilter(); }
+    });
+
+    btn.addEventListener('click', function() {
+        var q = input.value.trim();
+        if (!q) return;
+        var matches = document.querySelectorAll('.search-match').length;
+        if (matches === 0) googleFallback();
+        // If there are matches, button click just shows "Search Google News for more"
+        else window.open('https://news.google.com/search?q=' + encodeURIComponent(q) + '&hl=en-US&gl=US&ceid=US:en', '_blank');
+    });
+
+    // Update button label when there are live matches
+    input.addEventListener('input', function() {
+        setTimeout(function() {
+            var matches = document.querySelectorAll('.search-match').length;
+            if (input.value.trim()) {
+                btn.textContent = matches > 0 ? 'More on Google \u2192' : 'Search Google \u2192';
+            } else {
+                btn.textContent = 'Search';
+            }
+        }, 200);
+    });
 })();
 
 // ── ROTATING BREAKING BANNER ──
@@ -3232,7 +3300,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var timeEl    = document.getElementById('bb-time');
     var counterEl = document.getElementById('bb-counter');
     var closeBtn  = document.getElementById('bb-close');
+    var sectionPill = document.getElementById('bb-section-pill');
     var idx = 0;
+    var IS_MOBILE_BB = window.innerWidth <= 900;
     function show(i) {
         var item = items[i % items.length];
         if (!item) return;
@@ -3244,6 +3314,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         if (timeEl)    timeEl.textContent = item.time;
         if (counterEl) counterEl.textContent = (i + 1) + ' / ' + items.length;
+        if (sectionPill && !IS_MOBILE_BB && item.section) {
+            sectionPill.textContent = item.section;
+            sectionPill.style.display = 'inline';
+            sectionPill.style.background = (item.scolor || '#555') + '33';
+            sectionPill.style.color = '#fff';
+            sectionPill.style.border = '1px solid ' + (item.scolor || '#555');
+        } else if (sectionPill) {
+            sectionPill.style.display = 'none';
+        }
     }
     show(0);
     var ticker = null;
@@ -3281,6 +3360,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // ── SECTION COLLAPSE ──
 (function() {
     var CKEY = 'mp_collapsed';
+    var SKEY = 'mp_scroll';
     var collapsed = new Set();
     try { var raw = localStorage.getItem(CKEY); if (raw) collapsed = new Set(JSON.parse(raw)); } catch(e) {}
     function saveCollapsed() { try { localStorage.setItem(CKEY, JSON.stringify([...collapsed])); } catch(e) {} }
@@ -3303,6 +3383,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         saveCollapsed();
     });
+    // Restore scroll position
+    try {
+        var savedScroll = localStorage.getItem(SKEY);
+        if (savedScroll) window.scrollTo(0, parseInt(savedScroll, 10));
+    } catch(e) {}
+    // Save scroll position on unload
+    window.addEventListener('beforeunload', function() {
+        try { localStorage.setItem(SKEY, Math.round(window.pageYOffset)); } catch(e) {}
+    });
 })();
 
 // ── CLUSTER EXPAND/COLLAPSE ──
@@ -3323,6 +3412,39 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.classList.remove('open');
         }
     });
+})();
+
+// ── SCROLL SPY — highlight active nav section ──
+(function() {
+    var sections = [
+        { id: 'section-us',       cls: 'nav-us' },
+        { id: 'section-mideast',  cls: 'nav-mideast' },
+        { id: 'section-world',    cls: 'nav-world' },
+        { id: 'section-tech',     cls: 'nav-tech' },
+        { id: 'section-business', cls: 'nav-business' },
+        { id: 'section-sports',   cls: 'nav-sports' },
+        { id: 'section-culture',  cls: 'nav-culture' },
+    ];
+    var navLinks = {};
+    sections.forEach(function(s) {
+        navLinks[s.cls] = document.querySelector('.sticky-nav a.' + s.cls);
+    });
+    function onScroll() {
+        var scrollY = window.pageYOffset + 80;
+        var active = null;
+        for (var i = sections.length - 1; i >= 0; i--) {
+            var el = document.getElementById(sections[i].id);
+            if (el && el.offsetTop <= scrollY) { active = sections[i].cls; break; }
+        }
+        sections.forEach(function(s) {
+            var link = navLinks[s.cls];
+            if (!link) return;
+            if (s.cls === active) link.classList.add('nav-active');
+            else link.classList.remove('nav-active');
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 })();
 
 // ── UPDATED X MINUTES AGO ──
@@ -3372,14 +3494,27 @@ document.addEventListener('DOMContentLoaded', function() {
             toast.style.cssText = [
                 'position:fixed','bottom:70px','left:50%','transform:translateX(-50%)',
                 'background:#B30000','color:#fff','padding:10px 22px','border-radius:6px',
-                'font-size:0.85em','font-weight:bold','z-index:9999','cursor:pointer',
-                'box-shadow:0 4px 16px rgba(0,0,0,0.5)','letter-spacing:0.04em'
+                'font-size:0.85em','font-weight:bold','z-index:9999',
+                'box-shadow:0 4px 16px rgba(0,0,0,0.5)','letter-spacing:0.04em',
+                'display:flex','align-items:center','gap:12px'
             ].join(';');
-            toast.textContent = '🔄 New headlines available — click to refresh';
-            toast.addEventListener('click', function() { location.reload(); });
+            var msg = document.createElement('span');
+            msg.textContent = '🔄 New headlines available — click to refresh';
+            msg.style.cursor = 'pointer';
+            msg.addEventListener('click', function() { location.reload(); });
+            var closeX = document.createElement('button');
+            closeX.textContent = '✕';
+            closeX.title = 'Dismiss';
+            closeX.style.cssText = 'background:none;border:none;color:#fff;font-size:1em;cursor:pointer;padding:0;opacity:0.7;flex-shrink:0;';
+            closeX.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toast.style.display = 'none';
+            });
+            toast.appendChild(msg);
+            toast.appendChild(closeX);
             document.body.appendChild(toast);
         }
-        toast.style.display = 'block';
+        toast.style.display = 'flex';
     }
 
     setInterval(checkForUpdates, POLL_MS);
@@ -3395,10 +3530,13 @@ document.addEventListener('DOMContentLoaded', function() {
 """)
 
 html_parts.append(f'''<footer class="site-footer">
-    <h1>The Mitchell Post</h1>
-    <span class="byline">By Sean Mitchell</span>
-    <span class="mission">Curated news from reliable sources updated regularly.</span>
-    <span class="update">Last updated: {update_time}</span>
+    <button class="back-to-top-btn" onclick="window.scrollTo({{top:0,behavior:\'smooth\'}})">&#8679; Back to Top</button>
+    <div style="margin-top:28px;">
+        <h1>The Mitchell Post</h1>
+        <span class="byline">By Sean Mitchell</span>
+        <span class="mission">Curated news from reliable sources updated regularly.</span>
+        <span class="update">Last updated: {update_time}</span>
+    </div>
     <div class="homepage-wrap">
         <button class="set-homepage-btn" id="set-homepage-btn" onclick="document.getElementById(\'homepage-instructions\').style.display=document.getElementById(\'homepage-instructions\').style.display===\'block\'?\'none\':\'block\'">🏠 Set as My Homepage</button>
         <div id="homepage-instructions" class="homepage-instructions" style="display:none">
