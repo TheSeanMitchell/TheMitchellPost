@@ -2236,13 +2236,41 @@ def fetch_section(sources, keywords, pattern, blocklist, section_name="",
 
 # ====================== FETCH ALL ======================
 print("Fetching all sections in parallel...")
-middle_matches   = fetch_section(MIDDLE_EAST_SOURCES, ME_KEYWORDS, ME_PATTERN, ME_BLOCKLIST, "mideast", block_pat=ME_BLOCK_PAT)
-us_matches       = fetch_section(US_POLITICS_SOURCES, US_KEYWORDS, US_PATTERN, US_BLOCKLIST, "us", block_pat=US_BLOCK_PAT)
-sports_matches   = fetch_section(SPORTS_SOURCES, SPORTS_KEYWORDS, SPORTS_PATTERN, SPORTS_BLOCKLIST, "sports", block_pat=SPORTS_BLOCK_PAT)
-tech_matches     = fetch_section(TECH_SOURCES, TECH_KEYWORDS, TECH_PATTERN, TECH_BLOCKLIST, "tech", block_pat=TECH_BLOCK_PAT)
-culture_matches  = fetch_section(CULTURE_SOURCES, CULTURE_KEYWORDS, CULTURE_PATTERN, CULTURE_BLOCKLIST, "culture", block_pat=CULTURE_BLOCK_PAT)
-world_matches    = fetch_section(WORLD_SOURCES, WORLD_KEYWORDS, WORLD_PATTERN, WORLD_BLOCKLIST, "world", block_pat=WORLD_BLOCK_PAT)
-business_matches = fetch_section(BUSINESS_SOURCES, BUSINESS_KEYWORDS, BUSINESS_PATTERN, BUSINESS_BLOCKLIST, "business", block_pat=BUSINESS_BLOCK_PAT)
+
+_SECTION_CONFIGS = [
+    ("mideast",  MIDDLE_EAST_SOURCES, ME_KEYWORDS,       ME_PATTERN,       ME_BLOCKLIST,       ME_BLOCK_PAT),
+    ("us",       US_POLITICS_SOURCES, US_KEYWORDS,       US_PATTERN,       US_BLOCKLIST,       US_BLOCK_PAT),
+    ("sports",   SPORTS_SOURCES,      SPORTS_KEYWORDS,   SPORTS_PATTERN,   SPORTS_BLOCKLIST,   SPORTS_BLOCK_PAT),
+    ("tech",     TECH_SOURCES,        TECH_KEYWORDS,     TECH_PATTERN,     TECH_BLOCKLIST,     TECH_BLOCK_PAT),
+    ("culture",  CULTURE_SOURCES,     CULTURE_KEYWORDS,  CULTURE_PATTERN,  CULTURE_BLOCKLIST,  CULTURE_BLOCK_PAT),
+    ("world",    WORLD_SOURCES,       WORLD_KEYWORDS,    WORLD_PATTERN,    WORLD_BLOCKLIST,    WORLD_BLOCK_PAT),
+    ("business", BUSINESS_SOURCES,    BUSINESS_KEYWORDS, BUSINESS_PATTERN, BUSINESS_BLOCKLIST, BUSINESS_BLOCK_PAT),
+]
+
+_section_results = {}
+with ThreadPoolExecutor(max_workers=7) as _sec_executor:
+    _sec_futures = {
+        _sec_executor.submit(
+            fetch_section, sources, kws, pat, bl, name, block_pat=bpat
+        ): name
+        for name, sources, kws, pat, bl, bpat in _SECTION_CONFIGS
+    }
+    for _fut in as_completed(_sec_futures):
+        _sec_name = _sec_futures[_fut]
+        try:
+            _section_results[_sec_name] = _fut.result()
+            print(f"  Section '{_sec_name}' done — {len(_section_results[_sec_name])} matches")
+        except Exception as _e:
+            print(f"  Section '{_sec_name}' failed: {_e}")
+            _section_results[_sec_name] = []
+
+middle_matches   = _section_results.get("mideast",  [])
+us_matches       = _section_results.get("us",       [])
+sports_matches   = _section_results.get("sports",   [])
+tech_matches     = _section_results.get("tech",     [])
+culture_matches  = _section_results.get("culture",  [])
+world_matches    = _section_results.get("world",    [])
+business_matches = _section_results.get("business", [])
 
 # ====================== TIME SPLIT (3h breaking / 21h daily, bidirectional spillover) ======================
 THREE_HOURS      = 3 * 3600
