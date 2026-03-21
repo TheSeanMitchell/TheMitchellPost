@@ -753,68 +753,6 @@ RAW_SPORTS_KEYWORDS = [
     "overtime","brackets","huge lead","all-time","champ","champion","boxer","fighter",
     "competition","chess","surfing","surfing event","surfing events","surf",
     "f1","race","races","racing","f1 race","f1 races","f1 racing",
-    # ── Major Multi-Sport Events ──
-    "2026 winter olympics milano cortina","2026 winter paralympics milano cortina",
-    "2026 fifa world cup usa canada mexico","2026 commonwealth games glasgow",
-    "2026 asian games aichi nagoya","2026 world baseball classic",
-    "2026 icc mens t20 world cup sri lanka india","2028 summer olympics los angeles",
-    "2027 fifa womens world cup brazil","2027 mens rugby world cup australia",
-    "2027 cricket world cup south africa","2027 ryder cup adare manor ireland",
-    "2027 netball world cup","2027 pan american games lima",
-    "2027 world athletics championships beijing",
-    "2027 british irish lions womens tour new zealand",
-    "milano cortina 2026","commonwealth games 2026","asian games 2026",
-    # ── Tennis Grand Slams ──
-    "2026 australian open","2026 french open","2026 wimbledon championships","2026 us open tennis",
-    "2027 australian open","2027 french open","2027 wimbledon championships","2027 us open tennis",
-    "2028 australian open","2028 french open","2028 wimbledon championships","2028 us open tennis",
-    # ── Golf Majors ──
-    "the masters 2026","the masters 2027","the masters 2028",
-    "pga championship 2026","pga championship 2027","pga championship 2028",
-    "us open golf 2026","us open golf 2027","us open golf 2028",
-    "the open championship 2026","the open championship 2027","the open championship 2028",
-    # ── American Football ──
-    "super bowl lxi 2027","super bowl lxii 2028",
-    # ── Basketball ──
-    "nba finals 2026","nba finals 2027","nba finals 2028",
-    # ── Soccer ──
-    "uefa champions league final 2026","uefa champions league final 2027","uefa champions league final 2028",
-    "uefa europa league final 2026","uefa europa league final 2027","uefa europa league final 2028",
-    "fifa club world cup 2026",
-    # ── Cycling ──
-    "tour de france 2026","tour de france 2027","tour de france 2028",
-    # ── Motor Racing ──
-    "monaco grand prix 2026","monaco grand prix 2027","monaco grand prix 2028",
-    "formula 1 australian grand prix 2026","formula 1 australian grand prix 2027","formula 1 australian grand prix 2028",
-    "formula 1 miami grand prix 2026","formula 1 japanese grand prix 2026",
-    "24 hours of le mans 2026","24 hours of le mans 2027","24 hours of le mans 2028",
-    "le mans 2026","le mans 2027","le mans 2028",
-    "daytona 500 2026","daytona 500 2027","daytona 500 2028",
-    "2028 daytona 500","2028 le mans",
-    # ── Marathons ──
-    "boston marathon 2026","boston marathon 2027","boston marathon 2028",
-    "new york city marathon 2026","new york city marathon 2027","new york city marathon 2028",
-    "london marathon 2026","london marathon 2027","london marathon 2028",
-    "2026 tokyo marathon","2027 tokyo marathon","2028 tokyo marathon",
-    # ── Rugby ──
-    "six nations rugby championship 2026","six nations rugby championship 2027","six nations rugby championship 2028",
-    # ── Baseball / Cricket ──
-    "world series 2026","world series 2027","world series 2028",
-    "indian premier league final 2026","indian premier league final 2027","indian premier league final 2028",
-    # ── Ice Hockey ──
-    "stanley cup finals 2026","stanley cup finals 2027","stanley cup finals 2028",
-    # ── Horse Racing ──
-    "kentucky derby 2026","kentucky derby 2027","kentucky derby 2028",
-    "2026 grand national","2027 grand national","2028 grand national",
-    "2026 cheltenham festival","2027 cheltenham festival","2028 cheltenham festival",
-    # ── Sailing ──
-    "americas cup 2027",
-    # ── March/April 2026 Near-Term ──
-    "march madness second round march 2026","march madness sweet sixteen 2026",
-    "march madness elite eight 2026","march madness final four april 2026",
-    "ncaa national championship april 2026","the masters tournament april 2026",
-    "formula 1 japanese grand prix march 2026","masters par 3 contest 2026",
-    "ncaa final four indianapolis 2026","suzuka fan zone 2026",
 ]
 SPORTS_KEYWORDS = set(kw.lower() for kw in RAW_SPORTS_KEYWORDS)
 
@@ -960,66 +898,6 @@ RAW_TECH_KEYWORDS = [
     "beneficial ownership","corporate transparency act","FinCEN rule","crypto mixer","Tornado Cash sanction","privacy coin",
     "dark web market","shadow ban lift","encrypted app","Signal use","Wickr","Telegram channel",
     "fact check debunk","post truth era","fake news epidemic","disinformation age","information warfare","hybrid threat",
-    # ── Video Game Titles ──
-    "grand theft auto v","the witcher 3 wild hunt","minecraft","counter-strike 2",
-    "red dead redemption 2","half-life 2","elden ring","the elder scrolls v skyrim",
-    "portal 2","baldurs gate 3","disco elysium","bioshock","half-life","dwarf fortress",
-    "kerbal space program","into the breach","wildermyth","straftat","the last of us",
-    "breath of the wild","super mario world","tetris","resident evil 4","mass effect 2",
-    "fallout new vegas","doom","quake","starcraft","world of warcraft","civilization",
-    "the sims","super mario 64","ocarina of time","super mario galaxy","portal",
-    "bioshock infinite","grand theft auto iv","uncharted 2","metal gear solid 3",
-    "final fantasy vii","chrono trigger","earthbound","persona 5","nier automata",
-    "sekiro shadows die twice","bloodborne","dark souls","god of war","horizon zero dawn",
-    "ghost of tsushima","marvels spider-man","animal crossing new horizons","hades",
-    "it takes two","fortnite","apex legends","league of legends","overwatch","cyberpunk 2077",
-    "starfield","black myth wukong","helldivers 2","palworld","valorant","among us",
-    "a way out","dragon age origins","the witcher 2","fallout 3","the elder scrolls iv oblivion",
-    "the elder scrolls iii morrowind","doom eternal","wolfenstein the new order",
-    "metro exodus","control remedy","death stranding","tears of the kingdom",
-    "super mario odyssey","pac-man","space invaders","street fighter ii","mortal kombat",
-    "tekken","phoenix wright ace attorney","simcity","age of empires","command and conquer",
-    "diablo ii",
-    # ── Upcoming / Anticipated Game Titles ──
-    "gta vi","gta 6","marvels wolverine","resident evil requiem","007 first light",
-    "forza horizon 6","fable 2025","pragmata","tomb raider legacy of atlantis",
-    "control resonant","phantom blade zero","subnautica 2","warhammer 40k dawn of war 4",
-    "crimson desert","death stranding 2","slay the spire 2",
-    "monster hunter stories 3 twisted reflection","nioh 3","marathon bungie",
-    "toxic commando","saros game","cairn game","hytale","code vein 2",
-    "mio memories in orbit","kingmakers game","romeo is a dead man","mina the hollower",
-    "legacy of kain defiance remastered","heartopia","blasten","cozy caravan",
-    "fire emblem fortunes weave","ace combat 8","the duskbloods","super meat boy 3d",
-    "replaced game","kusan city of wolves","let it die offline edition","the lift game",
-    "limit zero breakers","little samson","professor layton new world of steam",
-    "pokemon champions","tomodachi life living the dream","mario tennis fever",
-    "yoshi and the mysterious book","gears of war e-day","onimusha way of the sword",
-    "halo ce remaster","wow midnight","solasta 2","deep rock galactic rogue core",
-    # ── Game Studios ──
-    "rockstar games","naughty dog","santa monica studio","insomniac games",
-    "sucker punch productions","guerrilla games","kojima productions","fromsoftware",
-    "larian studios","cd projekt red","epic games","valve corporation",
-    "blizzard entertainment","riot games","ubisoft montreal","bioware",
-    "obsidian entertainment","bethesda game studios","343 industries","id software",
-    "infinity ward","treyarch","dice ea","crystal dynamics","eidos-montreal",
-    "square enix","capcom","bandai namco","sega","konami","nintendo epd",
-    "retro studios","game freak","supergiant games","hazelight studios",
-    "hello games","moon studios","team cherry","remedy entertainment",
-    "platinumgames","atlus","falcom","arkane studios","machinegames",
-    "respawn entertainment","bungie","thatgamecompany","deck nine games",
-    "raven software","popcap games","firaxis games","creative assembly",
-    "relic entertainment","paradox development studio","gearbox software",
-    "io interactive","avalanche studios","frontier developments","splash damage",
-    "crytek","double fine productions","sandfall interactive","warhorse studios",
-    "11 bit studios","owlcat games","amplitude studios","subset games",
-    "motion twin","ludeon studios","grinding gear games","nixxes software",
-    "bluepoint games","housemarque","team ico","gendesign","iron galaxy",
-    "high moon studios","volition","psyonix","massive entertainment",
-    "ubisoft quebec","ubisoft toronto","ubisoft paris","ubisoft sofia",
-    "monolith soft","intelligent systems","creatures inc","hal laboratory",
-    "camelot software planning","juego studios","kevuru games","stepico",
-    "pingle studio","starloop studios","whimsy games","virtuos","sperasoft",
-    "n-ix game vr studio","pushka studios","ulysses graphics",
 ]
 TECH_KEYWORDS = set(kw.lower() for kw in RAW_TECH_KEYWORDS)
 
@@ -1233,154 +1111,14 @@ RAW_CULTURE_KEYWORDS = [
     "Governors Ball","Welcome to Rockville","Holi festival","Chinese New Year","Mardi Gras",
     "St Patricks Day","Vesak","Ashura","Sundance Film Festival","Stagecoach Festival",
     "Albuquerque Balloon Fiesta","Sturgis Motorcycle Rally","Ultra Music Festival",
-    # ── Upcoming / Anticipated Films ──
+    # ── Upcoming Films 2026 ──
     "The Odyssey film","Avengers Doomsday","Dune Part Three","Mandalorian and Grogu","Supergirl film",
     "Toy Story 5","The Bride film","Project Hail Mary film","28 Years Later Bone Temple",
     "Wuthering Heights film","Scream 7","Super Mario Galaxy Movie","Michael Jackson biopic",
     "Devil Wears Prada 2","Mortal Kombat II","Masters of the Universe film","Ready or Not 2",
     "Hunger Games Sunrise on the Reaping","Greenland Migration","Scary Movie 2026",
     "People We Meet on Vacation film","Lee Cronin Mummy","Apex film",
-    "Disclosure Day film","Flowervale Street film","Hoppers 2026","The Drama film",
-    "Moana 2026 film","Animal Friends film","The Moment film",
-    "Avengers Doomsday Marvel","Dune Part Three film","The Mummy 2026",
-    "28 Years Later 2026","The Odyssey 2026 movie",
-    # ── TV Shows & Series ──
-    "the pitt season 2","a knight of the seven kingdoms","bridgerton season 4",
-    "industry season 4","his and hers hbo","daredevil born again season 2",
-    "euphoria season 3","the boys season 5","outlander final season","scarpetta series",
-    "beef season 2","lanterns dc","spider-noir","wonder man marvel","star trek starfleet academy",
-    "the night manager season 2","the comeback hbo","the testaments hulu","marshals series",
-    "rooster series","elle legally blonde prequel","margos got money troubles",
-    "kevin animated series","darth maul star wars series","the madison series",
-    "dtf st louis show","american classic series","rj decker series",
-    "malcolm in the middle revival","king of the hill revival",
-    "buffy the vampire slayer reboot","ted lasso season 4","shrinking season 3",
-    "black ops series","heated rivalry series","waiting for the out series",
-    "can you keep a secret series","falling series","rivals series",
-    "it welcome to derry","when life gives you tangerines","mobland series",
-    "dexter resurrection","paradise season 2","the hunt season 1",
-    "fukushima a nuclear nightmare series","age of attraction series","sunny nights series",
-    "on the edge world cup ski racing series","rise of the 49ers","cult of the real housewife",
-    "second chance love series","crime in progress series","run away series",
-    "mel brooks 99 year old man series","12 12 12 series","the age of innocence series",
-    "bait series","big mistakes series","blade runner sequel series",
-    "carrie mike flanagan adaptation","crystal lake series","cape fear remake",
-    "man on fire remake","the traitors season 4","queer eye final season","yellowjackets final season",
-    # ── Books ──
-    "a tale of two cities","the little prince","the alchemist","harry potter philosophers stone",
-    "and then there were none","dream of the red chamber","the hobbit",
-    "alices adventures in wonderland","the da vinci code","the catcher in the rye",
-    "sophies world","one hundred years of solitude","anne of green gables","black beauty",
-    "the name of the rose","the eagle has landed novel","watership down","charlotte's web",
-    "the purpose driven life","the tale of peter rabbit","the very hungry caterpillar",
-    "to kill a mockingbird","flowers in the attic","angels and demons","kane and abel",
-    "the kite runner","valley of the dolls","how to win friends and influence people",
-    "the great gatsby","gone with the wind","rebecca du maurier","the girl with the dragon tattoo",
-    "the hunger games","james and the giant peach","ben-hur tale of the christ",
-    "who moved my cheese","a brief history of time","the seven habits of highly effective people",
-    "totto-chan little girl at the window","the celestine prophecy",
-    "the fault in our stars","the girl on the train","the shack novel","the godfather",
-    "catching fire","mockingjay","gone girl","things fall apart","wolf totem",
-    "jaws novel","adventures of huckleberry finn","pride and prejudice",
-    "where the wild things are","the power of positive thinking","the secret book",
-    "dune novel","charlie and the chocolate factory","kokoro natsume","where the crawdads sing",
-    "follow your heart novel","matilda book","the book thief","the horse whisperer",
-    "goodnight moon","the neverending story","all the light we cannot see",
-    "fifty shades of grey","the outsiders","shogun novel","the pillars of the earth",
-    "perfume novel","the grapes of wrath","the shadow of the wind",
-    "interpreter of maladies","becoming michelle obama","the hitchhikers guide to the galaxy",
-    "tuesdays with morrie","a wrinkle in time","long walk to freedom mandela",
-    "the old man and the sea","the giver","me before you","norwegian wood murakami",
-    "the plague camus","no longer human","mans search for meaning","the subtle art of not giving a fuck",
-    "the divine comedy","the prophet gibran","the boy in the striped pyjamas","the exorcist",
-    "the gruffalo","the help novel","catch-22","the stranger camus","the lovely bones",
-    "wild swans","santa evita","night wiesel","life of pi","fahrenheit 451",
-    "angelas ashes","the story of my experiments with truth","bridget jones diary",
-    "it ends with us","half his age book","the future saints","the seven daughters of dupree",
-    "whistler book","where the wildflowers grow","land book","vigil book",
-    "the missed connection","the caretaker book","exit party book","the astral library",
-    "dear debbie","my husbands wife","anatomy of an alibi","rites of the starling",
-    "our perfect storm book","theres only one sin in hollywood",
-    "the midnight train book","a parade of horribles","dogs boys other things ive cried about",
-    "beginning middle end book","john of john","the hybrid prince","judge stone book",
-    "the storm book","in your dreams book","what we did to survive","the trip book",
-    "war and peace","the diary of anne frank","the thorn birds",
-    # ── Hollywood Awards & Industry Events ──
-    "2026 primetime emmy awards","met gala 2026","cannes film festival 2026",
-    "toronto international film festival 2026","venice film festival 2026",
-    "bafta television awards 2026","iheartradio music awards 2026",
-    "mtv video music awards 2026","tony awards 2026","golden globes 2027",
-    "academy awards 2027","sag awards 2027","critics choice awards 2027",
-    "grammy awards 2027","comic-con international san diego 2026",
-    "sundance film festival 2027","palm springs international film festival 2027",
-    "boulder international film festival 2026","directors guild of america awards 2027",
-    "writers guild of america awards 2027","producers guild of america awards 2027",
-    "satellite awards 2026","anime awards 2026","voice arts awards 2026",
-    "cas awards 2026","brit awards 2026","aacta awards 2026",
-    "super bowl halftime show 2027","bafta film awards 2027",
-    "miami film festival 2026","ann arbor film festival experimental",
-    "pittsburgh film office lights glamour action gala",
-    # ── Global Festivals & Cultural Events (evergreen + dated) ──
-    "rio carnival","oktoberfest","chinese new year","diwali","holi festival",
-    "mardi gras new orleans","songkran festival","coachella music festival",
-    "glastonbury festival","burning man","tomorrowland","la tomatina",
-    "san fermin running of the bulls","venice carnival","dia de los muertos",
-    "christmas celebrations","new years eve celebration","easter celebrations","thanksgiving",
-    "sxsw festival","ultra music festival","lollapalooza","rock in rio",
-    "sziget festival","exit festival belgrade","edinburgh military tattoo",
-    "macys thanksgiving day parade","yi peng lantern festival",
-    "cherry blossom hanami japan","tulip festival netherlands",
-    "notting hill carnival","love parade","bonfire night uk","european christmas markets",
-    "albuquerque international balloon fiesta","sturgis motorcycle rally",
-    "carnival salvador","carnival barranquilla","trinidad carnival","junkanoo bahamas",
-    "cuban carnival","las fallas valencia","basel carnival","up helly aa shetland",
-    "white nights festival st petersburg","calgary stampede","pushkar camel fair",
-    "jaisalmer desert festival","hornbill festival india","inti raymi festival peru",
-    "timkat festival ethiopia","la patum berga","loy krathong festival",
-    "chinese lantern festival","mid-autumn festival","qingming festival",
-    "dragon boat festival","obon festival japan","chuseok korea",
-    "semana santa seville","ganesh chaturthi","navratri festival","onam festival",
-    "pongal festival","guy fawkes night","bastille day","boryeong mud festival",
-    "corpus christi procession","st patricks day",
-    "new orleans jazz heritage festival","stagecoach country music festival",
-    "bottlerock napa valley","governors ball music festival","welcome to rockville",
-    "bad bunny debi tirar mas fotos world tour 2026",
-    "ariana grande eternal sunshine tour 2026","lewis capaldi tour 2026",
-    "tomorrowland thailand 2026","america 250th anniversary celebrations 2026",
-    "route 66 centennial 2026","total solar eclipse europe 2026","paris fashion week 2026",
-    "coachella music festival 2026","glastonbury festival 2026","burning man 2026",
-    "lollapalooza 2026","oktoberfest munich 2026","diwali 2026","rio carnival 2027",
-    "venice carnival 2027","songkran festival 2027","holi festival 2027",
-    "chinese new year 2027","mardi gras new orleans 2027","stagecoach festival 2026",
-    "bottlerock napa valley 2026","governors ball music festival 2026",
-    "welcome to rockville 2026","ultra music festival 2027","sxsw festival 2027",
-    "independence day mexico","el grito mexico","lantern festival taiwan",
-    "canada day celebration","australia day","waitangi day new zealand",
-    "independence day usa","nowruz persian new year",
-    # ── Near-Term March & April 2026 Culture Events ──
-    "coachella valley music arts festival weekend one april 2026",
-    "coachella valley music arts festival weekend two april 2026",
-    "easter sunday global celebrations april 2026","good friday observances april 2026",
-    "passover seders april 2026","new orleans jazz heritage festival april 2026",
-    "stagecoach country music festival april 2026",
-    "boots in the park gilbert march 2026","beyond wonderland socal march 2026",
-    "savannah music festival march 2026","hells heroes festival houston march 2026",
-    "okeechobee music arts festival march 2026","rendezvous music festival jackson hole 2026",
-    "cape town international jazz festival march 2026","milan design week april 2026",
-    "cherry blossom hanami tokyo april 2026","cherry blossom hanami kyoto april 2026",
-    "cherry blossom hanami osaka april 2026","earth day global events april 2026",
-    "vaisakhi celebrations april 2026","boots in the park bakersfield april 2026",
-    "boots in the park fresno april 2026","holo holo avila beach april 2026",
-    "jam in the streets athens march 2026","sxsw aftermath mixers march 2026",
-    "elton john aids foundation events 2026","milan fashion design pop-ups april 2026",
-    "easter parades worldwide april 2026","stagecoach after-parties april 2026",
-    "coachella surprise sets parties april 2026",
-    "beyond wonderland rave stages march 2026",
-    "cape town jazz main stage march 2026","okeechobee art installations march 2026",
-    "dyngus day celebrations april 2026","national walking day april 2026",
-    "vaisakhi parades temple celebrations april 2026",
-    "japanese hanami picnic events festivals april 2026",
-
+    # ── Missing Celebrities Batch 2 ──
     "Mia Khalifa","Charlie Kirk","Novak Djokovic","Michael Jordan","Bill Gates","Sean Combs",
     "MrBeast","Victoria Beckham","ASAP Rocky","Stefon Diggs","Sophie Rain","James Harden",
     "YoungBoy","Ozzy Osbourne","Paul George","David Corenswet","Justin Baldoni","Emma Myers",
@@ -1400,6 +1138,19 @@ RAW_CULTURE_KEYWORDS = [
     "Cory Williams","Dashie","Sean McLaughlin",
     # ── Missing World Travel Cities ──
     "Madrid","Amsterdam","Barcelona","Guangzhou","Shenzhen","Palermo",
+    # ── Missing Global Events ──
+    "Tomorrowland Thailand 2026","The Masters Tournament 2026","Paris Fashion Week 2026",
+    "Semana Santa Seville","Onam Festival","Pongal Festival","Guy Fawkes Night",
+    "Pushkar Camel Fair","Super Bowl 2027","Australian Open 2027","Timkat Festival",
+    "Mid-Autumn Festival","Dragon Boat Festival","Obon Festival Japan","Chuseok Korea",
+    "Independence Day Mexico","White Nights Festival St Petersburg","Boryeong Mud Festival",
+    "Basel Carnival","Love Parade Berlin","Yom Kippur","Hanukkah","Formula 1 Miami Grand Prix",
+    "Monaco Grand Prix","Boston Marathon","New York City Marathon",
+    "Albuquerque International Balloon Fiesta","Carnival Salvador","Trinidad Carnival",
+    "Junkanoo Bahamas","La Patum Berga","El Grito Mexico","Lantern Festival Taiwan",
+    "Coachella Music Festival 2026",
+    # ── Missing Films ──
+    "Avengers Doomsday Marvel","Dune Part Three film","Michael Jackson film","The Mummy 2026",
     # ── WNBA & Women's Sports Stars ──
     "Sabrina Ionescu","A'ja Wilson","Brittney Griner","Sue Bird","Diana Taurasi",
     "Candace Parker","Maya Moore","Sheryl Swoopes","Lisa Leslie","Chamique Holdsclaw",
@@ -1565,31 +1316,6 @@ RAW_WORLD_KEYWORDS = [
     "Wimbledon 2026","Cannes Film Festival 2026","Oktoberfest 2026","Songkran 2026","Hajj 2026",
     "Cherry Blossom Japan","Yi Peng lantern festival","Loy Krathong","Nowruz","Vesak","Ashura",
     "Rio Carnival","Venice Carnival","Glastonbury 2026","Edinburgh Military Tattoo",
-    # ── International Events Added 2026 ──
-    "2026 winter olympics milano cortina","2026 commonwealth games glasgow",
-    "2026 asian games aichi nagoya","2027 mens rugby world cup australia",
-    "2027 ryder cup adare manor ireland","2027 world athletics championships beijing",
-    "total solar eclipse europe 2026","great wildebeest migration",
-    "timkat festival ethiopia","inti raymi festival peru","up helly aa shetland",
-    "songkran festival 2027","loy krathong festival 2026","yi peng lantern festival 2026",
-    "cherry blossom hanami japan 2027","obon festival japan 2026","chuseok korea 2026",
-    "mid-autumn festival 2026","dragon boat festival 2026","chinese new year 2027",
-    "lantern festival taiwan 2027","nowruz persian new year 2027",
-    "carnival barranquilla 2027","carnival salvador 2027","trinidad carnival 2027",
-    "junkanoo bahamas 2027","las fallas valencia 2027","semana santa seville 2027",
-    "tulip festival netherlands 2026","european christmas markets 2026",
-    "hornbill festival india 2026","pushkar camel fair 2026",
-    "jaisalmer desert festival 2026","white nights festival st petersburg 2026",
-    "boryeong mud festival 2026","basel carnival 2027","love parade berlin 2026",
-    "corpus christi procession 2026","la patum berga 2027",
-    "independence day mexico 2026","el grito mexico 2026",
-    "canada day 2026","australia day 2027","waitangi day",
-    "bastille day 2026","guy fawkes night 2026",
-    "hajj pilgrimage 2026","ramadan 2027","eid al-fitr 2027","eid al-adha",
-    "yom kippur 2026","hanukkah 2026","vesak buddha day 2026","ashura 2026",
-    "muharram processions","camino de santiago pilgrimage","kumbh mela",
-    "formula 1 japanese grand prix suzuka 2026","cape town international jazz festival",
-    "savannah music festival","hell's heroes festival houston",
 ]
 WORLD_KEYWORDS = set(kw.lower() for kw in RAW_WORLD_KEYWORDS)
 
@@ -1911,7 +1637,7 @@ US_BLOCKLIST    = {"iran"}
 SPORTS_BLOCKLIST = set()
 TECH_BLOCKLIST   = set()
 CULTURE_BLOCKLIST= set()
-WORLD_BLOCKLIST  = set()
+WORLD_BLOCKLIST  = {"trump"}
 BUSINESS_BLOCKLIST = {
     "iran", "ukraine", "gaza", "hamas", "hezbollah", "israel", "middle east",
     "russia", "taliban", "afghanistan", "military", "airstrike", "war", "missile",
@@ -2393,10 +2119,14 @@ def normalize_title(title):
         title = title.rsplit(" - ", 1)[0]
     return title.strip().lower()
 
-def fetch_section(sources, keywords, pattern, blocklist):
+def fetch_section(sources, keywords, pattern, blocklist, section_name=""):
     matches = []
     seen_title = set()
     source_count = defaultdict(int)  # keyed by URL
+
+    # Sections that should never contain sports articles
+    _sports_excluded_sections = {"us", "world", "culture", "business"}
+    _is_sports_excluded = section_name.lower() in _sports_excluded_sections
 
     for source_name, url in sources:
         if source_count[url] >= 5:
@@ -2419,10 +2149,23 @@ def fetch_section(sources, keywords, pattern, blocklist):
                     if norm_title in seen_title:
                         continue
                     title_lower = raw_title.lower()
+
+                    # ── Ghost-result filter: skip titles that are just 1–3 words
+                    #    (these are search-result pages masquerading as articles)
+                    title_words = [w for w in raw_title.split() if w]
+                    if len(title_words) <= 3:
+                        continue
+
                     if blocklist and any(block in title_lower for block in blocklist):
                         continue
                     if any(phrase in title_lower for phrase in JOB_FILTER_PHRASES):
                         continue
+
+                    # ── Sports pre-filter: fully exclude sports matches from
+                    #    US, World, Culture, and Business sections
+                    if _is_sports_excluded and title_matches_keywords(title_lower, SPORTS_PATTERN):
+                        continue
+
                     if title_matches_keywords(title_lower, pattern):
                         ts_struct = entry.get('published_parsed') or entry.get('updated_parsed')
                         ts = calendar.timegm(ts_struct) if ts_struct else time.time()
@@ -2438,18 +2181,18 @@ def fetch_section(sources, keywords, pattern, blocklist):
     return matches
 
 # ====================== FETCH ALL ======================
-middle_matches   = fetch_section(MIDDLE_EAST_SOURCES, ME_KEYWORDS, ME_PATTERN, ME_BLOCKLIST)
-us_matches       = fetch_section(US_POLITICS_SOURCES, US_KEYWORDS, US_PATTERN, US_BLOCKLIST)
-sports_matches   = fetch_section(SPORTS_SOURCES, SPORTS_KEYWORDS, SPORTS_PATTERN, SPORTS_BLOCKLIST)
-tech_matches     = fetch_section(TECH_SOURCES, TECH_KEYWORDS, TECH_PATTERN, TECH_BLOCKLIST)
-culture_matches  = fetch_section(CULTURE_SOURCES, CULTURE_KEYWORDS, CULTURE_PATTERN, CULTURE_BLOCKLIST)
-world_matches    = fetch_section(WORLD_SOURCES, WORLD_KEYWORDS, WORLD_PATTERN, WORLD_BLOCKLIST)
-business_matches = fetch_section(BUSINESS_SOURCES, BUSINESS_KEYWORDS, BUSINESS_PATTERN, BUSINESS_BLOCKLIST)
+middle_matches   = fetch_section(MIDDLE_EAST_SOURCES, ME_KEYWORDS, ME_PATTERN, ME_BLOCKLIST, "mideast")
+us_matches       = fetch_section(US_POLITICS_SOURCES, US_KEYWORDS, US_PATTERN, US_BLOCKLIST, "us")
+sports_matches   = fetch_section(SPORTS_SOURCES, SPORTS_KEYWORDS, SPORTS_PATTERN, SPORTS_BLOCKLIST, "sports")
+tech_matches     = fetch_section(TECH_SOURCES, TECH_KEYWORDS, TECH_PATTERN, TECH_BLOCKLIST, "tech")
+culture_matches  = fetch_section(CULTURE_SOURCES, CULTURE_KEYWORDS, CULTURE_PATTERN, CULTURE_BLOCKLIST, "culture")
+world_matches    = fetch_section(WORLD_SOURCES, WORLD_KEYWORDS, WORLD_PATTERN, WORLD_BLOCKLIST, "world")
+business_matches = fetch_section(BUSINESS_SOURCES, BUSINESS_KEYWORDS, BUSINESS_PATTERN, BUSINESS_BLOCKLIST, "business")
 
 # ====================== TIME SPLIT (3h breaking / 21h daily, bidirectional spillover) ======================
 THREE_HOURS      = 3 * 3600
 TWENTY_ONE_HOURS = 21 * 3600
-MAX_ITEMS        = 30
+MAX_ITEMS        = 50
 
 def split_breaking_daily(all_matches, max_items=MAX_ITEMS):
     now = time.time()
@@ -2876,7 +2619,7 @@ html_parts.append(f"""<!DOCTYPE html>
     .cluster {{
         margin-bottom: 16px; padding: 10px 12px 4px 12px;
         border-left: 3px solid #444; border-bottom: 1px solid #222222;
-        background: #1a1a1a;
+        background: #1a1a1a; cursor: pointer;
     }}
     .cluster-header {{ margin-bottom: 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }}
     .cluster-badge {{
@@ -2897,6 +2640,7 @@ html_parts.append(f"""<!DOCTYPE html>
         color: #545454; text-decoration: underline;
         font-size: 0.85em; margin-left: 6px;
         display: inline-block; padding: 0;
+        cursor: pointer;
     }}
     .link:hover {{ color: #FFFFFF; }}
 
@@ -3888,22 +3632,41 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 
 // ── CLUSTER EXPAND/COLLAPSE ──
+// Clicking the toggle button OR anywhere on the cluster card background toggles
+// the story coverage. The button stays as a visible affordance hint.
 (function() {
-    document.addEventListener('click', function(e) {
-        var btn = e.target.closest('.cluster-toggle-btn');
-        if (!btn) return;
-        var targetId = btn.getAttribute('data-target');
+    function toggleCluster(targetId) {
         var wrap = document.getElementById(targetId);
         if (!wrap) return;
+        var btn = document.querySelector('.cluster-toggle-btn[data-target="' + targetId + '"]');
         if (wrap.classList.contains('collapsed')) {
             wrap.classList.remove('collapsed');
-            btn.innerHTML = '&#9660; Hide coverage';
-            btn.classList.add('open');
+            if (btn) { btn.innerHTML = '&#9660; Hide coverage'; btn.classList.add('open'); }
         } else {
             wrap.classList.add('collapsed');
-            btn.innerHTML = '&#9654; Show all coverage';
-            btn.classList.remove('open');
+            if (btn) { btn.innerHTML = '&#9654; Show all coverage'; btn.classList.remove('open'); }
         }
+    }
+
+    document.addEventListener('click', function(e) {
+        // Explicit button click — highest priority
+        var btn = e.target.closest('.cluster-toggle-btn');
+        if (btn) {
+            e.stopPropagation();
+            toggleCluster(btn.getAttribute('data-target'));
+            return;
+        }
+
+        // Clicking a Full Article link — don't toggle
+        if (e.target.closest('.link')) return;
+
+        // Clicking anywhere else on the cluster card background
+        var cluster = e.target.closest('.cluster');
+        if (!cluster) return;
+        // Find the toggle button inside this cluster to get the target id
+        var innerBtn = cluster.querySelector('.cluster-toggle-btn');
+        if (!innerBtn) return;
+        toggleCluster(innerBtn.getAttribute('data-target'));
     });
 })();
 
