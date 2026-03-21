@@ -3968,9 +3968,9 @@ except Exception as e:
 # ── Write _headers for GitHub Pages caching ──
 try:
     headers_content = """/*
-  Cache-Control: public, max-age=300, stale-while-revalidate=60
+  Cache-Control: public, max-age=720, stale-while-revalidate=60
 /feed.json
-  Cache-Control: public, max-age=300
+  Cache-Control: public, max-age=720
 """
     with open(HEADERS_FILE, "w") as hf:
         hf.write(headers_content)
