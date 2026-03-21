@@ -7,6 +7,8 @@ import hashlib
 import urllib.request
 from datetime import datetime, timedelta
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import threading
 
 print("Starting bot...")
 CURRENT_DIR = os.getcwd()
@@ -1665,6 +1667,27 @@ CULTURE_PATTERN = make_keyword_pattern(CULTURE_KEYWORDS)
 WORLD_PATTERN   = make_keyword_pattern(WORLD_KEYWORDS)
 BUSINESS_PATTERN = make_keyword_pattern(BUSINESS_KEYWORDS)
 
+# Pre-compile blocklist patterns for fast single-pass matching
+def _make_blocklist_pattern(blocklist):
+    if not blocklist:
+        return None
+    escaped = [re.escape(w) for w in sorted(blocklist, key=len, reverse=True)]
+    return re.compile('|'.join(escaped), re.IGNORECASE)
+
+ME_BLOCK_PAT      = _make_blocklist_pattern(ME_BLOCKLIST)
+US_BLOCK_PAT      = _make_blocklist_pattern(US_BLOCKLIST)
+SPORTS_BLOCK_PAT  = _make_blocklist_pattern(SPORTS_BLOCKLIST)
+TECH_BLOCK_PAT    = _make_blocklist_pattern(TECH_BLOCKLIST)
+CULTURE_BLOCK_PAT = _make_blocklist_pattern(CULTURE_BLOCKLIST)
+WORLD_BLOCK_PAT   = _make_blocklist_pattern(WORLD_BLOCKLIST)
+BUSINESS_BLOCK_PAT= _make_blocklist_pattern(BUSINESS_BLOCKLIST)
+
+# Pre-compile job filter as a single regex
+_JOB_PATTERN = re.compile(
+    '|'.join(re.escape(p) for p in JOB_FILTER_PHRASES),
+    re.IGNORECASE
+)
+
 # ====================== SOURCES ======================
 MIDDLE_EAST_SOURCES = [
     ("Broad Middle East","https://news.google.com/rss/search?q=middle+east+OR+iran+OR+israel+OR+gulf+OR+hezbollah+OR+hamas+when:1d&hl=en-US&gl=US&ceid=US:en"),
@@ -2119,75 +2142,107 @@ def normalize_title(title):
         title = title.rsplit(" - ", 1)[0]
     return title.strip().lower()
 
-def fetch_section(sources, keywords, pattern, blocklist, section_name=""):
-    matches = []
-    seen_title = set()
-    source_count = defaultdict(int)  # keyed by URL
-
-    # Sections that should never contain sports articles
-    _sports_excluded_sections = {"us", "world", "culture", "business"}
-    _is_sports_excluded = section_name.lower() in _sports_excluded_sections
-
-    for source_name, url in sources:
-        if source_count[url] >= 5:
-            continue
-        for attempt in range(3):
-            try:
-                print(f"  Fetching {source_name}...")
-                req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-                with urllib.request.urlopen(req, timeout=15) as response:
-                    feed = feedparser.parse(response.read().decode('utf-8', errors='ignore'))
-                if feed.bozo:
-                    break
-                print(f"  {source_name} returned {len(feed.entries)} entries")
-                for entry in feed.entries:
-                    if source_count[url] >= 5:
-                        break
-                    raw_title = entry.title.strip()
-                    norm_title = normalize_title(raw_title)
-                    link = entry.get('link', '#')
-                    if norm_title in seen_title:
-                        continue
-                    title_lower = raw_title.lower()
-
-                    # ── Ghost-result filter: skip titles that are just 1–3 words
-                    #    (these are search-result pages masquerading as articles)
-                    title_words = [w for w in raw_title.split() if w]
-                    if len(title_words) <= 3:
-                        continue
-
-                    if blocklist and any(block in title_lower for block in blocklist):
-                        continue
-                    if any(phrase in title_lower for phrase in JOB_FILTER_PHRASES):
-                        continue
-
-                    # ── Sports pre-filter: fully exclude sports matches from
-                    #    US, World, Culture, and Business sections
-                    if _is_sports_excluded and title_matches_keywords(title_lower, SPORTS_PATTERN):
-                        continue
-
-                    if title_matches_keywords(title_lower, pattern):
-                        ts_struct = entry.get('published_parsed') or entry.get('updated_parsed')
-                        ts = calendar.timegm(ts_struct) if ts_struct else time.time()
-                        matches.append((ts, raw_title, source_name, link))
-                        seen_title.add(norm_title)
-                        source_count[url] += 1
+def _fetch_one_source(source_name, url, pattern, block_pat, is_sports_excluded):
+    """Fetch a single RSS source and return matching (ts, title, source, link) tuples.
+    Runs in a thread — all per-source work is self-contained here."""
+    results = []
+    seen_local = set()
+    count = 0
+    for attempt in range(3):
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req, timeout=15) as response:
+                feed = feedparser.parse(response.read().decode('utf-8', errors='ignore'))
+            if feed.bozo:
                 break
-            except Exception as e:
-                print(f"    Attempt {attempt+1} failed: {str(e)}")
-                time.sleep(2)
+            print(f"  {source_name} — {len(feed.entries)} entries")
+            for entry in feed.entries:
+                if count >= 5:
+                    break
+                raw_title = entry.title.strip()
+                norm_title = normalize_title(raw_title)
+                link = entry.get('link', '#')
+                if norm_title in seen_local:
+                    continue
+                title_lower = raw_title.lower()
+
+                # Ghost-result filter: skip titles that are just 1–3 words
+                if len(raw_title.split()) <= 3:
+                    continue
+
+                # Blocklist check — single compiled regex, much faster than loop
+                if block_pat and block_pat.search(title_lower):
+                    continue
+
+                # Job filter — single compiled regex
+                if _JOB_PATTERN.search(title_lower):
+                    continue
+
+                # Sports pre-filter for non-sports sections
+                if is_sports_excluded and title_matches_keywords(title_lower, SPORTS_PATTERN):
+                    continue
+
+                if title_matches_keywords(title_lower, pattern):
+                    ts_struct = entry.get('published_parsed') or entry.get('updated_parsed')
+                    ts = calendar.timegm(ts_struct) if ts_struct else time.time()
+                    results.append((ts, raw_title, source_name, link))
+                    seen_local.add(norm_title)
+                    count += 1
+            break
+        except Exception as e:
+            if attempt < 2:
+                time.sleep(1)
+    return results
+
+def fetch_section(sources, keywords, pattern, blocklist, section_name="",
+                  block_pat=None, max_workers=30):
+    """Fetch all sources in parallel using a thread pool, then deduplicate."""
+    _sports_excluded_sections = {"us", "world", "culture", "business"}
+    is_sports_excluded = section_name.lower() in _sports_excluded_sections
+
+    # Deduplicate source URLs before launching threads
+    seen_urls = set()
+    unique_sources = []
+    for name, url in sources:
+        if url not in seen_urls:
+            seen_urls.add(url)
+            unique_sources.append((name, url))
+
+    all_results = []
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {
+            executor.submit(_fetch_one_source, name, url, pattern, block_pat, is_sports_excluded): name
+            for name, url in unique_sources
+        }
+        for future in as_completed(futures):
+            try:
+                all_results.extend(future.result())
+            except Exception:
+                pass
+
+    # Global deduplication by normalized title (across all sources)
+    seen_title = set()
+    matches = []
+    # Sort by timestamp descending so we keep the freshest version of duplicates
+    all_results.sort(reverse=True, key=lambda x: x[0])
+    for item in all_results:
+        norm = normalize_title(item[1])
+        if norm not in seen_title:
+            seen_title.add(norm)
+            matches.append(item)
 
     matches.sort(reverse=True, key=lambda x: x[0])
     return matches
 
 # ====================== FETCH ALL ======================
-middle_matches   = fetch_section(MIDDLE_EAST_SOURCES, ME_KEYWORDS, ME_PATTERN, ME_BLOCKLIST, "mideast")
-us_matches       = fetch_section(US_POLITICS_SOURCES, US_KEYWORDS, US_PATTERN, US_BLOCKLIST, "us")
-sports_matches   = fetch_section(SPORTS_SOURCES, SPORTS_KEYWORDS, SPORTS_PATTERN, SPORTS_BLOCKLIST, "sports")
-tech_matches     = fetch_section(TECH_SOURCES, TECH_KEYWORDS, TECH_PATTERN, TECH_BLOCKLIST, "tech")
-culture_matches  = fetch_section(CULTURE_SOURCES, CULTURE_KEYWORDS, CULTURE_PATTERN, CULTURE_BLOCKLIST, "culture")
-world_matches    = fetch_section(WORLD_SOURCES, WORLD_KEYWORDS, WORLD_PATTERN, WORLD_BLOCKLIST, "world")
-business_matches = fetch_section(BUSINESS_SOURCES, BUSINESS_KEYWORDS, BUSINESS_PATTERN, BUSINESS_BLOCKLIST, "business")
+print("Fetching all sections in parallel...")
+middle_matches   = fetch_section(MIDDLE_EAST_SOURCES, ME_KEYWORDS, ME_PATTERN, ME_BLOCKLIST, "mideast", block_pat=ME_BLOCK_PAT)
+us_matches       = fetch_section(US_POLITICS_SOURCES, US_KEYWORDS, US_PATTERN, US_BLOCKLIST, "us", block_pat=US_BLOCK_PAT)
+sports_matches   = fetch_section(SPORTS_SOURCES, SPORTS_KEYWORDS, SPORTS_PATTERN, SPORTS_BLOCKLIST, "sports", block_pat=SPORTS_BLOCK_PAT)
+tech_matches     = fetch_section(TECH_SOURCES, TECH_KEYWORDS, TECH_PATTERN, TECH_BLOCKLIST, "tech", block_pat=TECH_BLOCK_PAT)
+culture_matches  = fetch_section(CULTURE_SOURCES, CULTURE_KEYWORDS, CULTURE_PATTERN, CULTURE_BLOCKLIST, "culture", block_pat=CULTURE_BLOCK_PAT)
+world_matches    = fetch_section(WORLD_SOURCES, WORLD_KEYWORDS, WORLD_PATTERN, WORLD_BLOCKLIST, "world", block_pat=WORLD_BLOCK_PAT)
+business_matches = fetch_section(BUSINESS_SOURCES, BUSINESS_KEYWORDS, BUSINESS_PATTERN, BUSINESS_BLOCKLIST, "business", block_pat=BUSINESS_BLOCK_PAT)
 
 # ====================== TIME SPLIT (3h breaking / 21h daily, bidirectional spillover) ======================
 THREE_HOURS      = 3 * 3600
