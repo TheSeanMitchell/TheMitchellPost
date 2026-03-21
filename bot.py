@@ -1121,6 +1121,318 @@ RAW_WORLD_KEYWORDS = [
 ]
 WORLD_KEYWORDS = set(kw.lower() for kw in RAW_WORLD_KEYWORDS)
 
+RAW_BUSINESS_KEYWORDS = [
+    # ── Core business / markets ──
+    "stock market","stock markets","wall street","dow jones","s&p 500","nasdaq","nyse",
+    "stock price","share price","market cap","market capitalization","bull market","bear market",
+    "market rally","market selloff","market crash","earnings report","quarterly earnings",
+    "revenue growth","profit margin","operating income","net income","eps","earnings per share",
+    "forward guidance","analyst forecast","wall street analyst","price target","buy rating",
+    "sell rating","hold rating","upgrade downgrade","ipo","initial public offering","spac",
+    "merger","acquisition","m&a","hostile takeover","buyout","leveraged buyout","lbo",
+    "private equity","venture capital","startup funding","series a","series b","series c",
+    "unicorn startup","decacorn","pre ipo","going public","delisting","stock buyback",
+    "share repurchase","dividend","dividend yield","dividend cut","special dividend",
+    "stock split","reverse stock split","index fund","etf","mutual fund","hedge fund",
+    "activist investor","short seller","short selling","short squeeze","options trading",
+    "call option","put option","derivatives","futures contract","commodities market",
+    "gold price","silver price","copper price","oil price","natural gas price",
+    "commodity prices","inflation data","cpi report","ppi report","fed minutes",
+    "federal reserve rate","interest rate decision","rate hike","rate cut","monetary policy",
+    "quantitative easing","quantitative tightening","treasury yield","bond market",
+    "credit market","junk bond","investment grade","credit rating","moody s","s&p rating",
+    "fitch rating","yield curve","inverted yield","debt market","sovereign debt",
+    # ── Company / corporate ──
+    "corporate earnings","ceo","chief executive","cfo","chief financial officer",
+    "board of directors","shareholder meeting","annual report","sec filing","10-k","10-q","8-k",
+    "proxy statement","corporate governance","executive compensation","layoffs","job cuts",
+    "workforce reduction","restructuring","cost cutting","expense reduction","profit warning",
+    "earnings miss","earnings beat","revenue miss","revenue beat","guidance raised","guidance cut",
+    "corporate strategy","business strategy","market share","competitive advantage",
+    "supply chain","logistics","manufacturing output","factory orders","industrial production",
+    "retail sales","consumer spending","e-commerce","online retail","amazon","walmart","target",
+    "home depot","costco","apple earnings","microsoft earnings","google earnings","alphabet",
+    "meta earnings","tesla earnings","nvidia earnings","amazon earnings","netflix earnings",
+    "banking earnings","jpmorgan","goldman sachs","morgan stanley","bank of america","citigroup",
+    "wells fargo","blackrock","vanguard","fidelity","berkshire hathaway","warren buffett",
+    "charlie munger","cathie wood","ark invest","bill ackman","carl icahn",
+    # ── Economy macro ──
+    "gdp growth","gdp report","economic growth","recession","economic recession",
+    "soft landing","hard landing","stagflation","economic contraction","economic expansion",
+    "consumer confidence","business confidence","pmi","purchasing managers index",
+    "manufacturing pmi","services pmi","job openings","jolts report","nonfarm payrolls",
+    "unemployment claims","jobless claims","labor market report","wage growth","average earnings",
+    "productivity report","trade deficit","trade surplus","current account","trade balance",
+    "import prices","export prices","tariff impact","trade war impact","dollar index",
+    "currency markets","forex","euro dollar","dollar yen","dollar yuan","pound dollar",
+    "emerging market","developing economy","imf forecast","world bank forecast",
+    "oecd forecast","global growth","global recession","global economy outlook",
+    # ── Finance / banking / fintech ──
+    "banking sector","bank failure","bank collapse","fdic","bank regulation",
+    "financial regulation","dodd frank","basel iii","capital requirements","stress test",
+    "credit card","consumer debt","household debt","corporate debt","national debt",
+    "deficit spending","fiscal policy","government spending","budget deficit",
+    "mortgage rate","refinancing","housing market","home prices","real estate market",
+    "commercial real estate","office vacancy","retail vacancy","reit",
+    "fintech","digital banking","neobank","payment processing","credit card fees",
+    "buy now pay later","bnpl","payday loan","auto loan","student loan refinancing",
+    "personal finance","financial planning","retirement savings","401k","ira",
+    "wealth management","financial advisor","robo advisor","asset management",
+    "portfolio management","risk management","insurance market","reinsurance",
+    "insurtech","healthtech finance","payroll","accounts payable","accounts receivable",
+    "small business loan","sba loan","microloan","crowdfunding","kickstarter","indiegogo",
+    "angel investor","seed funding","seed round","startup ecosystem","silicon valley funding",
+    # ── Crypto / digital assets ──
+    "bitcoin price","bitcoin etf","crypto market","cryptocurrency","ethereum","altcoin",
+    "defi","nft market","stablecoin","cbdc","digital dollar","crypto regulation",
+    "sec crypto","cftc crypto","coinbase","binance","crypto exchange","blockchain business",
+    "crypto crash","crypto rally","bitcoin halving","crypto adoption","institutional crypto",
+    "crypto fund","grayscale","blackrock bitcoin","bitcoin spot etf","crypto winter",
+    "web3 business","tokenization","rwa tokenization","digital asset management",
+    # ── Real estate / housing ──
+    "housing affordability","home sales","existing home sales","new home sales",
+    "housing starts","building permits","zillow","redfin","opendoor","real estate broker",
+    "commercial property","office market","industrial real estate","multifamily",
+    "apartment rents","rental market","landlord","tenant market","foreclosure rate",
+    "mortgage delinquency","housing inventory","home builder","dr horton","lennar",
+    # ── Entrepreneurship / small biz ──
+    "small business","entrepreneurship","startup news","business launch","business failure",
+    "franchise","franchising","business model","pivot","product market fit","growth hacking",
+    "revenue model","subscription model","saas business","b2b","b2c","direct to consumer",
+    "dtc","e-commerce growth","shopify","woocommerce","dropshipping business",
+    "amazon fba","marketplace business","gig economy business","side hustle","freelance economy",
+    # ── Specific business SEO from source list ──
+    "bloomberg business","reuters finance","wsj markets","ft markets","economist business",
+    "cnbc markets","forbes business","business insider","fortune 500","marketwatch",
+    "yahoo finance","investopedia","morningstar","barrons","harvard business review",
+    "hbr","entrepreneur magazine","inc magazine","fast company","kiplinger","nerdwallet",
+    "bankrate","coindesk","theblock","decrypt crypto","housingwire","seeking alpha",
+    "tradingview","zacks investment","money magazine","us news money","thestreet",
+    "investing.com","consumer reports","investment news","financial planning magazine",
+    "bisnow","inman real estate","globest","finviz","bplans","startups.com","score business",
+    "bitcoin magazine","beincrypto","cointelegraph","ledger insights","blockworks",
+    "bankless","cryptoslate","real vision","kiva loans","prosper marketplace",
+    # ── Additional business keywords from SEO list ──
+    "excessive force finding","systemic issue","training reform","broken windows theory",
+    "zero tolerance","stop and frisk","qualified immunity doctrine","excessive force standard",
+    "graham v connor","objective reasonableness","clearly established law","circuit split",
+    "stare decisis","carried interest","hedge fund tax","private equity fund",
+    "real estate tax break","1031 exchange","opportunity zone","tax shelter",
+    "offshore haven","inversion deal","corporate relocation","tax competitiveness",
+    "global minimum tax","pillar two","beps framework","oecd agreement","digital services tax",
+    "gafa tax","tech giant tax","antitrust lawsuit business","google breakup","amazon antitrust",
+    "app store fees","epic vs apple","sec lawsuit","ripple case","xrp ruling",
+    "stablecoin regulation","silicon valley bank","svb collapse","flash crash",
+    "trading halt","volatility spike","vix index","treasury yield curve","inverted yield curve",
+    "recession indicator","stagflation risk","bank secrecy act","beneficial ownership",
+    "corporate transparency act","fincen rule","crypto mixer","suspicious activity report",
+    "sar filing","aml","kyc","money transmitter","fintech regulation",
+    "robo advisor","fiduciary duty","best interest standard","dol rule","retirement advice",
+    "401k fee","target date fund","lifecycle fund","asset allocation","risk tolerance",
+    "portfolio diversification","tax loss harvesting","capital gain","wash sale rule",
+    "municipal bond","roth ira","traditional ira","backdoor roth","solo 401k","sep ira",
+    "financial independence","fire movement","retire early","savings rate","4 percent rule",
+    "safe withdrawal rate","sequence of return risk","longevity risk","healthcare cost business",
+    "long term care insurance","annuity","pension plan","defined benefit","defined contribution",
+    "401k match","employer contribution","vesting schedule","rollover ira","hardship withdrawal",
+    "financial literacy","budgeting","emergency fund","sinking fund","debt snowball",
+    "debt avalanche","credit score","fico score","credit utilization","payment history",
+    "bankruptcy","chapter 7","chapter 13","foreclosure","loan modification","forbearance",
+    "student loan refinance","income driven repayment","income share agreement","isa education",
+    "college roi","earnings premium","college wage premium","underemployment",
+    "degree inflation","credential inflation","human capital","fintech innovation business",
+    "digital wallet business","apple pay business","google pay business","contactless payment",
+    "qr code payment","cryptocurrency payment","bitcoin acceptance","lightning network",
+    "layer 2 crypto","scalability crypto","energy consumption crypto","proof of stake",
+    "ethereum merge","carbon footprint crypto","nft marketplace","opensea","nft floor price",
+    "crypto custody","cold storage","hardware wallet","seed phrase","crypto scam","rug pull",
+    "exchange hack","mt gox","coincheck","bitfinex","binance hack","insurance fund",
+    "proof of reserves","merkle tree","audit report","regulatory compliance crypto",
+    "know your customer","anti money laundering","travel rule","fatf guidance",
+    "virtual asset","vasp","money transmitter license","occ crypto","sabre charter",
+    "custody bank","fidelity digital assets","coinbase custody","gemini trust",
+    "cftc jurisdiction","sec security","howey test","investment contract","utility token",
+    "security token","sto platform","tokenized asset","real world asset","rwa",
+    "on chain lending","defi protocol","aave","compound","uniswap","decentralized exchange",
+    "dex","amm","automated market maker","liquidity pool","impermanent loss","yield farming",
+    "staking reward","governance token","dao","snapshot vote","quadratic voting",
+    "token weighted","sybil attack","decentralized identity","web3 wallet","metamask",
+    "mev","sandwich attack","frontrunning","arbitrage bot","liquidation bot","oracle manipulation",
+    "price impact","slippage","mempool","flashbots","builder market","pbs",
+    "restaking","eigenlayer","liquid restaking","airdrop farming","retroactive airdrop",
+    "wallet clustering","multi wallet","farming strategy","cross chain yield","bridge exploit",
+    "token sniffer","honeypot detector","contract verifier","etherscan","bscscan","gas fee",
+    "rollup","optimistic rollup","zk rollup","polygon","arbitrum","optimism","base chain",
+    "cosmos ecosystem","ibc protocol","atom token","validator set","slashing",
+    "unbonding period","liquid staking","lido","staked eth","rocket pool","home staking",
+    "node operator","execution client","consensus client","mev boost",
+    "account abstraction","erc 4337","paymaster","bundler","entry point contract",
+    "wallet as service","gas sponsorship","gasless transaction","relayer","biconomy",
+    "smart account","session key","passkey","webauthn","passwordless","mpc wallet",
+    "multi party computation","social login","email wallet","wallet connect","hardware wallet ledger",
+    "trezor","coldcard","air gapped","shamir secret sharing","multi sig wallet","gnosis safe",
+    "multisignature","social recovery","seed backup","metal seed",
+    "not your keys","exchange risk","custodial risk","bankruptcy risk","ftx collapse",
+    "proof of reserve audit","merkle proof","solvency proof","chain analysis",
+    "bitcoin etf inflow","institutional custody","blackrock ibit","fidelity fbtc",
+    "grayscale gbtc","etf volume","creation redemption","authorized participant",
+    "liquidity provider","bid ask spread","24/7 trading","weekend trading",
+    "global market hours","volatility hour","macro event","fed meeting","powell speech",
+    "dot plot","economic projection","rate path","terminal rate","neutral rate",
+    "r star","taylor rule","monetary policy rule","forward guidance","data dependent",
+    "hawkish","dovish","pivot expectation","soft pivot","cut cycle","hiking cycle",
+    "pause period","balance sheet reduction","qt pace","treasury runoff","mbs runoff",
+    "mortgage backed security","agency mbs","fed holdings","reverse repo","rrp facility",
+    "money market fund","treasury bill","short term debt","extraordinary measure",
+    "x date","cash balance","tga balance","treasury general account","tax receipt",
+    "spending outflow","reconciliation package","omnibus bill","fiscal space",
+    "primary deficit","primary surplus","structural deficit","cyclical adjustment",
+    "potential gdp","output gap","phillips curve","nairu","natural rate unemployment",
+    "beveridge curve","job opening","quit rate","layoff rate","hiring rate",
+    "labor force participation","prime age participation","employment population ratio",
+    "wage pressure","average hourly earnings","eci index","compensation cost",
+    "productivity growth","unit labor cost","profit margin business","corporate profit",
+    "shiller pe","cape ratio","valuation metric","mean reversion","bubble risk",
+    "fear greed index","aaii sentiment","investor sentiment","put call ratio",
+    "vix term structure","contango","backwardation","volatility smile","skew index",
+    "tail risk","black swan","fat tail","tail hedge","option strategy","protective put",
+    "collar strategy","covered call","wheel strategy","income generation","dividend capture",
+    "ex dividend date","dividend aristocrat","dividend king","payout ratio","dividend growth",
+    "yield on cost","total return","compounding","reinvestment","drip plan",
+    "dollar cost averaging","lump sum investing","timing risk","market timing",
+    "buy the dip","contrarian strategy","value investing","growth investing",
+    "momentum trading","factor investing","smart beta","low vol","quality factor",
+    "size factor","value factor","fama french","five factor model","risk premium",
+    "equity risk premium","carry trade","risk parity","60 40 portfolio","all weather portfolio",
+    "permanent portfolio","golden butterfly","diversified allocation","alternative asset",
+    "hedge fund strategy","long short equity","global macro","event driven","distressed debt",
+    "merger arbitrage","convertible arbitrage","volatility arbitrage","tail risk fund",
+    "reinsurance","catastrophe bond","insurance linked security","ils fund","private credit",
+    "direct lending","mezzanine debt","venture debt","buyout fund","growth equity",
+    "secondary market","fund of funds","evergreen fund","interval fund","tender offer fund",
+    "liquidity premium","illiquidity discount","lock up period","redemption gate",
+    "side pocket","performance fee","high water mark","hurdle rate","preferred return",
+    "clawback provision","gp commitment","skin in the game","fee structure","2 and 20",
+    "management fee","incentive fee","carry","carried interest tax","capital gain treatment",
+    "service income","tax loophole","carried interest reform","wall street tax",
+    "millionaire surtax","wealth tax","unrealized gain tax","mark to market","annual taxation",
+    "accrual taxation","realization event","step up basis","estate tax avoidance",
+    "generation skipping","dynasty trust","perpetual trust","family office","ultra high net worth",
+    "family governance","succession planning","wealth transfer","philanthropic vehicle",
+    "private foundation","donor advised fund","charitable remainder trust","crt",
+    "charitable lead trust","clt","impact philanthropy","venture philanthropy",
+    "effective altruism","earning to give","givewell","charity navigator","impact assessment",
+    "cost effectiveness","qaly","daly","lives saved","marginal impact","room for more funding",
+    "top charity","against malaria foundation","deworming program","cash transfer charity",
+    "give directly","unconditional cash","poverty trap","graduation program","ultra poor",
+    "asset transfer","training package","savings group","microfinance","grameen bank",
+    "microcredit","group lending","joint liability","repayment rate","over indebtedness",
+    "debt trap","financial inclusion","mobile money","m pesa","unbanked population",
+    "fintech revolution","branchless banking","agent network","last mile delivery",
+    "financial access","credit scoring","alternative data","thin file","machine learning credit",
+    "risk based pricing","subprime lending","payday loan regulation","high interest loan",
+    "debt cycle","real estate investment","reit dividend","commercial mortgage","cap rate",
+    "net operating income","noi","gross rent multiplier","grm","property management",
+    "property value","appraisal","comps","comparative market analysis","cma",
+    "home equity","heloc","cash out refinance","jumbo mortgage","conventional loan",
+    "fha loan","va loan","usda loan","conforming loan","non conforming loan",
+    "mortgage backed","fannie mae","freddie mac","ginnie mae","mbs",
+    "private mortgage insurance","pmi insurance","escrow","title insurance","closing costs",
+    "real estate agent","commission","buyer agent","seller agent","dual agency",
+    "for sale by owner","fsbo","zillow offer","ibuyer","opendoor offer",
+    "real estate crowdfunding","syndication","passive income real estate","cash flow property",
+    "cap rate compression","real estate cycle","commercial real estate vacancy",
+    "office market outlook","retail apocalypse","industrial demand","warehouse rents",
+    "multifamily vacancy","apartment construction","build to rent","single family rental",
+    "sfr","manufactured housing","mobile home park","self storage","data center reit",
+    "cell tower reit","net lease","triple net","nnn lease","gross lease","modified gross",
+    "lease expiration","tenant improvement","capital expenditure","depreciation","amortization",
+    "1031 exchange real estate","opportunity zone investment","cost segregation",
+    "bonus depreciation","real estate tax","property tax","transfer tax","mello roos",
+    "hoa fees","condo association","co op board","real estate law","zoning",
+    "entitlement","land use","variance","conditional use permit","cup","density bonus",
+    "affordable housing requirement","inclusionary zoning","adu","accessory dwelling unit",
+    "short term rental","airbnb regulation","vrbo","vacation rental","proptech",
+    "real estate technology","mls","multiple listing service","days on market","dom",
+    "absorption rate","months of supply","seller market","buyer market","bidding war",
+    "cash offer","contingency","inspection contingency","financing contingency",
+    "appraisal contingency","escalation clause","pocket listing","off market",
+    "wholesaling real estate","fix and flip","hard money loan","bridge loan","construction loan",
+    "lot loan","land loan","agricultural loan","commercial construction","spec home",
+    "custom home builder","production builder","tract home","modular home",
+    "prefab home","tiny home","container home","sustainable building","leed certified",
+    "energy efficient home","solar home","green building","passive house",
+    "net zero home","smart home technology","home automation business",
+    # ── Additional high-value business terms ──
+    "business news","market news","financial news","economy news","economics",
+    "economic policy","fiscal stimulus","stimulus package","infrastructure spending",
+    "trade policy","tariff","tariffs","import duties","export","exports","imports",
+    "supply chain disruption","global supply chain","logistics cost","freight rates",
+    "container shipping","port congestion","warehousing","inventory management",
+    "just in time","lean manufacturing","reshoring","nearshoring","offshoring",
+    "manufacturing cost","labor cost","automation","robotics business","ai business",
+    "digital transformation business","saas revenue","cloud revenue","subscription revenue",
+    "arr","mrr","churn rate","customer acquisition cost","cac","lifetime value","ltv",
+    "gross margin","ebitda","free cash flow","fcf","working capital","accounts receivable",
+    "days sales outstanding","dso","inventory turnover","days inventory outstanding","dio",
+    "days payable outstanding","dpo","cash conversion cycle","ccc","return on equity","roe",
+    "return on assets","roa","return on invested capital","roic","price to earnings",
+    "price to book","price to sales","enterprise value","ev ebitda","dcf",
+    "discounted cash flow","net present value","npv","internal rate of return","irr",
+    "payback period","break even","gross profit","operating profit","net profit",
+    "top line growth","bottom line growth","operating leverage","financial leverage",
+    "debt to equity","debt to ebitda","interest coverage","current ratio","quick ratio",
+    "liquidity ratio","solvency ratio","working capital ratio","asset turnover",
+    "inventory management","procurement","vendor management","contract negotiation",
+    "intellectual property","patent","trademark","copyright business","licensing revenue",
+    "royalties","franchise fee","franchise model","licensing deal","strategic partnership",
+    "joint venture","spin off","carve out","divestiture","asset sale","business sale",
+    "due diligence","valuation","deal structure","earn out","escrow business",
+    "representations warranties","indemnification","non compete","non disclosure",
+    "letter of intent","term sheet","closing","integration","post merger integration",
+    "synergies","cost synergies","revenue synergies","goodwill impairment",
+    "accounting","gaap","ifrs","audit","auditor","financial statement","balance sheet",
+    "income statement","cash flow statement","statement of changes in equity",
+    "notes to financial statements","related party transactions","off balance sheet",
+    "revenue recognition","expense recognition","depreciation schedule","amortization schedule",
+    "impairment","write down","write off","provision","reserve","contingent liability",
+    "deferred revenue","deferred tax","tax accounting","transfer pricing","tax planning",
+    "tax avoidance","tax evasion","irs audit","tax compliance","sales tax","vat",
+    "excise tax","payroll tax","corporate tax rate","effective tax rate","tax credit",
+    "r&d tax credit","investment tax credit","tax loss carryforward","nol","tax shield",
+    "business formation","llc","corporation","s corp","partnership","sole proprietorship",
+    "registered agent","articles of incorporation","bylaws","operating agreement",
+    "shareholder agreement","cap table","vesting schedule equity","cliff vesting equity",
+    "option pool","employee stock option","esop","equity compensation","restricted stock unit",
+    "rsu","phantom stock","stock appreciation right","sar business","profit sharing",
+    "bonus structure","commission structure","base salary","total compensation",
+    "benefits package","health insurance business","retirement benefit","401k match business",
+    "paid time off","remote work policy","hybrid work","return to office","employer brand",
+    "talent acquisition","recruiting","headhunting","executive search","onboarding",
+    "performance review","okr","kpi","management by objectives","compensation benchmarking",
+    "pay equity","hr technology","hris","human resources business","workforce planning",
+    "organizational structure","corporate culture","diversity equity inclusion business",
+    "esg investing","environmental social governance","sustainability report","carbon neutral business",
+    "net zero business","carbon credit","carbon offset","scope 1 2 3 emissions",
+    "climate risk business","physical risk","transition risk","tcfd","sasb","gri",
+    "impact investing","responsible investing","socially responsible investing","sri",
+    "green bond","sustainability linked bond","blue bond","social bond",
+    "stakeholder capitalism","shareholder primacy","purpose driven business","b corp",
+    "benefit corporation","social enterprise","nonprofit management","charity finance",
+    "endowment management","foundation investing","planned giving","major gifts",
+    "fundraising","grant writing","grant funding","crowdfunding business","kickstarter campaign",
+    "indiegogo campaign","gofundme business","equity crowdfunding","regulation crowdfunding",
+    "reg cf","reg a plus","regulation d","private placement","accredited investor",
+    "qualified purchaser","family office investing","multi family office","single family office",
+    "wealth preservation","estate planning","trust administration","will","probate",
+    "beneficiary","inheritance tax","gift tax","annual exclusion","gift splitting",
+    "grantor retained annuity trust","grat","intentionally defective grantor trust","idgt",
+    "spousal lifetime access trust","slat","qualified opportunity zone fund","qoz",
+    "like kind exchange","boot","basis","cost basis","adjusted cost basis",
+    "step up in basis","carryover basis","gift basis","inherited basis",
+]
+BUSINESS_KEYWORDS = set(kw.lower() for kw in RAW_BUSINESS_KEYWORDS)
+
 # ====================== BLOCKLISTS ======================
 ME_BLOCKLIST    = {"trump"}
 US_BLOCKLIST    = {"iran"}
@@ -1128,6 +1440,13 @@ SPORTS_BLOCKLIST = set()
 TECH_BLOCKLIST   = set()
 CULTURE_BLOCKLIST= set()
 WORLD_BLOCKLIST  = set()
+BUSINESS_BLOCKLIST = {
+    "iran", "ukraine", "gaza", "hamas", "hezbollah", "israel", "middle east",
+    "russia", "taliban", "afghanistan", "military", "airstrike", "war", "missile",
+    "nato", "pentagon", "troops", "soldier", "combat", "election", "vote", "ballot",
+    "congress", "senate", "white house", "supreme court", "abortion", "gun control",
+    "immigration", "border", "deportation", "drag", "transgender", "culture war",
+}
 
 # ── Job posting filter (site-wide) ──
 JOB_FILTER_PHRASES = [
@@ -1146,6 +1465,7 @@ SPORTS_PATTERN  = make_keyword_pattern(SPORTS_KEYWORDS)
 TECH_PATTERN    = make_keyword_pattern(TECH_KEYWORDS)
 CULTURE_PATTERN = make_keyword_pattern(CULTURE_KEYWORDS)
 WORLD_PATTERN   = make_keyword_pattern(WORLD_KEYWORDS)
+BUSINESS_PATTERN = make_keyword_pattern(BUSINESS_KEYWORDS)
 
 # ====================== SOURCES ======================
 MIDDLE_EAST_SOURCES = [
@@ -1470,6 +1790,66 @@ CULTURE_SOURCES = [
     ("W Magazine","https://news.google.com/rss/search?q=w+magazine+fashion+when:1d&hl=en-US&gl=US&ceid=US:en"),
 ]
 
+BUSINESS_SOURCES = [
+    ("Broad Business","https://news.google.com/rss/search?q=stock+market+OR+earnings+OR+economy+OR+wall+street+OR+federal+reserve+OR+inflation+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Reuters Finance","https://news.google.com/rss/search?q=site:reuters.com+business+OR+markets+OR+economy+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("AP Business","https://news.google.com/rss/search?q=associated+press+business+OR+markets+OR+economy+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Bloomberg","https://news.google.com/rss/search?q=site:bloomberg.com+markets+OR+business+OR+economy+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Wall Street Journal","https://news.google.com/rss/search?q=site:wsj.com+markets+OR+business+OR+economy+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Financial Times","https://news.google.com/rss/search?q=site:ft.com+markets+OR+business+OR+economy+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Economist","https://news.google.com/rss/search?q=site:economist.com+business+OR+finance+OR+economy+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("CNBC","https://news.google.com/rss/search?q=site:cnbc.com+markets+OR+business+OR+economy+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Forbes","https://news.google.com/rss/search?q=site:forbes.com+business+OR+finance+OR+investing+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Business Insider","https://news.google.com/rss/search?q=business+insider+markets+OR+business+OR+economy+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Fortune","https://news.google.com/rss/search?q=site:fortune.com+business+OR+finance+OR+economy+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("MarketWatch","https://news.google.com/rss/search?q=site:marketwatch.com+markets+OR+stocks+OR+economy+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Yahoo Finance","https://news.google.com/rss/search?q=yahoo+finance+markets+OR+stocks+OR+earnings+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Barron's","https://news.google.com/rss/search?q=barrons+investing+OR+markets+OR+stocks+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Seeking Alpha","https://news.google.com/rss/search?q=seeking+alpha+stocks+OR+investing+OR+earnings+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Street","https://news.google.com/rss/search?q=thestreet+investing+OR+markets+OR+stocks+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Harvard Business Review","https://news.google.com/rss/search?q=site:hbr.org+business+OR+management+OR+strategy+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Entrepreneur","https://news.google.com/rss/search?q=site:entrepreneur.com+business+OR+startup+OR+small+business+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Inc Magazine","https://news.google.com/rss/search?q=site:inc.com+business+OR+startup+OR+small+business+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Fast Company","https://news.google.com/rss/search?q=site:fastcompany.com+business+OR+innovation+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Investopedia","https://news.google.com/rss/search?q=investopedia+investing+OR+finance+OR+markets+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Morningstar","https://news.google.com/rss/search?q=morningstar+investing+OR+funds+OR+stocks+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Kiplinger","https://news.google.com/rss/search?q=kiplinger+personal+finance+OR+investing+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("NerdWallet","https://news.google.com/rss/search?q=nerdwallet+personal+finance+OR+investing+OR+credit+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Bankrate","https://news.google.com/rss/search?q=bankrate+mortgage+OR+savings+OR+rates+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("CoinDesk","https://news.google.com/rss/search?q=coindesk+crypto+OR+bitcoin+OR+blockchain+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("The Block","https://news.google.com/rss/search?q=theblock+crypto+OR+bitcoin+OR+defi+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Decrypt","https://news.google.com/rss/search?q=decrypt+crypto+OR+bitcoin+OR+web3+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("HousingWire","https://news.google.com/rss/search?q=housingwire+real+estate+OR+mortgage+OR+housing+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Inman","https://news.google.com/rss/search?q=inman+real+estate+OR+housing+OR+mortgage+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Bisnow","https://news.google.com/rss/search?q=bisnow+commercial+real+estate+OR+cre+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Bitcoin Magazine","https://news.google.com/rss/search?q=bitcoin+magazine+bitcoin+OR+crypto+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("BeInCrypto","https://news.google.com/rss/search?q=beincrypto+crypto+OR+bitcoin+OR+defi+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("CoinTelegraph","https://news.google.com/rss/search?q=cointelegraph+crypto+OR+bitcoin+OR+blockchain+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Ledger Insights","https://news.google.com/rss/search?q=ledger+insights+blockchain+OR+enterprise+crypto+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Blockworks","https://news.google.com/rss/search?q=blockworks+crypto+OR+bitcoin+OR+defi+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Bankless","https://news.google.com/rss/search?q=bankless+defi+OR+ethereum+OR+web3+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("CryptoSlate","https://news.google.com/rss/search?q=cryptoslate+crypto+OR+bitcoin+OR+altcoin+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Real Vision","https://news.google.com/rss/search?q=real+vision+markets+OR+macro+OR+investing+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("FinViz","https://news.google.com/rss/search?q=finviz+stocks+OR+markets+OR+screener+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("bplans","https://news.google.com/rss/search?q=bplans+small+business+OR+startup+OR+business+plan+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Startups.com","https://news.google.com/rss/search?q=startups+com+startup+OR+venture+capital+OR+funding+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("SCORE","https://news.google.com/rss/search?q=score+org+small+business+OR+mentorship+OR+business+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Zillow Research","https://news.google.com/rss/search?q=zillow+research+housing+market+OR+home+prices+OR+rents+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Zacks","https://news.google.com/rss/search?q=zacks+investment+stocks+OR+earnings+OR+markets+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Investing.com","https://news.google.com/rss/search?q=investing+com+markets+OR+stocks+OR+forex+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("NYT Business","https://news.google.com/rss/search?q=site:nytimes.com+business+OR+economy+OR+markets+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Washington Post Business","https://news.google.com/rss/search?q=site:washingtonpost.com+business+OR+economy+OR+markets+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Guardian Business","https://news.google.com/rss/search?q=the+guardian+business+OR+economy+OR+markets+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("CBS News Business","https://news.google.com/rss/search?q=site:cbsnews.com+business+OR+economy+OR+markets+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("PBS Business","https://news.google.com/rss/search?q=site:pbs.org+business+OR+economy+OR+markets+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("SEC News","https://news.google.com/rss/search?q=sec+gov+securities+OR+enforcement+OR+investor+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("FDIC News","https://news.google.com/rss/search?q=fdic+banking+OR+bank+failure+OR+deposit+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("CFPB News","https://news.google.com/rss/search?q=cfpb+consumer+finance+OR+credit+OR+banking+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("SBA News","https://news.google.com/rss/search?q=sba+small+business+OR+loan+OR+entrepreneur+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("Stock Analysis","https://news.google.com/rss/search?q=stock+analysis+earnings+OR+stocks+OR+markets+when:1d&hl=en-US&gl=US&ceid=US:en"),
+    ("GlobeNewswire Business","https://news.google.com/rss/search?q=globenewswire+earnings+OR+business+announcement+when:1d&hl=en-US&gl=US&ceid=US:en"),
+]
+
 WORLD_SOURCES = [
     # Broad sweeps
     ("Broad World","https://news.google.com/rss/search?q=europe+OR+asia+OR+japan+OR+china+OR+india+OR+uk+OR+france+OR+germany+when:1d&hl=en-US&gl=US&ceid=US:en"),
@@ -1586,12 +1966,13 @@ def fetch_section(sources, keywords, pattern, blocklist):
     return matches
 
 # ====================== FETCH ALL ======================
-middle_matches  = fetch_section(MIDDLE_EAST_SOURCES, ME_KEYWORDS, ME_PATTERN, ME_BLOCKLIST)
-us_matches      = fetch_section(US_POLITICS_SOURCES, US_KEYWORDS, US_PATTERN, US_BLOCKLIST)
-sports_matches  = fetch_section(SPORTS_SOURCES, SPORTS_KEYWORDS, SPORTS_PATTERN, SPORTS_BLOCKLIST)
-tech_matches    = fetch_section(TECH_SOURCES, TECH_KEYWORDS, TECH_PATTERN, TECH_BLOCKLIST)
-culture_matches = fetch_section(CULTURE_SOURCES, CULTURE_KEYWORDS, CULTURE_PATTERN, CULTURE_BLOCKLIST)
-world_matches   = fetch_section(WORLD_SOURCES, WORLD_KEYWORDS, WORLD_PATTERN, WORLD_BLOCKLIST)
+middle_matches   = fetch_section(MIDDLE_EAST_SOURCES, ME_KEYWORDS, ME_PATTERN, ME_BLOCKLIST)
+us_matches       = fetch_section(US_POLITICS_SOURCES, US_KEYWORDS, US_PATTERN, US_BLOCKLIST)
+sports_matches   = fetch_section(SPORTS_SOURCES, SPORTS_KEYWORDS, SPORTS_PATTERN, SPORTS_BLOCKLIST)
+tech_matches     = fetch_section(TECH_SOURCES, TECH_KEYWORDS, TECH_PATTERN, TECH_BLOCKLIST)
+culture_matches  = fetch_section(CULTURE_SOURCES, CULTURE_KEYWORDS, CULTURE_PATTERN, CULTURE_BLOCKLIST)
+world_matches    = fetch_section(WORLD_SOURCES, WORLD_KEYWORDS, WORLD_PATTERN, WORLD_BLOCKLIST)
+business_matches = fetch_section(BUSINESS_SOURCES, BUSINESS_KEYWORDS, BUSINESS_PATTERN, BUSINESS_BLOCKLIST)
 
 # ====================== TIME SPLIT (3h breaking / 21h daily, bidirectional spillover) ======================
 THREE_HOURS      = 3 * 3600
@@ -1637,6 +2018,7 @@ def split_culture(all_matches, max_items=MAX_ITEMS):
 
 culture_breaking, culture_recent = split_culture(culture_matches)
 world_breaking,   world_recent   = split_breaking_daily(world_matches)
+business_breaking, business_recent = split_breaking_daily(business_matches)
 
 # ====================== PDT TIMESTAMP ======================
 PDT_OFFSET = timedelta(hours=-7)
@@ -1813,6 +2195,7 @@ def build_top_stories(max_stories=10):
         ("Middle East", middle_breaking + middle_recent),
         ("World",       world_breaking + world_recent),
         ("Tech",        tech_breaking + tech_recent),
+        ("Business",    business_breaking + business_recent),
         ("Sports",      sports_breaking + sports_recent),
         ("Culture",     culture_breaking + culture_recent),
     ]
@@ -1836,6 +2219,7 @@ def build_trending_topics(max_topics=10):
         middle_breaking + middle_recent +
         world_breaking + world_recent +
         tech_breaking + tech_recent +
+        business_breaking + business_recent +
         sports_breaking + sports_recent +
         culture_breaking + culture_recent
     )
@@ -1870,6 +2254,7 @@ all_items_flat = (
     us_breaking + us_recent +
     middle_breaking + middle_recent +
     world_breaking + world_recent +
+    business_breaking + business_recent +
     sports_breaking + sports_recent +
     tech_breaking + tech_recent +
     culture_breaking + culture_recent
@@ -1886,12 +2271,13 @@ update_time = (datetime.utcnow() + PDT_OFFSET).strftime("%I:%M:%S %p PDT")
 
 # Section color map for nav bar accents
 SECTION_COLORS = {
-    "us":      "#B30000",
-    "mideast": "#C05000",
-    "world":   "#2E7D9A",
-    "tech":    "#005F9E",
-    "sports":  "#006B3C",
-    "culture": "#6B006B",
+    "us":       "#B30000",
+    "mideast":  "#C05000",
+    "world":    "#2E7D9A",
+    "tech":     "#005F9E",
+    "business": "#8B6914",
+    "sports":   "#006B3C",
+    "culture":  "#6B006B",
 }
 
 html_parts = []
@@ -1936,6 +2322,7 @@ html_parts.append(f"""<!DOCTYPE html>
     .sticky-nav a.nav-mideast{{ border-left-color: {SECTION_COLORS["mideast"]}; }}
     .sticky-nav a.nav-world  {{ border-left-color: {SECTION_COLORS["world"]}; }}
     .sticky-nav a.nav-tech   {{ border-left-color: {SECTION_COLORS["tech"]}; }}
+    .sticky-nav a.nav-business{{ border-left-color: {SECTION_COLORS["business"]}; }}
     .sticky-nav a.nav-sports {{ border-left-color: {SECTION_COLORS["sports"]}; }}
     .sticky-nav a.nav-culture{{ border-left-color: {SECTION_COLORS["culture"]}; }}
 
@@ -1989,12 +2376,13 @@ html_parts.append(f"""<!DOCTYPE html>
         font-size: 1.6em; margin: 0 0 6px; font-weight: bold;
         text-decoration: underline; text-decoration-thickness: 2px;
     }}
-    .section-title.us-color     {{ color: {SECTION_COLORS["us"]};      text-decoration-color: {SECTION_COLORS["us"]}; }}
-    .section-title.mideast-color{{ color: {SECTION_COLORS["mideast"]}; text-decoration-color: {SECTION_COLORS["mideast"]}; }}
-    .section-title.world-color  {{ color: {SECTION_COLORS["world"]};   text-decoration-color: {SECTION_COLORS["world"]}; }}
-    .section-title.tech-color   {{ color: {SECTION_COLORS["tech"]};    text-decoration-color: {SECTION_COLORS["tech"]}; }}
-    .section-title.sports-color {{ color: {SECTION_COLORS["sports"]};  text-decoration-color: {SECTION_COLORS["sports"]}; }}
-    .section-title.culture-color{{ color: {SECTION_COLORS["culture"]}; text-decoration-color: {SECTION_COLORS["culture"]}; }}
+    .section-title.us-color     {{ color: {SECTION_COLORS["us"]};       text-decoration-color: {SECTION_COLORS["us"]}; }}
+    .section-title.mideast-color{{ color: {SECTION_COLORS["mideast"]};  text-decoration-color: {SECTION_COLORS["mideast"]}; }}
+    .section-title.world-color  {{ color: {SECTION_COLORS["world"]};    text-decoration-color: {SECTION_COLORS["world"]}; }}
+    .section-title.tech-color   {{ color: {SECTION_COLORS["tech"]};     text-decoration-color: {SECTION_COLORS["tech"]}; }}
+    .section-title.business-color{{ color: {SECTION_COLORS["business"]}; text-decoration-color: {SECTION_COLORS["business"]}; }}
+    .section-title.sports-color {{ color: {SECTION_COLORS["sports"]};   text-decoration-color: {SECTION_COLORS["sports"]}; }}
+    .section-title.culture-color{{ color: {SECTION_COLORS["culture"]};  text-decoration-color: {SECTION_COLORS["culture"]}; }}
 
     .top-divider {{ border: 0; height: 3px; background: #222222; margin: 28px 0; }}
     .src-summary {{ color: #666666; font-size: 0.78em; margin-bottom: 12px; }}
@@ -2044,12 +2432,13 @@ html_parts.append(f"""<!DOCTYPE html>
     .section-wrap {{ padding: 0 0 10px 0; }}
 
     /* ── Per-section cluster tint colors ── */
-    #section-us      .cluster {{ border-left-color: #4a0000; background: #1a0505; }}
-    #section-mideast .cluster {{ border-left-color: #4a2000; background: #1a0d00; }}
-    #section-world   .cluster {{ border-left-color: #0d3040; background: #051218; }}
-    #section-tech    .cluster {{ border-left-color: #002040; background: #060f1a; }}
-    #section-sports  .cluster {{ border-left-color: #002a18; background: #04120a; }}
-    #section-culture .cluster {{ border-left-color: #300030; background: #120512; }}
+    #section-us       .cluster {{ border-left-color: #4a0000; background: #1a0505; }}
+    #section-mideast  .cluster {{ border-left-color: #4a2000; background: #1a0d00; }}
+    #section-world    .cluster {{ border-left-color: #0d3040; background: #051218; }}
+    #section-tech     .cluster {{ border-left-color: #002040; background: #060f1a; }}
+    #section-business .cluster {{ border-left-color: #3d2d00; background: #191100; }}
+    #section-sports   .cluster {{ border-left-color: #002a18; background: #04120a; }}
+    #section-culture  .cluster {{ border-left-color: #300030; background: #120512; }}
     /* ── Light mode overrides ── */
     body.light-mode {{
         background: #FFFFFF !important;
@@ -2093,11 +2482,12 @@ html_parts.append(f"""<!DOCTYPE html>
     body.light-mode .site-footer h1 {{ color: #000000 !important; }}
     body.light-mode .site-footer .byline {{ color: #444444 !important; }}
     body.light-mode .site-footer .update {{ color: #666666 !important; }}
-    body.light-mode #section-us      .cluster {{ border-left-color: #B30000 !important; background: #FFF0F0 !important; }}
-    body.light-mode #section-mideast .cluster {{ border-left-color: #C05000 !important; background: #FFF5EE !important; }}
-    body.light-mode #section-tech    .cluster {{ border-left-color: #005F9E !important; background: #EEF4FB !important; }}
-    body.light-mode #section-sports  .cluster {{ border-left-color: #006B3C !important; background: #EEF8F3 !important; }}
-    body.light-mode #section-culture .cluster {{ border-left-color: #6B006B !important; background: #F8EEF8 !important; }}
+    body.light-mode #section-us       .cluster {{ border-left-color: #B30000 !important; background: #FFF0F0 !important; }}
+    body.light-mode #section-mideast  .cluster {{ border-left-color: #C05000 !important; background: #FFF5EE !important; }}
+    body.light-mode #section-tech     .cluster {{ border-left-color: #005F9E !important; background: #EEF4FB !important; }}
+    body.light-mode #section-business .cluster {{ border-left-color: #8B6914 !important; background: #FBF8EE !important; }}
+    body.light-mode #section-sports   .cluster {{ border-left-color: #006B3C !important; background: #EEF8F3 !important; }}
+    body.light-mode #section-culture  .cluster {{ border-left-color: #6B006B !important; background: #F8EEF8 !important; }}
     body.light-mode .search-bar-wrap {{ background: #EEEEEE !important; border-color: #CCCCCC !important; }}
     body.light-mode .search-bar-wrap input {{
         background: #FFFFFF !important; color: #000000 !important;
@@ -2488,12 +2878,13 @@ html_parts.append(f"""<!DOCTYPE html>
 <!-- ══ STICKY NAVIGATION BAR ══ -->
 <nav class="sticky-nav">
     <a href="#" class="site-name" aria-label="Back to top">The Mitchell Post</a>
-    <a href="#section-us"      class="nav-us">US News</a>
-    <a href="#section-mideast" class="nav-mideast">Middle East</a>
-    <a href="#section-world"   class="nav-world">Asia, Europe &amp; World</a>
-    <a href="#section-tech"    class="nav-tech">Tech &amp; Life</a>
-    <a href="#section-sports"  class="nav-sports">Sports</a>
-    <a href="#section-culture" class="nav-culture">Culture</a>
+    <a href="#section-us"       class="nav-us">US News</a>
+    <a href="#section-mideast"  class="nav-mideast">Middle East</a>
+    <a href="#section-world"    class="nav-world">Asia, Europe &amp; World</a>
+    <a href="#section-tech"     class="nav-tech">Tech &amp; Life</a>
+    <a href="#section-business" class="nav-business">Business</a>
+    <a href="#section-sports"   class="nav-sports">Sports</a>
+    <a href="#section-culture"  class="nav-culture">Culture</a>
     <div class="light-toggle-wrap">
         <span class="nav-updated-ago" id="nav-updated-ago" title="Time since last update"></span>
         <span class="light-toggle-label">Light</span>
@@ -2587,10 +2978,10 @@ def build_daily_briefing(max_items=10):
         ("Middle East", middle_breaking + middle_recent),
         ("World",       world_breaking + world_recent),
         ("Tech",        tech_breaking + tech_recent),
+        ("Business",    business_breaking + business_recent),
         ("Sports",      sports_breaking + sports_recent),
         ("Culture",     culture_breaking + culture_recent),
     ]
-    scored = []
     for section_label, items in all_section_items:
         clusters = cluster_items(items, min_shared=3)
         for cl in clusters:
@@ -2701,12 +3092,13 @@ if top_stories or daily_briefing:
 
 # ── Build sections in user-preferred order (default order, JS reorders on page) ──
 SECTION_DATA = [
-    ("section-us",      "us-color",      us_breaking,      us_recent,      "Breaking US News",          "Today&#39;s US Headlines"),
-    ("section-mideast", "mideast-color", middle_breaking,  middle_recent,  "Middle East Breaking News", "Today&#39;s Middle East Headlines"),
-    ("section-world",   "world-color",   world_breaking,   world_recent,   "Asia, Europe &amp; World Breaking", "Today&#39;s Asia, Europe &amp; World Headlines"),
-    ("section-tech",    "tech-color",    tech_breaking,    tech_recent,    "Tech &amp; Life Breaking News", "Today&#39;s Tech &amp; Life Headlines"),
-    ("section-sports",  "sports-color",  sports_breaking,  sports_recent,  "Sports Breaking News",      "Today&#39;s Sports Headlines"),
-    ("section-culture", "culture-color", culture_breaking, culture_recent, "Culture Breaking News",     "Today&#39;s Culture Headlines"),
+    ("section-us",       "us-color",       us_breaking,       us_recent,       "Breaking US News",                  "Today&#39;s US Headlines"),
+    ("section-mideast",  "mideast-color",  middle_breaking,   middle_recent,   "Middle East Breaking News",         "Today&#39;s Middle East Headlines"),
+    ("section-world",    "world-color",    world_breaking,    world_recent,    "Asia, Europe &amp; World Breaking", "Today&#39;s Asia, Europe &amp; World Headlines"),
+    ("section-tech",     "tech-color",     tech_breaking,     tech_recent,     "Tech &amp; Life Breaking News",     "Today&#39;s Tech &amp; Life Headlines"),
+    ("section-business", "business-color", business_breaking, business_recent, "Business Breaking News",            "Today&#39;s Business Headlines"),
+    ("section-sports",   "sports-color",   sports_breaking,   sports_recent,   "Sports Breaking News",              "Today&#39;s Sports Headlines"),
+    ("section-culture",  "culture-color",  culture_breaking,  culture_recent,  "Culture Breaking News",             "Today&#39;s Culture Headlines"),
 ]
 html_parts.append('<div id="sections-wrapper">\n')
 for i, (sid, sc, bi, ri, bt, rt) in enumerate(SECTION_DATA):
@@ -3065,6 +3457,7 @@ try:
         ("Middle East",           middle_breaking + middle_recent),
         ("Asia, Europe & World",  world_breaking + world_recent),
         ("Tech & Life",           tech_breaking + tech_recent),
+        ("Business",              business_breaking + business_recent),
         ("Sports",                sports_breaking + sports_recent),
         ("Culture",               culture_breaking + culture_recent),
     ]
