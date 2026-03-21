@@ -2429,7 +2429,7 @@ html_parts.append(f"""<!DOCTYPE html>
     .link:hover {{ color: #FFFFFF; }}
 
     /* ── Layout containers ── */
-    .container {{ display: flex; flex-wrap: wrap; gap: 30px; max-width: 1400px; margin: 0 auto; padding: 0 20px; }}
+    .container {{ display: flex; flex-wrap: wrap; gap: 30px; max-width: 1400px; margin: 0 auto; padding: 0 20px; align-items: flex-start; }}
     .column {{ flex: 1; min-width: 300px; }}
     .section-wrap {{ padding: 0 0 10px 0; }}
 
@@ -2854,7 +2854,7 @@ html_parts.append(f"""<!DOCTYPE html>
 </nav>
 
 <!-- ══ FLOATING LIGHT/DARK TOGGLE (mobile only) ══ -->
-<button class="float-mode-btn" id="float-mode-btn" aria-label="Toggle light/dark mode">Dark/Light Mode</button>
+<button class="float-mode-btn" id="float-mode-btn" aria-label="Toggle light/dark mode">🌙</button>
 
 """)
 
@@ -3190,7 +3190,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function setMode(on) {
         if (on) { document.body.classList.add('light-mode'); toggle.checked = true; }
         else     { document.body.classList.remove('light-mode'); toggle.checked = false; }
-        if (floatBtn) floatBtn.textContent = 'Dark/Light Mode';
+        var iconLabel = document.getElementById('mode-icon-label');
+        if (iconLabel) iconLabel.textContent = on ? '💡' : '🌙';
+        if (floatBtn) floatBtn.textContent = on ? '💡' : '🌙';
         try { localStorage.setItem(LKEY, on ? '1' : '0'); } catch(e) {}
     }
     // Restore preference
@@ -3221,23 +3223,42 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!q) { clearFilter(); return; }
         var lower = q.toLowerCase();
         var matches = 0;
+        var firstMatch = null;
         allHeadlines.forEach(function(el) {
             var text = (el.textContent || '').toLowerCase();
             if (text.indexOf(lower) !== -1) {
                 el.classList.remove('search-hidden');
                 el.classList.add('search-match');
+                if (!firstMatch) firstMatch = el;
                 matches++;
             } else {
                 el.classList.add('search-hidden');
                 el.classList.remove('search-match');
             }
         });
+        // Expand any collapsed sections that contain matches
+        document.querySelectorAll('.search-match').forEach(function(el) {
+            var section = el.closest('.section-columns');
+            if (section && section.classList.contains('collapsed')) {
+                section.classList.remove('collapsed');
+                var btn = document.querySelector('[data-target="' + section.id + '"]');
+                if (btn) btn.innerHTML = '&#9660;';
+            }
+        });
+        // Scroll to first match
+        if (firstMatch) {
+            var NAV_H = 64;
+            var top = firstMatch.getBoundingClientRect().top + window.pageYOffset - NAV_H;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+        }
         if (countEl) {
             if (matches > 0) {
                 countEl.textContent = matches + ' match' + (matches !== 1 ? 'es' : '') + ' on this page';
                 countEl.style.color = '#aaa';
+                countEl.style.cursor = 'default';
+                countEl.onclick = null;
             } else {
-                countEl.textContent = 'No matches — try Google News \u2192';
+                countEl.textContent = 'No matches \u2014 try Google News \u2192';
                 countEl.style.color = '#B30000';
                 countEl.style.cursor = 'pointer';
                 countEl.onclick = function() {
