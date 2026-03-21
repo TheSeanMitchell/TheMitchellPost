@@ -2982,6 +2982,7 @@ def build_daily_briefing(max_items=10):
         ("Sports",      sports_breaking + sports_recent),
         ("Culture",     culture_breaking + culture_recent),
     ]
+    scored = []
     for section_label, items in all_section_items:
         clusters = cluster_items(items, min_shared=3)
         for cl in clusters:
