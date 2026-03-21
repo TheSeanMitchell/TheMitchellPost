@@ -2,12 +2,16 @@ name: Refresh News Bot
 on:
   schedule:
     - cron: '0 * * * *'    # top of every hour
-    - cron: '30 * * * *'   # bottom of every hour
+    - cron: '20 * * * *'   # 20 minutes past
+    - cron: '40 * * * *'   # 40 minutes past
   workflow_dispatch:
+
+concurrency:
+  group: refresh
+  cancel-in-progress: true
 
 permissions:
   contents: write
-
 jobs:
   refresh:
     runs-on: ubuntu-latest
