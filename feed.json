@@ -3,8 +3,29 @@
   "title": "The Mitchell Post",
   "home_page_url": "https://mitchellpost.github.io",
   "description": "Curated news across US, Middle East, Asia/Europe/World, Tech, Sports, and Culture",
-  "updated": "2026-03-23T08:35:49Z",
+  "updated": "2026-03-23T08:39:22Z",
   "items": [
+    {
+      "section": "Asia, Europe & World",
+      "title": "Online Florist Bloomeroo Named Among Asia Pacific's Top 100 Fastest-Growing Companies by the Financial Times - The National Law Review",
+      "source": "Broad Asia",
+      "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOcER6RmtYN1RGdU10RWVKQ2JOSHpPcF84MGFPU1VvcDFndmxIWnBHaGhuVTNYMXRya0k5WmZUeGFYV19JVzlHUFNQYW9TN081SmJXNzdIUWx2MkZxUVZKemlJdXFtaWtwWUNwVTdCYnFaai1MTFBadFFIRXRmNTFlNEJyS2tjRjNRUGZVa3F3MC1rd2ZYbld4OFJ4X1c0bEl4ZjUzekIyNjZYWTJwMGpCdHpvSDM?oc=5",
+      "published": "2026-03-23T08:37:26Z"
+    },
+    {
+      "section": "Middle East",
+      "title": "Iran threatens the region as Israel warns war to last 'weeks' - Euronews.com",
+      "source": "Euronews",
+      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQYVU1aTFWUTJJenRGLXlJX3VTZi10VUVwQjJfY19RRDZuaG1BT0lBSm1WQnRKckZTWXZsalBnOVpWM2pybW1lOXFRaXBfSFZCTnRXamdXMEVsRENrYTBxOGRoeEl0M3hMQmZyTy1BSE4wYy00cnlLSFNocGNPZ2VaS05GMnFrZ0hoUEVLWnh6NjRuZk85V1MtaGk2d2dYT1dSOTdqNkkxdUY1ZXZtcEtxNk9RUk1TSUNmaThJ?oc=5",
+      "published": "2026-03-23T08:36:55Z"
+    },
+    {
+      "section": "Middle East",
+      "title": "Israel admits slain farmer was hit by its own fire, not Hezbollah - Middle East Eye",
+      "source": "ME Eye",
+      "link": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxONGN2RXNGNFFxdVF0cEs4TjVTdkczYkYtdUIxUVhmQkQtRkZRRW1EZ0lxLTk2NUQyOUVxS19CeWV3Y0pBdVl1dUNlbUt0clhld3JNNVltWGVMYXIwN0RYX2k0YjMtNV9FbGZ2REQtMGhZSkRuaWVNZkFqc0NrclhWTFQ3THVZcUsxbU96ajFIcmZPOVVNWG5Lc2VsbENUQkZqN2RnZHNRQVZvMHVGc2QwckR3U0xDV2FueU5aV3FEaFlyQnZpdElWaG5jYVlaU0c0SXY2ZUZPWXFFejNHU2pMa21CZ3NfTTAxNVVCekd6T1ZnNFE3UjlLdDl3?oc=5",
+      "published": "2026-03-23T08:33:00Z"
+    },
     {
       "section": "Middle East",
       "title": "Sisi’s tour carries important message to ensure Gulf security: Analysts - Egypt Independent",
@@ -35,10 +56,24 @@
     },
     {
       "section": "Asia, Europe & World",
+      "title": "Singapore bonds beat out peers as other havens falter amid Iran war - The Straits Times",
+      "source": "Straits Times",
+      "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPQnlrM0NwRExtaEVVOFFPLXlnR2daSjNEdmRjMU94WnpfZk5TQ0VfREdVc1d0TEJRUmFiNjVKeHlaRFJVci1HNkYza0g0TnRPb0NRWUY4QUxGUmpmUEE2X1IwQTFIUm5ISUhmcjYyUy1LSmNHS21NcU1MaHFGSmk5dHNIeHg4MHNrdm1LRjBzQllOUDlXUXJ5VVRDblRmUm9jR2l0SjQ0OVY0U05SUWZBYzdhRWxJSVJVdzVKNlMxZ2c?oc=5",
+      "published": "2026-03-23T08:29:42Z"
+    },
+    {
+      "section": "Asia, Europe & World",
       "title": "Kihara: Japan plans provisional budget in case of Diet impasse - 朝日新聞",
       "source": "Asahi Shimbun",
       "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1fVDJsN2w1QWhZRmh1dHFCNjEwVU5xTUR0WU1vcFV3aTFjbTAzaGJDWmdwNVRJSndqcWlFclNqYUR1NERINlVSd3dMY3ZubVdiY3FZOUtR?oc=5",
       "published": "2026-03-23T08:29:00Z"
+    },
+    {
+      "section": "Business",
+      "title": "The Projected Federal Reserve Script Has Been Flipped -- and the Stock Market Isn't Ready for It - The Globe and Mail",
+      "source": "Broad Business",
+      "link": "https://news.google.com/rss/articles/CBMiiwJBVV95cUxPbC1QSDNkZXYwTUlMOVZfb3oxdE9ZRjE0OEMtZktSM0lIUWVWOVNoZjUwQjhoajZSdGREc1RLb2R6VUs5eE9XV3ZaMF9qYTduU2lQY05kdERUWm56ZmJoMTAzNzVlOHA1Zng3R2pWUVVHQWRTNE9mY0xHU3VBOURhMlJBU090WlhwTWhtN2pUV1VtZDVOaHZ6d1RVUnljcTF3WUx2Yy1vTFFfbVhKS3Q5am1WUS1JODQyZlJQNlNNWU15RXVWLWttUmV1MzFsMk5NbWxZekJtSVdlZWFRcVpjdGlnQUp1YjVKVi1saWJyd2RISkxlQWZhZDAyVkx2OHJUOVBSdmV6M1FNamM?oc=5",
+      "published": "2026-03-23T08:28:48Z"
     },
     {
       "section": "Middle East",
@@ -112,6 +147,20 @@
     },
     {
       "section": "Asia, Europe & World",
+      "title": "Europe Under Cyber Attack: The New Frontline of Security - The Parliament Magazine",
+      "source": "Politico",
+      "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPN0tXS2FyVFUzTWlwbF94SmticElpejJ5SjdMSGVHQmpERDBWR1RaX0lTQS16MDQ3OUlRc1JMcEJXYU1DSV9RX3pFZ0tzUE4tX3E4VVVBbGFaZkxKeE14MlJ1NUpKemt0aldxWk9TdnpfbXRBM0ZEcmp0WF9FTE5wZjVMcXE1NjROYmt2RkFneDFHaXhvTFhYQmt3YjY5d3B6Mk5NSm44eFF2SFVN?oc=5",
+      "published": "2026-03-23T08:17:36Z"
+    },
+    {
+      "section": "Asia, Europe & World",
+      "title": "EIB ups support for Azerbaijani MSMEs with new financing for Bank Respublika - EU NEIGHBOURS east",
+      "source": "The Local",
+      "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPUVhTYjFKSzNKektZY29iWWxja2pCM0tXZ3BxbUUzdmpXYkRXQWxmOUYyenhXaUVjTlhFYUVpbk9SeW1QeDNTNFVqOHptclFpTmNGQllBa0tya2RBYmpTallYVXY5UlMtR0JSbkx4UFYzbnpQcnJTUGRwY3JKRnJzdkxhX1NsUmRxa3lKTGswcFpTbUV0SGk0RjkxTXBJcVF4Q0VacWxKRWFIUkxUQWpmTDdCZ2lOdUFRRzM5eW9rZw?oc=5",
+      "published": "2026-03-23T08:17:11Z"
+    },
+    {
+      "section": "Asia, Europe & World",
       "title": "Japan denies U.S. official’s claim Takaichi pledged to send MSDF to Mideast - The Japan Times",
       "source": "Japan Times",
       "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNZHZFV1RMYUw3NlN2RGNzVFZwRTdpaWNKbGNRT1dSUV9TdUVKMDJaSE9kUFFuY0thSk9uVzFrTjh6aGl3T19RMVBDT1NNckxVczFfMlFUcjFPWDZ2a1dqQXpnQTZ5T0xuZjlXLWp4YjNhazVHMjEteWhBbDlqX0x5OXVn?oc=5",
@@ -137,6 +186,13 @@
       "source": "Nikkei Asia",
       "link": "https://news.google.com/rss/articles/CBMiekFVX3lxTE9zLWlnRzVMcWp5MXlQdDZTTnhSUkR3cmVIV1paMlh2RU5fT1RZekhmcWhlcEdsSTVEV181LU9vYlhsbkhsLV9BSzhNU3BGaFFGa2xidmN2VE1MX2J4MWh0Qk0zWkpLSVZZUjUydVFzSWRCeVl4cW15TVFR?oc=5",
       "published": "2026-03-23T08:15:00Z"
+    },
+    {
+      "section": "Middle East",
+      "title": "Iran says coastal attack will lead to full Gulf closure and mine-laying - Reuters",
+      "source": "Reuters",
+      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQQ0RHekRXX282RGdBRFhZTkRPTGluSnpiS2hYMUVRSGlmMUo4aVhyVEowTWFwYXF2N2k4TGM2OGpWaWoydEJrbE9SUXE3aXExaVVCMEZRY1EzLXVTa3o1RGJnRzYzOU4tVXJsdXQ5c2RLQ3ZxdEszNmREZDFDa29lbXdUWDVjSjBwSlMyWVM4LU1BaUsyaEFncmJIU3RoMGFzR054YzNpbmRPNDN2YWhsYnk5UmNqTHBQSWc?oc=5",
+      "published": "2026-03-23T08:14:34Z"
     },
     {
       "section": "Business",
@@ -198,22 +254,8 @@
       "section": "Asia, Europe & World",
       "title": "Japan Companies Signal Biggest Wage Hike in 35 Years - WSJ",
       "source": "Economist",
-      "link": "https://news.google.com/rss/articles/CBMimANBVV95cUxQU2NDMjhqY1oxcDNaSHZJUDR0aEFfTkhBRHEzV3Z5dnN5bXhJQ0NCS3JLT3JxM0kyQU9XemlleW5XZlo5eWJKU05uVjRiQmRfZlpvY0Z0SXliZExtYmZkYVFUR29iaDhtNDg4b1h1QTZBQ01FREpfeExTeGFaZVpPMFNrV2M4UDc2Qm9TeHZwcmtrME9lV2U5Uy1xcFNGdHR0LXhsbUY3TFNNcU5RNDh4U1k5V0wwME5zRmNYMmNzT29TTXFJbUJBcEUxbWhPa0JSOGc1cHh0dW9KWmVJMElQVnA2MW0wcVd3MmxtVXJKaHU3V1pHVHMyZ25YU0JwczREQm9RUm1zTUN3YmdYb25hbTI3ZkZaM2pNQldaaWlXWThELS1OaFFlbFAtTjlfdGI4ZFBkWnpFV0g2alZaRF9wb1M1QWZ6Ykc1LW1kZHE2TnY5VndSanFmUFQyaTVvV1licUNFblNmZHlVUFJFUnRwWHY0UDlDTFBVNVlkcVdITDgzQ2ZLTFM2M1MtSFM1Z05jMEhXVWFXU3g?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMimANBVV95cUxNYVYwdV9xSFNZTnVHRUczc3EteUc5dTRJLTRVZ0NIeU9QbFl1ME9aU0ZEd1NTblplbEhCYlQ5cWUtcThFWUg0Si1LTHBGbF9vSm5ub0N3S2tLUDFJQ3U3a1Q4MWpfU2ZMT0VDdmI5VzVJYzZkOFVWZXRGS1h0Z1RwdEtaaGhtVE05bE1TY1M4V2ptUHVTa2FjcHdBR0RIT0EwQVZyclFkRU5zSF9RQ1NRcUdNaU8xMlZHSjNXTnJFQkRYa3I1NnZPWHpTcC1vUWxtZW8tTmhNUWZKYnNhM0ozRjVmUmtaRjktdDhsRG9zUnF4V0l0ZE41dUZWS0ItVWFIcTQzRTh5eWIxZFY2amIwdU1ISXdKU3pUWDRsYmNLUDNwWlp5UDlsdzFkaWxmVUZnRXdKbnNUcG5NVzRva0EwbFhIdUxqUHFKV2p0RjlBQVBKVXRoNXM3QkMzeHczdWh4Qk1NSHpLR3lHajdLeTBYMkZPYzVJTGpya2dyX3BkVmMxRHl4RFJrMTJoSGc0U2lDdVFJRm9LeUY?oc=5",
       "published": "2026-03-23T08:10:00Z"
-    },
-    {
-      "section": "Middle East",
-      "title": "Israel Launches New Strikes On Tehran As Iran Takes Aim At Gulf Sites - Mena FN",
-      "source": "Jordan Times",
-      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNWEM5bWE2QWZGbDNzb3U2bENuMTBwcE8tdkNCTjJsZHFpZkd4c3Rnb0FQWjh2TmZGY1RyQVRpVDg2Y014QlJONFMzeVdrMnRHYXBNTC1rRV9sbUVDVzVLUkYxMGVQbGNqaXFMZXdBRVJ4WGhCM19iNk9fdFR5SlJPQTRPYkxnc0VXYWFOaGxVNUktQmN5b1RjRUVzYlJTTHFT?oc=5",
-      "published": "2026-03-23T08:09:58Z"
-    },
-    {
-      "section": "Business",
-      "title": "The Projected Federal Reserve Script Has Been Flipped -- and the Stock Market Isn't Ready for It - The Motley Fool",
-      "source": "Broad Business",
-      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPOHdCNWQwSGhJMGpxZFRVZ0Jfal9QdS1zaGphaE5fU1JpRy1FZDlZaTg1Zno1MnZFWElwLXFrbDlHZmRIbDA3VERjMUs0N0EtV09lQWt3YkpuYUxBaDYzLWhrSVhOV2RqbG8yWkNkMjNxOXFOR1hRdnZSY195clR0dVBzQWUyU3p5OTk2WUtEV3JadEwweFpr?oc=5",
-      "published": "2026-03-23T08:09:25Z"
     },
     {
       "section": "Tech & Life",
@@ -228,6 +270,13 @@
       "source": "New Scientist",
       "link": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNQzBCV3JCQXlHUmpDN2tkaVM1VlVzcUEzQzBjc3kzYWFWV3ctYnJZOHlnRUtsWlF1UmQ0TDN3NWV1NUltQnNDYXdWUHprb050WG5RZF9TRk16d0t3UHpSZ1o3TjBXZzN2Mk1KU3BlX2lPRkNuYTh5bkFtOFhSODk5MXBsa1NLUEVUbVMwU290X005WkpLam91Y3M5eWFwNVZ5ekpKUjlkTUFZanBtNlRpdmZlM0oyTTFNa3JQbjd3TUx4WThZczJ5OU9qMDHSAcwBQVVfeXFMTUMwQldyQkF5R1JqQzdrZGlTNVZVc3FBM0MwY3N5M2FhVld3LWJyWTh5Z0VLbFpRdVJkNEwzdzVldTVJbUJzQ2F3VlB6a29OdFhuUWRfU0ZNendLd1B6UmdaN04wV2czdjJNSlNwZV9pT0ZDbmE4eW5BbThYUjg5OTFwbGtTS1BFVG1TMFNvdF9NOVpKS2pvdWNzOXlhcDVWeXpKSlI5ZE1BWWpwbTZUaXZmZTNKMk0xTWtyUG43d01MeFk4WXMyeTlPajAx?oc=5",
       "published": "2026-03-23T08:07:00Z"
+    },
+    {
+      "section": "Business",
+      "title": "Is Avista (AVA) Fairly Priced After Recent Share Price Weakness? - Yahoo Finance",
+      "source": "Stock Analysis",
+      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNN2VXdE9uOWE1QWdDeTd2dU1vY1lpbFBnMGhONjB0MGp2YThJdl9mcXVWUGVfUXRyblNBck9Tbl9wUHRqamx2UjdjX0VNZzNvOXREY2l2cVJ4bV9qVFkwRFdRTGJCWklNNjNfVlBzOEo4V0ZpYUdtQ041anpOaU1TLW1FcklJaFh3eUNUZmxTdmdVcFd4QlJSVERWYVQ?oc=5",
+      "published": "2026-03-23T08:06:28Z"
     },
     {
       "section": "Middle East",
@@ -260,7 +309,7 @@
     {
       "section": "Middle East",
       "title": "Iran threatens to start hitting Gulf power plants as Israel launches new wave of attacks - The Washington Post",
-      "source": "Broad Middle East",
+      "source": "Iran Intl",
       "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQc3ZvbzB3VmdGMkVzc2Y1M29wUDViMERhbWhaSGZXY1RZbWxSeTMzNlF4WTdtMWh0WW5GY3pTRVBXSWF2Vm0xVVVZRjAwX2I0UkRyWUJzdFJfVHJOVEk3QjNLbnBrd3FIbl90a3JHUXFEN0RHWGw4VTFqaVlGV1NTUzNGTzJFVXdMVzlNZHJsNjBzc3Q2OGVMVFV5THc3d1ZaY181Nzd3VkFCOHhGdVcyazk0dmE2OHJpYWRhM2hoRFlHSzBsZy1IcDhGTHRsTk1uNWxKMA?oc=5",
       "published": "2026-03-23T08:04:39Z"
     },
@@ -484,7 +533,7 @@
     {
       "section": "Middle East",
       "title": "Oil prices rise amidst Middle East tensions and war extension fears - Middle East Monitor",
-      "source": "ME Monitor",
+      "source": "Anadolu Agency",
       "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQdWMwWHJ6anZab1JENHZCQ2JfbmlQQTBoUmRFLWlncHlhbkNRbEVubXlyMjFRODE4MzRkcS1zTi1udm9PUk1teHo3enZyQllWU1NPemV2VFd0b3hTNTZQSHAtd0FRVkRrbW9uZHhwV0VXNFlhbUZvNklDMVc3clo0blkyM2xaX1cxbXB6WjRZc2FwV3ZlaFJ3RTNBMFU4djRQOFJfS2pHaHZ2d0dONUlIcdIBtgFBVV95cUxQNFlYS04xUm5td3R0UU5JT016OHFZVDF2MENlZU45M1NyLUFEdEhjRTRBVF93WkZEZ2hxRGVtYkVNVzZBTmoxYkhkOUs3U2lNSGdoU0xtUFhVbUMtOXFUeGdsRDN0LUtzOU1UTEhBYk03cTZrN3FBOTl5MlRQdVc1TG5WWWZHQjlZTmFTby1vT3FMcjJrbFZZU2wxSFVUZUMyUENhTm01UThTc2V4cjRuaFdQOVpRdw?oc=5",
       "published": "2026-03-23T07:42:00Z"
     },
@@ -531,13 +580,6 @@
       "published": "2026-03-23T07:37:33Z"
     },
     {
-      "section": "Sports",
-      "title": "Brandun Lee signs with Zuffa Boxing; springtime ring return expected - Boxing Scene",
-      "source": "BoxingScene",
-      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQUVR3MGNMMmZOX3VISzZvZmRYRENnREQ4a3FtYjczTFpBZktlRXdUUWJwTGswZzlxT01DRzFSbE9ONy1qalllVk9YUW1GODhtTkFxV2xnT1A1cWdFVE9PNzJJOW81S28wb1hzWjhjRm5iRnJKLThvYlNNNVdhakU0RFEydVdrRnYzb3lyamdYaWwybzVqZ0lTam1OMWtDZ2hMWHpHZlFQWQ?oc=5",
-      "published": "2026-03-23T07:37:24Z"
-    },
-    {
       "section": "Business",
       "title": "Cautious Markets Ahead: Fed Signals Cuts as S&P 500 Faces Critical Breakdown Risk - Investing.com",
       "source": "Investing.com",
@@ -548,7 +590,7 @@
       "section": "US News",
       "title": "Gold Falls to Lowest Level This Year on Inflation Concerns - WSJ",
       "source": "WSJ",
-      "link": "https://news.google.com/rss/articles/CBMitwNBVV95cUxPR2FSV2lWVTRyOGM5ZHZNLTV1UDI4dEF0ZlRXNWRFQ2swd1VpQm82SXM1czRoWmJROVhXY09sMGFxSFMxYkltbVRpczUyRl9Jd2lwaDgwVEQzZXBhMFc5MDQ4Vy1ZS2kyVHVnRzVhdEZlUVVhOTBwS3BsY1VkLW8tUDA1TDl6LUxiaU9zNTh0Y0tkYWJTX3lTbFk1dHA4LTRab1ZlLTZ0eDJMN0FqNUxkOXBiekhGeGxRcnFoMTF5OHlMX1JzSHE0Q1BqZnhIa2RxRTFZRzVqOXA5ZEVzd2gxWTdmZVk5ZzJqcmppdjBGN0lEWXU1aUFuOG1vTzJpMkVycC1paEJTUGUzOEx0VHNaQ29QWTRhVldxeGcxQkZZeVVkaU5Pbmo2bmhNVWNERFVXQUV3eFFKV0Z5ZVk5UXlLaElGRk9oTEdYYjk2UVlyQlBhbmxkTklPM05GZlpZQm1OUW1MX3JKdEc0X2hIQ1hsN1VXTjRyNlE3cHJuaUhHYnB3eFlpZ1NiT0s2UElVUFVhQjlvOXdTdFB2dEx0ajRiXzFHRjByaVk5TVM1amVSR2dHdVgzSTJv?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMitwNBVV95cUxNZUJyVnJhRFk4b1VUV3o2RFFjRnlkWUd3Z2hKVVV5ZmxNNEF2NW80MERqcWVMNW8ySkYxR3NjVTNWMmdHc2p5UUZRN0k3dEI0ZGt0dklnbEU2Ty0tZmNtMDF3Q1ZVQ1ZpNV8yZVNvQmllSktuOUgtN3J3ZWJldURpQmx4cmdsMTByZnNvUUxhY0JjaVVlcWZTdFNyRlE2bGFtNkhiN1hPekN3T0dGM1VXSjRWcjlVMHRMekdJYmE4bmVQcEJtVXJlR0c4OG9ENW1mai1LeFNIZ2RHWm1BUTN2NnRNWmZJYVFCalpVcjk1MXg2NlQyR3dkeXJDNWlOLXAzLTJ1ZkU5aHNXOWthaXRtOTZfQXVtdXMyTXNFRjFnLWR5TjdyOUxFMUtrYUVuZ2VTU1Bmekl4cXY1ekJndXhWa3NKWVNLb19zVWVRb2pTQ2VXaXpkVGMwZnp4NjNIVkJiTjVkQnRFY0tGTVJIbWpjcWdGbGhoRm1xVHBBS0xUUHY1Ykp1M05laG5GRXNsejRkNF9rbUk1OEYxNmRYc0xTdk05aFl3S3FhX1FfSHprNElpZUxTMlpj?oc=5",
       "published": "2026-03-23T07:37:00Z"
     },
     {
@@ -590,7 +632,7 @@
       "section": "Middle East",
       "title": "The Iranian Prisons Where Bombs Are Threatening Dissidents and Americans - WSJ",
       "source": "WSJ",
-      "link": "https://news.google.com/rss/articles/CBMijgNBVV95cUxOUzQ3Z3VDcDYweC1IQmdyWDZKYzN0OE9YMnBmWDVoSGNHdmVHS3Q5RUo3V2RKVXFuTGdjNFA0aE5CYm9ETVRZYy1IeVY3QTdsblZ0WV9WTDdXMjJGTzU0U250VlB4ZXlNYlV1aUVCWlZKcGpnSmoxcXRkSExwUE0xR0lWZm5QVEFRYjFQdnpYMUdMY2pOUlhfMnhHN2hHS21DemRCTV8taEtrSHYtdmUzcWowd2ZiQVNsQnZpUTRTdmJwQnAxNE44U0lpc1V4dktjYlN6Y0hqcDRSdmxxcTE2dG1QdmtrbzFoZ3g0Mmd2S0kxalpDZEVJT2Jfcm9KdXRQeFo4MUE0X1pEZS1oa1dmSXhHbllYQS1QS3hLal9MeXJ2Mk9qRGNTT3gwd21PTjNUZmNKLWpLMnY5eHJOMnQwTVozTmZFbURiemtPX0ZVU3d5NWJuRDlDVERFWkpES2laS0ZMRDB3cDkwMWJpVktBNWJGS3k4Z25KdjF1ekJsWUFfdHBqWUk3SkU5bW0yZw?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMijgNBVV95cUxOVzByalpJSFRhYklGeGlsVjFkcGszX2pLQzczMjdfSFoxbXlYQndVS1FvMDNTdjVXM0Z4emllZjlzMERfWDliZk5UV3Q1RjhiaVlFRnJZSndZaktXNUt3N3ZEY25GckpRMldMU1NtbzFyVGE4ZTI4R2oxX3dGdXhfNExrV2MwWHFrYzJTU2RpX0twQ3BwcWM5ME55dTFzb2JYVTZCb0pxZkYtZGF5a21WYmdIQXlMM3dFcDNoczFReThVNUt5bjZmZm9SOWRPT0NPRVYzamxRekJxRWdZVGFqeDdxVHotR3JTV054RmtadG05ZXAwdktvZm1JX2FXMHlRUEZHZW8zY05uUkdzXzAtb0JkYmctM3RRVG5MSnRhQzZzMjR2U1F1UUg2d1lEY0R2czl1TUNoNXkwQ3czcUcwbDhqbVhpemszMWtJTVFfVHpQcHRrbDh0OUlqWDhBZFMtU3Y4SlFHRHZuZURtWXJMeVlfUVduVjNGWjVfb0dwRmdyUVluV1l1SnBqcjRodw?oc=5",
       "published": "2026-03-23T07:31:09Z"
     },
     {
@@ -657,13 +699,6 @@
       "published": "2026-03-23T07:25:05Z"
     },
     {
-      "section": "Tech & Life",
-      "title": "The Investigative Agenda for Tech and AI Journalism - Global Investigative Journalism Network (GIJN)",
-      "source": "Guardian Technology",
-      "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9MSFVLM29GUVlkM2FBV1RKUGctTUVlcFFBWlNDcjFqSWRCMGFqVjVfU3QzSVYtVW83M2g3TTY0MTlEU1UtYTlPS1lESmxZRlpoVHJhY1BRNFBETEtzYVZrckdHZzQ2YU95bXpVcmhhZ2hTakw3?oc=5",
-      "published": "2026-03-23T07:24:52Z"
-    },
-    {
       "section": "Asia, Europe & World",
       "title": "South Korean shares tumble, won hits 17-year low on Mideast conflict - The Star",
       "source": "Star Malaysia",
@@ -693,6 +728,20 @@
     },
     {
       "section": "Asia, Europe & World",
+      "title": "World - South China Morning Post",
+      "source": "SCMP",
+      "link": "https://news.google.com/rss/articles/CBMiR0FVX3lxTE5EeTlGVFZvUXhscEFLN2dta3FiYjdkZTNDTHRLdDZuSTdaaFppQ01jdzZkd3ljRHNjTGZPRUJWT3lHZnVrbFlv?oc=5",
+      "published": "2026-03-23T07:20:03Z"
+    },
+    {
+      "section": "Business",
+      "title": "PayPal Holdings, Inc. (2PP.F) Stock Price, News, Quote & History - Yahoo Finance",
+      "source": "Stock Analysis",
+      "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5sc3YyWXZCOTk2ZEdkWi1VY0o4YkVLbDlRMkthdjRNbGFIT3puc25CdzM0QUV1OWI3bkJPMWpWVzBUNkxNRXQxeUVya3RyNU0?oc=5",
+      "published": "2026-03-23T07:19:24Z"
+    },
+    {
+      "section": "Asia, Europe & World",
       "title": "Forging Legacies: HK4FAMILIES - South China Morning Post",
       "source": "SCMP",
       "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOcjVtOHdqQ0lScWxkZUMyWGRHY2JlRGJfWERHVHBtek5yTUlDcEVUSklzTEJnWUNhX29GSDhrX3RTRm1mb0htZ2k2dDJ2aXhEcHNUb202VTlRWjNJYmpLUUlqblR6WGRJYkl0NDY3em52T3l1ZUVtUk9iTmVVRkJxak5fVlc2Mi1PNGJhRjJVVl9QY1Z4ZnlZS00wVXhsRGRCTm5zTlFRZ0wwRVRaUFIyN0FiSWItQVYyOVBDWU9LSE90TmpONzFpRW1IRUVaUGZB?oc=5",
@@ -713,6 +762,13 @@
       "published": "2026-03-23T07:16:33Z"
     },
     {
+      "section": "Sports",
+      "title": "Miami Open 2026: Hailey Baptiste vs Jelena Ostapenko preview, head-to-head, odds, prediction & betting tips - Sportskeeda",
+      "source": "Sportskeeda",
+      "link": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNeW5SUWl6STFUQWdyZVF2UnFMZUtxX2RaVkJGSV8wWW5yTXpQTE1zNkxQazBlWS1WQXdOVXJhUlpzU2ZXZmNyRjdIZGZ6eGVDQ0NfM0xOTHJaVjlBRU9GZGdMWkZYTDJ4c25rZjg2MHplb2NDZkdxSV9Haklobm5UemJwNzBvMjF3UnBIUG13X3doM2VEZTQ4MHY5UFFFU0txTFpJYTJldnlwSXZaLVZNc1RGa19yd1lyS3BtUHpyVUxGMWFWUTlHMmE1MFFYYl9QMHc?oc=5",
+      "published": "2026-03-23T07:16:00Z"
+    },
+    {
       "section": "Business",
       "title": "From ‘Mutual Fund Sahi Hai’ to Market Woes: Middle Class Feels the Heat - The Sentinel - of this Land, for its People",
       "source": "Morningstar",
@@ -720,25 +776,18 @@
       "published": "2026-03-23T07:15:37Z"
     },
     {
-      "section": "US News",
-      "title": "News - Dallas News",
-      "source": "Dallas News",
-      "link": "https://news.google.com/rss/articles/CBMiR0FVX3lxTE9PTmtKbVlmRFpRSUI5Y2JvdXZIZ1lnSEFMT19tYVNqNWt0Y2pCdnRRa3VqSVZWWXBSV011M05vMHJrbXcwMVlV?oc=5",
-      "published": "2026-03-23T07:13:20Z"
+      "section": "Tech & Life",
+      "title": "FPT Recognized in Everest Group Application Development Services for AI Applications PEAK Matrix® Assessment 2025 - afp.com",
+      "source": "AFP",
+      "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFBlRG5aN3VLOEgwUTZ0ZnBYSHE5enpZcnNKY29iQUcyQTM4bDIxWjh1TFRCeGdTVlViWHFzNzY1V1JLR2VhZkVCNkVBQQ?oc=5",
+      "published": "2026-03-23T07:14:39Z"
     },
     {
       "section": "Business",
       "title": "World Markets - MarketWatch",
       "source": "MarketWatch",
-      "link": "https://news.google.com/rss/articles/CBMi0AJBVV95cUxOckw1aUZHTHF3WlhGY21aMi1EUDl0R1doczRFUEVncUllWEJWaU9vc2xjR0RnU24tVzR2M3huQS1BblFjU1NjMmtPbjBjUDE0ZnRZeXRtcVVKRUJrWmljcjBtMWhLRDJVU0QwUXlSUHZJWnJQRTR0UGd1RXIzVTVyakUycE5mbnJYVEFhdk0xaUJCQXJBMlZMTHhHVjFzQWxrVEdldGdlZ0dvTTZOc3B5WW1xWVR6U0VXZHVGSlkxYThEVHRWYk92MFM2MzdCMjNNSjJCRHZocVFJOUJGZ0U2R1htc0JoWGtsbDRyLW1uUXJFcWYwV1F6OGZCOFNOVlJvWTNYM3BTVGVpaVpINFB4MEp4MWNsSmdPaU8wSzBUYmx4WDMzamlQMjItMW5rcks2bU0tLTFtMDhIWGhha245ZVhQeWRPcjNBd0NRWGVZbDM?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMi0AJBVV95cUxPRVJqaldlRnY0YWMzdExCNTRYWWRaNFRqbUZFbGlHWWkzQWlveGItbHlGN2VrM3cxTEhvQ3V5eWNvWUg3dEtBUGxxUDRoSldYNnhvSjR1TU42MV9vM3JBM0VaSDRLUUdGVFhpdWZJUUpkUjlxOG1OaHFVR2ZpNnA4dzlKQXVrS1M0X25pb1kzeUVNdGtSaWpMT3BrWHdISjZ3NnBpdXNqVmpRWjlaVlFLSzFTX3lnMFBpWmtndDZ3dWo5YUtKekpaUnRTOGFyblNEcnVva2FvMUc3ajA1Z0NiNl9MQ1AyZGdROE9NZk1WYUFfSzkyWlQwZVBEbUpCeGM5V3dZUXg4dDdxd0M3VnJZbkxYdk1NNjlpNUpGcDJHMUJkd0thSTBBVEVESFdqczc3SmMtWE9FM3FBUlBaSHRJc1Fnamx5WkRfT2xrbllrSmE?oc=5",
       "published": "2026-03-23T07:12:45Z"
-    },
-    {
-      "section": "Middle East",
-      "title": "War in the Middle East: latest developments - InsideNoVa.com",
-      "source": "Broad Middle East",
-      "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPczhuSUtQb0dzdHhmWDhsZnViNGV4VzdoQnVLWGtfMy10ZTc1ZnJEX0Q5SUpjRFVwZDI3d3Vpb0V3dFU2OUpqRy12bXlDbzQ0em94SHhPR2VfVmc1ZEgyY2xEck12WjZsRm1sN1hCT1h2T3hpSHhyRXdGeWVqS29vVDU0QjVzTmdxZzh5SzlZTlY2RlBfT2JpWTZqa1JJOXM5cU51YzhGTVFfZm9wZDk0VEFfQURXUUxSU0ZDME5CZW03MkhjY0FaT3M5RDdCQQ?oc=5",
-      "published": "2026-03-23T07:12:20Z"
     },
     {
       "section": "Asia, Europe & World",
@@ -753,6 +802,13 @@
       "source": "Gulf News",
       "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOMGo3WkxVTXgtMF94eExlQ3Axc0d1aXVrVjNJV2pReUpPMGhIS19pZlQxazh6aThWZjlWQWZ0d1JtS2J1ZVRRLXVNWWlDem41ZGR6aGJIeWJmdHlOSlVvT1EzVDJfMjd1T285TnMxTGI1TjNWVXo0clZsYlZ0Q1gyT0Y4di1xOG10MWYzQjJPXzFTOXRKVGh1NlBSTlozMzB3b1RqaHp0Yng5VTJkSGpOUmJaTmZDbGJ6LVQ4XzlOUnZDSWU3b1ZZdUhMTENuQQ?oc=5",
       "published": "2026-03-23T07:11:08Z"
+    },
+    {
+      "section": "Middle East",
+      "title": "Toilet paper crisis hits Japan amid Iran war: Govt urges calm, warns against panic-buying - MSN",
+      "source": "Crisis Group",
+      "link": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxNX2xjYUFaYkhVTU5NWTVHSEJCM0ZZcVRpNGJYSUpodjIyNVNuVFo5RDF2Z2tTTWxwTTBMRVNkTUEzZFlOSHU2NERuSUozdDl4dFZqSDZyRlg2aXIyd3pFaWZpam9vbjVlT3lXQnBtTUVvTzk2Y25wcVRXRTA3UFItMWd4ZkdyU3BuY3VodTFGTTd5Y3Y3RlhvR3RNMzNQcTUwcHRXUmhYQVRfNWhUMVV2YW90YlVXUEtwR2ZzUUhhR1dyVHRscktZN0ctbzliUHBTd0h1UjZKNFVSZw?oc=5",
+      "published": "2026-03-23T07:10:15Z"
     },
     {
       "section": "Asia, Europe & World",
@@ -783,13 +839,6 @@
       "published": "2026-03-23T07:09:03Z"
     },
     {
-      "section": "Business",
-      "title": "Japan stocks lower at close of trade; Nikkei 225 down 3.68% - Investing.com",
-      "source": "Investing.com",
-      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQR1JMRG9kNEhMaWxBRklDNG82MkNzMy0wV2pkV2dZM2NYblkyZ2xVNGctZWtzald1bDlIY2RnZmFUUGtMU280N05xM0RKcXpOWHhmTkF2X1FlaXNUYjU2eXpzb2haRDc3THl2R1VnUU9MZkFubnJsa2FfbUJfb1pmYThteTRwc0szR04wdXI5N251UmF0SlhPY0R6Njd4eGRQeU5FZ3ozWVJhUlByYmdkUVl3WQ?oc=5",
-      "published": "2026-03-23T07:08:51Z"
-    },
-    {
       "section": "Middle East",
       "title": "Scotland's papers: Public backs oil drilling and Middle East threats - Yahoo News Canada",
       "source": "BBC",
@@ -816,20 +865,6 @@
       "source": "BBC Sport",
       "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFA1bHpNSXNYV1A0VWlZc1JQdlRhYjBVaV9kUFpkelZ6Vld4VlFJWEd6WVBKaFZZeW9OYU1ycG1HX1FFcDhrM3BnaWc0MHFyWVhXRFh2Znp5NjRKRDZKbnNuVUlTaERIclk?oc=5",
       "published": "2026-03-23T07:05:40Z"
-    },
-    {
-      "section": "Middle East",
-      "title": "Hezbollah conducts over 60 military operations against Israel, says Iranian media - ANI News",
-      "source": "Press TV",
-      "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNNTBBQjBxX2Qzd2tvWV93c1ZldWhqbWtmdVp1b1ZUMHlVY0duOGxYcVZ4ay1JZHgzeHViSVNKVkNMeGFVN0xLMWRsRWw1bXRLMHNyT3ZQMmZJVlZZYlNpMnNyb0hEZ1Axc25aSTg0d3JRYmdXMnpPNWlzcmJubkhBeXJVUU1ud3lDNFVkMFF1Z09oaU11U3h4Tks4M2E2d3ZLZmtYVDJKc29fZ1RYMnpKTEU5eWRoUE5GV1NZcmF0elZFSks1MkVYbklLWVNycmpQLWZnYmtsMNIB3wFBVV95cUxQcDAyNllPZEt2Q1FKeGlsZ3FNNXFwdGgtZTB3eXE3a3I1MUp4LTJPMHJUaE1uLWVmWjVLaWVsME02NVdoSFV6ZkMzdjVyMmRCYnk4ekxuekVhLXRpeEdfVjN3QmcwX3JuUnl2VV8tWmhrTWxwSTdIemlTcUwtdHhwN3ItSzQyNUZCTnRNUW5CTnNEeDN0NVNqREhYLWNWekJIbHRWWnh2eW9hZUxsN0JhMFdfOFV1aWpXNlpNZjVBNzd1Q0RZd0YwdnFJMnlUVmZxY1VCVEI2Z010Wl94eXVV?oc=5",
-      "published": "2026-03-23T07:05:00Z"
-    },
-    {
-      "section": "Asia, Europe & World",
-      "title": "EDITORIAL: Pushing for end to war the best approach to deal with oil crisis - 朝日新聞",
-      "source": "Nikkei Asia",
-      "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5Nc1NlSlpLWl9aTGM5R3ZpRHRUNWc5Uld5aHRvY2lDUk5hb2ZNY00wMDhTdWVPYS1qa3RtT3IxZFNFRGJJaUVBV1A4WkRLTkI2c1dXOXQ0emhscGlxNVE?oc=5",
-      "published": "2026-03-23T07:04:06Z"
     },
     {
       "section": "Asia, Europe & World",
@@ -867,18 +902,18 @@
       "published": "2026-03-23T07:03:00Z"
     },
     {
-      "section": "Sports",
-      "title": "'I can adapt to any situation' - Renshaw pushes for Australia Test place - ESPNcricinfo",
-      "source": "ESPN",
-      "link": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPclJxTmt1ck44a0FteS10SzZ3WGFjaThJSmtXSk16RGh5b25ycUtocU9SYThDRmNVZ1VQWWhaN0VJWm9rX0VaZ1h3NTA3QktWWl9zekNvMEJtckh0MU5yR2l1dHN3blBjSmM0c0hWMGVMRHJrdUlFMEFPTkRvS0RsR2d0SmgzenNlWVpUOC1ZcDhhMnZFNHhXQUd2cEZ0di00a2R3Mk9LeENoVS1QbXc2cmpMalNIa2lfUVJMYTFfR2VqSGlRb25sS2JReThqeUVpR0HSAdIBQVVfeXFMT3JScU5rdXJOOGtBbXktdEs2d1hhY2k4SUprV0pNekRoeW9ucnFLaHFPUmE4Q0ZjVWdVUFloWjdFSVpva19FWmdYdzUwN0JLVlpfc3pDbzBCbXJIdDFOckdpdXRzd25QY0pjNHNIVjBlTERya3VJRTBBT05Eb0tEbEdndEpoM3pzZVlaVDgtWXA4YTJ2RTR4V0FHdnBGdHYtNGtkdzJPS3hDaFUtUG13NnJqTGpTSGtpX1FSTGExX0dlakhpUW9ubEtiUXk4anlFaUdB?oc=5",
-      "published": "2026-03-23T07:03:00Z"
-    },
-    {
       "section": "US News",
       "title": "Oil Rises as Trump’s Hormuz Ultimatum Risks Escalating War - Bloomberg.com",
       "source": "Bloomberg",
       "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPdTl4SW44NDhMVGZURTVIWllRSG1DZEVBaXVKX2s4dWZ0V0xRVlg1Ti1FT3hjRzYxN1JRbXllZWUwUDVlMmRNMzJ6R2JDVGZYVzduTlR3R1lxMVhwWG92MHRhOUkwV19mWkxydnRINDFLV0J2NGtjMzJYUTZYT25ZeHZfY1VGOGxDQWtlOTJDeXUxd3dramRTSDBKMHQ3RlFE?oc=5",
       "published": "2026-03-23T07:02:40Z"
+    },
+    {
+      "section": "Culture",
+      "title": "Oscars 2026 Preparations Begin at the Dolby Theatre as Hollywood Transforms Days Before the Ceremony - AOL.com",
+      "source": "THR",
+      "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPNG1DcDJCUWNuUjNjNUwtOFR3RG5Ld1pLLTFMVXpZVVVRY294V25GNzdhby1XdDVZVE1lQlpTekVodVV1UDVFZjJuSmdiRHpuTHB1WVJTX2ExaV8zUF9WS0Y4TkUzQmRZN2JZTjhKNk5HeFdncG9JdVpydWJrRHdxcjRLWGtNQ2M?oc=5",
+      "published": "2026-03-23T07:02:15Z"
     },
     {
       "section": "Asia, Europe & World",
@@ -890,15 +925,8 @@
     {
       "section": "Middle East",
       "title": "Scotland's papers: Public back oil drilling and Middle East threats - BBC",
-      "source": "BBC",
+      "source": "Telegraph",
       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE40UVlvUW9tSUJyRmFPcFdxblc0amJmYWtqZ0ZMVHpVZkgtUkNLMXhobko1cEl4cHVYU0VreUh0b0cwZ21XMzdaVE5HT25NU2ZhR2x5SzhPdFdBUQ?oc=5",
-      "published": "2026-03-23T07:01:00Z"
-    },
-    {
-      "section": "Asia, Europe & World",
-      "title": "IEA boss warns Australia against ‘abrupt’ changes to oil and gas taxes - AFR",
-      "source": "The Australian",
-      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQb1ZtT3dDVlFSSkt1Tmh6eF9ENUk0MUtuM2ZiVk10ZHBpdDgwX1U5Ry1pTWJmd3d3cWpoY1N4bFNTUFllbzQ2RnNwcW96T1FjdlVwSldnSF9TZTE5QWNrU3hhVG1meFNrS1Vna2pXNVVJOExENi1mTVhfaF9EX2NQU2lzS2hEbE1KbW1NcWhmNElveWhKMHdMNElzMW5VRmhHMzVCVUplc1ViQzlPaVFCdFZ3?oc=5",
       "published": "2026-03-23T07:01:00Z"
     },
     {
@@ -923,18 +951,18 @@
       "published": "2026-03-23T07:00:28Z"
     },
     {
-      "section": "Business",
-      "title": "Best Crypto Exchange Listings Approaching: One Presale Stands Above the Rest and the Dollar Math Proves Why Smart Money Is Going All In - Digital Journal",
-      "source": "CoinDesk",
-      "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQaTl1WEc5REVMMG1pTmdiV0JWUUx0S2NUQy1DUnM0R3EwdkYxQlUzY0dsTGxRSnZzWjhTck0tZkdqeTRsWXJZY0NVRmhnNU5uQjJJUkFZZ3NBRkhMcEV3QWM0emdWczJuOGhwQTRjdEwyaEwwX29lT0NiLXZWeklXMkI1XzFlZnRmVFdvYml0ZTZ3VmVCRXVuemJYLWg4dmZ0cFNDdDIwM1BscDVXajdMUQ?oc=5",
-      "published": "2026-03-23T06:59:19Z"
-    },
-    {
       "section": "US News",
       "title": "Democrats storm out of Justice Department leaders’ briefing on the Epstein files - AP News",
       "source": "AP",
       "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQWlk2OU1uXzAtR01rNnBhempocGpGdi0zZmxoQzJwUFYxY3g2aHJSQVdEc2N0QXZFMUoydmNpd3RpeVdMV0VrYW1keDdtWklBX3h5cENtQkoyYUxGY0czN05QNjBSeFN1bVl6LWFYX0ZuLTJDQkt3a0RLOFRXV0pmZlJzUEtIdVVaM1h2a2o2LUtfZTBKLTRUd0pSRHZ3S2UxM1E?oc=5",
       "published": "2026-03-23T06:57:14Z"
+    },
+    {
+      "section": "Business",
+      "title": "ZAWYA-PRESSR: Blossom Accelerator launches DominAite - TradingView",
+      "source": "Startups.com",
+      "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxONGIxZFBQNTlka0EzQ3JlWkswazdMRm14aFdvQ250bW9ES2hYSTBMeWU3bWliSGlTTHZITUNENXhHQW1fSTBnTXFqMllVeElJNXN2VnBNTm1aWWRSczN5dTd5eEZxQUxWTFFUanNNaU1mVlNDWHlFQUtSN2RFd2JpaExScXdyeWIxNXJnWXJIeGVadDZiX28xaEI2OF95V2pwX2w2bzloRldLd1lBb3E2Y1RqcVE5MTJBMTNBSmt3WDU1TzlN?oc=5",
+      "published": "2026-03-23T06:57:00Z"
     },
     {
       "section": "Middle East",
@@ -965,6 +993,20 @@
       "published": "2026-03-23T06:54:17Z"
     },
     {
+      "section": "Business",
+      "title": "Top 4 Japanese Chemical Stocks, According to Morgan Stanley - Investing.com",
+      "source": "Investing.com",
+      "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPdjVCdGhCenhHVWtmTk5RWFhReDhBTTZZSEpLRC1SR2hiX0RlcE1QNVAyZ1g1T1JnbWlvbkloNDc1ZVZLMnRORWhwZGNsUjNGbFhieVJRTkExa3BWV0lxcmx2U1RmcWVDM0Rsd3dHTDJWM2g3WURWRVhsTUVYQXByQTNtODRwZGhMRHFWN3JwNmNjM0plTFl1UEdOSHlJUGZwcjNHSXk3T3QyUFB4TEpQZ3BCVHRXb1VnS01QU1FFZzMyS2ZPeEQ0?oc=5",
+      "published": "2026-03-23T06:52:51Z"
+    },
+    {
+      "section": "Sports",
+      "title": "F1 has always been a rebel, changing and innovating is what it does best - MSN",
+      "source": "Motorsport",
+      "link": "https://news.google.com/rss/articles/CBMilANBVV95cUxQNUdIc2tZTlAyNVpfd2w3Mzc1R3BrTnhuektKTW1xX3RnS2IxbHh3b2JNaWdESTN0cU83Qm5SU2dVd2s4SlVkcWM0aWpidTBEb1JaLVBJXzlFaWNYYjR1Y1luYTdCQWlQbUdxZFQtZHpua2tRZTRQckkwUGpDalE2ZTYyVmM5RHJaT0pRX01xa1VOSnlKeXBZVHJKVnhSMy1xZTN4Z1diMzViLW5FTEZ0aGFrelc3YngzTVBJMl9SdHBEOVFySnRYRmdmelJlRTlRMWVWcHFXSWlHUVAwV25KM2FYWWlFSGFrYkJubGNEYzBpVWFOU1BidGpkY0hNZzJ3NDFvSUlTYzd0X2JtQW9xZFl0ODU0UDFtM2ZaMUdmTWw1R1NGaTlSSlBtVmJYazBreU1HRUZhLTBLN2gxdlZWeENQRzdRclJFbDMxWFdOZ3B6ZVJLcVc3amlCS05wZzJiLVlnbHZGR0pvb3JtWXBjdG0xTHM1dWJ1QWdZN2VaQy1CUGZYSzhmV042RWtzcjR3M2ZwVg?oc=5",
+      "published": "2026-03-23T06:52:44Z"
+    },
+    {
       "section": "Middle East",
       "title": "Nine in ten Jewish Israelis support war on Iran, Tel Aviv poll finds - Middle East Eye",
       "source": "ME Eye",
@@ -984,13 +1026,6 @@
       "source": "Mashable",
       "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOLXdfQ25QaXdJcW1oZEJiWTBLZmpuSTA2RGl1SVlxM3dkRXZueEg0TTdVS2I0LUJkdW1NRjRKQl9mcXliUmNkYXdXUGNhMC1hYUpsRjBHV1pZQUo4Z2N5SjZPbGRNS0puRzc5QVdiZ0MtRDF3RlNrVW83enFaMy1QVzdUMDlKOEJUMnRBSHN3bEZKRVJuckJwLUFZN0xNRXA0UVozSUtjVFBUWkdGTmc?oc=5",
       "published": "2026-03-23T06:50:09Z"
-    },
-    {
-      "section": "Middle East",
-      "title": "US Israel Iran War Death Toll | How many people have been killed in the US-Israeli war on Iran? - The Daily Star",
-      "source": "Daily Star LB",
-      "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOMGVOZzJ2dDN1M2RndjJlMnIzbi1sUVllQ1pEYmdFS1VHV2h3d01OaThvRVpYdnBITnowMjBOUjBHUHBGZmZ4LWp3UXFIbFByWTNTUmd1b2dITmhTYS1nQjYydGZId01jbTg5TkxxUFFwei0tYmdEVWd3OG05WkdwZ19yZWlXTmtJcHF0encybVk2dHkzOFY4cFBpSVFwQXhjRUdNQlhqcUFodThnVTIyWGF0ZDdBVWVOX3V1WGJIc2NnZ19pelZj?oc=5",
-      "published": "2026-03-23T06:49:28Z"
     },
     {
       "section": "US News",
@@ -1014,6 +1049,13 @@
       "published": "2026-03-23T06:48:22Z"
     },
     {
+      "section": "Middle East",
+      "title": "Oil whipsaws as war risks to energy facilities counter prospect of eased Iran sanctions - Arab News",
+      "source": "Arab News",
+      "link": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5scDZSR2k4N2lVTGJFbTlNTldNd0ptM0l1ek1wUVBGTVZWLTkzVWdJaGY4WWI0X2EzcXZqRjJCbm5EaWtKMC1BZE9POWVOVUVNOGE4?oc=5",
+      "published": "2026-03-23T06:48:12Z"
+    },
+    {
       "section": "Culture",
       "title": "Crews Are Already Rolling Out the 900-Foot Red Carpet Outside Hollywood’s Dolby Theatre as Preparations for the 2026 Oscars Ramp Up - AOL.com",
       "source": "Broad Culture",
@@ -1035,18 +1077,18 @@
       "published": "2026-03-23T06:46:54Z"
     },
     {
+      "section": "Business",
+      "title": "Become a Sophisticated AI User - Harvard Business Review",
+      "source": "Harvard Business Review",
+      "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE0yQk5GVlNuWTN2XzBKdk44VlpETnZqQlZrNUhyYUlOcE05UVpXNzRpX0ZNRGlPYlBCYVdRaEVRbWFHOHpRbk00bE53bWNBM25ndXJnX1FHRkwwMW9uVXNPR1lkaE1nT0JXT1E?oc=5",
+      "published": "2026-03-23T06:46:44Z"
+    },
+    {
       "section": "Asia, Europe & World",
       "title": "BREAKING NEWS: Nikkei ends down 3.48% on Mideast woes at 51,515.49, lowest since Jan. 8 - Japan Wire by Kyodo News",
       "source": "Kyodo News",
       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9rWGZ2RVY0bXRIUG5GNThMckNqRzM4LWdEaXlUbFhZT18xM0w5dV9OZmlXeGhibnlFM0lwZnRLSjZBdmJ2U21falFnYnRSYkd1ek5GOEo4SVFjdw?oc=5",
       "published": "2026-03-23T06:45:00Z"
-    },
-    {
-      "section": "Culture",
-      "title": "Mick Jagger, 82, slammed over erratic Oscars Vanity Fair appearance with fiance, 38 - AOL.com",
-      "source": "Rolling Stone",
-      "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNNGozWnI2aDNqczNWQmE5RW9FY0xRYldaYXJBS0NtMXFTVUdBXzdORVJtbkRLUU5PbXQxeC1BbTFrREhNSVpkRENKMldUcmEyVF9yc0ZuYWM3dEU0YjY5ejctWGRfYm80WHpqYkdobm02OTlXMDNJbHI2U1VNdGRMbG53?oc=5",
-      "published": "2026-03-23T06:42:57Z"
     },
     {
       "section": "Asia, Europe & World",
@@ -1077,13 +1119,6 @@
       "published": "2026-03-23T06:35:56Z"
     },
     {
-      "section": "Tech & Life",
-      "title": "We called Samsung's Galaxy Tab S10 Plus \"the best of both worlds between a phone and a laptop\" and it's still our favourite premium Android tablet – and it's even more appealing with this AU$600 discount - TechRadar",
-      "source": "TechRadar",
-      "link": "https://news.google.com/rss/articles/CBMi0wJBVV95cUxQdGYySm11TXRCYVhkTlNTdzgtakltRzktVWJkRjFNOHVuYktwU01MSmxvV0lnMkNwRV9Jby1nYzViWndlbVpZQjhrLWFISzcxdG80R0hzd3lCalNaT18xYkpGZmt2aXVTenhCaDlWaUJtbHVlMUJjeDFoYlQwQ2hmQ1lKWnltUUZHaXEtQkZGeElCWUVfR1I3OEF2NXBoX0JBdE9nck5HS05qSzNjZ3RTQ0s4ZlFSUG5LQklDS19lQkJYS05WZW1fSjdjcHdWeEhZYUl1LU9ucWtMaDZCdjJmd3N3c2NUcERrdEFxWlFqVUtPMzNNeFBBMHZYX2RMZnFMUmRhbWJzZFVXRzc0WVp2dE1Da1owRXFGWjBDb1puWXBNUklkanFxRnlXei1ia3ktLTF3YlM5ZWdaTmR4aGtnRl9mZ003RDdiY1ZaWWJwbUZjUVU?oc=5",
-      "published": "2026-03-23T06:35:51Z"
-    },
-    {
       "section": "Business",
       "title": "10-Q Quarterly Reports: What Changes Quarter to Quarter - Stock Titan",
       "source": "SEC News",
@@ -1092,16 +1127,9 @@
     },
     {
       "section": "US News",
-      "title": "Cynthia Johnson (Georgia) - ballotpedia.org",
-      "source": "Ballotpedia",
-      "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9FV1UyOFdyOTRkekxlTTR5OXNFWkhxV2J0U3FDa3IzWDJrYTJrVDBnM0YwS3R6ak01YmQ5X0xKdEVwNG9yVEMzZmRuZURuSVZmZi1nRFVNcl9ERmxQU3c?oc=5",
-      "published": "2026-03-23T06:35:15Z"
-    },
-    {
-      "section": "US News",
       "title": "U.S. Treasury Yields Rise, 10-Year Yield Hits Highest Level Since July - WSJ",
       "source": "WSJ",
-      "link": "https://news.google.com/rss/articles/CBMipgNBVV95cUxPNUpDMXB5bGNoT3g2YzloQk1NQkhqLTZnTklzOUxTM2Z6Nm1tQzE0QlIxVG4yRUp3OWpseXpRV3dBQTlsSXRydFUzMzhFUTRmUjNUejMzbTdad2Nwc05GakJZZzIzdzdlU1BhMUFUaFNrQzVEbUdxbEJnamh1MlBicV9fdGFERnpQQW1XclQtRG81bGl0SDcwcngxWmRJRHJVYlAxZExVdEJhajgzbnV4YVV1Mkc3N3FrVm44Y1g0VF9icGpkR0JKSFJoY2ZqZzFncGlBQWxwVG9YZml2S29hai0wR0xhUTN2cmRLVklPM1lJMDRNb0pkeW9STUxuZzJtSmxkbXAyVjJ4N0pFbXZkWVM2OGlPWERpVTctQ0pjWFB3amUwLTd1R2RINjExS0FEamN6TmZyY09vR0F0a3B5Ym5PZVBDaHJ1RmRWRUlsaF9HMmItOHBGMm5vemlIX3VYQ0FmSV9oSG9hc2JwbF9mNnlIVVgxd19yb2J2bERQaHlZZXJsdlB0bXpGYzNIN2hGLWtjb1RUdW1PSldIWkRmQlBSSnFZQQ?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMipgNBVV95cUxQRUE3UkUyN2tYcTdxVGgwTjJJenBSZnZjMFZRN3p4T0NKTld4T1BDTFZ4SEdqa2ttbndMUnhVcVVHWFNoYkJyS1JhRTlGdHE1UUxrZTdHYU45Q1hPRlMtblBwcEFneW5NTWctOFRhOXJuVFdBa3owcjBGdmI2MUl0Uk5RcnRuUzQwRzk5aFRUVFd5M29pcFkzQlZZSkxJQ2pfQlhSaC1MRHRHZlpaTXZwMDJrTTVaZno5R0g1T2Y3SlpBdzNjR0RLRzJvdVZqX2czZkE2djhnZGJYQUdibE9oX0tHTGxRQmdnSWszYk05ODBuZXJ1SmVrd1NjNDcyS3YwTHY5TnlkNS0yMGZVcXZkdXNtTkYzMFJtdnJudFNRZkVSZFhxVzNqYmVOaXI5NnNmUE9SNjlIR1diTUpsbTZaV0FvcXBGcF9RZ2M4V0phS0o0N091WmM5YTZJR1J0bURSNjdwd3JLNl9kTkEwRGNpa1A2eVlMYUo2UmhLdlpjNlpGcG1PNEVFVTZicXdBNXJ0c1ozTXJNWnAzcENOZzlZUkVTcG1GQQ?oc=5",
       "published": "2026-03-23T06:35:00Z"
     },
     {
@@ -1126,6 +1154,13 @@
       "published": "2026-03-23T06:33:00Z"
     },
     {
+      "section": "Tech & Life",
+      "title": "12 Tech Stocks with Best Earnings Growth in 2026 - Insider Monkey",
+      "source": "The Next Web",
+      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOVWFTNjJITjMtZmZtNV85SmRzQ3BXVU0wM2NsMmpqTlVfdTVBbU9KYjUwbHN0VFZYakx0TVZPQkk5REMwU2Q1VWJVTGtMUHlYSmR1WmFYSDZtMXFIajFCQVFpdTNwWjJTVGRHQmNyc293WElWZEtmVGNNLWF1c3d1ZWhFSUQwTEI5WV9zcnNjTThtR0V1TXAyMnM5SzVqUEHSAZ8BQVVfeXFMTlVhUzYySE4zLWZmbTVfOUpkc0NwV1VNMDNjbDJqak5VX3U1QW1PSmI1MGxzdFRWWGpMdE1WT0JJOURDMFNkNVViVUxrTFB5WEpkdVphWEg2bTFxSGoxQkFRaXUzcFoyU1RkR0JjcnNvd1hJVmRLZlRjTS1hdXN3dWVoRUlEMExCOVlfc3JzY004bUdFdU1wMjJzOUs1alBB?oc=5",
+      "published": "2026-03-23T06:32:26Z"
+    },
+    {
       "section": "Middle East",
       "title": "Iran war: World economy facing 'major threat,' IEA head says - DW.com",
       "source": "Elle",
@@ -1138,6 +1173,13 @@
       "source": "Elle",
       "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNU3RON0ItUXVMTXBiaUFCSkVSaERDa09jeEdYOWg1WWJFYmh1b0ZzLWZ0aVFuOElxcmNibUxJdkI1YjJmcmdNdVpqVmFRTnFVLU9CU2d1WXl1U3FtMnBGa1pPWjVrNnd0UFBnVTdQc252dUZZd0ZXU3puZmpZb1Vrby1NeTZwWkZBUlNhc3FEOVFuLTlMbHFz?oc=5",
       "published": "2026-03-23T06:31:07Z"
+    },
+    {
+      "section": "Asia, Europe & World",
+      "title": "EDITORIAL: Pushing for end to war the best approach to deal with oil crisis - 朝日新聞",
+      "source": "Asahi Shimbun",
+      "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE05TGF3WVdPd0FXOGgzZDhESE1aWHg4VXNlVkhPY3Y0cGtpZjZoaDFBaUl6WG1qX196bzNyUHM3LUI4WlZ6ZndRX0NfcGZKZUNaVWtqMHNR?oc=5",
+      "published": "2026-03-23T06:31:00Z"
     },
     {
       "section": "Asia, Europe & World",
@@ -1147,25 +1189,25 @@
       "published": "2026-03-23T06:31:00Z"
     },
     {
+      "section": "Middle East",
+      "title": "Iran war live: Iran to close Hormuz entirely if US targets power plants - Middle East Eye",
+      "source": "Broad Middle East",
+      "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1FeXpPbkl0TndOTmdVREw1ZUF0MTE1MDd3SXFQWHpWbTBBWEtVWVhlZmZZX2pJZ3BDNERQay1pWW1jbElKNUNEVUFfTVdkTXdaZjB2eUlLblpySXdWN2JLOXUwWWlBRjI2azN0V1V0N1ZZRjg?oc=5",
+      "published": "2026-03-23T06:30:25Z"
+    },
+    {
       "section": "US News",
       "title": "Oil Could Pose Serious Risk to Asian Economies if It Hits $120 a Barrel - WSJ",
       "source": "WSJ",
-      "link": "https://news.google.com/rss/articles/CBMizwNBVV95cUxQWXhzQVNuWDJmem91NTNHTEJXVmR2UzJuSWk1RENQcWNlTXQ3dUNpRjYyY2VmUGdBcjFHUkk4SV9ZZG00d1JrdWlWNzREX0p6ZlpxYWNBQzluNFVzWW1RQzhGRmdhNHN0YzNWaHZiejFsWFA0clBjcUp2ZlNQU2Z5YjFoSDBQSlE1VjdDTFVFS0V6RldIaFZqb3ZTR0dJanJPVnJyeHVrRVJZRmtmVUl1aUR5OVMxUUJWUGtmTXAxeHNTRFJhNTNJbWdiMFF3WklaQXd5REZjOXZYSll4UU0ta0hkZVRZN25SVnN5WklrSUQ4c3Z2MkZ1NGUxMV9GdTB4WEdEcVVnNjFFUy1CcmNuWDR2RXpnLXdFYzBnOVRVUkp5UkZGdXV6aU82LTFMMDBvM1VOM1ktZVFLVkI4Y2lWZDZBQ3BRMGt4SWtDb2Nib2REMlhrUm5BcTRlRW9yaGVwSXZaYmRBVlR3MkM3R2VIcGZvbFAyQXZ0YVYzX3ppcVRpMzlVa3d1Tmx5UGNMNkRnb2ppTm9BejlnSHo3dEJha1UwNFpQMzYtLVJPWG9RTFdOSm8tcXBFWDV4a080cG9CRExVR3hEeFhxZkVMQmZZ?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMizwNBVV95cUxNUEkzQnBuQmlEbFl2YnVyWFBKNVNVeHQySnVPbDhxSEN3NHo4Z1hoc2dveXQzZGNSeTVKd19BWkJ5eFZwLTFYakNHVGxlSm9OdUpLSFVVbWExMWlNNm5DbUN0OFIyNV9MNWtzajUwRkR6M3dtN2RFZlZWYmRpQjBpR2RYbnpfUWNwbjJTOXhpMnVSTWtKOUxjVW1hVUt1cl94NkJjZ212Nmh2cGpsTld5VlZyRDRIeWM3SXFnSzZrY1hSeWNzbk5IVnBLRTdubXJsZkd4NDZJa2Y0WUlDRjhqVXFRTjduVExsQl8xcFl6NUFFVlRrY2JuMnpiY09IOXM4cHhwZnEwMWtaS1VEd2FYMDYxaWVzTk5BckttRjlyMnZOREZYSnJBRklibXZPRjJmWDBjaXF6bXM2V09ubWlacGE2cmJwa0x2VlNKMDhRM0xyTzNuS3dHOGRmSXBaV3EzNWlSanI2Vk9fVm14R2paNHdZbzgyVXEyQTZ2RHdaT2REbl9DSE5Vd1M4eTBHMjZvU0ZHVjAtejZiYS0yeDdXMFVaZm5IVUpzOFJWSzRlMVdYRWVWUXoxSWcwcWgyeUJqOFBlUENrODlzYWkwSUxB?oc=5",
       "published": "2026-03-23T06:30:00Z"
     },
     {
       "section": "Middle East",
       "title": "Oil Could Pose Serious Risk to Asian Economies if It Hits $120 a Barrel - WSJ",
       "source": "WSJ",
-      "link": "https://news.google.com/rss/articles/CBMizwNBVV95cUxPVFhucVRGUUwtZGtQZXQ5WmFjWVhxdEt3VGRpZUNTY0FfNU1DeGdFN1hKSDVFVWNfV1FWYWNWY2s2VFJyWkdmbldpd1l1LUxCM2dkdFd5N0xvOW1ZWk9hREkyZ2h1cUtHNXpwT0x1YkF5U3hfQ2F2VGltaEFxUUlwUzY1OTdmcTlkdlFYUU51RUNUZEktbUJFcXFfY2E2eG15dVBWdkVEQ0hiRkI3UC1kSUJNX1Y4X0hGS0xTWTN1VFJYdlZpTXhvb0xoOU9lUkZvQ1F4cUN1SVdSUWlaNEZSdVZ5MGg0YUFYUDFLaW5OWFVyZldZZF91TVVOaHNRMWVuZllrQ0lDOWVSX2UzeGZnSXo4Nnd0Yy1zdWtncmthQy1OMUhkWU5CN1VsXzJFNklOZl9uQU9GVXEtdlRPaG1fWWVpZ3VQOVNhSnJpbm9WUXRrMkVFN0hTX0UzN2tpUFZ2VEtwWnhGTjdpeU9pZkJHYnQzZXVIRmlickpMOXFRVU1KZDRBU2ZWOEh3SGFkS2JPMWRwNEFMUjd0VDZBWkExN003aUVNVTNLYnVoSWdYcUpWZ3J1alllcWZUWS1qdzc2WTRweHFYbE9RTGZxOVRB?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMizwNBVV95cUxOSkVBMlM4RlROcUlvbU1EOVpabHpWVEN0YmV1NmNvX2tUM2RpSnJEcUczNXpJMkxRNVI4RUhzdzByOTZ3N1BRMERQT2J6TUVxblBsWWVLU3Uxa1FuV2xQclhzVzI5M21tTUVWWDRNOFdydVN5VWR2LWVMdExVLXhCTWxEUkpDVk1YSm1sNTU3VlJMNnV0U0N3X2VxWXlLWWhlQk5pOU5zYmFnZW50c2tkTFJWVHdsZ25nUkRZaUlLdHRyNVA0N3ZxQ3pDVFZPVDhJUEV5a29JaFlDTGR5cnhkNDl1UXhsQlJ5VVFzWlNNVFVLUjNZTlJIQnUyVnFfalpUTS16MWkwaEc4ZG1BUWVoMkF1alpBNmZnczR4TFpzWURHc1dNeURwSm5FeDBHVDB6OExDa1d1UXdNZUpmcFhiWGdGdW9WdEs0c3FzUGVReFU1d0dyU1RRUkJuWnJaN2JKR3N6N0o4SUlCaE5heVhZY0YzQlcxSUxjOVFscHdzX2dSN2lmejBSV3VpOVo1cWU0THFsOGh1aFQ2cjVjQmZKS1p2Qy10WFlUcGN6anJOVWpwWXlnVzRGdDItT2JzU2p0d0lnT0M4YmtyeXZPRkFZ?oc=5",
       "published": "2026-03-23T06:30:00Z"
-    },
-    {
-      "section": "Middle East",
-      "title": "Iraqi pro-Iran group extends pause in US embassy attacks - Jordan Times",
-      "source": "Jordan Times",
-      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNSWVTMFJiaTRDLVR1V1VOYk40Q2FwVHBtTWFzS2RqdV96MFJ6Q3ROWlE5dy1Xa2x4N2w5WFJLTWYtdTZ2MDd0alNqV054NThZdHpveWl6THRZZjd3c3pyWHpWUm1XQW1HLXRzTG5zMl9pTlpYcnVXQnhuVHJPc1lqOUZOTWt5MGVfampra2xUajNRMm9GTXgw?oc=5",
-      "published": "2026-03-23T06:28:04Z"
     },
     {
       "section": "Culture",
@@ -1210,6 +1252,13 @@
       "published": "2026-03-23T06:24:31Z"
     },
     {
+      "section": "Tech & Life",
+      "title": "ETST - Earth Science Te Latest Stock News & Market Updates - Stock Titan",
+      "source": "Pop Sci",
+      "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9FMVFqWm5zd21SSkNZWWJQZU1kdXVCUHJsM0ZUcGozN19xUXRwVTViWnhJNUZhR0Y1V0VNSkh3cGYyVHBFUzBFYzNNOGhvZ3kyVWl0ckVuSHBQR0F4?oc=5",
+      "published": "2026-03-23T06:22:58Z"
+    },
+    {
       "section": "Middle East",
       "title": "IEA Warns Middle East Crisis Exceeds 1970s Oil Shocks, Ukraine Gas Disruption Combined - NDTV Profit",
       "source": "Crisis Group",
@@ -1224,17 +1273,10 @@
       "published": "2026-03-23T06:22:00Z"
     },
     {
-      "section": "Tech & Life",
-      "title": "Old masters, new methods: The tech transforming art restoration - inkl",
-      "source": "Nature",
-      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQNXdiMC1wdVdicHRpVDc2NjV0Yk04bTQtMWw3S3d5QTJMSENRaUsweWdiTDJUTnRaWTM2Y25yNXlRLXVKN0pRMVdRNjdZVzBJNTFIVVRkcjVYUVZqb211UUJDTjhUdVR2bzkzNWlUMEstTmoyVnVyYkZBNV8zM3lzOEVadlUydnl5WGhFanplTzE?oc=5",
-      "published": "2026-03-23T06:20:14Z"
-    },
-    {
       "section": "Asia, Europe & World",
       "title": "Russia's Max: The Unencrypted Super-app Being Forced On Citizens - Barron's",
       "source": "AFP",
-      "link": "https://news.google.com/rss/articles/CBMixwNBVV95cUxQaHdkVXVOTzlkYWt0TEtkT3pINE1yU0Z6Z2JQWHBJMVd4b05HRGJLZk5RMHpYTlJwb1RHazY2OG43OUpTQlZvNXBvT3NTU1hwVU5HaFdCRi1LVl82TFdHdDM5VWR4a05XYWdrUlpSOERkNk9HaVYwMzJncFJtVWVlVW9QckhLMWcza05xWmJyRmFrN1haWXhISXJxWUt3OVVoaDhxSlp6ejRzYUlESDJRVGdnVUFMdE9JaGFsd0xTMjdiWXJGR2Q0bmhNVEYtd01CR2xaRVdod3luQTBMaFBYTjF1WHVwTVNlMXoyZDBsUHVZTUdWSG9sajBGR2cyaXMwXzFBcEp1Q250eGVndVRjQlh6Ql9VbE1OanVkWE9ERDNjMkl4QzUwNTFaUEdjTGJEWUNFdmZOaTdURExkODVKZHJhSUZ6YWQ5cGZPN2JVQTZKM2FWczROd0gyTlpYTjlQaW9uMFdHUG9GcmNPMjJiSUVONUxhSzN5WjlLbVJGYlNjNkVzYUQtdGItTXZYSmJtZ01zVEN5c2RiM3o3RVlsYU5iZS1ibHlaTkw5NTNQT2lhOEZnMnhSSkV4dEhHZUFULXVWWTVHYw?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMixwNBVV95cUxNaTlFZmNvZ3lzWXZsbWp5UW9NX3A2SDdad0lPX0RhMExCTENxbF9TYVo3Qm1iMF9OVUVXMHVGWHJtMU5iMmprdGxpT0dZMmhUSDM1RTZOcUdWUldJQ1lGc2oydHAtRFY3OFdETmtrdVdjRktWT2tHa0VObUFHQ0hkSDVsdzBYUEUwWHpjSTlFWlZiMlUxQjdOa1Y4ZHhIZDJNT3hWaUlEY0pJUTJpMTlwREc1dUxiOUVPM05xUERaMzQ5a1VJT0lXOXlWMnh4ZzA5ay1xVkJyVlYtX3dlb1RuejdWZjRaQllhRUVLd3lfM0V5X1drenpWMGl1U0JJd0xSR19Ddm9CSjNyaFlBRFp6QktCV3UwRmdGSUxqQ0tsWDhsNWV1T2Q4WmV4VVVKdmgzNTRaMEttcnFTSENwUzFlZXVJNVBFbDN2WURJbkMwa2hsUFVPdzBwVV80WUFtZG9KdXlVYmVKUUlXZnVkaTltLThkRHFiTWtJQ1lOTmNXaE9YSFp0SzlBcmhvSWhtM3NqcjdtTnA5MkhBanhXMDZpRUxSanc2TzIxTjVIaC1YOVc5YTlCeTM2NHZVMXZDMm9WclpZV3p0QQ?oc=5",
       "published": "2026-03-23T06:19:00Z"
     },
     {
@@ -1243,6 +1285,20 @@
       "source": "Pop Sci",
       "link": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPamJGNk9KV0VtaG52RGtGSFZwdXUzeFExUlBfcUJzUU9mVVlDMzJVZkRNbWVOT0dULVBlNUNqSHZPVk92STVLZnc3cTgxNXExdV9pLXV0ZU5uZ3JEOTFWblRUMDgyRW4xa2YtQmlrZDlrbEtWRlFRdGNpbnNPY0k0OXlUUHFqQXlaU0FUS1ZzMTI3UEFHRXN6Tjl1bUVFeEdUVWxJYmpyQ0RkbW9MUnZydERuemJuYjRUUHdJbExVZmxuU0ROeWFPMlk0dkZiLUJsaUHSAdgBQVVfeXFMTWh5dzB0SUQ0TC1YY3U0aldEYmdjZTdhTUpQMC04NThlaW01aFdCZFYtZWFJQmxKMDRaUTZJck5nQm84bXgwckNNN1gxLUZaZ0o3SnVVcjUtMTFfVUMxZ0VKSzFOVDdPR09iY3lPLWtXdThrNFNINjVZWXJiVHdJNlltQy1uazNKcklfVkRIb1JJZTQ5SHdIelJsUy1qQW40eDViT0VLQV8ydG0yeVA4VkdZcnh3Qm9NRzA3Z0lqUnBvZzJ2alNNYTBSUlk1TFRuTmVHc3BZZTlr?oc=5",
       "published": "2026-03-23T06:18:07Z"
+    },
+    {
+      "section": "Culture",
+      "title": "Zendaya’s Latest Bridal Look Is an Homage to This Prince Outfit From 1985 - AOL.com",
+      "source": "Harper's Bazaar",
+      "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQREtWbGNFblJLN2ZlQ1gxSWZlclRGTGVub1hxSFEtS2NnX0xXWm03bFF1Vm5OOWdEa0ZiM05QWDRjUkNtQ2JNTlNsYWtwQy04UWxjOUpDTW5TWnZGM1lNcHQ1M3UyU2hxeEdyVTEydWlkR1NycjA3X0RoeXRXUkpyU1F2WQ?oc=5",
+      "published": "2026-03-23T06:17:54Z"
+    },
+    {
+      "section": "US News",
+      "title": "News - Dallas News",
+      "source": "Dallas News",
+      "link": "https://news.google.com/rss/articles/CBMiR0FVX3lxTE9PTmtKbVlmRFpRSUI5Y2JvdXZIZ1lnSEFMT19tYVNqNWt0Y2pCdnRRa3VqSVZWWXBSV011M05vMHJrbXcwMVlV?oc=5",
+      "published": "2026-03-23T06:16:04Z"
     },
     {
       "section": "Sports",
@@ -1273,25 +1329,11 @@
       "published": "2026-03-23T06:14:38Z"
     },
     {
-      "section": "Tech & Life",
-      "title": "Pentagon has made a 'big change' to the way it uses technology, and what this means for American technolo - The Times of India",
-      "source": "The Next Web",
-      "link": "https://news.google.com/rss/articles/CBMiqAJBVV95cUxOUDd0aWxKNXgxbDd5ZU1reXRfcW41d2FBMjFvWkJoV01CbmZ5RVo4S3VyZTQtV2ZaeWVpd2JJT3FrU0E3YXhMbHE0VjZfYnlqVmU0VmN5cEwtWTR2OVRJV3ZTZ0VsbmZEalJ1MTd4TGxyUS1zLXVWNF9rNWRCVmJyNU5Oa25lbXpFcTRSX09HVm5lc2tld1dvM1ZsUjE5TnNDRkxQTmVtUWYxSEYySjAyVEVFbnNMZmdqSnVvYVVJOWdPRjVDMk9wRDVYVTVKbmxmRmZpQkI4NnUzQTVVSVd6ajl6RUJGNnEyTmRHOUQ3eVlScHctLVN3Qmt0VjhfRmFlTU1lRkRJMUpQQk10NkxNRGgyMHZiQjFJdVNERi1WYUdNaXlNMEtZV9IBqAJBVV95cUxOUDd0aWxKNXgxbDd5ZU1reXRfcW41d2FBMjFvWkJoV01CbmZ5RVo4S3VyZTQtV2ZaeWVpd2JJT3FrU0E3YXhMbHE0VjZfYnlqVmU0VmN5cEwtWTR2OVRJV3ZTZ0VsbmZEalJ1MTd4TGxyUS1zLXVWNF9rNWRCVmJyNU5Oa25lbXpFcTRSX09HVm5lc2tld1dvM1ZsUjE5TnNDRkxQTmVtUWYxSEYySjAyVEVFbnNMZmdqSnVvYVVJOWdPRjVDMk9wRDVYVTVKbmxmRmZpQkI4NnUzQTVVSVd6ajl6RUJGNnEyTmRHOUQ3eVlScHctLVN3Qmt0VjhfRmFlTU1lRkRJMUpQQk10NkxNRGgyMHZiQjFJdVNERi1WYUdNaXlNMEtZVw?oc=5",
-      "published": "2026-03-23T06:14:00Z"
-    },
-    {
       "section": "Business",
       "title": "Taiwan stocks lower at close of trade; Taiwan Weighted down 0.43% - Investing.com",
       "source": "Investing.com",
       "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNdTZTMjN0UzhPaXY1ZUwxRUtjZWxzMUNvWHN2TFR3NkdOcG5yN3RCVlJrYVZwYlJoRUMxaGtjUUNrNTlHdWJOc1J1TFkyUkVRamFPS0tTckJqdE15ckdyZUFBQjNKSHRhb2pWR2ZPbGp3ckltWWpDWHpNZWVUN1JiN3E1ekM2VmQxX1pEMmRHOHEycmJkVkxETDgxb3JSNGNzdEdYOXlIcjh5Tkh1WXM5MERzYU11SW0yMVpr?oc=5",
       "published": "2026-03-23T06:11:15Z"
-    },
-    {
-      "section": "Asia, Europe & World",
-      "title": "EU chief in Australia with eyes on trade deal - France 24",
-      "source": "France 24",
-      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOM3loU3dKaEhMNTNCNmFwZExodHVhN2o5NG4xSHNPbXBkdDF3aHhKVU5UTGdsWXZ6UlN4c3g5LUNSM19CdldfSFI1OGlfSlJZa3pGNUJYcnJlWWZsc0lkTlMzVWpJNldKNWFMd3BZTGtfNDhGYkNjZm8tMWx5MXFWckZhU2hDdEx0dXNIWGEzOEliOVZIaU1V?oc=5",
-      "published": "2026-03-23T06:11:13Z"
     },
     {
       "section": "Middle East",
@@ -1301,13 +1343,6 @@
       "published": "2026-03-23T06:10:14Z"
     },
     {
-      "section": "Middle East",
-      "title": "Sky News Australia. . US officials have issued a worldwide security alert warning that groups linked to Iran may target American and Western interests. - Facebook",
-      "source": "Sky News",
-      "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxObGJ4LWtRU2JuWlFUcklvU1Y4OW1aR3AwT2N4c3l0RXdYeHpRT0Jld0hORy1tb01oYmI3bVcyNUQ1cVFyX2lHaUx5N3R2OEJMcGF3UElFOGM1UDJlUldMUllhRnZxeVloZWU3RXBDc2xwRU85eGlJUFd5aWs5T0pqQ0xKU3VBTnROUW5MdjRnS1UxaHdCSlhxZ1Mta2JBSV9EeDh4NkpFb3BmRDdnTTU2eWF0clVvRXpjM2JRQ0FaS0tIRi1DWnBIcVUwSjVwSkFyUUpnbE1tTQ?oc=5",
-      "published": "2026-03-23T06:09:26Z"
-    },
-    {
       "section": "Business",
       "title": "LexinFintech: Mixed Signals From Q4 Results (NASDAQ:LX) - Seeking Alpha",
       "source": "Seeking Alpha",
@@ -1315,32 +1350,11 @@
       "published": "2026-03-23T06:08:58Z"
     },
     {
-      "section": "Asia, Europe & World",
-      "title": "Prosecutors raid 4 major refiners over alleged oil price fixing - The Korea Herald",
-      "source": "Korea Herald",
-      "link": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFAzcFEtZVlwMTBJQVRnTmhDeldvQW5TZVo2anB5MUdiYUo0RnU1Uk1aRmtTcVQ2ampuMUlyYVhuOExGVm56bUtXSWo4Y1JJN0xhdF9ZanNhYw?oc=5",
-      "published": "2026-03-23T06:07:38Z"
-    },
-    {
-      "section": "Asia, Europe & World",
-      "title": "Germany’s leader is failing his ‘last shot’ mission - The Japan Times",
-      "source": "Japan Times",
-      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPNHUzTVFsYXJwVHpOSVdJYW1fU1lpd1lNV3ZVbzNwVFZhYnJwN3lXVjEyaG1UX2o2SVp4MklGdm5fZEdPM0NlWk1Gc0hNUFNqdExFV3JNdFVoMVZmLXpqeUhhaHRHYkNHNHNNRkpWSlVuUXNFN0hQNnFhZHZTdHlsR0JvSUdSTkxTMzhVeg?oc=5",
-      "published": "2026-03-23T06:07:37Z"
-    },
-    {
       "section": "Tech & Life",
       "title": "‘AI doesn't create value on its own - the humans that use it do’ - | Asian Legal Business",
       "source": "Reuters",
       "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxONm56YksxY0dvMm5LQjItYmJ4aURhMXpNTTVxNFZJVGZlckJjanVDcElhQ2R1RzBwU1FtU2VJZmdfNUFDT3p5WHBBVnRJdVZHVklfOFV5UzdMd2ZkcW40dF9pNWVsbEZWTW5sMzRPcUo2WGk2aWxMMGJ2SVNiWEZaRkExLW9MUGpsME83Z2I4Y1R2UlQzbHg3TERBd2pscEhSOXdLUk1PRXRHT1NVejlGWTBBbzhuSVFlc3hMQ05QZ29WWU0?oc=5",
       "published": "2026-03-23T06:06:49Z"
-    },
-    {
-      "section": "Asia, Europe & World",
-      "title": "4 Jewish community ambulances set ablaze in London in suspected hate crime; video shows burning vehicles - The Times of India",
-      "source": "The Times",
-      "link": "https://news.google.com/rss/articles/CBMihAJBVV95cUxPSWEyTHdoZEl5YUZzc2dpbEtTY1kzWTRYWGFSSlF3UmlSdl9KX3k2SzhBb21YMzBORnF6VUR4NW9jTHlGZXNDUlVSbHpOWWVFelNOQzl3MXhQeDM2VVdVQ3FKcHFkVzJibm03bzBvNXRPMW1UVzdPbGNFZzdQbGhjV3JRTEJ4WFFLUnpsU0phZGEyODFsa3V0NGxmVW5BUzdIQjUzWjVkSm51ZnZqUEN2TUs0LUt1b2Z1T2FvVHJpVUNybDIwRDVwaTFMem1kTmcwUGU0T00zNGVRMzRSYkp0bXJlc2xaVWFqOTBTcjhQUlllY2hBVlMwQk1MaGdjUm9uOWFnUtIBigJBVV95cUxNWm9QSWZsRDRwYzl2R3o0M3A5YWNSU3FYYzRIaG9jVFBienZlOC1ISVlVVjZMb3U5RXlvaGpwd1VSVU9VTmlEQi1McFR4bDM4MmU4a3QtRnVXWmVyczY0TUlFOS1NbjJDeHg2Wmx0Uk5mUVczeFhDdzJBaVgtRkdjR1o4SEFfN0VZeEtibjNIT1hxa0xCM1JLbkJYb3Z0QTZteC1ESWpfZkx2a2hPSzJ1VGhoZ2hVNFJmRlBSRUZMcWdMczU5TWswZ2hhaUdyODZLVE9jZ1JPVDF6YVdIak9UemEwb3VVZEd1SXZIaTBqS25ORFp1U3o5UHNIcHFqOWtmS19iY2RMMnEtUQ?oc=5",
-      "published": "2026-03-23T06:04:00Z"
     },
     {
       "section": "Business",
@@ -1358,17 +1372,10 @@
     },
     {
       "section": "Sports",
-      "title": "Bryan Acosta training with Bob Santos ahead of 'personal' comeback fight - Boxing Scene",
-      "source": "BoxingScene",
-      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQQVFFWjdGVUZ2THVVcnk2bkZCUDd3eUJ3T2Y0ZlphYWJnVW9TWWtKQUdURndPMThtMzZmQWY2WkhvcG9teW9NRF94OGpUdmN1NE5UU2FNQmtWZEhLZWxoZkktcVNGaHFPcEpOUEYwTzBhMVdwbE1nRFd3NFNDbG9FZUZDS01YSE1SU29tVnlaM25URUFWdFZkWWIweUdPSXVicjBvSHFZeHBhRkE?oc=5",
-      "published": "2026-03-23T06:02:01Z"
-    },
-    {
-      "section": "Tech & Life",
-      "title": "Zenitron warns memory shortages will reverberate across global tech supply chains - digitimes",
-      "source": "The Next Web",
-      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQTHpFSjlFa3BEcGUzSllwYzhzeGxadW5WdXVjaG1EQVFyRHZTVkVFMXhiTTAteTFnNHNJdGZYM1NnVVZlX0o5dnVMQ3VSanBINVJfT08zek01eTZGZFh6R2lGS1BodXRFa1BHM0djTDdkbUpxSGo3cUZib2M3dFc2dkVIZTZiejBQ?oc=5",
-      "published": "2026-03-23T06:00:32Z"
+      "title": "March Madness 2026: Bracket, schedule, scores, date, time, TV network for NCAA women's basketball tournament - NBC Sports",
+      "source": "Broad Sports",
+      "link": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxPckNySzZWMC1Ha0kwRHNTeXJNbWxtYWtWVmZqenhJcFk4NVF5cmVnZkxUSzdrdlNnNTlDaFdhYUxTQ1NTb01ZY0o3UmctWWVseHNLbEljTXRnRHlubEl6V2hUbG1MX25QbnFPWDBhNHBPZGtSLUtSVmwzb3JfQk1IWHFIUFA2WFlVU1ZJS2dyR2V4aEMtSVcxUnNPSTYxbUJVaDliTGJKVmlKbzU5SFQ1dG1KeEFlNUIwVWhReDdBT1FlSG9XMDNJYTBXVzMzY29zSW1vTjZlNTNOLTAzSnZ2LXJNVkQ3UEw2UFdHd0hvaw?oc=5",
+      "published": "2026-03-23T05:58:51Z"
     },
     {
       "section": "Tech & Life",
@@ -1385,18 +1392,18 @@
       "published": "2026-03-23T05:55:59Z"
     },
     {
+      "section": "Culture",
+      "title": "HBO’s Near-Perfect 13-Part Satire Series Is Still the Smartest Weekend Binge on Streaming - AOL.com",
+      "source": "BBC Culture",
+      "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBGSjlGYm03dlgzcWd4QzVIazYzeFNWMmV3aVFGcW1USTF4elpXVTVlcjhFMXNhRXktd29NVjhDWjlOVVA3aUdUMWk3UlBaT3dGZ1Q1eFU0czY3UWp2Uk1LNzU5cEJzbm40aTBnSDE4Mk9JaVFWb2N3?oc=5",
+      "published": "2026-03-23T05:53:18Z"
+    },
+    {
       "section": "Sports",
       "title": "Jayson Tatum Addresses Struggles After Celtics-Timberwolves Game - Yardbarker",
       "source": "Yardbarker",
       "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOQ2J0bW1WZ2I4UmwyNUhHX0ZZYVJPWjVsVkw0SmIweTBHN3pROURQb0F5VkVVTnFtbUdoSmE2aG9oT0ZlVDgwUWZ6VkRmektsdDI4Zkp2MXlZUS1peEF1ak1UeG91eGJHUGMyVlZwYnY2TkdULVhiWUhfMnU1QXA3WGlkQkxUckFCQWpvVEhWYkMzUUJfQy1fSnlXRVNpbVhGOGV4Z0M5YkJXYjBTckxlUi1CVUh1UEYtQS0wSy0wdw?oc=5",
       "published": "2026-03-23T05:53:10Z"
-    },
-    {
-      "section": "Sports",
-      "title": "The timeout, play and player that dethroned a champion and sent Iowa to the Sweet 16 - The New York Times",
-      "source": "Athletic",
-      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQWFRuTEZtLWxQMGl2amRQc0FtdDNnVGpZWC1vNFJQUXVRMFhaVndUMjFPdVdDcDRheWNBYWJZNGlQaW1WRlVEVlFHdGktMXFsZEdwdm1WMWdnM091UHp5RE5pSVNwQzF2bmxNQjZwbnI0eWZFd2h1RE1xTUdWakJWUDllUDZpbzdwSmFVeHptVXRoMjJIMkxLQXlwb2prVFg3RG1SWFhR?oc=5",
-      "published": "2026-03-23T05:52:41Z"
     },
     {
       "section": "Culture",
@@ -1413,17 +1420,10 @@
       "published": "2026-03-23T05:49:38Z"
     },
     {
-      "section": "Tech & Life",
-      "title": "The Iceman Cometh: An AI version of the late Val Kilmer is starring in a new movie - AOL.com",
-      "source": "Sci American",
-      "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQNkkxd1ZxemV3WGdSS25TQ09CVThuRldqenlFOHhJbS1sZEdCWDhmZnVfTnNZYzBpOFRIRE9rcmhQbERmdHFoTHhaM2lXMVBEMEFtc05iQnJfY1FTaWxja2loSl95ZS1IVHBtbkhNazhZVjRrQ3dEbXBtS1hZTVJKOA?oc=5",
-      "published": "2026-03-23T05:48:58Z"
-    },
-    {
       "section": "US News",
       "title": "Asian Currencies Weaken as Oil Prices Stoke Growth Fears - WSJ",
       "source": "WSJ",
-      "link": "https://news.google.com/rss/articles/CBMiqwNBVV95cUxOcWpkRHB2UTBvZzJfVlVZQnUxRDlFUEpOeWtOR0xQQ2hUQm5mNUVXb2FFb0VjT2QxeEVUdW1tRE9YQklkdGs1YmpQMHZxMF96VWdscGROMXppbjdVZzhPdFJLaW5kbGpVcjFIT3MyMjgwVU1mZE4zVzVkYUZadWlzRjg0ZnJfOWtFamZUei1xbkFBZXdReVE0ZU9hZy01eEFpU2hRSzRNWUhfZ09XblJrM09hUHJTTXE2aGhlS0xHbFFibUJ2V05jRWlvN3BreFNsMDNUNDNKVDBhYW9BZmREakNvenItZWVsMXB5WHVpQ0Qzblp1WWM5UGNVNUJDZ3ZpazRZdXFXMmMySDBOcDhLRWlBWUVjSm4xRW82OTZtSHFqX1A3emJyWm5CdXRwZkh2TkE1VGxlMGJiWkRXamY2QlpBV2tDZUhyMFlJWE1Zc3g1a3dsT1VHTVptdGVIYXFfdzQtSmFEN2tmWFJLd1ZlQnE5Ti1lU0ltSTVCc2hoRkR0dm92NkZJUHpWanhWOXZVQTJwNWNFRkVnelFBRVZRWmRIYUVDV0hzc3JN?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMiqwNBVV95cUxPZl9zMk1lOUZzUTBuclY2aElIU2t3MTdWQUFfVXY3R195MGItbHNwSGhVOTZEaDN4QU14Qncwd1BkWEhBemljWVE0OUhSNzJ1ZWxoXzIzQS1wd0lrOWZBejNMLWlydXdnS2JJVzFsRTBEeVhvOEFoQmxrblh4SjdxYTN0TTVnYTZETklYRkhMWWFOY1d3cGJxczBkS1lWRnN2ZVhfSXA0RmZwMVljcU0tMUVzY2ptS25zc01ubURUaXZ0Vnl2NlUzU3B1clN5ajJNYzBZYmdRX0d6MmRGc285SlQwX2pEX2pQMTlubmVsRFFkSTduc0tWbFoyMmV4TThUME9pRmxjUW1lZEVaSkV2SXdhUll1cVVRNDhyMmFkQjlsaXkyZkRSaU40ckZIekdaUnRZWkNIMENpRG5PdWVRVG00SEVscnc3dUxHX2Y3eUlvMXNQVnpkaXZtcGhybTc1ejVqTTlXY25wNzBMclFKajZEckdOSzJfWWMwN2FKdmo3Qnl0M0JBUldKbGZKeEJVM1BDcEs2ZlRrUVJab0tTNkp6WndCdkhUMFhn?oc=5",
       "published": "2026-03-23T05:45:00Z"
     },
     {
@@ -1448,13 +1448,6 @@
       "published": "2026-03-23T05:44:34Z"
     },
     {
-      "section": "Tech & Life",
-      "title": "Quote of the Day by AI entrepreneur Andrew Ng: ‘The future is here; are you…?’ - Mint",
-      "source": "Reuters",
-      "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNNGduYTR0dkVlQ1hZVFFJb2w1WEpQVmZzM0RXQTktVlRRUmJNT1QwTDloZkxNR21seGwxRjdjUllxWWNTNHZtaUVlWlZLVnM1Qnk2YmttekVoMlFvQklyVnhGX082dGl4bFhrSUFCb0k2RkF1ZmJWTFZSLVJzMlVLdE5ncXZGb21hODVpdXE2a290anhMekxjMVFzSDF4MDBPUXNYbFJPRzZaWV94VU43U0NBWXJhcnhtbU5zMnliamZEOFnSAcgBQVVfeXFMT0VVelNLdERHNkZvVkVwUGNzODYtSUhRUWtlNGZXQjJsOXVhUC1NMW00dk5qZlNiUDZfN1dDTHVRcXN5ZkhnQzBkcDk0ak8wQWhaMjhUVlF2dGpjTU5tOEFsNE5KVHFLc1Q3cm44TzFtbTVBUzhMNFRHSzN0bUxGTFIyNVpnVWRCcHNEN05QSzJkNjZTUzVacnVRd2QwZlM3QkxZRzJyNWV6cWVualFGWjBQUzdJX29XbDhlOGtIQ2w1dEhCMUlHSG4?oc=5",
-      "published": "2026-03-23T05:44:06Z"
-    },
-    {
       "section": "Business",
       "title": "Bitcoin sinks as tariffs jolt markets - MSN",
       "source": "CoinTelegraph",
@@ -1467,6 +1460,27 @@
       "source": "AFP",
       "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOTWlTUnVZZkd4bjdxYjNNdHNCZk1sS25kRjl3VDJNZ195Z3NGLUpHLXBYbzVKelVSWUlXVlZXd2RzMG1kRE1PTmR0N1Myc3hYdDhNMTBUSjdIRnVEOFlVU3NYQXB3bEprcExCd1lPOVFrMWY0N2YwNHlvV0p0WXprYUpZMnNzOUY2a2dlemgwR3FDc3ZLQ0V3QWxFaWhpYjNxQmN6SQ?oc=5",
       "published": "2026-03-23T05:40:19Z"
+    },
+    {
+      "section": "Asia, Europe & World",
+      "title": "Japanese national detained in Iran last year has been released, Japan's foreign minister says - WRAL",
+      "source": "Kyodo News",
+      "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOVlJIWXM2ZXhPZ0VsQTJHcHNnS1BsY0Z2UjVtMTBQeHQ3WV80Q2JCdVdkN3B0bHNpNVdlLVB0NXR2NXdTU2hQTm1uNDhZRmpRV3hBeUdQV1liRjRvRnloYWVLMW5HVGZIcEo1aTBCVk84M08tZzNpNGQzZjVqcXVjZXRlYnVGcGNVYVRXSk9KeEtkRVg2clRZb2tWYkdLZ1lhbS1keWFKLS1CVWNMZ3NJU3FITnZybjVDS25EWFNrb29ZYnJBb3c?oc=5",
+      "published": "2026-03-23T05:37:30Z"
+    },
+    {
+      "section": "Tech & Life",
+      "title": "New AI guidelines issued for Jersey organisations - AOL.com",
+      "source": "BBC Tech",
+      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPMVkycjdTZ0YzNFk4RXNZTE5lNXZSc3dNZk80azNXdEdweXVLZjBNSk9EYmFXdUpOVFNaWU92cXo4R0VPVTg2SzJPdmR3T2s0TTdSMWFTYmk0WklXYjFuZkU2bk5IV042NUFXNmFMMk1IN2xzbTZrUEFPSXZrTG0zQ09la254bTg2?oc=5",
+      "published": "2026-03-23T05:36:11Z"
+    },
+    {
+      "section": "Asia, Europe & World",
+      "title": "Indonesia Says No to Hosting Foreign Military Base, Joining Wars - Jakarta Globe",
+      "source": "Jakarta Post",
+      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOZjJBbVFQYVhGUi1ZLUZlWjRvNThXUjlnYjdOaHFNZzZWQjB5Zk8tel9YcENOWlhOdmRFZzhRU3FaQWVaWmhSTlhTYjAzZzU0dDc2TjBfRmlWY1I1NkNYVkMzeW12aGZqdU05V0tDblFNaS1jempWTHlVQ3VfLThiSlpHdl9TeE44OGtqbFRnQzR3dGoxeHVv?oc=5",
+      "published": "2026-03-23T05:36:00Z"
     },
     {
       "section": "Sports",
@@ -1491,24 +1505,10 @@
     },
     {
       "section": "Sports",
-      "title": "March Madness 2026: Bracket, schedule, scores, date, time, TV network for NCAA women's basketball tournament - NBC Sports",
-      "source": "Broad Sports",
-      "link": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxPckNySzZWMC1Ha0kwRHNTeXJNbWxtYWtWVmZqenhJcFk4NVF5cmVnZkxUSzdrdlNnNTlDaFdhYUxTQ1NTb01ZY0o3UmctWWVseHNLbEljTXRnRHlubEl6V2hUbG1MX25QbnFPWDBhNHBPZGtSLUtSVmwzb3JfQk1IWHFIUFA2WFlVU1ZJS2dyR2V4aEMtSVcxUnNPSTYxbUJVaDliTGJKVmlKbzU5SFQ1dG1KeEFlNUIwVWhReDdBT1FlSG9XMDNJYTBXVzMzY29zSW1vTjZlNTNOLTAzSnZ2LXJNVkQ3UEw2UFdHd0hvaw?oc=5",
-      "published": "2026-03-23T05:34:17Z"
-    },
-    {
-      "section": "Sports",
       "title": "Is World Cup Winner Antoine Griezmann On His Way To MLS? - FOX Sports",
       "source": "FOX Sports",
       "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOLXlickNKaVNZUmh3Z0RSVFQ2UEp2X0NKRktMYVNlM2gwalZoX2pwVnZwV1BFbjNJb0tpbGl5V0FvTE04WmZYTzQ4bzZPMXJrbUdIdjY2VlhtcUpVWTJCcV9zLXI2QVphUnpuMXRtRmJhclJBaTU2OVc2VF9VWjEwQTNRUzBoRXFMWkRiZ3pQVkZkdUJ1MWozTW91dHBFOFAwVG9nbHVESnV5bW9tY2VlekwtaVVscEVJMmV0StIBvAFBVV95cUxQWGg5aHctbHdEc2tTTWJadDdFcEo2S1lGOVg2TEYwYmNFa1B5TkdVc3UyTW4xQkpKMFNKbGlDSGRpc2tuTktrdTN1dFNqanZUcDBaaHpNOVVua0VVZ0VUWElWQnROUTFHazlqbDFQRHBxTTR3NHVXamJ0LXJLM2U0NHdqR29EdzV6eWlpdFp3UHNCc3JTRFVVRklqMXpWeF80WHJEeHh4RWEtYXZMQ3NDSWo3dTEtRWZLcmF3QQ?oc=5",
       "published": "2026-03-23T05:33:31Z"
-    },
-    {
-      "section": "Middle East",
-      "title": "Iran war live: Iran to close Hormuz entirely if US targets power plants - Middle East Eye",
-      "source": "ME Eye",
-      "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1FeXpPbkl0TndOTmdVREw1ZUF0MTE1MDd3SXFQWHpWbTBBWEtVWVhlZmZZX2pJZ3BDNERQay1pWW1jbElKNUNEVUFfTVdkTXdaZjB2eUlLblpySXdWN2JLOXUwWWlBRjI2azN0V1V0N1ZZRjg?oc=5",
-      "published": "2026-03-23T05:33:11Z"
     },
     {
       "section": "Asia, Europe & World",
@@ -1523,13 +1523,6 @@
       "source": "i24 NEWS",
       "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNRmNuTXVXcXQtU3hZcjB6MkZwa3dzTGJpclQzc2liWlUtS3FZeFJ0NGNrSTNIWjlTd3NLQTI0S1pRZnpOdUxvbFdNNG5TSy0wM29wUHhzY0ZxUUlLXzI3VXI0S1pNU245cXZnQTMtS1FXb05tcHBCb2RFLVprMlFwTTVBeWlTR1F0OGFJWUFKcU9PTzZfZE9UNmJibnMyWWZyTFg2dWVn?oc=5",
       "published": "2026-03-23T05:32:00Z"
-    },
-    {
-      "section": "Business",
-      "title": "Georgia Suspends State Gas Tax—Here’s How Much Drivers Will Save - inc.com",
-      "source": "Inc Magazine",
-      "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPejZPalEwQjd4dmFBcGpRazVYREJYcWxYUHByVFU2SkdfWVZEQUhzT09aNnAwb1NxM291QmJ2VmNPOWFzWTRMWG1nRHlMNGp1UWNvMFp5eTllNFoycUFSM3oyUE1iZzdVRFNwNExVZW9acDZPZml2ZnBLbW9fb0JJMGEwVV9PbldQZnNnNWExWDBkT3J1V1pkd194S0hjU1h3U1V4RW1IZGs?oc=5",
-      "published": "2026-03-23T05:31:03Z"
     },
     {
       "section": "Asia, Europe & World",
@@ -1551,20 +1544,6 @@
       "source": "Asahi Shimbun",
       "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBOZUdkVXAzMzVabFNnUVVEd3B5TmVmc0Q3MlJvN3BPRHdkczdDY01SRlhaazdqbXkyUWVMQmtMa3JsaU8wb0t3ZEYtTUM2TXp5d04xQkVn?oc=5",
       "published": "2026-03-23T05:30:00Z"
-    },
-    {
-      "section": "Middle East",
-      "title": "US nuclear projects emerge as income sources for Korean firms amid Iran crisis - The Korea Times",
-      "source": "Crisis Group",
-      "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOODJlWkd4T1Z5UTlDdjdsQzR3c2FtUXdFQ0VMZDd2dkdjVVlmMGVyUm9nbGtzRGUtYkdOX0JhUTQtUXBQMDhyY2pfM0p6SFZlOEU5Q3BVZzRUYUtoTTVXWGpwTXRoMWx3WU41RlRfY3ZBUG1RbkxaNnZ4ampPWUEyZXRjYUphQk5iSWh6S1RlVjZxODREaFFIMEh0SWcyVFNsTGE5QndQeWpiT05MRzNfLUxDZEppd1R5VVdoOEtxSjY3OC1YNVpUVXhJT202U0hw0gHWAUFVX3lxTE8xRUp3ZTM5NmMtaXB0VnNzdnZkQXdjT2Y5eVRNelhYTGNrNnNyQW9VeF9OczlvU1YxSHd1VUpoUl8wdk8yT0dNRVh4YzNfZHk0UDVFdjh5N3ZmNFo1dVBOYm9JRkZOQnQzbmNpMFBja0JxYW1MdW1WemhENVg2dHNLOXBpdm9qTlJvWTMwRzFXMjJJTEJBbmJMclpXX0ZNWFI0SEdPTWY4Y2gyRGtYbVdhckpjcHRrRmRwQkRGY0lEZFYzYzVWZ2RlV1lCcVFJWmlsM3dmVlE?oc=5",
-      "published": "2026-03-23T05:26:05Z"
-    },
-    {
-      "section": "Tech & Life",
-      "title": "Scientists Discover New Species of Dinosaur in Desert. The 'Hell Heron' Ate Fish and Was the Length of a Bus - AOL.com",
-      "source": "New Scientist",
-      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPbmR6Q3FRUXZ5ZVl1OWVXMnBCdDAwbG5QU19HaDd5VUNaV2lhbXpxSFBaRWZxZzg5a3BtdlNpM1JjMVNmTUM4VzFDNUJOX0xFQ2lvZWFhWjA1YjBrWVlYYmFZcC1IUWxXaUU3a3hJUFdPUzF2MFMyT3kxTVVXMWsyNzNTM1E?oc=5",
-      "published": "2026-03-23T05:25:19Z"
     },
     {
       "section": "Business",
@@ -1624,13 +1603,6 @@
     },
     {
       "section": "Asia, Europe & World",
-      "title": "Iran war energy crisis equal to 70s twin oil shocks and fallout from Ukraine war, says IEA chief - The Guardian",
-      "source": "Guardian",
-      "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPbmVoSlVaMGxfUVVEb0tsN0VxZG5BZmF2c0lWVDF0cThqU1ZHYzBLSlQ4MVhHLTc5bGM1TVVxb3FPY2dLNGE0eWRjX1VWS2R2TWJYRTNudU1jVVJNVXF4ZDZLd1pCVkZPUGZnV2sxNHJ4YWdnWlRVNmFMMkxFZW9ULXhSNnhyOVh5eXZaYnNMRzVoRUhxa0RxRlFKYTFhUzN2UUJJ?oc=5",
-      "published": "2026-03-23T05:14:00Z"
-    },
-    {
-      "section": "Asia, Europe & World",
       "title": "MAS to update Singapore inflation outlook in April as Iran war sends energy prices surging - The Straits Times",
       "source": "Straits Times",
       "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNcGNfdWlZUjI3aEVDaUZLVlVOY0I0TWhoemkxWkJkeTk5NXFaa3poa2tTa3VUTnNlRDczUGUxbUJ3aGZ4am1TTTBmVUVVVzNfLWdYcF84YkhvMk9FZDVkNWVUQW9WM0RwZ183aV8wNDVhYmdsenJMYXF1RkVxSFpOVGthazc0OFd6Umd4VDJCcUNHVWVlR1d4VmE0TUhuS2R3aFJyaUVkeHdiYU5vVEhB?oc=5",
@@ -1672,13 +1644,6 @@
       "published": "2026-03-23T05:12:07Z"
     },
     {
-      "section": "Middle East",
-      "title": "Iran threatens to attack Mideast electrical plants powering US bases - Beaumont Enterprise",
-      "source": "Arabian Business",
-      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNMHJsSkp4ZFdaMUpfY0V2ak56bEQ1djlaZnRYOVlDRVdaZ1FpZjZWdlR3UjIxd0tMOXhaU21LVW9hSkplektVYU80Um1MQ2RfVUQxOEtFVkx3WHNuNGtfOFptWV9oQ2E2XzdHendZMjRiS0xaUU1GaDlLVllNR1RwMHpRajc3Y1ktR1FzSU1GeVo1aEVUR2h2dmRpNTNHV2JyRXlieHJPUVhRUWkxWEZN?oc=5",
-      "published": "2026-03-23T05:09:33Z"
-    },
-    {
       "section": "Asia, Europe & World",
       "title": "Asia shares slide, yields climb as Gulf war rages - GhanaWeb",
       "source": "BBC",
@@ -1691,6 +1656,13 @@
       "source": "i24 NEWS",
       "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQSWJNelp5SS0zMFpBZUVZLUQtcUcwOGl0dlZwREFoOEpFNldTaGN2a1hIQUc0Si1fYnFLUFlRN2dkUFNpVjNCMzVwZ01ZanV6R3o0dVJZc2FtLTh6Q2hMQzFsTWRzOFl5TTIxWkZiRlY0NVdXQnhkNzk3Zkh3TWtFWEZiUzVDd3dlNVJRZXFFZ0E2NDByd1RnVmNXTjJuc21PS1Z0c2N1b2J4OG55TDdqT1lRYXFzN2FNR08yTHA0MGlsQUpL?oc=5",
       "published": "2026-03-23T05:08:00Z"
+    },
+    {
+      "section": "Business",
+      "title": "XRP price: What next as Ripple-linked token break below $1.40 signals downside risk - CoinDesk",
+      "source": "CoinDesk",
+      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPMlNNR3hhWjNSNTJTLWFNbmpmcXNpOHNJd3RLRlY2U0xPa2Q4dzNDOEZRQmhJQnEtV3h3cVVDZl9aOHU0aHdXQ1FqdkFLaU1iZ1BTYlJyVklnTUNCNkxCRnJ1Y3R6SDFMMXZOSV92aEFXbWhsN09YNXZ1c0ZDV3QwYy1VMk9MeW5Xa3djd1FXS2RrdF9aSF93SFUxYlhWUWh1dzdMTTF6b25ZTXJ6RlVB?oc=5",
+      "published": "2026-03-23T05:07:32Z"
     },
     {
       "section": "Sports",
@@ -1728,13 +1700,6 @@
       "published": "2026-03-23T05:02:02Z"
     },
     {
-      "section": "Sports",
-      "title": "Jude Bellingham names Real Madrid teammate who always inspires the team to bounce back after 3-2 win vs Atletico - Sportskeeda",
-      "source": "Sportskeeda",
-      "link": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxONkI0RW40eU5fdVZNaVJpRFBiVmpDUlI5czJWdGFaOEVUTVMwaHU3WFF2MTl4anZzYTVIS0RzNjBUazJuSFA5NFp5am5mRkQwSmNWZ0E3S2g3QW9mODIwd2V0bG12TXNsSUpPRGI1WWg5b1JSaUUteEtxSlh0TkVJcno5VUJiR3l4NmdkbGVoa0k2SjFhVlJhQ01WNzdMY1g1Tkc0WjQ0dHpOQktYU1kwRkc4UnBvaUU1SGgzbWxRRjlScjFZSVh4a2xGMkg1eE5Xci1Z?oc=5",
-      "published": "2026-03-23T05:01:00Z"
-    },
-    {
       "section": "US News",
       "title": "Qatar Airways parks long-haul jets in storage in Spain - Financial Times",
       "source": "FT",
@@ -1756,13 +1721,6 @@
       "published": "2026-03-23T05:00:49Z"
     },
     {
-      "section": "Middle East",
-      "title": "Military briefing: the high cost of using fighters to down Iranian drones - Financial Times",
-      "source": "FT",
-      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNWmpZbFNCVDV5R0JFb2toSTBDMDVPQTJBc2pvTTgxU2FORElVYk9DWFYzamVRNjRBc2ZuRXdaM0N0ZU05N1QtZmd0cGRkYjREY0VNc3k4ZjcwaGtpSG9NQXVpeGJXTHVvRWRRNUw0VjVTaFBQYzdRV0tCQ094ZUdvV1NjTnI?oc=5",
-      "published": "2026-03-23T05:00:48Z"
-    },
-    {
       "section": "Asia, Europe & World",
       "title": "Keir Starmer to bring forward EU rules legislation in King’s Speech - Financial Times",
       "source": "FT",
@@ -1781,6 +1739,20 @@
       "title": "The pro-regime ‘caravans’ taking control of Iran’s streets - Financial Times",
       "source": "FT",
       "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9YNEt3dlE0cHM4aE5zVEcyWVdQdUtUcXBXRDBpUkZCeTlaRnBHMlRtc25pZ0dmYjlMZGduZDhnMVBFRjZRcUZHV2dZTFdMMlNDdjN0U1dxWE5wY0ZOaDdGSW9ya0IzQ3RvSl9hTmE5bDM?oc=5",
+      "published": "2026-03-23T05:00:15Z"
+    },
+    {
+      "section": "Middle East",
+      "title": "Military briefing: the high cost of using fighters to down Iranian drones - Financial Times",
+      "source": "FT",
+      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNWmpZbFNCVDV5R0JFb2toSTBDMDVPQTJBc2pvTTgxU2FORElVYk9DWFYzamVRNjRBc2ZuRXdaM0N0ZU05N1QtZmd0cGRkYjREY0VNc3k4ZjcwaGtpSG9NQXVpeGJXTHVvRWRRNUw0VjVTaFBQYzdRV0tCQ094ZUdvV1NjTnI?oc=5",
+      "published": "2026-03-23T05:00:15Z"
+    },
+    {
+      "section": "Asia, Europe & World",
+      "title": "Military briefing: the high cost of using fighters to down Iranian drones - Financial Times",
+      "source": "FT",
+      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNWmpZbFNCVDV5R0JFb2toSTBDMDVPQTJBc2pvTTgxU2FORElVYk9DWFYzamVRNjRBc2ZuRXdaM0N0ZU05N1QtZmd0cGRkYjREY0VNc3k4ZjcwaGtpSG9NQXVpeGJXTHVvRWRRNUw0VjVTaFBQYzdRV0tCQ094ZUdvV1NjTnI?oc=5",
       "published": "2026-03-23T05:00:15Z"
     },
     {
@@ -1819,6 +1791,13 @@
       "published": "2026-03-23T04:58:42Z"
     },
     {
+      "section": "Asia, Europe & World",
+      "title": "Asian shares gain and oil slips back despite a barrage of attacks by Iran - 朝日新聞",
+      "source": "Asahi Shimbun",
+      "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE0xTW9YUVJ6NXhsSnZHLUVWYktMNW9PR3BPWW5uYk1SVXJpXzZQVWNvWkt1ZjVNbE9ya0tMclVwb05TSWFzZ1RFN2ZxUmdMeW1jc0IzRlhnWnRfb2JfZkE?oc=5",
+      "published": "2026-03-23T04:58:23Z"
+    },
+    {
       "section": "Culture",
       "title": "Kevin Chamberlain | Celebrity News and Gossip | Entertainment, Photos and Videos - Just Jared",
       "source": "Just Jared",
@@ -1855,13 +1834,6 @@
     },
     {
       "section": "Middle East",
-      "title": "India Coca‑Cola bottler SLMG says Middle East war risks pushing up prices - Reuters",
-      "source": "Reuters",
-      "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQLXNHWDBYamFDSnZvWGNlSW50WUFVM2tka1A5ank0UFVrX1NIRjgzYlAwaE4yOUhwbXk5UldtbFhrR2NveUlBTERoRUxQdVhkUFVWRkg2UUFTdDgtV081RDlYaGlKUUctTWE5TUdiUlNkNElHWXJwbHlpcHo5T3RSUXBYanVpWHZUS3ZTcVdMb2dvZk5xR2NTUzlYMUFFVUtfeGRNamo4eVdRMVExNzMtTW9Sc1kzLWFwZng4Xy1zaHVKRkx2N0VTZVdzUmhlQQ?oc=5",
-      "published": "2026-03-23T04:54:00Z"
-    },
-    {
-      "section": "Middle East",
       "title": "US Issues Worldwide Security Alert Urging Americans To Exercise 'Increased Caution' Amid Iran War - Bernama",
       "source": "Anadolu Agency",
       "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNOS1nYWIyU3dsd0h6NVFscTNhRHpGMzRMMGc4WVlFTEZfRTlxc3E5Mm85N3ZLRTF4MEdKQnE2QmdyNjJnbUtfMTZ6ekpHR2pNajZvb1ZjY25ZdXVxOEZjTi1SRzRVTEhKVHFpRWxKbHNKbjg3VUxlUzk1Y0NFaV9HWEEyaEE?oc=5",
@@ -1883,16 +1855,16 @@
     },
     {
       "section": "Asia, Europe & World",
-      "title": "Japan tries to head off toilet paper panic amid Iran war fears - The Japan Times",
-      "source": "Broad World",
-      "link": "https://news.google.com/rss/articles/CBMiekFVX3lxTE84ZTlxSFFGU3FzeEttMFItcm1aT0tPcFZsSjRmeXZ3Yk50QjZ0LWhaQXZtQ0g0MElWQ1JfTHNJM0JMTUprZEtrMWZnUXRUWUNHNDVUaFYxUTZtOVNTR0F3MFF1ZEhieGtBZHI2ZFRmSFJWQnBjR1NaclB3?oc=5",
+      "title": "Anne De Mesa grateful for chance to scream ‘Philippines’ on global stage - Inquirer.net",
+      "source": "Phil Inquirer",
+      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNdzIyaW9ucTI0QlhSUVFIaGU5LVRyWGtsV2pZOGRuYjY3M290a3lYTEJnVU94VFYwSGpEYkg4N3hvRGFMaXQwRXFGYmxGLXBPLW1uUnYzOGdiSVowaTdYblNfUlJDcHFGZkEybGFJVmVjdUpaVjdhNXB5MlZVWFpZclpFN1BuS0wxOTV2TjRIVmVUM1hLRVBrM0VYMUllMWpvNEZvb1VxMzUzSWV0QVZrS2x30gG3AUFVX3lxTE1vVzRXNzF6dFI3b1dKUEpOcEsyemdXX0RYTEVBWGtyclBLS09kUDVqME9zcXotOXU3WUhxU3JHQzQ2T29YVmx5OTZubTFEUGR6Nlo2RlZKNVBsZ2hHRUJFVllkUlU4TE5NVC05cEZHVDZoQ3NWZlhXRXdnb2xMSEJjcWp0RHJKQ19QOWRXUk8yNDM3ckgxSUw1U3BfV3E4RlV5dk5HalFSaDNXclVsZDFnT3YweFlzMA?oc=5",
       "published": "2026-03-23T04:51:00Z"
     },
     {
       "section": "Asia, Europe & World",
-      "title": "Anne De Mesa grateful for chance to scream ‘Philippines’ on global stage - Inquirer.net",
-      "source": "Phil Inquirer",
-      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNdzIyaW9ucTI0QlhSUVFIaGU5LVRyWGtsV2pZOGRuYjY3M290a3lYTEJnVU94VFYwSGpEYkg4N3hvRGFMaXQwRXFGYmxGLXBPLW1uUnYzOGdiSVowaTdYblNfUlJDcHFGZkEybGFJVmVjdUpaVjdhNXB5MlZVWFpZclpFN1BuS0wxOTV2TjRIVmVUM1hLRVBrM0VYMUllMWpvNEZvb1VxMzUzSWV0QVZrS2x30gG3AUFVX3lxTE1vVzRXNzF6dFI3b1dKUEpOcEsyemdXX0RYTEVBWGtyclBLS09kUDVqME9zcXotOXU3WUhxU3JHQzQ2T29YVmx5OTZubTFEUGR6Nlo2RlZKNVBsZ2hHRUJFVllkUlU4TE5NVC05cEZHVDZoQ3NWZlhXRXdnb2xMSEJjcWp0RHJKQ19QOWRXUk8yNDM3ckgxSUw1U3BfV3E4RlV5dk5HalFSaDNXclVsZDFnT3YweFlzMA?oc=5",
+      "title": "Japan tries to head off toilet paper panic amid Iran war fears - The Japan Times",
+      "source": "Japan Times",
+      "link": "https://news.google.com/rss/articles/CBMiekFVX3lxTE84ZTlxSFFGU3FzeEttMFItcm1aT0tPcFZsSjRmeXZ3Yk50QjZ0LWhaQXZtQ0g0MElWQ1JfTHNJM0JMTUprZEtrMWZnUXRUWUNHNDVUaFYxUTZtOVNTR0F3MFF1ZEhieGtBZHI2ZFRmSFJWQnBjR1NaclB3?oc=5",
       "published": "2026-03-23T04:51:00Z"
     },
     {
@@ -1901,13 +1873,6 @@
       "source": "The Australian",
       "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNcHdma1FUMDZ4YzRwZ3pJR2x3ZDRsb1FOcUtocURuU2RsbVprX2VtVVdMRW1tRFBQVDdnSnN6SnJoaTllc0d0S212OUNNUG1VT05GRlNaOVN6S2NjY0JPUEl4ZHFlSm5PSnkzb1ZNbzQyUGI3Rk5uaE93bTB6b2NaUGxBbHdQdFZGcGt1ZmpMYTNfVjg?oc=5",
       "published": "2026-03-23T04:50:53Z"
-    },
-    {
-      "section": "Sports",
-      "title": "Bracket: How to watch today's March Madness men's basketball NCAA Tournament games - Times Union",
-      "source": "Broad Sports",
-      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNVVp1bUZXMnljeE1wamdmeFhJd2tVTkhKOUZuUHVMeXhzTjdHOEtrT3ZkQnljSW4xaGJYbGYtWHNYSk5vTnRocVh5UHBPZ3BacWZKbTFjVGlFSVNCYk11LVRRMU8xc2EwM0t0MXpuNk4yY042V3dRTDZORzVGVFcxYVhaUjhrUVFGeFFBdWNfbzNBOUVXbTlaQ2dGdU56eWZKSklIOQ?oc=5",
-      "published": "2026-03-23T04:50:28Z"
     },
     {
       "section": "Culture",
@@ -1987,18 +1952,25 @@
       "published": "2026-03-23T04:41:11Z"
     },
     {
+      "section": "Asia, Europe & World",
+      "title": "Global economy under 'major threat' from Strait of Hormuz crisis: IEA chief - France 24",
+      "source": "France 24",
+      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPVUhOX2ZzeXZvcFhOVmM1UlRQNWh3Q2d4dVMwZEJ2bDZrTlFIVmg4XzBYY2E3OXE1dTBrMGt3TEEwNFV0QjBabzE2cXMta1dCQ0h5RkpVM3dVcURHZnktcVVBVThGVFZXbnFFNV95V1YydnJqNlF6WVdYM18xTnN5QkU5cUtEaDYyc0pVZ2tvZk9MWW9PQXhXQjJSdDUxdTNFdHAxQS03TUR6ZFU5QlduOWl2YllyNnNYbDln?oc=5",
+      "published": "2026-03-23T04:39:12Z"
+    },
+    {
+      "section": "Tech & Life",
+      "title": "Tell us: How do you use AI tools? - MSN",
+      "source": "AP Technology",
+      "link": "https://news.google.com/rss/articles/CBMirwJBVV95cUxPb1VSZTNCVkZETWlzQ2RYcnJ2MURYd0d3SFh3ZTdzanFHd0JrcVJVUzJ4T1FHRGpITnBnTEpvMkY4emU0QXhYOE8yejNSb2gxVEdxYXpRbllQblhwX1dUQWVMUXdKYTZjTC1UcW42RzNnNFR4dXRtQm9IS0ZveTNnQjgzTmh3ZVBkMlA0VXVFSXBoNFBEYVplWWhFQ3lTVUJNSEtZNXVSWXFZOTRwcDF2T3pWMUdJUnhIdDgxQVNxdzltdzBJWHIwRVhGZjNTVXdZTzY1ZTBhYnM2TDJLT3JBY0l0clEybUF4ankzRXA0MTllc3pzcjg0T3ZyZno4dW9Cb3MzelV3SnlRODgta1RHUnRtaENZcnRaRExFRzh6TWxaQ0xXakdFMVhST05xYUE?oc=5",
+      "published": "2026-03-23T04:39:08Z"
+    },
+    {
       "section": "Culture",
       "title": "BTS agency shares drop after comeback show turnout falls short - BBC",
       "source": "BBC Culture",
       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFAxR1FEd0lDaXk5Qk56UVNmNmhqTUVyV0x3ZU1qUWJrTjB2MFVVNWFQcFlWZ1NJSUpaZTZ0Vi12ekVuQ2pSNWYtd0dGVXpkcU5rWFlLSEUwTlUydw?oc=5",
       "published": "2026-03-23T04:39:03Z"
-    },
-    {
-      "section": "Middle East",
-      "title": "Blasts reported in Tehran as Israel says launched strikes - Arab News",
-      "source": "Arab News",
-      "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE44eTFPZG9qeTcxVnlEd0oxYnBiaEs4MnJxWDBHZUNfSFhRbmZWSmJtNkg2bk5JRDNwVjF3XzVQN2ZLQWt0Z0Znazd5cXlROEFUTzk2OUNfeE85SllRelE?oc=5",
-      "published": "2026-03-23T04:38:51Z"
     },
     {
       "section": "Sports",
@@ -2071,6 +2043,13 @@
       "published": "2026-03-23T04:32:00Z"
     },
     {
+      "section": "Sports",
+      "title": "March Madness bracket 2026, full NCAA Tournament Sweet 16 schedule - The Tennessean",
+      "source": "Broad Sports",
+      "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNZVdYMC1FZEFEZVBSUmNieWpTTE11cHNZNnAxNnNHbk9wNTNEa2U1MTFSS2o4UGVxbjd4VTdJOG4tUkZIWTNzak9CWGI3amRxUVpid1VfbG9MaWNLUjlKWlhhY21yUVJJaDFwLVpzdkE4NE84Ui1kdFhjdklGcnVWbGRQUkQ2LW45U2g3bFhseEw0ekJlZFRRNXJ1cmxZSHhYeGlwRVZrQUZZd3A0X3pfZWpYV1Qzb0VHUmlDV01EM1dzY2dRM0pITmR5M0JmTENU?oc=5",
+      "published": "2026-03-23T04:32:00Z"
+    },
+    {
       "section": "Business",
       "title": "Is It Time To Reassess T. Rowe Price Group (TROW) After Recent Share Price Weakness - simplywall.st",
       "source": "Stock Analysis",
@@ -2101,7 +2080,7 @@
     {
       "section": "Asia, Europe & World",
       "title": "US should practice what it preaches on Vietnam religious freedom - Asia Times",
-      "source": "Foreign Affairs",
+      "source": "Asia Times",
       "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNRmRHU2lPcm5abTlsaFlFXzhSLUtkV2d0NmtJVHJObDhlem1kcHM0ZnZyWk1DSVQ3S19hXzN5QWFzMzVhTjNKZGhyWXZDanBxSVpyZTJ6VzNfLWE5Rmx0NF8xc2NMYjFMSWlzSVBuMGZTbjV4RDJBRkxncFg2N1BORFJFOUNHWExxdWJZMVpoX2xMa3EyTkxXV0tLVQ?oc=5",
       "published": "2026-03-23T04:30:00Z"
     },
@@ -2141,11 +2120,11 @@
       "published": "2026-03-23T04:27:11Z"
     },
     {
-      "section": "Asia, Europe & World",
-      "title": "Vietnam's Communist Party meets, with new state leaders set to be nominated - The Star",
-      "source": "Star Malaysia",
-      "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNaFZmSzBocHdHRVgzdGxlcWQ2MEhyNkR5NWJnU0FtS0lPRWhFNDRvemxCS0loemN1MVhQTzJlWVNsb0dfdGtDOGM1cFJQOVdETFo2am9JSUdrV0hKdzZ1OVo2UDBrcVYtOHJ0WDJ3NU80LXNoMzZMLVIzR0dSNW5EVFpuVHpDajdISW1nZ0t0X2M4eHNHM3Eyc1dMWlB3MU5zTHVRMl81b204NEpTNHZpSEZOdVU2UTFURVNlUkxoT3kwc2s?oc=5",
-      "published": "2026-03-23T04:27:00Z"
+      "section": "Sports",
+      "title": "2026 Sweet 16 schedule, game times, TV info, brackets for NCAA Tournament - USA Today",
+      "source": "USA Today",
+      "link": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxQNkh2UkNZWTNTUWpsNEdLbWhmWVNDQWpYOUJnQ0YxdzJzY0N6d0pjWlVmTTNmd3o4eXdzdEZydzZJaEZSdlJMQS00ODNDNzF5eWNPVXM1c1A5UGhwY2hJQ0dqamdDLVNQLXhTeGdVNTdXRkhXYmZsb1VycGN2aFIzQ2Z5M1NvOWJnSzg4b2NqMnZWdjU0MkFsaFhqVGNSWWhWMEVsTmV5a1dtbC15Njgwb3VtdUotWVRrRWJZV1ROdTlLOFlfeGlXYmVSc0xXUnlLTFdsVzNLZlN1bWpDaWF4dTF0eGxpSmJqbWpoRng0NA?oc=5",
+      "published": "2026-03-23T04:26:00Z"
     },
     {
       "section": "Business",
@@ -2162,6 +2141,20 @@
       "published": "2026-03-23T04:21:24Z"
     },
     {
+      "section": "Sports",
+      "title": "Men's 2026 March Madness NCAA tournament forecast bracket - The New York Times",
+      "source": "Broad Sports",
+      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNenN4WVVTazgwVVZobWdBYUxvTlhCVkFMbGl4aUtzX2tqVlAwbHN1ejFPZUlqdFhQeU9pakxDamo2OUZRbThnNDJ4NUpVM2I3eERSRzFtNmNaNTRQWGVsVG83OFdGcDZTYnRyenAwQk9LZHd0TzNqdlZuQlBjRDhrS2oxTUNkeEJ2Y2U4dTFMZ0xKVHhrUHhFZXRERFRhMWNHUDlzRg?oc=5",
+      "published": "2026-03-23T04:20:56Z"
+    },
+    {
+      "section": "Sports",
+      "title": "The timeout, play and player that dethroned a champion and sent Iowa to the Sweet 16 - The New York Times",
+      "source": "Athletic",
+      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQWFRuTEZtLWxQMGl2amRQc0FtdDNnVGpZWC1vNFJQUXVRMFhaVndUMjFPdVdDcDRheWNBYWJZNGlQaW1WRlVEVlFHdGktMXFsZEdwdm1WMWdnM091UHp5RE5pSVNwQzF2bmxNQjZwbnI0eWZFd2h1RE1xTUdWakJWUDllUDZpbzdwSmFVeHptVXRoMjJIMkxLQXlwb2prVFg3RG1SWFhR?oc=5",
+      "published": "2026-03-23T04:20:55Z"
+    },
+    {
       "section": "Culture",
       "title": "BTS Is Back With ‘Arirang,’ but the K-Pop Landscape Has Changed - The New York Times",
       "source": "NYT Arts",
@@ -2171,16 +2164,9 @@
     {
       "section": "Asia, Europe & World",
       "title": "Squawk Box Asia - CNBC",
-      "source": "Broad Asia",
+      "source": "Asia Times",
       "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5jaTdxM1dTeXBWdHRpdW53N1dscmNGRUt3VW9md2g4NkNfelhJZ0VLR3d2Zzk0UUF6OGlhdXhnd1JaY2Z4dHFzS1ZqOTNXUQ?oc=5",
       "published": "2026-03-23T04:19:34Z"
-    },
-    {
-      "section": "Middle East",
-      "title": "The Latest: US Central Command leader says Iran campaign is 'ahead or on plan' - New Haven Register",
-      "source": "Arabian Business",
-      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQa1RKLTNEUm9oc1NnS1lwN05meDVBdGxZUmVhdUhUM0FJeXFtOW1iQmRYRDhEYVd3ejJ4Q3hiUkZBQ3N4N0ZFMDdCQ0FKSDdYcVk0ZW1yUVZkM2FNVzd4ZU45c0IwaWplZGNJbmxCaTkyZEk4MkpzNDlmM3o1eDhpZWFKZDh0ZTQySWxuN3RDT2oxbmt3NW9PVnIzQkFJWlg2THNBeUpB?oc=5",
-      "published": "2026-03-23T04:19:08Z"
     },
     {
       "section": "Sports",
@@ -2225,11 +2211,11 @@
       "published": "2026-03-23T04:14:54Z"
     },
     {
-      "section": "Middle East",
-      "title": "How did Iran's ragtag air force intercept, strike down world's most advanced fighter jet F-15 of US Air Force? - DNA India",
-      "source": "Tehran Times",
-      "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQT3VmWmhKTUYySU9GQjdpQWNXOG94ZWNmS1dEQWk4UDV6UG5OUC1QYTZNc2ZtcTFOYUFoS3pIa0pfNTJtTTVsMElmNTVqNGtBbnNxT2FseFI1VzA0UkpGdGVOQ0E5bEJjRktCQlhlb1Z0NXRfQjBReWpjTkJMZnhSRElVRm1hZHJMWk1zMnFPd1MyYkk2Y0xhZWRHYXVzZ0lTaEMtQjdJT0ZORHQwZV9oTG5OX0YtUkl5akptdVRiMTl5TVZVMC14NVltWFBEYi1kb1lGc1M3dC1RQzVXSFpSeGU4dXlzNkNGNmfSAe8BQVVfeXFMTzVGMWxBd2xKN1NlMl9OQTRCNDJQYU1fZGtFZWl6SlhIZF9YQjRIX0l5emZLRjhBM1BLWldmUWNkbXNLZjRBUFlCRDlOSTFReGNac0pENmp2eWFBVHpBS1JzWExVMUtMSGo3N3k0RGlUSE1aR3Nwb0Jkdk5rSm9ISVNnQVZvNHVUUzFEYjJKSkxIeE5rVjJuM2F6V0dmdzBrS1B1UUZVdzN5TmRzZmNySXYwTXk4VFczcXNRY2VQUVFCaFA1QmR3by05WTFxSVEwcFNiSU5hUUJMTVdDRUVxUkU4TWs4TmVvSnRkR2o4dmM?oc=5",
-      "published": "2026-03-23T04:14:00Z"
+      "section": "US News",
+      "title": "US court kills tariffs, Trump hits back - MSN",
+      "source": "Broad US Politics",
+      "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxORk10ck9SYVpwbUdXVDN6SmhmeGw5eHlDVnpFWlFrSWpDaV9nTG9OM3NDZzdkSmo2bUlucWJEU2hlN1NaQkx3bUt2T1BDdGFiT1BmMXVOZTQ1VExQZWJoNXo3MGxUSmhkTlpQSFdkS05HTk1ma3pFNHdtc3M1ZXF2dzZJajlOc201TWtRZnMyeU9YWkticENfd0RUcGkydzRkN2RER0Jla1NhbGRGTXZMVkpseFk5RDZHUUxvQkVRSmNUd3M5ZFJqTXg4QmJKRkNlc09kWjRjTQ?oc=5",
+      "published": "2026-03-23T04:13:24Z"
     },
     {
       "section": "Asia, Europe & World",
@@ -2237,6 +2223,13 @@
       "source": "Nation TH",
       "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBJQllKcV80MFNoQ1Q5VmdsQWtLeFdXRUl6NVgzbm9NWWZPZEY4Q3lGcC1mcXVBSFRDY25YeTRHakR0dGlJa2xIYk9XOTFGT2pDN3NxZ1N5bVd2SXc1czBjcw?oc=5",
       "published": "2026-03-23T04:12:00Z"
+    },
+    {
+      "section": "Culture",
+      "title": "Vanity Fair Oscar Party 2026 red carpet: Teyana Taylor, Kim Kardashian and more - AOL.com",
+      "source": "Vanity Fair",
+      "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1EOHhLZl9OS0pPWk9INU5zWTN3bWlnX196cXVCNGxmb21FVThwS242cHZHUzJXTUNWMEpKRGFWLXJNWkpORUZNQ1dXT2NCWkNQN1NlTDBLRmV4TlByajBXRVpodFZpUllER2ZDd25UTE9ES0VaM2JkY1hzaDg?oc=5",
+      "published": "2026-03-23T04:11:59Z"
     },
     {
       "section": "Middle East",
@@ -2310,13 +2303,6 @@
     },
     {
       "section": "Business",
-      "title": "Gold extends losses amid 'brutal flush' as inflation worries mount - Yahoo Finance",
-      "source": "Yahoo Finance",
-      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNaHpRaE5YOTRFSjJDMF90STc2a2FEdGtYMGQ1S0I4VDRWRHlzSmpqMVhwZU8yaGU0U0lJeXh4NlZkMFU3RXpvX2NPTGJSbzBEaXNmRlpFS3NDYjFsOHBoU0lEaUQyVVRkcjNndVFjZC1HNy1VYzNWTUFiRmY2OU1BMEwwNUdOdmc5UVRITTQ1NTFIRjUtcDRYYVh5SFdHOG43czZfMjZHd1ZoaElRWENZ?oc=5",
-      "published": "2026-03-23T04:04:00Z"
-    },
-    {
-      "section": "Business",
       "title": "Alibaba Earnings: Adjusted EBITA Misses on Investments, but Long-Term Outlook Remains Positive - Morningstar",
       "source": "Morningstar",
       "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQaVQxQVBUdDJTSWhIWTFiZmZhdUo3T1Q2M3BfaXhSc2V5elBaaHBJRTlXVGZfRW1FRHNWNDdBdDlkLVFRdVNjT3Y4YzJuczdXMndrOVNoLUtYSlBxbksxZnh6NDZxM1JvLVliRDBPN0I0S00zN3VfTFBWa1RyUU9Dbks3T1dGREFQTzNvZ2o4R0U1MEZRTUs0S0p6WVktaV9xbUdPMG02M2lFV1lVVWh5U3ZwdU00SDVlSHdWNHE5a25uSE9yXzVaeQ?oc=5",
@@ -2387,30 +2373,37 @@
     },
     {
       "section": "Culture",
-      "title": "Everything you need to know about ‘BTS: The Return,’ the new Netflix documentary - WOWK 13 News",
-      "source": "Variety",
-      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQQzIwNXVjUVFORTRnb29fcDhpMlc3MHBJd3pNMHJTY2VhX0tTelJtcHVjajZWRm8tX0tRZTJvcEdyMGpMMV8zTzhkMWxoRkcyN0dCUVEtR09qMEpNbTBfdWQ0Wm4wMFA5eEpCTFo4S1c4cFV3Unk4UW9hM0hRT2dqOHdjQW1rOWJDUl8zTVY4cFhtTkVpREwzWm1hNFk5UWU2MzlhZmEtcmFHTUhoZm5Hc3BRZnZHRDFyUlHSAb8BQVVfeXFMUFUtOWVBT0o3dkpLN3dSQVlfMTRXaTI3VXZNb0VrbmQ2Sy01R2cxbEhmeVlfaDJOQXU5WExYdXI5WEo2b0sycXVPSXJOMHM0M0YyNS0xRjRiNTZYbjBzazFtMHRnRDZ0YVZkdTB0N1pQYVU0WmhxdnVZODNkTHo0d0NvYnNSMFcwSjZVZmpyaDYxMk93VGc5amU4eGoySWM4clJBWHpyb0dERDFwTFZVR3cwN2FkeFNPZTZPRER5c1U?oc=5",
-      "published": "2026-03-23T04:01:16Z"
+      "title": "Celebrity chef René Redzepi resigns from iconic Danish restaurant Noma after abuse allegations - Gwinnett Daily Post",
+      "source": "NME",
+      "link": "https://news.google.com/rss/articles/CBMilAJBVV95cUxQSFZtSVBDNGdpVWZMb1R4RlBaSWJsYm1HZmdtSGRKdlhYQ1J0aXhkdkxHbE5uZF9IS0JsN3JuS0N2MHcwckFyWmlUUmNmWF9qM3JndUxkdnotZFhLcnZjWV9XeGlWa25zR09zTHh1bjV3OTJsM3k2d2ZuV1luWjFaX0N5eEJCeTN5TklJVjhUT3YtZ3lSX2VsREQwamw1UFNEN05iOFhWUlpoYjV5TVc2OVpIRnk4QkRmcmhFSTFuc015T3J5RzRHY24wVzRWNldrc3FOZkVQNzVWckRfem1ZUXdUd0c3Y25rcmpEckM1UXJSN2NOSjZKLWVEUVdhUEVJXzRXVVBGTVlVTVJ6OWlINUViMXM?oc=5",
+      "published": "2026-03-23T04:01:36Z"
     },
     {
       "section": "Business",
       "title": "Donald Trump risks getting bogged down in legal action over new tariffs - Financial Times",
       "source": "FT",
       "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOcFEyTkRpbzAxNkpiNUtiNjB4b3N4dDlCQ215blBiV3B3TnZtb0o3Z3Y4ekFwLUJzWDN1Ymd2SG9FTEtKYmhIYm1BWHY3c2ZyajVrODN2VDVsY3FNazhFdEJ3cjBzUW41R0g3bHRKTkVxVzYxNU9ES1QwNEJnNVlreHZIQ1A?oc=5",
-      "published": "2026-03-23T04:01:04Z"
+      "published": "2026-03-23T04:01:18Z"
     },
     {
-      "section": "Middle East",
-      "title": "Nothing to Lose: Iran Exploits U.S. Weak Spot to Drag Out War and Economic Chaos - Haaretz",
-      "source": "Haaretz",
-      "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxOaXR3cmJ5X3ZvQ0pIQk9QdkFVTmd3RUpoQjFIX1ZRNUs1M0NQOFFmWXVPRGM4MW5ycWd0UE1EUEFONmFNVktoRjd2SkJmMFQ3YmJMdVZXZkEyWUV2NnFvVnJjejJJZ3dRcjdOelFBZlBHR01ZS3lXOEpocHV1VVlpYWNJaFpPUjhtOU9QbU9WUGtONnU1N1VFQ25LM0JFQ0hkaG51UHNYVHNRbUVzTUZBNktVRjdpVUZwVEFocjNkQmVZZERZY1ZlYldPdmhwc3ZRb3B2eTB0RXpLNEY1WWZFUHlDNzVNanpvYWc?oc=5",
-      "published": "2026-03-23T04:00:00Z"
+      "section": "Culture",
+      "title": "Everything you need to know about ‘BTS: The Return,’ the new Netflix documentary - WOWK 13 News",
+      "source": "Variety",
+      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQQzIwNXVjUVFORTRnb29fcDhpMlc3MHBJd3pNMHJTY2VhX0tTelJtcHVjajZWRm8tX0tRZTJvcEdyMGpMMV8zTzhkMWxoRkcyN0dCUVEtR09qMEpNbTBfdWQ0Wm4wMFA5eEpCTFo4S1c4cFV3Unk4UW9hM0hRT2dqOHdjQW1rOWJDUl8zTVY4cFhtTkVpREwzWm1hNFk5UWU2MzlhZmEtcmFHTUhoZm5Hc3BRZnZHRDFyUlHSAb8BQVVfeXFMUFUtOWVBT0o3dkpLN3dSQVlfMTRXaTI3VXZNb0VrbmQ2Sy01R2cxbEhmeVlfaDJOQXU5WExYdXI5WEo2b0sycXVPSXJOMHM0M0YyNS0xRjRiNTZYbjBzazFtMHRnRDZ0YVZkdTB0N1pQYVU0WmhxdnVZODNkTHo0d0NvYnNSMFcwSjZVZmpyaDYxMk93VGc5amU4eGoySWM4clJBWHpyb0dERDFwTFZVR3cwN2FkeFNPZTZPRER5c1U?oc=5",
+      "published": "2026-03-23T04:01:16Z"
     },
     {
       "section": "Middle East",
       "title": "America Has No Good Options in Iran - Foreign Affairs",
       "source": "Foreign Affairs",
       "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBOdzZFUW1jNjVDM1MxZFZVSjNxM2s0VXBadm84TGU2c2xtUS1QNHdkeWk2RnljTXhtb2h4bjJ6amhWQXVHOFhWVGhvTXJQcVRBZFVxWGRxLUR3NFVfWnpHbWdMTlFya1gzdW9VNGNsRWE5M190Z25F?oc=5",
+      "published": "2026-03-23T04:00:00Z"
+    },
+    {
+      "section": "Middle East",
+      "title": "Nothing to Lose: Iran Exploits U.S. Weak Spot to Drag Out War and Economic Chaos - Haaretz",
+      "source": "Haaretz",
+      "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxOaXR3cmJ5X3ZvQ0pIQk9QdkFVTmd3RUpoQjFIX1ZRNUs1M0NQOFFmWXVPRGM4MW5ycWd0UE1EUEFONmFNVktoRjd2SkJmMFQ3YmJMdVZXZkEyWUV2NnFvVnJjejJJZ3dRcjdOelFBZlBHR01ZS3lXOEpocHV1VVlpYWNJaFpPUjhtOU9QbU9WUGtONnU1N1VFQ25LM0JFQ0hkaG51UHNYVHNRbUVzTUZBNktVRjdpVUZwVEFocjNkQmVZZERZY1ZlYldPdmhwc3ZRb3B2eTB0RXpLNEY1WWZFUHlDNzVNanpvYWc?oc=5",
       "published": "2026-03-23T04:00:00Z"
     },
     {
@@ -2425,6 +2418,13 @@
       "title": "Here is the latest SEC sports news from The Associated Press - WWLTV.com",
       "source": "AP Sports",
       "link": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOZUY3cWxING1KemRFa29INlBwUDlzWENzbVVza0wxaF85V3FIa3F6N0lmQXBzVlZJZkxROTJpdzBkczUxNEtQZHEwY1hBZEVBTERSVUlGZURJN056NWsxM2xjOFN4SlBfTTFrZHNtdGxhMVZEdUtQeU9WNEVRNTA5dG5IM2R3dU05Q1V6N0c1bVdmcUNnQ19qRnlWQTBpLTd4MFhxVWlnX0Vrbk1KVjlCTHdEOXVXWFU4M3JSRWhKWXNNa294TTN0bFJha29hN0lNNWZyamljMDZ2elVYZGo3aG9uRVIwdExUeVpYZWdXOHE?oc=5",
+      "published": "2026-03-23T04:00:00Z"
+    },
+    {
+      "section": "Sports",
+      "title": "Here is the latest Big Ten Conference sports news from The Associated Press - 10tv.com",
+      "source": "AP Sports",
+      "link": "https://news.google.com/rss/articles/CBMigwJBVV95cUxNS1VURl9KUDJNRjQ5YUV1bzd6ZVRhWWJ0Tks5bGVBMWFad09leS1CYnBUeFNrVGxpeGlnUjlKQUhuLVp4RExwT3I4RW9wZkdOa3NzUzY2TnY1SzY3UmpHMk9qNlMwQjBfX09BUWhnQWo2ZmIybHZ1T3dIN2s1Wmg0LV94Z1dza3pNQTZPMkRaSGs0a0IyTE1Fd25CbkM0Z25UdmtkSTlfUFVaZ0h1OWh0dmxySVJUN0NzZk1veDJubHZmMThtM3plcVpnaWI5NU55aU04ak9PaGZBeFY5aWRPS0VDa2tQZ2xLTzVIdmpZUktOU1pyRmRrMHFDaUpMQXlJZldz?oc=5",
       "published": "2026-03-23T04:00:00Z"
     },
     {
@@ -2471,13 +2471,6 @@
     },
     {
       "section": "Asia, Europe & World",
-      "title": "North Korea's Kim Jong Un reappointed as president of state affairs - Le Monde.fr",
-      "source": "Le Monde",
-      "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOWDdKcFppcXVrWXdYd3lRYnBrWWRDWktvaVVjNHRTNnN0eXZ4emozejNVMzd4cTJJTmlFVkh5bTlYZnBySDJhYVBEMW5fNVIyODVBMmN1eGVMeklIVUVydE1nMGM4M0ktbFBRUGF0b1FnUnlTeHBVTVJDWnl1TDcwTzdJa2Z2aUhMR1ZCMEMzZ3I4Mnlua2dWV25TT3lNbGFHUWRBT0tEbmw3TEMtd2txWGJMd0RHRlB3cHNRX0VXWk5Ta0VtVndWRThsZV82dTdSQ2lSaG4zd3I?oc=5",
-      "published": "2026-03-23T03:53:37Z"
-    },
-    {
-      "section": "Asia, Europe & World",
       "title": "Vietnam's fifth cardinal Pham Minh Man dies at 92 after prolonged illness - VnExpress International",
       "source": "VnExpress",
       "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQTjFPa1RIbW1XaklKZnY5ZUQ0aS1SRVFURzFadkVaUmdBOE9WRVdMcURLODJIVmFOWGRaUmxRck55M0NNMVBydlFPbWNZNzhoblRSM0dITUhjWW9mNVppajlGWW05bnJCUVJ6UWJCU2t3M0g0ZDFUNnlKLUJ3elVud21XZXV4QVJCSDNrYk9ZTmh4SGxpdXNPMzN4UVgzcDNxSlNMdjk5NGtEREdqelA2YXhHeDRoNVg4SV9jcw?oc=5",
@@ -2510,6 +2503,13 @@
       "source": "Vogue",
       "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOTkdNMUxNQmYzTTFGbE1RWVg1bDllLXJHa1dBcWxYTUNjMHFGVV9PTFhwRGo2TUplNDlvNzl1dWVvLWEyenQ1U3hKeEZhZUsxdUZPcjJkX09HbE9scTd2Rms1Tllpc3h2YkJyUDRXb3lTNm9mZlRKY09icElGczk3UXFKVUNHWDIzTnB2bzJid3hzemg3MTRhbjQ0TjRyLUt0OE95dC1nQmtVRzMtd05ZUEJPVXY0VDZRUUlsYjZxQ2ZRQkJQbjc2TktyTC04aC1TYmV1SkZxSjQ?oc=5",
       "published": "2026-03-23T03:47:13Z"
+    },
+    {
+      "section": "Culture",
+      "title": "Academy reprimands Oscars security team, 'extremely upset' over Teyana Taylor shoving incident - AOL.com",
+      "source": "EW",
+      "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPT0o3M2k4eVZmLW9XNHRXWUhpdUU5SGxfREtkRXdYVWVvWFBSS2VJVF9LV2NFQXRtcGIzeGZKSlNITjZibjE4OTFwTjBfNkZ3YmFTZmgzZ2dIRkxadlNZdlhJdWFMYVU0WDNWSzdleldmVUJfWFlhWTBFcEE3bXpSaXhNdUV6aXBpLUVN?oc=5",
+      "published": "2026-03-23T03:46:43Z"
     },
     {
       "section": "Asia, Europe & World",
@@ -2673,13 +2673,6 @@
       "published": "2026-03-23T03:34:03Z"
     },
     {
-      "section": "Tech & Life",
-      "title": "Will AI steal your job? It's complicated, new survey reveals - MSN",
-      "source": "ZDNet",
-      "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOeUpXTGdCYXlsWmM2a29DYU5NS28wZHByRjlVSGU5TjhKSEk1SzNFdlhwbGdLN20tdFdHdHJZNmxqdjJ5bG5kUkVMM0Rkcml5a1RvSE9wamhwLU5Qb1YxUGlmV3R3VTlnZ2hJWVpxb0g3c1hwVDdYeDAxTExXY3hKRHF3a0VpQXlrakNoTFhpVmphTU5OT1pkbXN4QmFjVmlnTW9IRHVzblRTTmJsZFdkNVRoNlFJMnpUZ29fQ2h0UjhOQQ?oc=5",
-      "published": "2026-03-23T03:33:06Z"
-    },
-    {
       "section": "Middle East",
       "title": "Over 40 Middle East Energy Assets ‘Severely Damaged,’ IEA Says - Bloomberg.com",
       "source": "Bloomberg",
@@ -2715,13 +2708,6 @@
       "published": "2026-03-23T03:30:35Z"
     },
     {
-      "section": "Business",
-      "title": "AI-led wealthtech rising as VCs bet on a fintech disruption - ET CIO",
-      "source": "Startups.com",
-      "link": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQUWJ2Xy1JcmNBcjQwcGduNWwyOENiajVfNzlCU1J1ZlVrZS1SU2p3emFKRGVTLVFoS081RHJXTl9BTWlBVkIyVnBRdTl5SWF1NnN4RUVSNlF1dW1YODdQcGZwMTE2UklOOUJQY1Q0YVdDRXY5SlFLNElyOE5fYTN6TjhmTmhZTG4xczYweHc4akxBUnhMcEhxTUk5SlZPRXBNTlZLU29WVzRacmZaWWo1Wk83aFQ2VjlCNE1JV2dNRjJiZ1h5a0pBX0Z1NNIBywFBVV95cUxQUWJ2Xy1JcmNBcjQwcGduNWwyOENiajVfNzlCU1J1ZlVrZS1SU2p3emFKRGVTLVFoS081RHJXTl9BTWlBVkIyVnBRdTl5SWF1NnN4RUVSNlF1dW1YODdQcGZwMTE2UklOOUJQY1Q0YVdDRXY5SlFLNElyOE5fYTN6TjhmTmhZTG4xczYweHc4akxBUnhMcEhxTUk5SlZPRXBNTlZLU29WVzRacmZaWWo1Wk83aFQ2VjlCNE1JV2dNRjJiZ1h5a0pBX0Z1NA?oc=5",
-      "published": "2026-03-23T03:29:00Z"
-    },
-    {
       "section": "Asia, Europe & World",
       "title": "BBC World Service South Asia - Schedules, Sunday 26 April 2026 - BBC",
       "source": "BBC",
@@ -2736,18 +2722,18 @@
       "published": "2026-03-23T03:24:00Z"
     },
     {
-      "section": "Asia, Europe & World",
-      "title": "Majority of Japanese Oppose Sending Warships to Middle East - Bloomberg.com",
-      "source": "Bloomberg",
-      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOcnU0Z3BWOC1WQWxGMnpYYnZVYkFLWnpyMnhlbll0ZGs4UXQzUVZKbnJhdFNVVGYzYWVsVFpYRkpSQjVyeGNLR3pXbXg4WkxjbDVPeHNfR3h0ZjJEVzJXSkxIODZ5c0VqTEd3amRnWkdPakxFREh4SUtjRkhlY0RyUTRwMXd1X3NZdE4wYzZlamNTNnFiQ2wzME95ZFhRWkdDUzVUN2hyY1hKR2E1RDA4?oc=5",
-      "published": "2026-03-23T03:24:00Z"
-    },
-    {
       "section": "Sports",
       "title": "2026 March Madness: Men's NCAA tournament schedule, dates - NCAA.com",
       "source": "Broad Sports",
       "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNZmJ3X0hpa2ZMakl4dlFVRTU5clIwM1BVNktFWU1JMWtJNnd6UnBxWU5BUW9pYjFDSDlaVkdoR3dkQzJaeHhIUW04MHZDODVfWTliZF9Qa1VxRkFTdU44ZFlMd05CWkhZV3E5QkwzZFpMUjBrZjc5d3JCWG1GYWl5VUdFUE5NelFoOG1DSEoxajNwdS14c3g1TlU5OU42azFHZTh6czdNUFUyMnBqX0xyOVE5bXnSAboBQVVfeXFMT010cUNTanYzM0I2WGNxM1pBbWNKb0tkSEh0UTI5TjBnYWlNSWZ2YWdOcUJJbUR6NUh4MmY2UlJqVkt5VmFMclozSktFWWNuTGtQT3NsOEd3NmJySlY3WkhsbDVuaEtCcDFQWWcxSDliRGQ3VkYydmF2RVNnY2NScDBsa2doX1NfT3NLcWVEbVR6YUFoaGgtYlJhUXVpS05RSHRfMG53QzlQM3FnSUpDdlJiS0hFaXprY2tB?oc=5",
       "published": "2026-03-23T03:23:23Z"
+    },
+    {
+      "section": "Asia, Europe & World",
+      "title": "Les Républicains claim symbolic victories over the left in municipal elections, but struggle in France's largest cities - Le Monde.fr",
+      "source": "Le Monde",
+      "link": "https://news.google.com/rss/articles/CBMilgJBVV95cUxOS1NlYm9BWkR4dnB5RW1yblpfOU9yWkVQN2FWblZiT2RWeFMyTGdiZ1RVVkJvQmRFdUZlTGZHQkF5NWk5ajQtX05BQTUyMUVHc2piT1hWS0tkVk5oelhDdk9mdThvOTdTN2hsOFNVVVJYcXkzWTVoSHVkb2ZUbnliU09BcnpVY1JaSFc2LVBVakRfdkNfZ1lEdXJHS1hkZElnTkhUYTMxcG1vLVR4S0dEMXA5U193ZnNVaDRta0JYM1doWjBLb1pOZ2pOYkJkRVJiT2RvZGVybjBTWTJuTWFpYzdLc1pjeDJYMjU5VDYxUkFXRjY4Z3VCTWRXcG92VVpScHlpbEc1dDl6VlloWTQybUt2ZXNkdw?oc=5",
+      "published": "2026-03-23T03:23:13Z"
     },
     {
       "section": "Tech & Life",
@@ -2785,6 +2771,20 @@
       "published": "2026-03-23T03:15:00Z"
     },
     {
+      "section": "Middle East",
+      "title": "Turkish tax authority targets wealthy non-filers - Hürriyet Daily News",
+      "source": "Hurriyet",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPby1zeWpqTVRjTGF5dFh0Yk1zeDlFdnRGRmdLZ1JENDRNd1RQWG83OVZ0QlVXTHJMSlluNW5NN0h3WkVfZWpiTURsc3pZTFBqMmVTd0VOaEV0cm8tTm51WUZEQmoxUHlVNEI5ZFNyTGM5RUtDVWxHUHNUUUlCUS1vcV9QeEw4YzhjYXdiRUFxRDhlSVnSAZgBQVVfeXFMUGZjWXRhQk5PbDhucC1LckgzaTBLd25lVC1IS2FKbjR6dDZvdnRqdm81Z2NhVXVPWGdoT2VLVjcxTEpBcTZkZm5fOHZ3TjkxUGprSDhzSm9ENy1TbDJPOTROMTlXa3RtRkdtTDlFNUF2MTdwTmZuUzlnSzQzRXhoRDlvNUp1djZtczAzaWFHTGQ2S3ZQZ2ZVMlE?oc=5",
+      "published": "2026-03-23T03:14:55Z"
+    },
+    {
+      "section": "Middle East",
+      "title": "Iran crisis poses new challenges to Turkish agriculture - Hürriyet Daily News",
+      "source": "Hurriyet",
+      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQQTdZOVVPcG5Sa0VFLXlrWV81MEhqQVFHeGhEc2NnVmE5VUROenhjX3huOFllcFlGZkhzcGpPTVpSNWV0cFJXMmNXNDVFSUtZTU5YS2pwWXZBaTA5WUVqTXZvbDNwZzZRZUZBSmFWNHM1U0E4UHJkN3dUSEMwZEk3NDJlMWlVbV9VNzBORzlBaHk5QWd1bzRGd3VQTUJwTHgxZlHSAaIBQVVfeXFMUEE3WTlVT3BuUmtFRS15a1lfNTBIakFRR3hoRHNjZ1ZhOVVETnp4Y194bjhZZXBZRmZIc3BqT01aUjVldHBSVzJjVzQ1RUlLWU1OWEtqcFl2QWkwOVlFak12b2wzcGc2UWVGQUphVjRzNVNBOFByZDd3VEhDMGRJNzQyZTFpVW1fVTcwTkc5QWh5OUFndW80Rnd1UE1CcEx4MWZR?oc=5",
+      "published": "2026-03-23T03:13:46Z"
+    },
+    {
       "section": "US News",
       "title": "Historic Hawaii floods leave 2,000 people without power - AP News",
       "source": "AP",
@@ -2799,18 +2799,25 @@
       "published": "2026-03-23T03:12:00Z"
     },
     {
-      "section": "Asia, Europe & World",
-      "title": "Vietnamese worker killed after struck by waves in Japan, three others missing - VnExpress International",
-      "source": "VnExpress",
-      "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNbWlnVmJ1RW9JOGc1OU5yaUZLM2cybzdCT3JSUEp4cy1TUTdjZGszZUEwZjZGNlJ5SENZcS1UOS0yZFJfZlc5NlJmZVBqakRvakFtMV9fbVVCTDMzWnk2aDBtamV5dGtwMDdoVTZFUkpEVnhWZjlrazdmMjZqMGlBVTI2b3dmaGo0Um0zVmxQYTBIQmNDdE9LVjNfaUN1QWdYcDBPM1dZVkJ2MGJ5Z3J0LTEwZEp5UVktdG1QeHplRFo?oc=5",
-      "published": "2026-03-23T03:11:29Z"
+      "section": "Middle East",
+      "title": "Iraqi pro-Iran group extends pause in US embassy attacks - The New Arab",
+      "source": "Sky News Arabia",
+      "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQWHpxcGlmNzZPWTlWaWlFaHdaUV95TWxVRlNMRExONmhZd3dGekdaMnlwcHhmaUZEX1U0T0NxSVJEUzFHRjd5TTRGOGhwZ0g4RWRPV1FiMEpudjI1eDdGcGlVUFRvcDZaTHl1X0c0aWJSemxjYlN5amttN2QtR0x1LUNncjZqU3FZOEHSAY8BQVVfeXFMT2thNk1uOVlhVFBfaXh2eHZ4WjVRdHFWa2VPOFc3empZb1RrRkE2VDh4OGRzZkZhRnpLd0RIZS1MQUF5Ri10UXdqNHBRM2lSNC1RNWlSZkQwaFloalJWQ290TldVR3Jza3ZZSGRxMlJiUTM1d2NtbW9qMjlCMTN0Z3JJQkRXcUhYOVVpS3hIa2M?oc=5",
+      "published": "2026-03-23T03:11:08Z"
     },
     {
-      "section": "Asia, Europe & World",
-      "title": "Over 200,000 visitors expected at Ho Chi Minh City banh mi festival with increased food safety - VnExpress International",
-      "source": "VnExpress",
-      "link": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxPYnNQd1lLWlZjY3BCTWh2eENnMUlNOUxXSVNpQ2dCTUoxdEhITG5MbXBseVVVMzlCMFk3UFVXS2R4LWdDV01HQlJmQzNKb3RIOW5hU1RQaDgzRHlLVEpQWHlsVVhpem8zZVlYR21lcVBaX0RLbFZ4UkZyQmxtY1RmLUZudnVDeFVubzY5TTlYa1VnTXpkUFZCbG96ZWJiTUp3TzR4MTMxTldjejBmc0lkX09iQm1GUjNnT0pKbFd3QW5QcU1wRjdnUlJxSXl4bjltY1pjaHhfMVdxZGcxcWphbmlUNWUzbWRnN3pZdw?oc=5",
-      "published": "2026-03-23T03:10:50Z"
+      "section": "Middle East",
+      "title": "Bases serving as launchpad for attacks on Iranian islands ‘crushed’, says IRGC Navy commander - Tehran Times",
+      "source": "Tehran Times",
+      "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPYkxKVTE1WURFaHNLSkdzaVVUOC1GRWQ1RUxVNGtzc2dIUmNKUzBZbmFqMTBfSlhpaUh3V19BN0djSlNhR01sLWcwOEhNc1hHZ2dod2hDVmtKeG1JOVRGbG1MUmNMdXNXcWRhLXEzLVEtZWZMR25fZ3hrYW94RURIWk9Rc3NUUjhYVDc1b3dsbk13NlZJcmtFTFk0dkdoQnJRUXRYZVl0SHU?oc=5",
+      "published": "2026-03-23T03:10:39Z"
+    },
+    {
+      "section": "Middle East",
+      "title": "While Be'eri Rebuilds, Hamas Rearms – and Netanyahu Looks Away - Haaretz",
+      "source": "Haaretz",
+      "link": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxPdFYzNm9yZzJTc3dMTUNvb1JJMFVEY3dVdlBLSHpKSmFocnpkM09VZDRRR0tCa0xLeDkyV2ctNFhTT0dzTW50dV9pSGZJSlNjVzF3WUxCOWppNTRsMW11T1pxa2NfZEtkd2V4T29EXy1MeWFheXVEUDN3bEhudDF6VXZwNG5WWUNidUxOVW01bWlYMWN1NFczRFVfV3RRbnhZcUFrZHJoMk4tSTRnMFBmak5aT0xCUXV5OUhaOUdoU09ZZFJlRnFMcmtRT3l2NTdENUhEdTZlN2xfS3RxTE52ZllmSTE5X2xMM0xRYWxTQTlRSV9zb1NfZnN3?oc=5",
+      "published": "2026-03-23T03:08:00Z"
     },
     {
       "section": "Sports",
@@ -2834,13 +2841,6 @@
       "published": "2026-03-23T03:03:00Z"
     },
     {
-      "section": "Sports",
-      "title": "Paco Damian has high hopes for Jassiel Ramon Amador and Frank Espinoza - Boxing Scene",
-      "source": "BoxingScene",
-      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPT2U2azlfZ2FxXzEyaGZzeTFqYjAtSEVCdG5QT3pXWXlrNEhPMEJPRl9UaE9ZQXpFdWhncmFyOHRUSmV1QzZVVXo3SE1lZC1hR3BDekFUMHFYeGtJUzFMd05ZQ2d3OUtSTlp1V3RNZjNmRGlySl9zYzdWaDBvOFI1SDRsWW1LYXRNejB4Qm9ScXpFTEZHNl9MZlRPZWl4YlpPVmJacHdwWjhVemM?oc=5",
-      "published": "2026-03-23T03:02:01Z"
-    },
-    {
       "section": "US News",
       "title": "White House installs statue of Christopher Columbus on its grounds - Reuters",
       "source": "Reuters",
@@ -2860,6 +2860,13 @@
       "source": "Golf Digest",
       "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOcEh4N1cyakxqSEh6YkV3UjFNQXFTdGJXeTR2ZHJHQW05SEZNYmZoT1NmMWJvN1F4Q2FoVjZuNHN3NFg3RWhuZ0F3bEdjOUJkV1kzdDZLQ2hOcEJ0Yk5CNHV3NklLLVNIb21VaXExdXZwZHR1eWxvc1NVZklKaDR2d05adFhsQWhNQUNER2RGc3dUdjRjb0taSHFxSXhGd0ViVmI1MVdlQ19ZVFFPTW5ERDlMSHNBWHNQeDJVN0dlcmp6SnJRYnozaHRR?oc=5",
       "published": "2026-03-23T03:01:29Z"
+    },
+    {
+      "section": "Middle East",
+      "title": "Middle East conflict may intensify SA’s cost-of-living crisis - Sowetan",
+      "source": "Economist",
+      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQb1lwdjhtc0h5S0dWZ3VmNy1yNjQwSHFFVHZGeU8tUGJvQVUwUW1jZERPR1dnX2kwUWRtQ2xPLWgxOHAyRU1TZEpJYTBsM3lTQ2R5dGVILV9aQkR3MWF2eHRMeGdCTjdsMzdOelF2TXdBdEkwSWIyUU1kRHQyWW1rOGxCdC1Hak5ycmlZQ3lTTmhUcjE5N3NYMklJWXJQMU9RN1BPZzBR?oc=5",
+      "published": "2026-03-23T03:00:00Z"
     },
     {
       "section": "Sports",
@@ -2884,10 +2891,31 @@
     },
     {
       "section": "Sports",
+      "title": "Smart rookies at IPL 2026 - Veer, Allen, Kartik, Nabi, Ghazanfar, and...? - ESPNcricinfo",
+      "source": "ESPN",
+      "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNMk9FYzhtNjNvTDBpakRaZnZKT24wNXhNdzlfbnpKaXFkRTNTcVFoZXJWS2RybVpBSmpUR3p1Y2hHVXNzRWE5NFVfTlptdUlNTXNSZ2JxZmpPUWNNQmZPRDEtTnVwYmZJVWl4cWxuZG5Qcmt3YkhMa3E4OUpQTUliWGRTQm5LN3ZwamVrWHgxdG9rdGtORUVPdXJBVzNJLXhRdDg4aUl4akUtX29lRVFQN2l4Wk5aSHV3Rm1qNk1TTnFYSnphSmhYcHNVNTdkVUdjVDlNedIB5gFBVV95cUxNdl83aFBWZ2pXalFlb2Rnd1NManF5TGYwU1QxT3htVV9LWG9mQ1EtcnE4cGwwdm9hWVp6LXdjY3ZQMVVqR1BVcDVGM3k2RlcyU2N5d1F5VzVhTE1WTnN3S09ibzI4eFVVd0FiVmJOTGRMZHRfT0Z4cnZRbHE5R0p6cWpMRzRUM2l1Q3plcjlHUU1iLXRNelJGREc2dHlPZk5vT1FBS2NhQWsyZ0lqUTVpcTU0ZjYta3NaWDJTalpBSDdVRUdIMGpIQzFWTlBydUxKRDhVdHN2bkw4TjMzcHFod2dWdEVhQQ?oc=5",
+      "published": "2026-03-23T02:58:07Z"
+    },
+    {
+      "section": "Sports",
       "title": "Cardinals Projected to Take Kyler Murray Replacement in 2026 NFL Draft - Yardbarker",
       "source": "Yardbarker",
       "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNRHVsSk44TVJ3UV9SR00wLTVJeVAwQXBETUl4RzNSam9wUlN4c3FSbzlMckNVOTJaNFMzR0FfNGwwdFVBbEo4NE9hRmNMbC1SZ19NaFdYWDdwT3JxOGRVUmJFNVhOOVhhMDNwQ3BYQnp4LXNvY09lbUsxZm9lR1cwb0s3T0VCRGpqaUVuS1NnZ0FEZG1tSGp2NEtrbmJXeDFNYkNhTDRqTHI5TFlBYUtPSGlvaTdtRTk2UU1WeF9yWl9yRE1lOWI4?oc=5",
       "published": "2026-03-23T02:57:20Z"
+    },
+    {
+      "section": "Middle East",
+      "title": "The Arab World Needs to Get Its Act Together - الحرة",
+      "source": "Carnegie ME",
+      "link": "https://news.google.com/rss/articles/CBMiQkFVX3lxTE0wY1lzMmRLc3ZmcHdTNnVnd3RWODB6VmpiTFpNMFRDamNkdUVkX2ZrbUNralE0Z2NVYTNxQk4wdmJ4Zw?oc=5",
+      "published": "2026-03-23T02:56:27Z"
+    },
+    {
+      "section": "Culture",
+      "title": "Louis Tomlinson sparks concern as he confesses he's terrified of touring after Harry Styles swipe - MSN",
+      "source": "NME",
+      "link": "https://news.google.com/rss/articles/CBMiggNBVV95cUxNTXEzU2xVSnJtcXp6TmVfUzBjREpjTFhldVY3Ml9KZVRlWkVpbld1cVdmS3FTSF93OGdpeGlPX2dJdkIxNkV2eWNyZE9DQnlqV2xlTEtpTHR1RWVnVlRXWTRyYWE0VlZpUlAxU2hIWUotWHRobFUzOW5FMmRuNU1KSG1YSDQ4NFNrelNSZ0JZLTFwdmRzT2lLT2RfZkYzZ044QWY4emNLQ2Z3bXlEaGFzMlZHZVZCY0llVEFQdWxyMkQxVWtqTEhIaHdMUUc5UTdTaVFQRzM4R0Z4NlIyVE5aWmdVdkFEYURzXzBEeXhwQWJIeHpxYzhpOVRJaV9iZDNqUEkwOGZGYjM0ajRhQTFaYndjQkxzRGFfMmVWdzlZMDFud3JCdDBlc21qMV9sNno5c0dNNmswT3h2bkVBNHlYblVCWERLOXZsQ2gxMHJuNTBTaEppMG5ZdV9MbkoxN21aYkR4c2dHNkotRVc0aGhlSkltT0NSQWtSYm9BUTBPMHpOUQ?oc=5",
+      "published": "2026-03-23T02:53:11Z"
     },
     {
       "section": "Business",
@@ -2974,13 +3002,6 @@
       "published": "2026-03-23T02:30:00Z"
     },
     {
-      "section": "Sports",
-      "title": "Where Racing Bulls is exploiting its F1 power unit better than Red Bull - MSN",
-      "source": "Autosport",
-      "link": "https://news.google.com/rss/articles/CBMigAJBVV95cUxNUW81ZHgzWjF0QUk3NGFWYWNFRk5DR25nUXZ5S2VGeG41cDkza0lIMHh2Vk1ESlByM2xxdkxkREI3SXlsRFdGNWFJTmpDcWNkZFpxckVQWEU3YzAwdVMxRGY0bG84dUVIc0gyWWxEMGNqUU1iQTZUa0xvV0kyUzA2Wi15Q1lUV2VOTVgxX2xpXzNOai1MYnRZTUROdVNxa1NhczBIQ1NBdmhCbVJBUDc0R2RJS1lWUVQ1UGJrTEFMWEN2cmwzTmhkUXRoQ2ZJWlBCVDVVOVp4ak4yUEIzbFdPRFRQN0x1WmctVlpCWDlSTDhxUlBfNlh1MHIyaURGV0lF?oc=5",
-      "published": "2026-03-23T02:29:58Z"
-    },
-    {
       "section": "Tech & Life",
       "title": "PepsiCo Bets on AI Across China Operations to Boost Efficiency - Bloomberg.com",
       "source": "Bloomberg Tech",
@@ -3002,11 +3023,11 @@
       "published": "2026-03-23T02:18:00Z"
     },
     {
-      "section": "Business",
-      "title": "Court blow sparks Trump tariff surge - MSN",
-      "source": "The Street",
-      "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPUWVMVGtocGkyVnNBdy11XzJqcG5iT0VYQUJhNDZsZGhHcERPQXZYWkJaNnVreEVVVXJ1OHFfTktSQURhNjZVb1R6UUpUOGJWOHJORkRmOFBvMzBtalZkVVhyOUt0cU9IRGFWaHg4bzZfcVIyNE0zbFoxY1Nqa3ZkTjhBQ3ZBeVhnOWdGNU9xMkdyTVgwTHNGbkdtZXh6VVFfckhtem1pWUVyS0tfRUpHcnppZzZQSE9pS3dBLS1vWHpDcW1jOU1jVkhfdkxFVXZveThNNg?oc=5",
-      "published": "2026-03-23T02:17:36Z"
+      "section": "Culture",
+      "title": "Chappell Roan pushes back after soccer star claims his daughter was mistreated - Inquirer.net",
+      "source": "NME",
+      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQS01CQTktMk9BdWwxR3NXekl5b1hiQU1UMTNYRUxFVk9OLWZXaDJfdEUzYlZUVlNXdW9pVDFCQ0oyRWFJRDNFOGl0X1FtS28xVmp0UUxlUmVkMkVCc2N3dHVJV3lzQXhQcGoxUFFMdy1kc181Uk5nN1dSNXVvVzFCbVlFUUZQU2syd0NLRjlDalBPWGpSVmNCWU0yeENybUNRdHVnOE5OTThLYS14MWNwMWJxQ0g1NWJRa3pfc9IBwgFBVV95cUxNQWphU0lrbXlFalh1dWFTNmxod1d5QVFZY3hKUHVfZ3FUYV85NTVtZC15d2JpTjdvVkhIbktTQjZBcEtqSlB1R1JuVVlyd2swbjNfQWxGVHVMbzFxczdRenlmVGxwNUJJV2RjMHpFNkpTanZhc0lCZDFORVF1MWhlWDE3QnFsTU5iRUxOZUR2MFMzd0pEc0hKVWhXUnJzVEhrU0w3RUM2N1dVczNucW1BOVNNUl9EM2pKdkNYT3FwbGNodw?oc=5",
+      "published": "2026-03-23T02:18:00Z"
     },
     {
       "section": "Business",
@@ -3014,6 +3035,13 @@
       "source": "BeInCrypto",
       "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPeEszMDlPMWR2NGFiMDNuYjBmazZRUjdFeXM1WkpuaG9KY01PbUt6elYyWWkxczJRam1QcV9hNEh5bDR1d3JjSnB4MVN5MEZtRDVBOWEzTTM2ZGJBQWlYaDFiMWhqZlJmWDBjU3pndjQ0SG5CWlVVM043MEFObXRzZlJScDhwY3dISWdUbE9B?oc=5",
       "published": "2026-03-23T02:17:00Z"
+    },
+    {
+      "section": "Tech & Life",
+      "title": "This Artificial Intelligence (AI) Stock Has a $19.4 Billion Microsoft Deal, a $3 Billion Meta Deal, and Now a $2 Billion Nvidia Investment -- Is It a Buy for 2026? - AOL.com",
+      "source": "MIT Tech Review",
+      "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNVW5XNGJLRkROZFktY3hzRkhveVRuZXFXSUdueWU5MmdpaVpZQTE5bTU4VTh4UTdpUUVxdHFLQVNhSEZGMk9YLTNfdnB5cGExVlVyTWFaZTFYYzMtNXNrcXlTaHItVTljRnR6SmZMZFZfcVMxOGV1RndveldiLWxDUzVveGQxdw?oc=5",
+      "published": "2026-03-23T02:11:16Z"
     },
     {
       "section": "Tech & Life",
@@ -3028,6 +3056,13 @@
       "source": "Bloomberg",
       "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQZnBLeDVTVjA0aEpQSHVkcWhxd0ZuN2lDdFVPSURqUHJwcHlrZWoxZVBTTkpaODBrR1hsVFY0Y016Vms2bjc5TS1iWVh0dC1pMEdWdnhBWGlOYldTSDFESTBmTGoxUF9fbWpxT29rYld1QVZncGlsb2R0VnMybGk1THR6c3pDcFJsajlPYm9wOXpSOHR5RzJMQkQtY18zY21lVHZuTG5iRk9rWTUzaFdySHl1Zw?oc=5",
       "published": "2026-03-23T02:10:00Z"
+    },
+    {
+      "section": "Culture",
+      "title": "Kim Kardashian steps out with Lewis Hamilton amid dating rumors - MSN",
+      "source": "E! News",
+      "link": "https://news.google.com/rss/articles/CBMi6wJBVV95cUxNQy16Q2hzZjI1QjdJYlBNY3pVbEdsSmJCU3EwSzNKbHQzblowdW1xcnprRTdKNnd1OEx3M1I0YlVWTi1jMlBXazBwNGVqMGxNWkIzSEl4c2RKaWlLMTJDR1EwaHhRbW5DNWJaTkROcmtaT1FLamcxRTRPVWlRNl9DMS1hM0IzbWNHMVBxUEZHbnFYbmpXeHM5TWhNVUhkR2hXUzVCNDVaTElwaTFmTzBmdXVybVladkJsWGdySFpTemFQd0pPY0tobW8xcEMzX0NvNElVYWx4clFrRXV0VGExdVpBMWlPUnlpODc5dGlucVQxcEdmWm91V2dQVWpEdno2WEdEU0JFWnhVWklDYUY5XzlvcGJrWVFRQ0hZakNSUHlQaHZMQUgtWnJCT0tsaU5CRF9TNkhyOG84Nk1kUE0zLWRrWjdfeVV4dnhuOXhLdV9oaE41eGxiUDlxZjBXUkR6Tm4yQ0M4SDBqTG8?oc=5",
+      "published": "2026-03-23T02:07:37Z"
     },
     {
       "section": "Tech & Life",
@@ -3053,7 +3088,7 @@
     {
       "section": "Culture",
       "title": "Style Edit: The 2026 awards season was all about Matthieu Blazy’s Chanel - South China Morning Post",
-      "source": "THR",
+      "source": "Broad Culture",
       "link": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxNNS1mZ1cwUXdQSTAzRllhV2FKdURBY3VQZWxXTEJuT1I1RFBCTDZhRHBTb1hDRkxIVTV2c2kwTEh5Y2tFakcxSzRrMkFjb2RkZG04ME1qbVoyTTdMNkhxM1kwQlpUNUNWUXdydWlkY2ZzejRacF9ZaUU0aWcxMVUzRnVGQkxxc0tVazQ1Z1ppTmNmZHJQVXZ1QnYtLWNYbDgzb0RhVGFMNVByRUd3M0dGYk82a0xUTjRZOGlSQkkzdkY0ZjVsdjdQbVFrd01zOUZzamYtcHV1QXV5MWJBX3E5NHdMUWs4T05hMjlLdndPb3NsNlhWeVo00gH3AUFVX3lxTE01LWZnVzBRd1BJMDNGWWFXYUp1REFjdVBlbFdMQm5PUjVEUEJMNmFEcFNvWENGTEhVNXZzaTBMSHlja0VqRzFLNGsyQWNvZGRkbTgwTWptWjJNN0w2SHEzWTBCWlQ1Q1ZRd3J1aWRjZnN6NFpwX1lpRTRpZzExVTNGdUZCTHFzS1VrNDVnWmlOY2ZkclBVdnVCdi0tY1hsODNvRGFUYUw1UHJFR3czR0ZiTzZrTFRONFk4aVJCSTN2RjRmNWx2N1BtUWt3TXM5RnNqZi1wdXVBdXkxYkFfcTk0d0xRazhPTmEyOUt2d09vc2w2WFZ5WjQ?oc=5",
       "published": "2026-03-23T02:00:29Z"
     },
@@ -3093,31 +3128,10 @@
       "published": "2026-03-23T01:58:00Z"
     },
     {
-      "section": "Culture",
-      "title": "BBC Studios Chiefs on Mega-Mergers, Own M&a, Trump Tariffs, U.S. Streaming Growth, and the ‘Bluey’ Movie - IMDb",
-      "source": "The Wrap",
-      "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5aR2VOMmhfMUpnRXRuYVNLQkRaOUdOYjJ5V1Q3NFluQmN1THRyOXFSNTRJLWdLM3c2a2lYczI3ZGxlSXE3VnR2bUM3YmE3Q2VRb0E?oc=5",
-      "published": "2026-03-23T01:50:59Z"
-    },
-    {
-      "section": "Sports",
-      "title": "Orlando City reportedly nearing deal for Atletico Madrid star Antoine Griezmann - Goal.com",
-      "source": "AFP",
-      "link": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxOaHduS0poaHVqM2VoamZiSTdsQlBLOTN6dWlHc25JN3drNl9MUjVNTTJ5Q3VwbGdkcDBCZ0R3NW1ZUXpDX0dDSjN4UVdYWHdodVFBR05NSG5Pa3hOSldyZi1VQlJ5UUFodEZ0RVhLVTc2SkE3dzAtNFFHNnBVWThWSWZ1Snl1eUhCMWtsVmNrZjhpY09aX3V4UEZaWHQ2b19XZDRvV19ZaDZ1WC1lVkNEb01VS0VsVjdxNEt1Z1hvMVRGdUlTVUd1YXRLSUlZc1h2NUdic1hpVVpHdw?oc=5",
-      "published": "2026-03-23T01:48:34Z"
-    },
-    {
-      "section": "Sports",
-      "title": "Orlando City reportedly finalizing deal to sign Atletico Madrid forward Antoine Griezmann - Goal.com",
-      "source": "Goal",
-      "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxONHZEbHh0WFNmNzU2TC1mZzNYcEZycWJiSWtOc2FrakNkbnZaM21oUTdESm1OVVRyYkxGY0p1LVdqZHNhb0c4TzdXU3FaYUpzbmYtdjFSNHl0RzBtZUdPbEhwcGVMWlJFY1dQY3FOeUJ2d2hTU1FXSnVIRGdKZmRVbHBhZ0RoRjMwbm01Q28wWTdvQk9lZjYzVktDak5tLWdKcHpKazg4d3hIbEZfbVlyZTZXTEt2eVVvMUZqNFBYWnVyd2tZUmpGNHBZZElBUGZMWWdXenBn?oc=5",
-      "published": "2026-03-23T01:48:05Z"
-    },
-    {
       "section": "Tech & Life",
       "title": "Tesla, SpaceX Plan to Build New Chip Factory in Texas - WSJ",
       "source": "WSJ Technology",
-      "link": "https://news.google.com/rss/articles/CBMilANBVV95cUxNVHdGY0doamFaZy12Z3A5U0tNX2lUa3JDZmlWcFE5Umt0dzR2eU5vV1VXNS1MNWRROTVTeEdjR3BEbkd4bVJOTlJqd0hnMGhXcHBNa2Z3TTFsQ2RES3dIZE4tLWY1RHFoQkVqc3c0RzBBcFFPY3RhSHdGSzJiWHVjTnAxbkZ4SzdnQWNPRDZxNERFSnZDUHlfa0VyaUg0RUhiTU15REpuODQwQWZMQjdiVnNrRFJrRGtQVkpQYThxdTgwX1dJYUlkTE5XVGpSOHhEdTZVZ2Q5eWhfNW42LXJYbDZlR0kwMnhQQ204d0NxeDM4VjEzU2g1WTZRQ0luTTVuUVRnejRzb0pJNTFMY1lyLUNRbDlCWmNhczhYWGJnZG5kUWEzNFZmWjE1UVo4UUYyTXgwUWlQTTRDMWstOGFFWjMtcG5ISkhmZ0lUMnEtS0VNMTBDRjN5d3YtRXVWNHZQMDVKdU9PbGpjYTBoOXpWWWYwS3hHUmt6ejczT1diX0o1elJ1aWthTXlBOENSUENsOWNUSA?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMilANBVV95cUxPN2xlb0JlZEgtaHRna2N1NTZKOFc2UDZVNTNBQ2xVQWE2U3JrelJKZ0Q4eVBJNFZrcEFLMGdxZHdjNXN1bDdnMG1FbUpYQmJmSHc4X0pZT2hXbnhqZ2p1X3NXMWwwd01PazFra2VOWmJHeTJhVThtUHNuYUttWHlGUkhQWm9VdmxfZkNEczIxSndDU2x0dWQxX0wxeFZ3MUlSbmhpbENSUlVSYllybEU0Ymt5NkVCS2d5WUtNVFRER0xSdUJUbjRjekd6RTJ4ZE9iUlVIQkhZTVp0bmp1ZjVUNDY2ZXl5azUzN1BhbThDOWxzRXhaYUZMN1JIckduQkhtdnVfMFhFVFZpbFV5b3JFY19PZEZOQ1lienI1enNEU2xFQXQ4VUlNWHBkQTdCM2JBckswdzB2QTZ4UWN2RVBZS1RzMmFQcVFiOGpmUjNfX3Q2SXB6WmVsVktvTlFPZUFCUExfdklYX0t1M2hkamxOaVg3VmNPV2JOWmg2bTlhcVZaZW9JMU5OZTdsNWxGMGs0dVJxYg?oc=5",
       "published": "2026-03-23T01:48:00Z"
     },
     {
@@ -3140,20 +3154,6 @@
       "source": "Seeking Alpha",
       "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxPTVpFY3IzMmFDX000ZVN2N3k1aTRTaXdkb0lUVXpvR2IyN2hTbVJPaW04dWluOWNtTWxxWG9ENVRtdkpobzBEck9GQW44LXVqTVR6SGpfbjJCSWpzNmRMMUxpUHF6QUJBeEtEMHlVRjI5X21YQnYxTnRhNUpJUG9VUkwwR09abXVlMDBLYS0xZFpnSTl1RS1oSVVJWGtaUQ?oc=5",
       "published": "2026-03-23T01:44:17Z"
-    },
-    {
-      "section": "Culture",
-      "title": "Jude Law's ex hits back at Chappell Roan's denials about security leaving her daughter in 'tears' - MSN",
-      "source": "NME",
-      "link": "https://news.google.com/rss/articles/CBMi_gJBVV95cUxOMmltT3hDS3NKV2VpWFNMMGRtdks2aURjOWJoX1JNaG9PRmt3d0E1Ym1mb3lScG9CMzlDMVNDSkZLVlpwZnl5Q3lTWDA4ZVpFTXV3djg5ZkZsbU9kNWhJV0xZNzJOcjRIQkpQeWlTd2pBVFdldDkySWE4bXZ6OWpLdFVPQko4a3d0TXFPcGVGdXNOVVBNVGlBRU9uUmo5aWpQanUyT2xMODBNcXhhV21vVl84Z0p4RVFhWmRoMUIzTGxjQjh5VVpKSjdmOGhWblhnVHhRWThrR200MEowdllnMndaMHAwQmkzeXNfZ0VkaTRVQnJOeXJlMFFWV1pQZXFOODM5dURVU1phSEFFZEJSTzNhd1Y3TUNkRXhUQTd5Y2trVGlYNF83aW91YXp0eDQxYVl4SjQ2d1BlNndrbVRuRmt2QTdtdXMtMm80MkhPMDVjN01yeDdFenQzalN1SV9WbjZlbmJsSFFXdTVkWFdBZ01hVWNCTEthMGN0eGtn?oc=5",
-      "published": "2026-03-23T01:43:24Z"
-    },
-    {
-      "section": "Sports",
-      "title": "Verstappen runs foul of Nurburgring stewards on F1 break - The Japan Times",
-      "source": "Motorsport",
-      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOTHhEanNFM3RkellhRk45SUJVYkR3R0pzbUs4Sk9DM0RQZnQ2emN6S052N1B0RHBpVE1idm9tVXdUOHNZTVBXNEtNUEtXWXlQMmVHRlQyd01Ba3hOYTI2Ym9sS1BsZENLaUcyNkVSSUVxMEVxaExlZzZuRXFJZkZJazhiSHBOTmEzd0tvSXNFeWp1Z2t1NER5bC1HTQ?oc=5",
-      "published": "2026-03-23T01:43:00Z"
     },
     {
       "section": "Tech & Life",
@@ -3179,7 +3179,7 @@
     {
       "section": "Tech & Life",
       "title": "Scientists Open Moon Rocks Locked Away Since 1972 – and Find Something Totally Unexpected - SciTechDaily",
-      "source": "New Scientist",
+      "source": "Pop Sci",
       "link": "https://news.google.com/rss/articles/CBMiSkFVX3lxTFBGdjV2c1g4ZG1oRnJYcnByX0VIYnV1SU5ERzhNRXJPd1lHazlyR3RkVVFIM2NqSUl2czBBVmpTWkxIQ2N0bnhhSmlB?oc=5",
       "published": "2026-03-23T01:32:47Z"
     },
@@ -3205,13 +3205,6 @@
       "published": "2026-03-23T01:28:00Z"
     },
     {
-      "section": "Culture",
-      "title": "Kim Kardashian steps out with Lewis Hamilton amid dating rumors - MSN",
-      "source": "E! News",
-      "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNbUJ2ZG9qQ29GZ2p4anNvZEt1OVk1UTQyVTBXVWNPOTE0X09keTZtMzRWaVBrU2FWNkdkcmdfcHpIZk5GNFEwaVFiT2Fyb1FGLVRDSHBoUFVLcGR0VnhITHpHZVA4dUcyVXNpbU52TkhFYjRRUEIxRVhKQmZNdUZlN0o4c3Z5SjVCaThFTnFHWnVWMmM2MnJTN3Rlc0MyQ1JJbXRuWk00UzlXdjJUN21GNV9vNWJWckdlQ2JNVENqVm9pNmg2cXYwODFldDhyaXFuUldFUWFn?oc=5",
-      "published": "2026-03-23T01:25:26Z"
-    },
-    {
       "section": "Business",
       "title": "Pump.Fun Holders are Selling Big – How Low Will Price Drop? - BeInCrypto",
       "source": "BeInCrypto",
@@ -3233,11 +3226,25 @@
       "published": "2026-03-23T01:23:21Z"
     },
     {
+      "section": "Business",
+      "title": "NYSE exchanges scrap crypto options cap on 11 Bitcoin, Ether ETFs - MSN",
+      "source": "Bitcoin Magazine",
+      "link": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQODMyaDRzRHZWZ1FQZkJIQ0RkS0RGYzR5bDhoN3dMd0R3azJNX0dsZVdkMGhfTFZOUjlabjlDQnhTdWl2Vkx2SWswMXlmczhnLVlURVgtTm5xdFRxVTFnamR3cnR1Z2oxazJLQksydXR4TF9yTm9wWmI0bmZHRURGR1ZLcFF5UUQ3X0Q2R1A0LXQtTVRibVkwODh6ODhoMFhndnlQa2ppQUl1WktKUWxFWXpqTmlKZnREUElaU1pZeUZmdHdOa0xFak5WRXZKYTJSamJsSHV6NFFwQQ?oc=5",
+      "published": "2026-03-23T01:23:16Z"
+    },
+    {
       "section": "Tech & Life",
       "title": "Social media accounts banned for using AI without disclosure - Women's Agenda",
       "source": "BBC Tech",
       "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPSUdidWxQQnRuN09Da2hHLU9tWlJtRzRUS1MyUG5ZRTFMTTJyN0lQUk9aNXQwWFB3d3Bhc204dTF1a1ZKbENfR0t4a2E5NEhGYk51Vk1WOUd0eGpSTE5BMWNqZmVLQjFaVWtfWlhEVldxYVcwM0pKd2lPZUtMbG1GUGR6NFN2VGNwMzV5WTFyREpMU1dQVk5QTWh6Qkw?oc=5",
       "published": "2026-03-23T01:22:31Z"
+    },
+    {
+      "section": "Business",
+      "title": "Why is Palomar (PLMR) down 5.7% since last earnings report? - MSN",
+      "source": "Zacks",
+      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQZl9Pd1ZTQzZlYkxUNEMtSzdHVUlrN3dpM0pucFlsWGJXSVQ4T2RyeERNUnd3cnl2X3EzUG11Q195QmJ0UDNTaWJMS2hrU2ZFQjhLanM0R2tqc1A0M3NFYkJMQ1dncHl1NTZWc0FWamVxb0ZYd1RfdEVWTlM1cklsdThHYnM4NEtCZm9NaXFVS1VDa1R0cXJtaHRxYmdLVjhSR3VyVmFLeW1HbWpQaGc?oc=5",
+      "published": "2026-03-23T01:17:03Z"
     },
     {
       "section": "US News",
@@ -3296,13 +3303,6 @@
       "published": "2026-03-23T01:09:54Z"
     },
     {
-      "section": "Culture",
-      "title": "Stephen Baldwin warns that aliens are coming in bizarre post about the Oscars - MSN",
-      "source": "NME",
-      "link": "https://news.google.com/rss/articles/CBMiqANBVV95cUxNbUpMdWs4TVhCTnhQaEFDUHU2bWtUYnhFQksyNnpUU0J4M25Vbm9IenVaZm13LWFUamNKVlFuamZjLUljZFRaRlJTQ2g0WEVkV25fbUFMdzBLVmJ5OFlQREdOcnlNQnFMU0JCRWdXdURoRko2Z3QtaFVpTEZXdThlSWxSVWwycW5RWkNmWlFncjFIQVNXclB6MkpKUTdyNlhyendOaXhQS1NOLUFGS1dBUkM0bmxSZ2dQUDNKXzlUdFN2bWRYcmxqZmdHaFhNRE90a0hYMl9SNXF2RjI5c2NHeWFTNk9kYlI0ZlJ3aHc0YUJKZjdJRTEwakF6X3EtUzB1SWRnN1VrQ1k5ZzlEUGY2MlV0X2FoY1JuZTlpUkZ2NFp6eGs4Sm9nUnJxNE5QRnZGSGtodW1YTmZBU1pYOUJsZFJwU21mVE81cXdFYm1QeG5kZkljdkJvZUUtbHVoWWtpVGVxeWpCaGJyMXoyU0hZRVZPb0NwNFdpbEFMR0xwcXU5bThaOThNSnFTWjVCb3I3a0tDeGhROEhlSE1LRmdLQ2lycHFQUVBn?oc=5",
-      "published": "2026-03-23T01:06:18Z"
-    },
-    {
       "section": "Sports",
       "title": "Duke Went From Lost Season to Legitimate March Madness Contender - inkl",
       "source": "Guardian Sport",
@@ -3327,7 +3327,7 @@
       "section": "Business",
       "title": "Thailand Repositions Its Exhibition Industry to Drive FDI and a $44.5bn Creative Economy - MarketWatch",
       "source": "MarketWatch",
-      "link": "https://news.google.com/rss/articles/CBMi2gNBVV95cUxNT1VVUFFOZVRaYmZoME9sdXFQVklEX3JzeVpmSWRPVEZLYVprWDlFbHhlUW9uc2RjdG1wd0s5SGloc2ZPYW9sOEF5WDRkZlBfTlhqMDZGT0xNelEzXzlIRGMwZzZsN1Z6MGZwWldGdGQ0a1RGRHlrQWlZdnphOE1jVkpsQTJVSDRaNVFMVkM0V2xMc2F3R193NDZlQUdEbmZubU1zUlQzWjZTSG5QamhWcHlBUDlVTnotNzlENlRiSjBnSEIySi1oTEVrbWp1ZmRVMUwwdlNqR0JqcUdjeG01LVlYSmFYUkFNaHdybERTX0Z3TWVwdmZERngwdkREQ0ZvYXpjenUydmJVR3g5QlBTMk41YkJ4d2w3Zkx2MHNsQXNtVGRVWjdsYXczUHpmTmxQaEFBZ2J5cXl0RmFHVE9nc09CQVJMV09ndHF2eDE1d2kxX3phQTlJWU8zWGY2VHNfakhqUUQtZU12R2RDb1ZUR09fdjNxODZGTWpESUNnQl9zWWEwV0VCQ1FFX3A5VTZqYVJPWXlCbXBuNkZuREVyd3JabGliWWRzUXRwbFhhSWZUaE02eTdVdTF6VWFyWGZXeU0tTWhkN0FyMklYMWt4YlUxcVRyZ3czTVE?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMi2gNBVV95cUxPV291QVpnOTRBOUNSOHJreVRuY01YZU1PcUNWZE9YNlZSWjFDano5LWxfRTR6SklsUDdoN1AyWnJCeWwwUmxvSjlLOGdyRm42eVZTbGdNNURyNkdhdUxPX0xfNFZXSnVaaUJtV3lqRm5qWVVvUU9RMTAtOHF4MzJqdUU2VzJBanVGeDVHVDBycTVDYTIteWUwOVdBaC1uS2xPOXlQb3pfMVhra2lxNU5Hd2p6S0JiZzRQTlZITm9IWWt1QU1vZmthMHNRaXlQenhIdEFaS0tyZnhMbWJuandCSW5xSlBMWmVDN3ZWWTBQU1RuSlhMUXB1VV9rRVdiNDFNanYtU21NLXFjS0p2NFVqVFRFbTNSTlJtbTE5RmJ1SmZTZzNmd3M3cVJnS3pGWFNQM3FTdDUzcXJoQ1V3WG1DUXFUcFVrQVRXUzRkSlhjRkZyVm5DS0QtQ2YzRE9WNV9VRk5HdnJmenVrR0NYbjItelJtYjMzOVpNMHZfc1ZTUFdjMWFpZXhSUDFmSENrdTIwVHZSUXlfR1hIWDI0MTJqQV9fcURLaTFtU21DVFJQazFwRGJlVU02eW5DTUlENEJ6MWVVREVCSFJBeTZNWndOTG9DYjZ2Y3prTGc?oc=5",
       "published": "2026-03-23T00:59:33Z"
     },
     {
@@ -3415,13 +3415,6 @@
       "published": "2026-03-23T00:47:15Z"
     },
     {
-      "section": "Business",
-      "title": "NYSE exchanges scrap crypto options cap on 11 Bitcoin, Ether ETFs - TradingView",
-      "source": "CoinTelegraph",
-      "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNXzNQcXIzNVVMMjh1Mzk5MHp4WjZ0UVZtNTB2eUJNcjJqMlhmd2pHRFJEeVFEY1N1SDNkNmlSdDVPcFRWSFBHcWZ0VWhOelUtU0x5ODJ2WVgyQXNJVUxsVlc1WWFyZnI2QVZoYVRTaFBfRjhINi0yTXZLZndkM1JEb0pJLTBuMDgzTmtPMzFBaXpxaEpOTS1SdHZJS2V5ZVZmczhjbXByQVc0YkdBdnFTTFQ2RDR0aFZwbHVrV0x1V3FxaFhGYWkw?oc=5",
-      "published": "2026-03-23T00:46:00Z"
-    },
-    {
       "section": "Sports",
       "title": "Venue: Botswana Cricket Association Oval 1, Gaborone - Cricbuzz.com",
       "source": "Cricbuzz",
@@ -3438,7 +3431,7 @@
     {
       "section": "Business",
       "title": "Sell The S&P 500 And Buy Gold Mining Stocks - Seeking Alpha",
-      "source": "Seeking Alpha",
+      "source": "Barron's",
       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPcVpTdlVtd2xBWlg4RGk3YV9nSlhuLVZtX0dHdW92YW1kaGpPZEgtRjA2c1l5bjVJSlVhSUk3SEo1ZGluZFlEcXpzSnAyOWJ3alNDeEJsR1NsVHZYNkxjSTh1TGNnZjBSMFV0MU9rc08zWVV0WGpxekxnNjBfTGdfMU91WE9TcEZBUFExWHNEUmpHdw?oc=5",
       "published": "2026-03-23T00:45:00Z"
     },
@@ -3464,6 +3457,13 @@
       "published": "2026-03-23T00:35:53Z"
     },
     {
+      "section": "Tech & Life",
+      "title": "Scientists Discover New Species of Dinosaur in Desert. The 'Hell Heron' Ate Fish and Was the Length of a Bus - AOL.com",
+      "source": "New Scientist",
+      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPbmR6Q3FRUXZ5ZVl1OWVXMnBCdDAwbG5QU19HaDd5VUNaV2lhbXpxSFBaRWZxZzg5a3BtdlNpM1JjMVNmTUM4VzFDNUJOX0xFQ2lvZWFhWjA1YjBrWVlYYmFZcC1IUWxXaUU3a3hJUFdPUzF2MFMyT3kxTVVXMWsyNzNTM1E?oc=5",
+      "published": "2026-03-23T00:35:18Z"
+    },
+    {
       "section": "Culture",
       "title": "Jude Law's Ex Breaks Silence on Chappell Roan Drama - Us Weekly",
       "source": "US Weekly",
@@ -3479,6 +3479,13 @@
     },
     {
       "section": "Sports",
+      "title": "Utah State coach touts massive NIL jump amid NCAA Tournament - Zagsblog",
+      "source": "Front Office",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxOeFBib2xwSmVZcWRXa0twUEtucGRTR0pUTWVrS2tkMWdqYWRDb1Zrc3dGZkdPN1RUT2VHSzV1WXNYT0RabGM5blNiaW5wRlZnMThVME4tTEpNcjg3WjBEd2RLTVlPTXVWZTdlSnlYSnkzOHFmdG5fb3JMVnlMOWxmMUI0Mlp5SXBka2hDWTJpUi1Qb014ekFKNXNIVF9OQQ?oc=5",
+      "published": "2026-03-23T00:33:30Z"
+    },
+    {
+      "section": "Sports",
       "title": "St. John’s stays alive in March Madness 2026 on game-winner Rick Pitino calls ‘funniest thing’ - SB Nation",
       "source": "SB Nation",
       "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPTGZ4Q3Bqa2hPY2ZRSEpoNE1VSU9DMjIyQWEyWGE4QXdsQXVNdGw3N2tfOXd3c2NRWmlMSU4xVVdhbnB1Rmd0dzEzeFJ5cHV5RGJkT21seHBubnNnam9hV3pJZUVCNVpKQWhNeU5IRGJOMWJIVi1Sb0Z2RmVlSnhmREFoc3VfcTB5ZmFOVG9wb0J3ajh5bS1hMl8zTVk2MzhxbnpHLXV5djNCLW9YYVl3Q2tlbF9tVkRnUTB6VGU5bVFXYzJ4?oc=5",
@@ -3489,6 +3496,13 @@
       "title": "Venture Investors Back AI Wealth Management Startups - Let's Data Science",
       "source": "Startups.com",
       "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOS3luTEZ3NkFIM2tPM0wzRGp2SmV3cVhTU1d6QnFDa0FXeTZIeFhFRXhPNnpjWGtianBVOXFwMWZXQzRuR3dSTkV6TmczMlJ3SkRxV1hyREc2OUVtV2JrZXFxUU0tekM1NWU5OE9nanZlSTJCdXFCU3VKdjB5VkxIV3lDS3hWYmVrQnVxbE9QZkV3T3FaZ0hZcWpn?oc=5",
+      "published": "2026-03-23T00:30:00Z"
+    },
+    {
+      "section": "Business",
+      "title": "AI-led wealthtech rising as VCs bet on a fintech disruption - The Economic Times",
+      "source": "Startups.com",
+      "link": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxOSkVWVDZhUHY0OW5FZFRlU0k2UDcyMURIWjZUdzFCT1h5Y3ZWRFA0YjUzM1F0QkZBa0R6b0Q5bkJpeS04WnQ2SHZXakI3Q0tmN0pya2N4NWFTbi02cDJ3NHk1NDI5c20zMm9SMjNXZDNMM1lLQXp4U0pPZGU5RXlVYUZTZ3lEZFk0M0dCWGd3cVFtRE9iNlg1c0RxMUR5N1Z1ZGl6b0VZd0tGYmZXZ1N4SnFXMDBvNk1mNFRHRms5TDNxN3pNUUNISG1GZHlUNmtNTkRSXy1sbHlUbVFMWnpv0gHfAUFVX3lxTE5KRVZUNmFQdjQ5bkVkVGVTSTZQNzIxREhaNlR3MUJPWHljdlZEUDRiNTMzUXRCRkFrRHpvRDluQml5LThadDZIdldqQjdDS2Y3SnJrY3g1YVNuLTZwMnc0eTU0MjlzbTMyb1IyM1dkM0wzWUtBenhTSk9kZTlFeVVhRlNneURkWTQzR0JYZ3dxUW1ET2I2WDVzRHExRHk3VnVkaXpvRVl3S0ZiZldnU3hKcVcwMG82TWY0VEdGazlMM3E3ek1RQ0hIbUZkeVQ2a01ORFJfLWxseVRtUUxaem8?oc=5",
       "published": "2026-03-23T00:30:00Z"
     },
     {
@@ -3511,6 +3525,13 @@
       "source": "SEC News",
       "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9nbkd0MmtZYnl0QzkwYmt3MDNuMk5JSjg0Y2xwMmRHZW5kMW5xbFRLTHoyTWNuT1NxbEd1S2ktNUNxZkVsTGZLOFIyWGIzX2RkRUI2dWRuTTFyVHZXT0dnLVdtb3Bpdw?oc=5",
       "published": "2026-03-23T00:28:38Z"
+    },
+    {
+      "section": "Sports",
+      "title": "Indonesia Boat Race: 11-year-old aura farmer makes festival a global phenomenon; 1.5 million spectators expected this year - MSN",
+      "source": "AFP",
+      "link": "https://news.google.com/rss/articles/CBMirANBVV95cUxQbm1CTWwzY25ldGtCb3NwTy1OcjRuNnJKNGlUa1Brd0lRcUpGRzZYRU13QTZyQU02OXRhdDlBTm0yc1BGSUFFSFBud0UzVVBKNUpTNVMxcFZBZnEwbUFqSlgzR0ZLN0w4SzN0U3hCeDBSczVSQXBUQ3B3WG5HYlpuaFpaZGpTN2lkcFljdHhldHFTN1hmUVZkaFkzVWIyVFBBeFgyeXBIRHI3Vl9SOXczeV9aX3lVdmJJRmIxWnB4QjlkOC1DeUlPVzdXWF80ZmtDVW5PQ09zMmZDaG1rbkJ0c2lweTBTRkMtNjBXcUV6MHlRVl9odFdXMG1fa3Exb1czQW8zSThReVlmcEF6MDdlUkZ0cmhRdWphTHVRZlBoeXowOTBqMjdWeGFrM0ZNbHdDRmdNVEdhcW1jUllxb0dFaG5MdFQ3eWoycFdWY1g3dERaS05EMnMybnB5M1VLNE1rRjBRVHNod3VadlVJMFZTVDhjOXBvWmFZTFFpZS1RTHhQVFdzazZZb0RKNGgwN09WUEFBbWRnSk9jVlRYSWk1aVdsbHk0VTlKQTVBSA?oc=5",
+      "published": "2026-03-23T00:25:07Z"
     },
     {
       "section": "Tech & Life",
@@ -3576,6 +3597,13 @@
       "published": "2026-03-23T00:10:00Z"
     },
     {
+      "section": "Business",
+      "title": "Gold just saw its biggest decline since 1983: what’s next - thestreet.com",
+      "source": "The Street",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQbGZ3N05ua3h5UEhQZXBPNlpPS0lOVklod2diZk8zZlB0dk5VT2VSRnBHQnlNV1k1YXFocE10SUVadG5KQ3lPU0dSdTA4N25hU2FtRkQzdWRvSVRPZjU5dHhWYlg3aVNsSndYenNhQXJRR1hNTGY1emU2UEVyX00xeW5hcnhyQngxdmx2dnlWOHlTVlZPUHc?oc=5",
+      "published": "2026-03-23T00:07:00Z"
+    },
+    {
       "section": "Sports",
       "title": "No. 80 in Best FIFA World Cup™ Moments 🏆 - FOX Sports",
       "source": "FOX Sports",
@@ -3618,13 +3646,6 @@
       "published": "2026-03-23T00:02:44Z"
     },
     {
-      "section": "Sports",
-      "title": "Who should Lester Martinez fight next? - Boxing Scene",
-      "source": "BoxingScene",
-      "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5FcW1JbVFlR0F3SUZid09xck4xQVJ2MW5PTDNTeHNMZUl4THQtbGpwRlRSVXpkNXlremQxSU1EVjlBR1RHWUxHTk5LNU9tMzZOTmxtejdkanJ2RzlqUEZ4WU9SZlNqa2V6TXBpOU80ejhoMjJqT0NnVjlHOWhHYm8?oc=5",
-      "published": "2026-03-23T00:02:02Z"
-    },
-    {
       "section": "Business",
       "title": "China’s Premier Vows to Back Balanced Trade as Exports Surge - Bloomberg.com",
       "source": "Bloomberg",
@@ -3647,17 +3668,24 @@
     },
     {
       "section": "Tech & Life",
-      "title": "BBC’s latest gaffe is to pick a tech bro as director-general - The Times",
-      "source": "BBC Tech",
-      "link": "https://news.google.com/rss/articles/CBMiwwNBVV95cUxNX21Sak96a052V1VrcncxdV9uVXdwaDNpQTJFeHFXYTZvNnN3MS1xMWVUaHA0LTdwZGtNNDRaUFJkWEFxZFZGUTUxVnliUGZ5cmNQNm1tSG5BYkxpREkya0pESUg5NV8wNDRvWkY2bDRwRkRBUHNXUzVmOHNYWUZ4X25Ici1iMWNpaDZ0NW9aR0hNT29ZUW93ejc5SUNKRDRkTW9GOTlEQ1BVa0hENDJfM0NmMGdKc0JuYXNrNGxJOXhCOXFEZnRlTlVIcHpZNHR5V3BVSnJXdjltVTlOXzlXQ3lpVC1NeHU2VWxiNlpVQjFEZmtYN3B1TnU3cTZjOVVFZVIyb2h4d29tZ2p2cXBmQXZEbEVXNUZMWFFHSmdoMXowd29INUh3S2tocnRDVkVBSFBGY0F2U2RUeHlpajhsaWlMaVMwRFFxeVJsVG5ENGxuOXJRSFdCbS02ZjNqVXNyRnh4bFc4Tm04cmtIVjdBOE8yNGZhcllQOEF3ZWlIQWRySDNLY0tkNG52eHl6YWdYamUzdzhXMklqLWlmSDFUcFpOY2daUUtWN093U0pFc3k1VHF3em1iZ2RDLWpoVXhLalZR?oc=5",
-      "published": "2026-03-23T00:01:00Z"
-    },
-    {
-      "section": "Tech & Life",
       "title": "AI influencer awards season is upon us - The Verge",
       "source": "Verge",
       "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPM3NhcV9IaDNsYklnZjh3TUlOXzNkN0FOeXhoSm1Ha09Rc2dFdmE4cmExeGhsQlVzVjVibFNtdjY5MUFvc1VaWlJGb01vb3FLWVNLWGx1V2lNZ1A1bUpUTVVjemdWQXRZd3NTNHFfY2RaWklWb1loa0d1ZU1NZmpTcVljanJUSVk5b3ZySFVxbzNKcjZ0a1htVjZBR0FvaWtST1hoUFJOSQ?oc=5",
       "published": "2026-03-23T00:01:00Z"
+    },
+    {
+      "section": "Tech & Life",
+      "title": "BBC’s latest gaffe is to pick a tech bro as director-general - The Times",
+      "source": "BBC Tech",
+      "link": "https://news.google.com/rss/articles/CBMiwwNBVV95cUxNSEg3dkhJelVZYkt1LURMRXExVXZWTjhiTkJidWN6RUlBSnVGTmJsRXpQSHJIQ2h1M1VWRXVLNzEtX0Jpb2d2Y2E5SG9ueVpBRHk4TkZWb0FMckxNOTY4OUlCRE4zeWpESVQ0N3FZQWhfNXdhZm1HeVcwMVJwM245d2FWc3VQdlU4OHZnbGdBWFJ3LThtM1Ewd3gtYVpwUkQzM2FVb0RhY1RsQWE4aFFHem9wcUdwZGlZOEhGbWxjVGVPbFpaTnBCSkhlMV9UbXZ1TVdfbkkycnN4b09mX29yX1JwblNtcGZyT0JDSWk1Q0JOd0RVMi1yeTlyQ3lmUExlQktacjAxNlJ3dzFtcjhiaGl3c3EyY1Z4MVhERXZKUkY2TFl3b0pYX0M5OFpfNzN4ZkNuN0FBYmhHeWpBcjNkalNsVnd6SE1jd0htcjQ4azBGbWxvMl9LSWw2cDJEZC03b0w1RzVGeTV5alVqWWswVDFVeXpvNkloVVRRcjBZbWpROXZEeHNRdzE4SUlCUGpoMDMzT0ItVE9FaVM5Tk5sTm5OOWhHNjduSUdwSlNVbi1BNlJHY1oyM2NjWVFDTDJ4SklV?oc=5",
+      "published": "2026-03-23T00:01:00Z"
+    },
+    {
+      "section": "Tech & Life",
+      "title": "Günther Anders’s Bleak Picture of the Tech-Perfected Society - Public Discourse",
+      "source": "Nature",
+      "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5seEdnaG9peE10MlhDbm9sMnlHdnNLMzhoeDFWRjY5YXVjdlVVVG9wUEw4YUttVl9najAxQzIzQVFzSm1nQlY0ZklaS1M0U1Zvbklwa0ZQMHpKUXpnRU1V?oc=5",
+      "published": "2026-03-23T00:00:49Z"
     },
     {
       "section": "Tech & Life",
@@ -3709,18 +3737,18 @@
       "published": "2026-03-22T23:56:00Z"
     },
     {
+      "section": "Culture",
+      "title": "Kris Jenner and Lauren Sanchez mistaken for one another at Vanity Fair Oscars party - MSN",
+      "source": "Vanity Fair",
+      "link": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxNc3FmME1zZUZkUGt4QnRDUDVxcWx1dFlTcHZ4Z19xMTNFUXpKaGVxcFpqZ19MSmhwaTBEZGFUX3JSWmdRemxZWHdVZklQUWpkdzF6SVdzcE9paTQ4WmhnOTRPN1R3U3BxYlgyLUZWU1FnZDJaY2ZQNjJ0bFpRbHloNS1PVkRJM0cwMEVtQUFIN2dWSVI3TlVrN0dVM04yaWpGN1FBeFFVLTdSakZRdHd0UWFyQ3pmb0ZLYms2WXlnODlvWHhpa29UX2pGT21UY3RaZ2xUS0twQy02Zw?oc=5",
+      "published": "2026-03-22T23:53:15Z"
+    },
+    {
       "section": "Business",
       "title": "Jessi Pierce will be remembered for the heart, humor and zest she had for the Wild — and life - The New York Times",
       "source": "NYT Business",
       "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxONGhwX2RlSFVYVGx1cV9GZzVEQzRybEVwQWF3OWt5bGI4ZS01YzYzaGNYRnQtS0w2b3JsejdzTnRkczhoV1dWVWI4TzJXX0F1cmJRS1J4STctanlaUEU4UjBGeFlBci1sdWJpSHFKN09WWGdoNlpIR2lOdFE3Yjc3ajNB?oc=5",
       "published": "2026-03-22T23:51:00Z"
-    },
-    {
-      "section": "Sports",
-      "title": "Anthony Joshua in a great place, but no discussions yet about return - Boxing Scene",
-      "source": "BoxingScene",
-      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPV0hHeHlic2dzb2tsYmFfRzI5T0xxTXIzcXFnVG5rRDdLZERHU25aU21Bbjc1UGs3ZUhtckg1czc3QU1sRWJwcE9iMXl1Vkt4dnMzcm5OQVFfSk15TVo2SmR4ZXBwRGhUODBURWRWdWtkdHQ4dTB0WXJ4TVd3N25IZzMyVzhvMmI4LWo0QWEzQ2ZubC1lRUdpWDlpNVJXUE8zLVkwbXpIcw?oc=5",
-      "published": "2026-03-22T23:48:45Z"
     },
     {
       "section": "Sports",
@@ -3758,13 +3786,6 @@
       "published": "2026-03-22T23:45:26Z"
     },
     {
-      "section": "Culture",
-      "title": "10 Hollywood Stars Who Didn't Show Up To Accept Their Oscars - AOL.com",
-      "source": "THR",
-      "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1ablVjNVQ0Y3RmOWVFZE5WZ0N1X0kzNlJTM21xQlNFVFRfcG9WdTNrazJseWptZHNIYzNLRDRfbmI2UDVPZ2w4cENzbWlPYzRiMWdidnVBNkRzVFhLMzRiMTdjNHJESHI4R2tMcVlCU2RpX2lHdENxd1o4azRnQQ?oc=5",
-      "published": "2026-03-22T23:44:04Z"
-    },
-    {
       "section": "US News",
       "title": "Panthers’ A.J. Greer suspended for hit in Calgary game. How long is he out? - Miami Herald",
       "source": "Miami Herald",
@@ -3772,18 +3793,25 @@
       "published": "2026-03-22T23:39:52Z"
     },
     {
+      "section": "Business",
+      "title": "Prudential Financial, Inc. (PRU) Stock Price, News, Quote & History - Yahoo Finance",
+      "source": "Yahoo Finance",
+      "link": "https://news.google.com/rss/articles/CBMiTEFVX3lxTFBhMkxGbFdteEhDS1VOay1hS2w1SDMzcTNJNllKeG41YzFCeDRKVlp1Qmk2Y3ZNcnA0VmNUaTlzTkpScFlra2hjcEQ4RFY?oc=5",
+      "published": "2026-03-22T23:37:03Z"
+    },
+    {
+      "section": "US News",
+      "title": "Brandon Huckaby (Knox County Commissioner, Tennessee, candidate 2026) - ballotpedia.org",
+      "source": "Ballotpedia",
+      "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPTzhfNXZNR3dDZG1DZ0VzdnBiZ19MMkNISnVrSjh5aVY3OEt0cUZfLWdNNEdsOXp1MGszMV9vQXRwU05kLVh2MmI3cExobGRYbjY2WmJuWUhqWDZsZy0xZXBETnhXcUNQN1owZC1JZ2lCMXlxU01TMjE4aDh6aE0wTG11NVVSX2hNcC1lZjdQQkVCa2ItUzlFSA?oc=5",
+      "published": "2026-03-22T23:36:42Z"
+    },
+    {
       "section": "US News",
       "title": "Opinion | D.C.’s war on renters - The Washington Post",
       "source": "WaPo",
       "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQZWt2VzBvZ2ktWXVKblR5QUJVTGRUamJwMDI1cU1VNnhwaVlORV9HVkRBcFlZTkRkR1JMSnVNdlhrbUFhT2pZUFBnRjFweWdJRE5GcU9tenllV0JidXFleld5ckZiS3Bla0hlYmpNR2RmUEctbENvbTI1UU9XQUdaQ1gtdm5XWVBvSzhUaURxaFZhV3FjRDlsLUJRYkthSExl?oc=5",
       "published": "2026-03-22T23:35:33Z"
-    },
-    {
-      "section": "Business",
-      "title": "New Crypto Alert: Bitcoin Jumps Past $68,288 on Strong ETF - openPR.com",
-      "source": "Bitcoin Magazine",
-      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOLU9kMy1BcWNwMkFhT1dEb0Uxd0dldVBkRDltb0tRS01oaG1vRWdZa2YzUUtHYWFCS3drZWxZRHdWaThFd0VpaGhfTmtEWWFNclp1eC1fbFBOWkdmRXlEVFRNd0NfMWpXNmhiMWozVXdSSVBKbDJ6dXduc1JsakdtLTFjQUphcVpEV0xFYjRpZUItdFdWcHdN?oc=5",
-      "published": "2026-03-22T23:35:13Z"
     },
     {
       "section": "US News",
@@ -3849,6 +3877,13 @@
       "published": "2026-03-22T23:28:17Z"
     },
     {
+      "section": "Sports",
+      "title": "Nuggets 128-112 Trail Blazers (Mar 22, 2026) Game Recap - ESPN",
+      "source": "ESPN",
+      "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE0zMjhORjVVOUVMZHh5RTcxYUk1eVZ5VWhlVWVZT1BrRndoMzR5ZzJta3FDS19VSERUX0NPMEYtZ2hFbkZ0S1pqQ2pjeWkwT2hCMS1SWmF2NHFFcTA?oc=5",
+      "published": "2026-03-22T23:26:15Z"
+    },
+    {
       "section": "Culture",
       "title": "Amazon MGM Studios’ ‘Project Hail Mary’ rockets to the top of the box office - Los Angeles Times",
       "source": "NME",
@@ -3892,17 +3927,17 @@
     },
     {
       "section": "Sports",
+      "title": "Is extending Andy Farrell's contract before the World Cup a gamble? - Daily Mail",
+      "source": "Daily Mail Sport",
+      "link": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxNeVpHbk5MR3pqTW9TazRVYWVnTWk3MHdta0VZOFhwWWo1cDdFUmRBam13RkNJYzhqTE1ONUxzYXNEdDZud0VQSkI3ZV9UWncwX2ljWVB1X0dGT1Jobl91YW83d1N0cXcxcTBpQ1VINk5ObWtaaW1lYlFNZ0xvMXVaUVdHRnVKMC0xcnZfQmljel9uZGQxdlhmUURMUzh5TktFUDg3cHo0UlFQYUVVVzc2ck45Z1NWSEdXTEpLa1hwWUE4ZDNVS3hwdmFvS1ZMc0xYS29Qal83aEd5MEFlM0pPaC1pdndYamRLMzloU0ZVeXozd20wR1czQ29n?oc=5",
+      "published": "2026-03-22T23:17:30Z"
+    },
+    {
+      "section": "Sports",
       "title": "Mark Pope Experiment at Kentucky Faces Justified Questions After March Madness Early Exit - inkl",
       "source": "Guardian Sport",
       "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPX1RrNnJXUTFXTHZCZEZMQjZZMGxNY1JMdHlIb2d6dENteG5VRzBQa2ZyMWVzeTZ5dFBja0pIeTR6ZWR4c1NMSUZTS09CMlZySVdjVHNPQUxLMmVybUI1SGNmaUN4dnUxYVc2NXBDUk9sc0pKUkdjcjhlUko0aXZlN3liNU9SajdINkR0VkkwOGk3ek1hdWUxMHQtMFF1dWhoeU9zbEdselVkS2h3eUdSZUdPelduZw?oc=5",
       "published": "2026-03-22T23:16:58Z"
-    },
-    {
-      "section": "US News",
-      "title": "Thomas R. Bichler (Ozaukee County Board of Supervisors District 1, Wisconsin, candidate 2026) - ballotpedia.org",
-      "source": "Ballotpedia",
-      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOYUlRVV9Md1V6WjRheEc3bEIzREpxdHpQaDNTYnlIZ0hXRFRZQ2d5ZzNYVERuU1VZc1RmY3N5UjFDeVRpaXRCeW9Uc2F0XzRjVXd2bnZRWVhrTElfTXZJc3NHT0ZuX0lxaWN2ak9RV2s4TUgyMHNadWFkY19NaUc5WkVwV285bVRubjI3Mlg3VU5kRk5adlFVQ2M3ejlGT25ERlJDdHpzREtMdk16UHkyOG0wV1JVb2VK?oc=5",
-      "published": "2026-03-22T23:15:34Z"
     },
     {
       "section": "US News",
@@ -3917,6 +3952,13 @@
       "source": "NYT Arts",
       "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQOXdUUG9XR3hRMENERUlhN2w1cWR2N1FmcS02SDRoVTMyMkplLVpaNm4yTnAxU21wNEdBTXZWR1B5ZmEzTDVGY3pwR3JnUTI1V1hwYzRFNHVvell6aFBKUUNzOTVDM0tuOXVldE5tU1pUdl9iS1BWVTZ2YktlWVhKY2tWRUl1cXlaNlQ1OHJEcFlJcFZrcUFqeU1FeVDSAZwBQVVfeXFMUDl3VFBvV0d4UTBDREVJYTdsNXFkdjdRZnEtNkg0aFUzMjJKZS1aWjZuMk5wMVNtcDRHQU12VkdQeWZhM0w1RmN6cEdyZ1EyNVdYcGM0RTR1b3pZemhQSlFDczk1QzNLbjl1ZXRObVNaVHZfYktQVlU2dmJLZVlYSmNrVkVJdXF5WjZUNThyRHBZSXBWa3FBanlNRXlQ?oc=5",
       "published": "2026-03-22T23:15:00Z"
+    },
+    {
+      "section": "Sports",
+      "title": "The clubs Matt Fitzpatrick used to win the 2026 Valspar Championship - Australian Golf Digest",
+      "source": "Golf Digest",
+      "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPRWo5T0tvdmduVXd5QU9OSmhiUU1xaFVrNDYyVnBpTnlLQ1NNR21ESjNmN2Z1QWJ0N044ZDFZR1ZQTGg3aWJXU3ZsT1pCVjM5YmMxc3BET0xEbDdDWW84a3dQbzhLaDFEQ19LcDVVX0d3c2dBTFlSV0RjaXdCb2kwZ0lPX2FWeEEwSmhBNHBnWFB6UXg5djhub0p5RjlZd2JrRVBnQ1ZKbDk?oc=5",
+      "published": "2026-03-22T23:13:51Z"
     },
     {
       "section": "US News",
@@ -3948,16 +3990,16 @@
     },
     {
       "section": "Tech & Life",
-      "title": "The guy who started DJI becomes Asia's youngest tech billionaire - Mashable",
-      "source": "ZDNet",
-      "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5QWGxkX0lYY241MlM1ZURZTXZmdWFTbVhQT0RvTk1yZC12aU5hV3EzeXJMRmEwRFRWbVk0b2xkTGQ2NXJ2LWR6SVo5cDkxcjl0bWxWUUQyVHVXeFdjYjhR?oc=5",
+      "title": "Asia’s Busiest Earnings Week Puts Tech, Consumer Shares in Focus - Bloomberg.com",
+      "source": "Bloomberg Tech",
+      "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPLWptamZxREEwQmZkZWcwZzJNWHBSQjVxZEE4RTNERjhfWndGQkhKZjA4Wk1BV0Z4MEhVeVRFSEd0ekR1NFRzOWhMOWx0Y2lVbEp6MnFsU2t5cFFydlA2RUFGNjJVYWdOS3JxaWhZUHJsbDd0T1NRazg4VDdGLUdlMHlBTGFFN21KODhGdEhiRTI0MURES0kwTTJRUDhqX1RwcThPdlhoOHlZLXEzQ1dQVkpxZnE?oc=5",
       "published": "2026-03-22T23:00:00Z"
     },
     {
       "section": "Tech & Life",
-      "title": "Elon Musk: Tesla FSD will soon become subscription-only - Mashable",
+      "title": "Elon Musk promised cheaper Tesla Insurance and it's here, sorta - Mashable",
       "source": "Mashable",
-      "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFB3R254RDZJY3FsNlpwY19URDNUTVBGb2hIMWJOMzdkZnhHMHdSSE9EVjNvN1MtRVhpNXRWY0NSb0VLM3BRb3c4c2tVNEJMRUdwTFhjYzVielExM24wUHl6elNrYXFVdkE?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1MQ0hHQUw2NWQ1TDRrXzlkMGxyNkotNmdMb3o5MzB0NjJJb25UYUtKSVhTQWZXTzFMTWgtenpHdVhTS3QwMzN4Z1dBci1OU0pPYTM5THJNSjBELTNLS3JF?oc=5",
       "published": "2026-03-22T23:00:00Z"
     },
     {
@@ -3969,9 +4011,23 @@
     },
     {
       "section": "Tech & Life",
-      "title": "Asia’s Busiest Earnings Week Puts Tech, Consumer Shares in Focus - Bloomberg.com",
-      "source": "Bloomberg Tech",
-      "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPLWptamZxREEwQmZkZWcwZzJNWHBSQjVxZEE4RTNERjhfWndGQkhKZjA4Wk1BV0Z4MEhVeVRFSEd0ekR1NFRzOWhMOWx0Y2lVbEp6MnFsU2t5cFFydlA2RUFGNjJVYWdOS3JxaWhZUHJsbDd0T1NRazg4VDdGLUdlMHlBTGFFN21KODhGdEhiRTI0MURES0kwTTJRUDhqX1RwcThPdlhoOHlZLXEzQ1dQVkpxZnE?oc=5",
+      "title": "Elon Musk: Tesla FSD will soon become subscription-only - Mashable",
+      "source": "Mashable",
+      "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFB3R254RDZJY3FsNlpwY19URDNUTVBGb2hIMWJOMzdkZnhHMHdSSE9EVjNvN1MtRVhpNXRWY0NSb0VLM3BRb3c4c2tVNEJMRUdwTFhjYzVielExM24wUHl6elNrYXFVdkE?oc=5",
+      "published": "2026-03-22T23:00:00Z"
+    },
+    {
+      "section": "Tech & Life",
+      "title": "The guy who started DJI becomes Asia's youngest tech billionaire - Mashable",
+      "source": "Mashable",
+      "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5QWGxkX0lYY241MlM1ZURZTXZmdWFTbVhQT0RvTk1yZC12aU5hV3EzeXJMRmEwRFRWbVk0b2xkTGQ2NXJ2LWR6SVo5cDkxcjl0bWxWUUQyVHVXeFdjYjhR?oc=5",
+      "published": "2026-03-22T23:00:00Z"
+    },
+    {
+      "section": "Tech & Life",
+      "title": "Singapore will put high-tech sensors on regular buses to make them driverless - Mashable",
+      "source": "ZDNet",
+      "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE00cml4bE85RWdXRVRYZWs3OV83eUhDQ3VXNDNPYnpOMkZMQV9RM2pINHhyei1fSE1WVXl5TzNsZjFIS2hka1paVHhlQWMzNUZXa19RMzZobDFJVHNnYUpSZFpBbnprUQ?oc=5",
       "published": "2026-03-22T23:00:00Z"
     },
     {
@@ -4017,13 +4073,6 @@
       "published": "2026-03-22T22:52:35Z"
     },
     {
-      "section": "Tech & Life",
-      "title": "Mentions of AI in BBC 500 Word stories increases - MSN",
-      "source": "BBC Tech",
-      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNakZndm1KZG1ZWW1KbG8wUnJnT1MyemR6ci13T0IxVXdVcW1XY1c4RTVGcGlhRlNXekdzaVJNVFNKX1ZiOU5ES1FYT0pqQjN0dEJidTYwRjRqSWFxbElKTzZoYXB0UjRGWElDellYV3NrTmhCQ2JCaVk1OTFVQUpwRm9tVm1YbmxPYzN3UjNTYkc3LWVTWFpPWmpodl83cDhFQVl5bg?oc=5",
-      "published": "2026-03-22T22:41:01Z"
-    },
-    {
       "section": "Culture",
       "title": "Zendaya Fashion Through the Years: 10 Red Carpet Looks That Made Her a Celebrity Style Icon - inkl",
       "source": "Broad Culture",
@@ -4048,14 +4097,14 @@
       "section": "Tech & Life",
       "title": "Exclusive | Mark Zuckerberg Is Building an AI Agent to Help Him Be CEO - WSJ",
       "source": "WSJ Technology",
-      "link": "https://news.google.com/rss/articles/CBMioANBVV95cUxPX2lHdVVJMVVQUkpPNUszY3J3RG1WT1lVblFxYi1aOUZLUVA1ZnhPLUp0dGFLLWxQdmpvUmZzaFpRX2hIU2FBZ2JOVVVTb2VQQThCOWhRbHFzVEJvRzkxRU4xbkh4NHVBZTJrNjhxZlRwREhUZWg4ZDBJTC00V3dIdi1NenlFVHhmdzk1aks2bHJpWTVGRmpIUGp1S2liNzQ2T21yZ3dmNHdmYmV0WXZTbWt5dzdiZ2tSdFpacHpITG54YTJqMGU3a0h5a19nb1pnTFp3WkhQZjNXVGdlNnV3dDVjQzNTYl9XUXA4YkVReU5vQ05YTkVjanQwaW1ZcGNITU9DYUpjdmdhOFRPcWs4U2hCQkJnbThKOUxKZ2NwVWJrRS1aMDNwZlIxcDZ6UmhhMGRESWJSRm05SHVRVXFwQjhtMWlJb0FJUXVaVkpFSDlRTHljM016WEVXY1k4TXI1amtZNkp3ZmpNS0VVMU44QUNTcnc5U3RUNGpPOFBZSTdSa3ZHMExPNzRGX2VXRlRSdW52U0dVUXpJMExvVFQ1WQ?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMioANBVV95cUxPTVllY0tzWVU2VVlobnNtVWNqYzRMUlVnanN4UEJKeW9RUldwNFdTUGdiRmNQZWhCUEhYWWZQbkswLVRabklPOEd5RVhJOXB2NXJYQXdpVFpjaXU1QU93RGJ2TTgyNGxiS0kwZTE1RDJVR09teXdQVEN5YXd6Q25ub196ekp2eVNjNjJvc0g0QWpBQnlCZW1HdkxJU2U5UHl0WkI4bnRFWmYzRjBIYTloWjcyd3prOXNyWjEzSGV6NTFpSFJ6eG9mcGNlblRWUldDQVdwYmtPdGt0T05yTzQzRExhWVF6ZlpzTnhVZEtYd1BHVnZ0aVU1ODBENExzbFdwaEJWblhFeHdwa0hjQXlfdUJ3ODY4Zlg4ZVF3a3ZLVVRMNTlzOGVTVGViOXQ5VGJXbTdjeGtvblVDNUF5QThzT2xyLXE1WGtwZDN2WVJ5WkdfT2xVZzNGV0sxRmhHUkNhMVB2czlnSU1mN0sxeGhDOHctdHNHdTRqdzNFcEZYLU5ZeG1LMUZaTGRBSFgxWmhlQzJQekVIT3RrZUVmM2NqcA?oc=5",
       "published": "2026-03-22T22:37:00Z"
     },
     {
       "section": "Business",
       "title": "Exclusive | Mark Zuckerberg Is Building an AI Agent to Help Him Be CEO - WSJ",
       "source": "WSJ",
-      "link": "https://news.google.com/rss/articles/CBMioANBVV95cUxPajhUendMSXBFekRHaGZIaUhfM2d6SFRiSHVIODhkbDN1WVE0R0FDZlM2b2g3TEdZRW1fa2pnRnJaN0FqQ3F1M1FXT3BNUFVJdVZYUU0tdTRPdXNOTUhLTnk2Yk4ydXRvbkhNT2pqNjI4amFDek5nTlNseldZTm9MZFFPVnZBeXd5bWZWNXNUYUlaWXI5dExXTTFFWldVS01NWDhrOEdOZ0xhOVZMNmVWaTd5b3ZIemYwN1V6UTNEeFpXZXlEUlVITkJUUGZxTXRVWTZUYV8zcElaM0VGamxpTHlFVDEyZnpMQWltbnkzUXF5UW9ucVMyOE1SWGdraFJyNnpfQUt5a0hESFVrRmZUN1Z4ZVY1WTExd0FaQ1ZvZl8xbEpHYWZVRjYtQU9YM0sxSjA1eXNBU2FnNHBxQ1RBZXpVTDJCX1ZjeS1FSjFWNjZ3TG5PMGhpc3JZalZfQmJMcjF0QzVfNy1uRi12N3dJR1oyUlpnUmtxdDNTci1aQkt5bEl5R21SdW5NMHJqTWJXNVJRdk9HV21PWEJocWlxTQ?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMioANBVV95cUxOTHZteFlpeXcyalNYMEpPR1BKQmJWRkxZVml5bTgyUjNaX3lJRGd2UzJSdk5JangzNi1oOVpwLVF3eklOU2tOQjB2bDc3WEJac0dDSGhvQTJyNXRMN09la3ItUnBDaVd4X3RtTVk4RHBVOVVmX0Uwb09Zc09uREw0YllZd0J2akpuSnJaY3JTYi1EYlhpcVdXMzhBSnZLQ1BRcENGXzRwdW56TW91OEV2TGE5VFliWXJfbnhVbm04bFJ1THpQY3V1RzBfdEhNRlhIVVljUkFWRnIybTZfZUpoeEtyUFQ2WTFaeVVxcm5paERzU3c5NmRmTEM3c3RvNHdlUkVFLXZGbVpGOGp6cUVzcTUxRHZ2TThVNXlZVy13Z2hwRGFRNERFS0MtVDk5WEw0elRIVW13TjFyZlFFRk5pbTQ4RGcyV2YyYVVTN1RmQy1SQWx0aUpfcHBWTG5BYm1NUVE2RTBLRXA1M3ZSdHF1Smx4ZEtKYzNHNlRQa0Q5N0lVTWdGRkNwWDVva1ZIMGRSd3J3ZGVlNHFaamhXQ3hlNQ?oc=5",
       "published": "2026-03-22T22:37:00Z"
     },
     {
@@ -4138,7 +4187,7 @@
     {
       "section": "Culture",
       "title": "Chappell Roan Speaks Out After Allegedly Leaving Jude Law’s 11-Year-Old Daughter “in Tears” - E! News",
-      "source": "Rolling Stone",
+      "source": "E! News",
       "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNOFFxSUNfR1VoTWpuOWtudGk1MkVKR2J0eEZIQnpRcV9CRXcwUFRGdXQyUVVERHlQMzM4SDFpWUtBajlpQWZZdzlZODAzd1BHenNiTEFXUDJUX1pHMlFXSkhrYmRFQ090dHhMVzJ0a0t2VURWUkZNSmhDdjEwSTVqWlIyN1dGSjFpc0o2TUh6dGRua2dGUjZHU3duTQ?oc=5",
       "published": "2026-03-22T22:07:00Z"
     },
@@ -4262,13 +4311,6 @@
       "published": "2026-03-22T21:22:55Z"
     },
     {
-      "section": "Business",
-      "title": "Kelly Loeffler to Newsmax: Small business loans now only for citizens - MSN",
-      "source": "SBA News",
-      "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPZ3VzdXRZVWZEM1VncEFkcndhOC1zSkFVR1BaUmFZY2Fua1hMa0swQmZ3dEVtbVFyaXltbVR1dDhWS0FheFlEM3ZlLUpWWUVPQk4wRlVPbDFyd1pMUlkzalFSVVE4cHhVNWNqSTE2Q3FhYzhEVGFCOE5HNnd2S0U2WUs0VVZxYVRNTGx1RTRBSDNfR1FrMHBQTzBOVjFJZ05IS0t0MVQxd3ZQc296blFvYTVrMTRyaF9fXy1relV3Q2s3Q0th?oc=5",
-      "published": "2026-03-22T21:22:29Z"
-    },
-    {
       "section": "Tech & Life",
       "title": "Menthol-flavoring add-ons allow for workaround of menthol-flavored cigarette bans, Virginia Tech researcher says - WSLS",
       "source": "AP Technology",
@@ -4353,6 +4395,13 @@
       "published": "2026-03-22T20:55:25Z"
     },
     {
+      "section": "Culture",
+      "title": "‘Project Hail Mary’ blasts off with $80.5 million, a best for Amazon MGM, and the year - Scripps News",
+      "source": "NME",
+      "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNRHB3ZnFyZmlWT1VuYWdPN3hnMThPQkppOWVLcnhUTm5CSmpDbVdRdU0xOFJwTENQS044cTQ1Wi1RalFvXzZvUmNCWmhneThmRjlpRWoyUDJuSHRsVGFVWTFCU3ZpZ2pqNlZLSEdyX2tZTjFiT28tZUQ5T1N4QVpUenRlNFlvSmF6M0dRM05Qa2V2S3JiY2tYWnFhY21MSnhrSkFSamRWNWVDSHpibVlzUVBFWGtlTEtELS1kNWNoUUhTWUxCUXU5SjN3?oc=5",
+      "published": "2026-03-22T20:55:19Z"
+    },
+    {
       "section": "Tech & Life",
       "title": "Seconds that save lives: how the IDF’s ‘digital brain’ uses AI to reshape the battlefield - ynetnews",
       "source": "The Information",
@@ -4365,13 +4414,6 @@
       "source": "Miami Herald",
       "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE8xQ3F6QW0tcE5yY3ZNaVhEVzJnNVNsMmJ3THhKVkkxMnRrbk9adm05N3BxMlFGbms4aG1UUm5zWUZ4OUNkRWduNmJ1ZTNBNDM5WDNlcm9TVWdnV3RRQVdodFFvNmU3R3FXd1A5YUo3TXJ2RDVmeFJKRHA1QdIBe0FVX3lxTE9NZVZyN3JJOHk1LS1OQ1ZwcHB5aTBNUUlBNjhYeDhxVjN1Vk94LVkybjRmRUtfR3c3aDg2R3NvZDNCMTRyMVlBOWJJa0Y4UzlJQ2JjU3BGTDQxWGdjeXB5cnZSWDJ3SzNTTUVCSWtidDIycUZFT2RvS3JvYw?oc=5",
       "published": "2026-03-22T20:49:01Z"
-    },
-    {
-      "section": "Business",
-      "title": "Starbucks CEO Brian Niccol Just Revealed His Turnaround Playbook, and I Think I Learned It While Studying Shakespeare - inc.com",
-      "source": "Inc Magazine",
-      "link": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxOR0NRbXF4R0JqYXpaNGJwX29iRWNUQS14UUYzN2wzUUw0Yjl0MDlUcXlSX295V0lSam1SYU1DZVpvdmd2NUtzdi1UaFZXczA1emk5VjQ1V1NOdEpTcGp1dWViX19TS2RQamxCRkJpcXZEbEQ2eVhXcW9adVFkbC1FX2JjdkhBaHc4OTVGVGhMaTU4ZF9lVVBFZFp3RXhTV2NvamdTSHJmaTdLcWxnOU5QclZEbGh4MV9hamowbkxXcW5uMGx2VE85dUpCMjhNZl9xLVNWMEJmaGFPbFRxQ0Jkd3JfckVsR3ZOc2UycEtOZHBrdw?oc=5",
-      "published": "2026-03-22T20:48:25Z"
     },
     {
       "section": "Culture",
@@ -4444,18 +4486,18 @@
       "published": "2026-03-22T20:34:00Z"
     },
     {
-      "section": "Business",
-      "title": "Popular Florida family theme park closes down for new development - thestreet.com",
-      "source": "Bisnow",
-      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOTFduOG5PTUVOZi1RN1R1czRLeVpickNwa3dHWS02aUdHMUZqZ2JkOVdRa3ROLXFyNEl5Z1k4NnRQM1FnMWhYOTBWREl0YlpNNk1SWTRvcWVzTGk4U2hDdzhyZmVIZ2FtRUw2djhPbXVVSDJydFZmaWdIdk9BREVUQjNUQlpwX2JqQ0hMM3dWakN6c3pfX1lR?oc=5",
-      "published": "2026-03-22T20:33:18Z"
-    },
-    {
       "section": "US News",
       "title": "Projecting the Mariners' opening day roster | Analysis - The Seattle Times",
       "source": "Seattle Times",
       "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPN05GMmZMTkJvMzlBZk5fcXVTR3JxV0xCal9NLTJMQ2dGcENEaVAyYWpNYWRLRm82eXpmYXVnUVBsS0ZLbVNoV1Y5RGJIRTJ6ZldhdVlNVk5LTmNycVNXQkgwUE8yQWthdWFUdU5TMHBYRTNuM0U2WDVLM1NjdFJ4UnRqZ2dUR3VrS1RJbUNZT05tUTlxUzdXSi0xb2NQNEJsY3c?oc=5",
       "published": "2026-03-22T20:28:12Z"
+    },
+    {
+      "section": "Culture",
+      "title": "Katie Holmes' style transformation - AOL.com",
+      "source": "Glamour",
+      "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBGSXNyNUE2WGY0eXNuLVVIQ05mMnBQQ1ptX3JyUWtlMFIxVGl1cjY3WENhaTVvRVJsekZUTU9yZUNSS2gxTXhxNV9SMl9wYmxTWW9qVEluRy1fTkpkelE?oc=5",
+      "published": "2026-03-22T20:26:33Z"
     },
     {
       "section": "US News",
@@ -4542,6 +4584,13 @@
       "published": "2026-03-22T19:49:00Z"
     },
     {
+      "section": "Culture",
+      "title": "The media may have unmasked Banksy — again. That’s angered some art fans but not ruffled dealers - Fox 59",
+      "source": "NME",
+      "link": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxQdE9xWnNhZl9zNFRFaWRhZHJ2eWhZX1U2WHZiZFVvdkR4bUZkVG15WGZRQXNJUHBILXVGM1NFczJRUm9IT0JLQWw0d0ZWeFVjZFZibWozR29nd0xxWTRlYW1JbXNFTGt5SjNyQmtPV1ltZDY1bmxrYnpnbXBSdzdjMnpFOGJ0N1J4ZW5sV201eGxiN05iWGZET1YyYTdta0w0MU5xdDZqclZONEM5Yjd2RGxuMUxlTjUwVF80OE5vU0pCdVFaU0pjbk9JTGUta3JKRU0tZDB4YlN0bE5aOV95SEotRVjSAeoBQVVfeXFMUGJlZzRGVy1xNS1mT3lZVkt5VkF2Ql9OdDZhVmZONGFIRXFsdTczbThMVHBfa29yVnZZNWpISlJyOEhnQjg5N0dtX2FNN3VYd2JzSVFMUkNjQ0FwTjhRTGY3MkN4U2pQMERZNUNiQ1ZzUDJnN3RYRDdJTFhvR3g2VTdRazdkTmppbTc5NEh2bTRid0xIZ2ZMVFViUjM1VkJvVjhOVHd6NTdWODBsU1hQVHdsemkzaDE0SFpZTmZnbmhWR21NVTRvcWVINjZoRmszc1IyZUluNk1ZeXJCclJyelhJMlhJMGlFYTNn?oc=5",
+      "published": "2026-03-22T19:46:00Z"
+    },
+    {
       "section": "US News",
       "title": "Donald Trump - NOTUS — News of the United States",
       "source": "Notus",
@@ -4561,13 +4610,6 @@
       "source": "The Wrap",
       "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1OTERxWnF4Qk13cXhCVEJRSzZqWUJPenJBOFhNWkY4RjFfdEtCNS04dUxrVmtBVWM0ZmRJTklEZGdDYTNLV3FoYWhUWU9vV3BaOC10dmc1QUdIYTBBV3VWY0U2ekJ5dw?oc=5",
       "published": "2026-03-22T19:41:51Z"
-    },
-    {
-      "section": "US News",
-      "title": "Wedding venue floor collapses in N.H., sending nearly 70 people plunging to basement - The Boston Globe",
-      "source": "Boston Globe",
-      "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxONHQwdFVGQllKdEo1eXFVS21DSGlDV0NkbVZfNUJoQVp2R2FHaW0xVkVtVTdWUW94V1c5YXZOTkF6dGxURkE3NFd3VWJURG5SYlJGOXlyc2VnQy1NR3RHTWFZQ1p3Q3UtT1huVzNDOHMzQWhuTGpWNWFrWkpMQ2NYVk0yVHpxZXFnNWc?oc=5",
-      "published": "2026-03-22T19:40:00Z"
     },
     {
       "section": "US News",
@@ -4622,7 +4664,7 @@
       "section": "Tech & Life",
       "title": "Opinion | Best Protection Against an AI Bubble? Index Funds - WSJ",
       "source": "WSJ Technology",
-      "link": "https://news.google.com/rss/articles/CBMikwNBVV95cUxPc1B4aU1jeEpkSlI2OFM0TmZXcDR2UVVHUDZMazhPY1NjVWFlZ3ZsbFFQTk1WOFh4UktkdkctRkJTSlFnS3djZFdmV1ZZalByNmhERjNzaW1lNnBtMzJXWVpqT1BkdEp0Nm1hb1RNR2FpLXVqTV9MZU4tMVdvMl84VllMNTcyNUlLdXNiS2RISl93U2JVcTdadDFNRHdKVVBINnM0UTlvMkx3SHJURllmX0tkXzRQSC0zT283XzVaM29pNGszT3J1UXJiSXpQVXpKWU41NXZuaXVKeUFvOUgxdXFHZzVOZlNIX1l6NEdjY2t2QkQ4Yk9UNVYtMTBQZnZJTzB4LUdkQWlMa0NtTlZuRTNaRWpLX0RZWHgxX2RLVTBqOGFGQVhZS2VmN3pqUHJyei1WMnBDbEctNFlrWnVicDJlNnJPWFpXTzNYVlg0TGhWN3poN19kbG80VTBPWWVNRlI5VDNhcTd6RXEwN2psMkFjc2UwZnpMVEw0MWpwaGpfbW9pQjczenk1UkhNek5haVp3?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMikwNBVV95cUxNMjBHcVJHUTdVWU9aZFJCalhIMXlFYWxUNHNobjdEWmpsNE0xaFNYNXFLNUIyeDNwS1gyb2FjYWNtMlJWaTY4bnF1QkQtcy02bi1pY1hjcjUzT3FTVnBaWFNlOUg2MTNVakJ0N2VYYkh4U1A5bUg0NnBLSGVEaWh4ZFk0M0Vwa0hZMVFuSmNEbDVvbFh2dHJjR0x6NGRrYXJMRGhpWlNwandOSlhMRWFwM3JDUXJLYU9fX0hTc0xtVE1uQUVZU1M3MHV3OEhzbnNxaERZMEhLenMzLXU4QWk2TTdJSjhJbldOY3l4ekpoVTExR19nZmVCVGxpQjAwcDY5U2todnJoWVNTdFBYNzZLc1RaSUpVQld6aXNBWVQwTTJ0ekpCa2xjVm82emg5eW5aRzFFTHNCRnlVVEFLdkdnTnpaNzZ1Um94d0t0NHp5cGtxT1hYalF4ck5PTTJwN1hKX2F6Q1BtUlZvckdsdGM5enlJRTBBYVNna2dnaDR0bjhPVzFJUWxLdHpNc1UtV0xsOWRz?oc=5",
       "published": "2026-03-22T19:15:00Z"
     },
     {
@@ -4647,6 +4689,13 @@
       "published": "2026-03-22T19:05:30Z"
     },
     {
+      "section": "US News",
+      "title": "ICE agents will deploy to airports to help TSA. What we know about MIA and FLL - Miami Herald",
+      "source": "Miami Herald",
+      "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTFA4WVRqVjd2YlEwSHRUek1NOGNtN2F3LUx0RUNTVGJfQWUxTURjamJUUHJRUERQeDlsYmRGOXZnVUN4cUhMbDMzZldCZ0lOTllFRGZiMHNjSVdpZUhNUS1ualFXUXdpTzVqRzFrVVhDTzZhOWtFR1VsRG1OVGTSAXxBVV95cUxQeUd3eFJMWmVYbUJLclpNOWNOWXJCdU9YWmxvWDEyNnBqM1RRYzFqVVBBSDhWYVNQa2FQUHVrc1lhS1BsMmhsYnNGRGRKYlNPNUdWXzFmYWhlcU8xcWhNdWttaHMxal9ENWFoTml6SmFJX01tOUFrSG8yYkJI?oc=5",
+      "published": "2026-03-22T19:04:00Z"
+    },
+    {
       "section": "Culture",
       "title": "A Beginner’s Guide to Bird Photography: Essential Gear and Basic Settings - PetaPixel",
       "source": "PetaPixel",
@@ -4666,6 +4715,13 @@
       "source": "Broadway World",
       "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQaU9kVElqNWsxYWhyME1uY0J4Tk9jbFBuX0x2anpzdGZIS21iek5vVXdMSG9NVjd0LS1DUGpNbmhRZngzZk85MWJPNlFxNWtyVzBINkdRRmlkc09oMVRYdlR6SnRtUUdhVFBrS3pLUF9KU1RldG5tN0hobnNmTG5zemFlYVg?oc=5",
       "published": "2026-03-22T18:55:50Z"
+    },
+    {
+      "section": "Culture",
+      "title": "The truth about Timothee Chalamet's sister and Kylie Jenner's 'awkward' run-in at Oscars - MSN",
+      "source": "NME",
+      "link": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNWS1FcDJUVjVlM0M1YUF4Z2dxWTl0LU1CZnd0Z3pGT3lOQ3p3MmIwVklYWUx2RkJmanJ0cnBGQnViRlFLLXkyRGdoRFM5UFB0VHZnMFNRTk9YekxLb1NpSzl4LUpTWGJrWHJMZmVUQmZwNnoyeVpmVXFBT2ZublpERWJVRU1LRGktaGRITXNiLVZtNkFoXy0wWjVuem93YkZiRHQ3ZDdvNXRRa0NLSlZBMW84V1REek1hSVFxMll4VVdUa294NTRNN21acWdyMXpBR3J1MWlyZmQ3OHc?oc=5",
+      "published": "2026-03-22T18:50:06Z"
     },
     {
       "section": "Culture",
@@ -4711,13 +4767,6 @@
     },
     {
       "section": "Tech & Life",
-      "title": "Who is Devendra Singh Chaplot? IIT Bombay alum joins xAI to build superintelligence, welcomed by Elon Musk - MSN",
-      "source": "MIT Tech Review",
-      "link": "https://news.google.com/rss/articles/CBMijgNBVV95cUxNSGp2QktCcTNmVzZHTGlWTWZESzNCOFZFRU56YUtROHNlOV9IVk9TRVVMRGExYndJOGh4QWhJNENrUE1iRlJaQ1lBTnQzU1dVclNsdHd0YUJVMVhYM19KX010T3ZncHY3c2VLWXA0OFVYR0tQR01QQW55NVNxdjR2ZjFpOHA0S1B5SVdVdlRGaU9pYm1pZlBHY0ZjUFotTWFqc1oyZkVZR0gxd3QyYmJWY2d0RkdlRE9vTjhHbHE1TWZPanc3OHhRS0x2dDdJaDFIWFFqaElCMks1Nk1YbERzSzQ1ZmpQa01fd3Y4OEpYdFhLRWp2RkY2eUZMUDFMb1dRaDFQeXBqbUlxQ0Q5Q3I1VFhlSE9OZlhqX1lUaVJncTR2OTJ1VWJYaS1FWHBDY0dMU1NMb1ZMZXRmT05VODl5SmV0NEthTkEwRDhHT2JRTnpfTTg4ejRFaFY1UFA3Xy12SkRZYXJfOUpNdm5YeTdVR3lpem1kQndxbE9OVjU2dWlVVGFoS1pzeDZqcmJRUQ?oc=5",
-      "published": "2026-03-22T18:18:57Z"
-    },
-    {
-      "section": "Tech & Life",
       "title": "Tech Employees Are Reportedly Being Evaluated by How Fast They Burn Through LLM Tokens - Gizmodo",
       "source": "Gizmodo",
       "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPRmJvSkxzaU9qcG9LenFRSXo1ZzNKeUtxY2xHSVNSSWNBUy1FWW9WZ1VMV3NFbVEybGJXMjBLX3MyQ0cyZUJmRjBBM3lRUFJKX3dvMmtkZG5vMzljdDMtdE5WeG94N0NQaGZLc2NleVY1S2VMVlAxbDV3NVJLRENNRFg1azF0SE92QUZDdlF3RzRxWkZsaEZFQ2NwQjlOSWdUZHd1QjFUQnBIXzVBRUNZYS0wbTBQX1V2?oc=5",
@@ -4746,6 +4795,13 @@
     },
     {
       "section": "Tech & Life",
+      "title": "44 bathroom trips later: My unfiltered thoughts on the P Water app - TechRadar",
+      "source": "TechRadar",
+      "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9tbDB6SWZXOEp1UjBYcVhObjd4cUstNkFlaE1fR0xOcVVZTzYzMWtjdV9RS2laNWVwcXNfQXQwMEdZMTlOaTRjaVF6UXl6bllORHpYTFQxRUQxYmpoVW9nbU1JNzJsNGlz?oc=5",
+      "published": "2026-03-22T18:00:00Z"
+    },
+    {
+      "section": "Tech & Life",
       "title": "Persona AI Brings Calm Experience to the Hectic Humanoid Industry - IEEE Spectrum",
       "source": "IEEE Spectrum",
       "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5COGFhcUVRZXRCVktwZ0dlUEpoSWtBMEI4NmNlcEp1UXBGRVJMdGc2QV9KVmJlMDFvbDNFRFItTTlCLUtZZ3RGSmw5LVdlLUFiRlF6VmhQdzZEZnNLSW05dVJrMGdMYW10ZXhlVDl30gFzQVVfeXFMT1RoR0xxUmpYNTVrQWFYSGg1cjdQOVBqalQ1cV9iX01OUmkxNEUyYklESFpkNkNib3dvQk9pUndScXpUMEd4VHN1TkJJSU42Zm9zR2lWaXBUSU5FZ0pkeHhHXzZxM1JYOS1iNHNhZkR2Ri1NRQ?oc=5",
@@ -4757,13 +4813,6 @@
       "source": "PC Gamer",
       "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOMi0wc2NKUFVqeEM4bVFUTWhyXzVTNXFRNm5GaUlDTmxSeGRiMkFuUmV6Q2ZmSHpfYk5GZnRmTkhrVGVGamZIaF9CS2R0dlpYeDRxTnBhcHZYNVIzVWZjR2ZueDNBUmRabEp2MFdxV05ubnFkMllOdWFsUUh5Njl2MlJLd1UyaklZdlNFUTk4NGFINm1GSGhKU0JvLXUwdkQ1UFVuRl9QWjJqTVZQSE1GaXllYXFjTVVzaTdUX2NrVEk3SFQ1XzdwV1hwbG1jVzhxaElERFdWUQ?oc=5",
       "published": "2026-03-22T17:53:53Z"
-    },
-    {
-      "section": "Tech & Life",
-      "title": "Elon Musk launches 'Terafab' project to make own AI chips - Gulf News",
-      "source": "AFP",
-      "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPWlUybUpEUnM5cVNvY3JxQnctTkU4RkhYbHFteU9ZWGFoRkdSOXVtYTh2cDR4YTNOMEcyV3dUTVViWndGamFJaHdHMmRiZ2ItcGdMaG4wbGRzTFE4dWNyUlJGUGNZM1V1UUc1TUxHa3JWUUozSENVNmlyVkdwb3pKM29ZRWRlRHpkak11RzJKZVRaeDZfS1ZlNkVfMWV1bHAzNW9jUGJRQTl1Ym1kYUFqbdIBsAFBVV95cUxPWlUybUpEUnM5cVNvY3JxQnctTkU4RkhYbHFteU9ZWGFoRkdSOXVtYTh2cDR4YTNOMEcyV3dUTVViWndGamFJaHdHMmRiZ2ItcGdMaG4wbGRzTFE4dWNyUlJGUGNZM1V1UUc1TUxHa3JWUUozSENVNmlyVkdwb3pKM29ZRWRlRHpkak11RzJKZVRaeDZfS1ZlNkVfMWV1bHAzNW9jUGJRQTl1Ym1kYUFqbQ?oc=5",
-      "published": "2026-03-22T17:51:22Z"
     },
     {
       "section": "Tech & Life",
@@ -4787,11 +4836,11 @@
       "published": "2026-03-22T17:24:00Z"
     },
     {
-      "section": "Culture",
-      "title": "Chappell Roan Responds to Security Incident Allegation After Fan Controversy in Brazil - Just Jared",
-      "source": "Just Jared",
-      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNSF9kXzdGeTdaM2VTNWt5ZmMyVHJGcGVrVjFiNmp4Tmliclljbkdtbm41OXcwUk5YeEFDYjRGbEU4VGZKQnBLYjIxSHlGc3RScUNibW1WV2RGRllBdHJCaW0wVklJQndvUXpoRTZDTjR1VkZ1NWE1bXR1bC1JSjhuaDBDcHRPRE93enFEX2R0RG1hcnZZMnRKalFB?oc=5",
-      "published": "2026-03-22T17:19:19Z"
+      "section": "Tech & Life",
+      "title": "Gemini's new Discover tab could fix one of my biggest issues with AI — what you need to know - MSN",
+      "source": "Android Authority",
+      "link": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxPWlNaN1pCODhSRlA2WlFBbkx3MzBrNnQ1UktYSzNmQWdxN2J2bmxBbzQ1cGUxQWo2TVZBaFktNFVXVW1Ield0UllYeHVLMlNWOWNidDBPWEt4MURsRE0xamVrRC1zODJjUUVvYUFvbmJyRm5HT1RxUkZxRUZ1QU00eHdMOGJ4TVl6XzdIY2txMmJvN1lBaUJsRlMtSUVyS1BMdWNlUVZRNFdWaEg4blNnRGJNaEhONGJNY21YcVZNelF4NXEzeTZBa29iWmdfVzdRUWZ6OXpjb0ljTGJhdWVHOHUzaURpQ3RVbVdsaw?oc=5",
+      "published": "2026-03-22T17:18:10Z"
     },
     {
       "section": "Tech & Life",
@@ -4799,13 +4848,6 @@
       "source": "Engadget",
       "link": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxOSFNPZVVFNkFmdmFiQWd4bHF2SURYZ1pZYXlsd3hmOTJmdkpPc3ZCVG5OZkdaR0xDblBFelAzcmItbUJsT0xSVmNzR2lUR2ZTLUNqcGtCeHMyQnAxcWdIVXRHYmpoT1UtSlNtQUxvWnhmVVlpek9DalBORTVrS1lnUUdxT05ydHVKXzFfSUNIaGdJQTdydjNJVVFYNll0dnpFN3ItLVNYbExjdzRFa2dxalBXY1lwb25CYlkzZFZDRnVOQXRCQU5IVlg5anNyaTdlNlJZd1h1RU1zb3pRaHZJ?oc=5",
       "published": "2026-03-22T17:17:18Z"
-    },
-    {
-      "section": "Culture",
-      "title": "10 Most Rewatchable Movies On Netflix, Ranked By Popularity - Screen Rant",
-      "source": "Screen Rant",
-      "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTFB6Sk1TWnZDR1JTZVp2bFAwWHRrUmhwdnpybHJYZ1RBSGFES2oxR1pNMzNiWWJSRWVJWnVYa3Z5UHlmZlRxMThxWFYxRDFfc0ZZRVV6cVRmX05KOFZhYmZwZnUwaklhSUs3TWg4RlJmdw?oc=5",
-      "published": "2026-03-22T17:16:19Z"
     },
     {
       "section": "Tech & Life",
@@ -4820,13 +4862,6 @@
       "source": "Nature",
       "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQS3BnUE10TDlKNV9aQ0VUX3RUVE41czB3cXQ0cWtUbUFjMXlNcFY3MzRRS1BnLVdfLU9TYjZEb2JzZkFRdnRBczdRc21qSFZiSV9ONW1WTTFQNlJrNW9CRFZ4clFpR2dETjBsUjFsTk1oLVA2eWYwejNPckN2cXBqYk9sQTFjZzc3R01UZWJfdDJYeTZ1WkZETVd0Mmx0Ti1UemVTaGZuOTXSAa4BQVVfeXFMT0Zoc0J4RTR0V3BzdUdyM3dJQ21PM0xESnFXYkxJbWtueDBUUnFPZmNOYkhWYVNaNFhBalo1MDFYc0p5QVQzOUFydU9kNUhYYUlpNzdaUnZlQnRRd0RWbG9kUHJScmljeDRZSWJCeHJ6NE11MG93QUd6VjFMcFlSN0g4clRPLTZYcVR3cmdGRC13X1MyWmFIYkxYWVlaLVFzaTVMMGJlZm9BMW9zelhR?oc=5",
       "published": "2026-03-22T17:07:18Z"
-    },
-    {
-      "section": "Culture",
-      "title": "The 2026 Met Gala Dress Code Was Just Announced - AOL.com",
-      "source": "W Magazine",
-      "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1BWE5OMHpwdUlOUVBRc3VmcmtsajFkSTI1eXp6QVJwYXdhWVNGQ3I0MENsSHZKcUxqTk9wTWMxTkhrcFlHS1oyaHVhNjBkNFAwUjJkcmw2a2ZmM3hIeHB2OEdOODdrVlNaRzlZRDRPemRmeHVpTHZhTw?oc=5",
-      "published": "2026-03-22T17:04:59Z"
     },
     {
       "section": "Tech & Life",
@@ -4858,52 +4893,17 @@
     },
     {
       "section": "Tech & Life",
-      "title": "Ubisoft laying off 100+ staff and ending game development at Ghost Recon studio Red Storm Entertainment - MSN",
-      "source": "IGN",
-      "link": "https://news.google.com/rss/articles/CBMiggNBVV95cUxQS1YxSjhJRy1kdDdTMnllV21VZW5RMVR1alI1eDgtbE9WRi16NVZ0cmVfaFpza3p0MzdERjY1aklxcTlpN0MwT1d6UEFPRTduTy1haXdUWDNqOE9fTnIzLXV1LTA0QlpScFE2RThZMUsyZXJncVFNZW5tdDF0bEU3d3o4emxqS3JFNDdMRTZJWjI5MjhzeUlSeU5UbzJMWTRGYWdvbUE1TzV6MElRT0tIUFg2TDBuajd3cG5mcDBhUjVTdGdNQXowWFVfdEsxMkV4YW52S0U4ZTNNV1FJV0tCOVVnSDl3LTMyZ3BQZTMzbU84YjE0RGpxeG05X3JwMmhKaXI3X25JajBhNkItNWZxbGVxVGxmYW5iOW9LdThMNEdOZWZOOG9EMWR0TXFGbnl1VW1jYU9BQzZyaThaTmdmbnQzVTlqWTM2aW5sY29LdEE5M3dUTW1Yb2ZZSjNmR3lZVGlXQWZyRTRybnI1VUk5cjU0cHdHdktBcndvT1R2VnBWUQ?oc=5",
-      "published": "2026-03-22T16:57:36Z"
-    },
-    {
-      "section": "Culture",
-      "title": "Chappell Roan addresses security incident after Jorginho criticism: \"You did not deserve that\" - NME",
-      "source": "NME",
-      "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQUW0xVG9jZ3FqdWNxSE1LTTM4Undrb1ZqNTl4NnNvZktuQ2tXcks1ekFlRElDcTNsbmtWcWtnX3ZvbnVQaVpEWm9IVWZrbnRWOWtta0VOc0Y5MXNPNW1BMk41dFZsTDRyYXdXeFMzeUwzblE4eHRqbnVsbDAyclFuUmpqam5DV0dyVDZEZ3V2emhOdUFwV2ZTUDZpLVJ2aWFnRnAwODUyMDFhc1RXdkN0bnhoOFlUR0hZd0J4bEtLMlhFemQtQ0w0UXFn?oc=5",
-      "published": "2026-03-22T16:55:32Z"
-    },
-    {
-      "section": "Tech & Life",
       "title": "AWS at 20*: Inside the rise of Amazon’s cloud empire, and what’s at stake in the AI era - GeekWire",
       "source": "The Next Web",
       "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNdVVZUU1HNXN5alhlOEJULVhtNG52RWZBWjdyUGpKbnJ2NjJ0SlM4TFZacGVUbTl2UGU2QVlsSkVwbDhjbk5HMXlTamVLOVpiX0c4NnBXd3J4VWhuSWw0dGdJRUVsUXN0NENvdDQwRTdodWZja0poVVYxeHRMeTRyek9aWGNraUxLTUJETndELTZhNW9sMHZfQ3hSRGVrT0F0RDRJTGZUenpZVGQxTWRjc3R0UQ?oc=5",
       "published": "2026-03-22T16:46:14Z"
     },
     {
-      "section": "Culture",
-      "title": "Variety slammed over Chuck Norris legacy take - MSN",
-      "source": "Variety",
-      "link": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxPNWw1cXZlek9HN0JoeHFLY1pURmJVd00zSjZzWlVVaW40S2d3cG1hQ1EyUUZ5UTJaZzRHSmNraDlicXVmcWNBQ21sOU1WSDJIMGNObHFZQTlVaG4wWmw3Z1RQdlNtbUpLbGQ2Z1NUSVpMV1U1UENPNFJtYzAwNmVaQ0NDRnU5OFRoMG9pN1l1ek8wTzZJMUNMamxzaFVnaGRraFgtc19mdEZZTms3dVU4azdpV1FyX0ozT2ZKa250RkhlZnV4ZHpCcmZfNlFoY3VoSmZadFNIY1VZZmV1cHhPTA?oc=5",
-      "published": "2026-03-22T16:39:29Z"
-    },
-    {
-      "section": "Culture",
-      "title": "Netflix’s 7-Part Masterpiece Miniseries Pulled 62M Views in Just 1 Month - Collider",
-      "source": "Collider",
-      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQQnFnLVNuYU5HeWZTZllOSV9aSjN4OHhrOGpWN1BJRnVQRG5ZeXZiMTJXQTM0OWJkSGpKWTVDRTAxYmduX2UweFRreXdvNE9jVTlxbXJPOTMzODRhQkd4bV9oSzREeWVGYlQ0ZnRfVEo5SEhXT3l1SmJkM1BkWGpqcHlvQks0WVVW?oc=5",
-      "published": "2026-03-22T16:36:13Z"
-    },
-    {
-      "section": "Culture",
-      "title": "Netflix Has The 2 Best Gothic TV Shows On Any Streaming Platform - Screen Rant",
-      "source": "Screen Rant",
-      "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBCdTRtbGZvTlZncGVMOVFaN3dPaE9lZThnaDZuWnZWTzRpZnJpeU9HZ3RYV2RwbEJ5WlpERDNkSUNlbEd6M2lYVXhJWFdEYTloSFA2YnVTbURaM0w5RS1tTndDWGMwUDlJZnh2S3dVMFVFLWc?oc=5",
-      "published": "2026-03-22T16:31:21Z"
-    },
-    {
-      "section": "Culture",
-      "title": "Kris Jenner Recalls Not Giving Robert Kardashian Sr. Her Phone Number - People.com",
-      "source": "People",
-      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOcWhscEpjcTZtMnRUZl9MTDRwOVJOVkRKa3ltSEFEX1dHZm52RUZvcFZiYzVWSXY0dm5Jd09tdFJuQVliTXp3WjdJNkEtTlg2c0Z1cU5oUXZrcVZRMEFWakU1Vl91MDJGNldkbnJwV2lDUENFa05LbEJqbUthUG1BcGFPX05XUjhpZzdGdlJtV0lRM0w5?oc=5",
-      "published": "2026-03-22T16:30:00Z"
+      "section": "Tech & Life",
+      "title": "Crimson Desert team apologizes after players find AI art in the game: 'Our intention has always been for any such assets to be replaced' - PC Gamer",
+      "source": "PC Gamer",
+      "link": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxOZDBJb2dsQ3YyMFRTTGJqcWU3OVdVQXpyWW1CcjZ4eGZ4N0xLcFBfZ2c3SW9HU0J2Q1k5bU12X0hrSlpYRjlNV3dwZ0ZQQ2xCYkdDSlltamxhVzVRM2MzcUMwMXhzY1BKVExKbE5lcHV1WmtiVjdnZ3ZqVC1NWG11eGV6XzZCV2RoaHdHa05CcUxKdnRhSVJ1OUp4eWtIcUx5VjFJYXRnaFdGMThTS0NLdzFvTDRWZ1pRc1VpMmFwb1JjM0FDRmo1MldjODF0OGhFb3lzTjNXMTNOV1dGWDBEVlJ5TWxfTl8xODJtaElTTjNsMnZncjRXNUZuQVo?oc=5",
+      "published": "2026-03-22T16:26:58Z"
     }
   ]
 }
