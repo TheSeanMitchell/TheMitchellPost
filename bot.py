@@ -758,6 +758,49 @@ RAW_SPORTS_KEYWORDS = [
 ]
 SPORTS_KEYWORDS = set(kw.lower() for kw in RAW_SPORTS_KEYWORDS)
 
+# ── US City + Team keyword pairs for routing ──
+# If BOTH the city AND team name appear in a headline, prefer Sports section.
+# Headlines matching this will be allowed in Sports AND (if major) US.
+US_SPORTS_CITY_TEAMS = {
+    # NFL
+    "buffalo": ["bills"], "miami": ["dolphins"], "new england": ["patriots"],
+    "new york": ["giants","jets","yankees","mets","knicks","rangers","islanders","red bulls","city fc"],
+    "baltimore": ["ravens","orioles"], "cleveland": ["browns","guardians","cavaliers"],
+    "pittsburgh": ["steelers","pirates","penguins"],
+    "cincinnati": ["bengals","reds"], "houston": ["texans","astros","rockets","dynamo"],
+    "jacksonville": ["jaguars"], "tennessee": ["titans"], "indianapolis": ["colts","pacers"],
+    "kansas city": ["chiefs","royals","sporting"], "denver": ["broncos","nuggets","avalanche","rockies","rapids"],
+    "las vegas": ["raiders","aces","golden knights"], "los angeles": ["rams","chargers","lakers","clippers","dodgers","angels","galaxy","kings"],
+    "seattle": ["seahawks","mariners","sounders","storm","kraken"],
+    "san francisco": ["49ers","giants","warriors","sharks"], "arizona": ["cardinals","coyotes","diamondbacks","suns"],
+    "dallas": ["cowboys","stars","mavericks","rangers","fc dallas"],
+    "philadelphia": ["eagles","phillies","76ers","flyers","union"],
+    "washington": ["commanders","nationals","capitals","wizards","spirit","dc united"],
+    "chicago": ["bears","cubs","white sox","bulls","blackhawks","fire"],
+    "green bay": ["packers"], "minnesota": ["vikings","twins","timberwolves","wild","united"],
+    "detroit": ["lions","tigers","pistons","red wings","city fc"],
+    "carolina": ["panthers","hurricanes"], "atlanta": ["falcons","braves","hawks","united"],
+    "new orleans": ["saints","pelicans"], "tampa": ["buccaneers","rays","lightning","rowdies"],
+    "charlotte": ["panthers","hornets"], "orlando": ["magic","city sc"],
+    "portland": ["trail blazers","timbers","thorns"], "oklahoma city": ["thunder"],
+    "memphis": ["grizzlies"], "san antonio": ["spurs"], "new jersey": ["devils"],
+    "columbus": ["blue jackets","crew"], "nashville": ["predators","sc"],
+    "salt lake": ["jazz","real salt lake"], "utah": ["jazz","royals"],
+    "sacramento": ["kings","republic"], "san jose": ["sharks","earthquakes"],
+    "montreal": ["canadiens"], "toronto": ["raptors","blue jays","maple leafs","fc"],
+    "vancouver": ["canucks","whitecaps"], "ottawa": ["senators"],
+    "edmonton": ["oilers"], "calgary": ["flames"], "winnipeg": ["jets"],
+}
+
+# Pre-compile city+team detection: returns True if headline should be sports-preferred
+def _is_sports_city_team(title_lower):
+    for city, teams in US_SPORTS_CITY_TEAMS.items():
+        if city in title_lower:
+            for team in teams:
+                if team in title_lower:
+                    return True
+    return False
+
 RAW_TECH_KEYWORDS = [
     "technology news","latest tech news","emerging technology","cutting edge technology",
     "future technology","tech trends 2026","artificial intelligence","ai news",
@@ -1688,6 +1731,39 @@ _JOB_PATTERN = re.compile(
     re.IGNORECASE
 )
 
+# ── Junk-result title filter ──
+# Catches search-bar ghost results like "Persian Gulf - The Atlantic" where
+# a source's own search page is returned instead of a real article.
+JUNK_SOURCE_SUFFIXES = [
+    " - the atlantic", " - the guardian", " - the economist", " - the hill",
+    " - the independent", " - the telegraph", " - the times", " - the new yorker",
+    " - foreign affairs", " - foreign policy", " - politico", " - axios",
+    " - bloomberg", " - reuters", " - associated press", " - bbc news",
+    " - financial times", " - wall street journal", " - new york times",
+    " - washington post", " - npr", " - pbs newshour", " - cnbc", " - forbes",
+    " - usa today", " - the wrap", " - variety", " - deadline", " - vulture",
+    " - rolling stone", " - pitchfork", " - espn", " - si.com", " - the ringer",
+    " — the atlantic", " — the guardian", " — the economist", " — the hill",
+    " — bloomberg", " — reuters", " — politico", " — axios", " — cnbc",
+    " — foreign affairs", " — foreign policy", " — the new yorker",
+    " — the independent", " — the telegraph", " — financial times",
+    " — wall street journal", " — new york times", " — washington post",
+    " - abc news", " - cbs news", " - nbc news", " - fox news", " - newsweek",
+    " — abc news", " — cbs news", " — nbc news", " — fox news", " — newsweek",
+    " - time magazine", " - time", " — time magazine", " — time",
+    " - al jazeera", " — al jazeera", " - bbc sport", " — bbc sport",
+]
+
+def _is_junk_title(raw_title):
+    """Return True if title looks like a site search result, not a real article."""
+    tl = raw_title.lower().strip()
+    word_count = len(raw_title.split())
+    for suffix in JUNK_SOURCE_SUFFIXES:
+        if tl.endswith(suffix) and word_count <= 8:
+            return True
+    return False
+
+
 # ====================== SOURCES ======================
 MIDDLE_EAST_SOURCES = [
     ("Broad Middle East","https://news.google.com/rss/search?q=middle+east+OR+iran+OR+israel+OR+gulf+OR+hezbollah+OR+hamas+when:1d&hl=en-US&gl=US&ceid=US:en"),
@@ -2178,9 +2254,23 @@ def _fetch_one_source(source_name, url, pattern, block_pat, is_sports_excluded):
                 if _JOB_PATTERN.search(title_lower):
                     continue
 
+                # Junk search-result title filter
+                if _is_junk_title(raw_title):
+                    continue
+
                 # Sports pre-filter for non-sports sections
                 if is_sports_excluded and title_matches_keywords(title_lower, SPORTS_PATTERN):
                     continue
+
+                # City+team pair: prefer Sports; skip from US/World/Culture/Business
+                # (allow it to pass through in US if it also matches major US news pattern)
+                if is_sports_excluded and _is_sports_city_team(title_lower):
+                    # Allow it in US only if it's a genuinely major national story
+                    # (i.e. the sports keyword match is weak / incidental)
+                    if not title_matches_keywords(title_lower, SPORTS_PATTERN):
+                        pass  # Not a sports headline, let it through
+                    else:
+                        continue  # Strong sports headline — skip from non-sports sections
 
                 if title_matches_keywords(title_lower, pattern):
                     ts_struct = entry.get('published_parsed') or entry.get('updated_parsed')
@@ -2826,7 +2916,28 @@ html_parts.append(f"""<!DOCTYPE html>
         transform: translateX(16px); background: #000000;
     }}
 
-    /* ── Search bar ── */
+    /* ── Video On/Off toggle — desktop only ── */
+    .video-toggle-wrap {{
+        display: flex; align-items: center; gap: 7px;
+        margin-left: 8px; flex-shrink: 0; padding-left: 10px;
+        border-left: 1px solid #2a2a2a;
+    }}
+    .video-toggle-label {{
+        font-size: 0.72em; color: #aaaaaa; letter-spacing: 0.04em;
+        text-transform: uppercase; user-select: none; white-space: nowrap;
+    }}
+    body.light-mode .video-toggle-label {{ color: #444444; }}
+    body.light-mode .video-toggle-wrap {{ border-left-color: #ccc; }}
+    @media (max-width: 900px) {{ .video-toggle-wrap {{ display: none !important; }} }}
+
+    /* Active-audio red border on video inset */
+    .youtube-inset.audio-active {{
+        outline: 3px solid #B30000;
+        outline-offset: 2px;
+        border-radius: 4px;
+    }}
+
+    /* Search bar ── */
     .search-bar-wrap {{
         max-width: 1400px; margin: 0 auto 18px auto; padding: 12px 20px;
         background: #1a1a1a; border-top: 1px solid #2a2a2a;
@@ -3150,6 +3261,13 @@ html_parts.append(f"""<!DOCTYPE html>
             <span class="toggle-slider"></span>
         </label>
     </div>
+    <div class="video-toggle-wrap">
+        <span class="video-toggle-label">Video Feeds</span>
+        <label class="toggle-switch" title="Toggle video feeds on/off">
+            <input type="checkbox" id="video-feed-toggle" checked>
+            <span class="toggle-slider"></span>
+        </label>
+    </div>
 </nav>
 
 <!-- ══ FLOATING LIGHT/DARK TOGGLE (mobile only) ══ -->
@@ -3375,7 +3493,7 @@ if top_stories or daily_briefing:
         <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/pykpO5kQJ98?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/YDvsBbKfLPA?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/vfszY1JYbMc?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/V1uQavRXjo8?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/8F3XTORhaQQ?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/iEpJwprxDdk?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJj3l8Bg&autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
@@ -3423,19 +3541,86 @@ if (!IS_MOBILE) {
     });
 }
 
+var PLACEHOLDER_VID = 'x-K_xTqtFCw';
+var PLACEHOLDER_SRC = 'https://www.youtube.com/embed/x-K_xTqtFCw?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1';
+var _stallTimers = {};  // track per-player stall timers
+
+function _setAudioActive(activePlayer) {
+    // Remove audio-active from all insets, add to the active one
+    document.querySelectorAll('.youtube-inset').forEach(function(inset) {
+        inset.classList.remove('audio-active');
+    });
+    if (activePlayer) {
+        var iframe = activePlayer.getIframe ? activePlayer.getIframe() : null;
+        if (iframe && iframe.parentElement) {
+            iframe.parentElement.classList.add('audio-active');
+        }
+    }
+}
+
+function _startStallTimer(player, idx) {
+    _clearStallTimer(idx);
+    _stallTimers[idx] = setTimeout(function() {
+        // 20 minutes of stall/error — swap to placeholder
+        try {
+            var iframe = player.getIframe ? player.getIframe() : null;
+            if (iframe && iframe.src.indexOf(PLACEHOLDER_VID) === -1) {
+                iframe.src = PLACEHOLDER_SRC;
+            }
+        } catch(e) {}
+    }, 20 * 60 * 1000);
+}
+
+function _clearStallTimer(idx) {
+    if (_stallTimers[idx]) { clearTimeout(_stallTimers[idx]); delete _stallTimers[idx]; }
+}
+
 function onYouTubeIframeAPIReady() {
     if (IS_MOBILE) return;
     setTimeout(function() {
-        document.querySelectorAll('.youtube-inset iframe').forEach(function(iframe) {
+        document.querySelectorAll('.youtube-inset iframe').forEach(function(iframe, idx) {
             var p = new YT.Player(iframe, {
                 events: {
-                    onReady: function(e) { e.target.mute(); },
+                    onReady: function(e) {
+                        e.target.mute();
+                        // Start stall timer immediately — clear it when video plays
+                        _startStallTimer(e.target, idx);
+                    },
                     onStateChange: function(e) {
-                        if (e.data === YT.PlayerState.PLAYING) {
-                            players.forEach(function(other) {
-                                if (other !== e.target) other.mute();
-                            });
+                        var state = e.data;
+                        if (state === YT.PlayerState.PLAYING) {
+                            _clearStallTimer(idx);
+                            // Red border: show on the video that has audio unmuted
+                            if (!e.target.isMuted()) {
+                                _setAudioActive(e.target);
+                            } else {
+                                // This player started playing but is muted — mute others too
+                                players.forEach(function(other) {
+                                    if (other !== e.target) other.mute();
+                                });
+                            }
+                        } else if (state === YT.PlayerState.PAUSED ||
+                                   state === YT.PlayerState.ENDED ||
+                                   state === -1) {
+                            // Stalled / ended / unstarted — start stall timer
+                            _startStallTimer(e.target, idx);
+                            // If this was the audio-active one, clear the border
+                            var iframe2 = e.target.getIframe ? e.target.getIframe() : null;
+                            if (iframe2 && iframe2.parentElement &&
+                                iframe2.parentElement.classList.contains('audio-active')) {
+                                iframe2.parentElement.classList.remove('audio-active');
+                            }
                         }
+                    },
+                    onError: function(e) {
+                        // Error on this player — swap to placeholder immediately
+                        _clearStallTimer(idx);
+                        try {
+                            var iframe3 = e.target.getIframe ? e.target.getIframe() : null;
+                            if (iframe3 && iframe3.src.indexOf(PLACEHOLDER_VID) === -1) {
+                                iframe3.src = PLACEHOLDER_SRC;
+                            }
+                        } catch(err) {}
                     }
                 }
             });
@@ -3443,6 +3628,26 @@ function onYouTubeIframeAPIReady() {
         });
     }, 1200);
 }
+
+// Listen for user unmute clicks to set audio-active border
+// (YT API onStateChange alone doesn't fire on mute/unmute, so we watch clicks too)
+document.addEventListener('click', function(e) {
+    var inset = e.target.closest('.youtube-inset');
+    if (!inset) return;
+    // Give YT half a second to process, then check mute states
+    setTimeout(function() {
+        var activeP = null;
+        players.forEach(function(p) {
+            try {
+                var iframe = p.getIframe ? p.getIframe() : null;
+                if (iframe && iframe.parentElement === inset && !p.isMuted()) {
+                    activeP = p;
+                }
+            } catch(e) {}
+        });
+        if (activeP) _setAudioActive(activeP);
+    }, 500);
+});
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -3502,6 +3707,43 @@ document.addEventListener('DOMContentLoaded', function() {
     if (saved === '1') setMode(true);
     toggle.addEventListener('change', function() { setMode(toggle.checked); });
     if (floatBtn) floatBtn.addEventListener('click', function() { setMode(!document.body.classList.contains('light-mode')); });
+})();
+
+// ── VIDEO FEED ON/OFF TOGGLE (desktop only, persists via localStorage) ──
+(function() {
+    var VKEY = 'mp_video_on';
+    var vtoggle = document.getElementById('video-feed-toggle');
+    var banner  = document.querySelector('.banner');
+    if (!vtoggle || !banner) return;
+
+    function setVideoMode(on) {
+        if (on) {
+            banner.style.display = '';
+            vtoggle.checked = true;
+            // Re-activate iframes if they haven't been loaded yet
+            banner.querySelectorAll('iframe[data-src]').forEach(function(iframe) {
+                iframe.src = iframe.getAttribute('data-src');
+                iframe.removeAttribute('data-src');
+            });
+        } else {
+            banner.style.display = 'none';
+            vtoggle.checked = false;
+        }
+        try { localStorage.setItem(VKEY, on ? '1' : '0'); } catch(e) {}
+    }
+
+    // Restore saved preference (default: ON)
+    var saved = null;
+    try { saved = localStorage.getItem(VKEY); } catch(e) {}
+    if (saved === '0') {
+        // Videos were off last time — hide banner but don't load iframes
+        banner.style.display = 'none';
+        vtoggle.checked = false;
+        // Keep data-src so iframes aren't loaded at all when off
+    }
+    // If saved === '1' or null (first visit), videos stay on (default state)
+
+    vtoggle.addEventListener('change', function() { setVideoMode(vtoggle.checked); });
 })();
 
 // ── NEWS SEARCH BAR — two-tier: live filter first, Google News fallback ──
