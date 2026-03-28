@@ -2649,8 +2649,17 @@ all_items_flat = (
 )
 ONE_HOUR = 3600
 BANNER_WINDOW = 45 * 60  # 45-minute window for breaking news banner
+
+# Breaking banner only pulls from US, Middle East, World, Business, Sports (not Culture or Tech)
+_banner_source_items = (
+    us_breaking + us_recent +
+    middle_breaking + middle_recent +
+    world_breaking + world_recent +
+    business_breaking + business_recent +
+    sports_breaking + sports_recent
+)
 hot_items = sorted(
-    [it for it in all_items_flat if (time.time() - it[0]) <= BANNER_WINDOW],
+    [it for it in _banner_source_items if (time.time() - it[0]) <= BANNER_WINDOW],
     key=lambda x: x[0], reverse=True
 )
 show_breaking_banner = len(hot_items) > 0
@@ -3239,6 +3248,178 @@ html_parts.append(f"""<!DOCTYPE html>
     .homepage-instructions code {{ color: #B30000; font-size: 0.9em; }}
     .hp-browser {{ display: block; }}
 
+    /* ── Professional Footer Styles ── */
+    .site-footer {{
+        margin-top: 50px;
+        background: #0a0a0a;
+        border-top: 3px solid #B30000;
+        color: #888;
+        font-size: 0.85em;
+        padding: 0;
+    }}
+    body.light-mode .site-footer {{
+        background: #f4f4f4 !important;
+        border-top-color: #B30000 !important;
+        color: #555 !important;
+    }}
+    .back-to-top-btn {{
+        display: block; margin: 0 auto;
+        background: none; border: 0;
+        color: #555; font-size: 0.9em;
+        padding: 18px 24px; cursor: pointer;
+        letter-spacing: 0.06em; text-transform: uppercase;
+        transition: color 0.18s; width: 100%;
+        border-bottom: 1px solid #1a1a1a;
+    }}
+    .back-to-top-btn:hover {{ color: #FFFFFF; background: #1a1a1a; }}
+    body.light-mode .back-to-top-btn {{ color: #888; border-bottom-color: #ddd; }}
+    body.light-mode .back-to-top-btn:hover {{ color: #000; background: #eee; }}
+
+    .footer-masthead {{
+        max-width: 1400px; margin: 0 auto;
+        padding: 36px 32px 28px 32px;
+        display: flex; flex-direction: column; gap: 18px;
+    }}
+    .footer-logo-block {{
+        display: flex; align-items: center; gap: 14px;
+    }}
+    .footer-logo-mp {{
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 52px; height: 52px; background: #B30000;
+        color: #fff; font-size: 1.3em; font-weight: bold;
+        border-radius: 6px; flex-shrink: 0; letter-spacing: 0.05em;
+    }}
+    .footer-logo-text strong {{
+        display: block; font-size: 1.1em; color: #ddd; letter-spacing: 0.03em;
+    }}
+    .footer-logo-text span {{
+        font-size: 0.82em; color: #666; font-style: italic;
+    }}
+    body.light-mode .footer-logo-text strong {{ color: #222; }}
+    body.light-mode .footer-logo-text span {{ color: #888; }}
+    .footer-mission {{
+        max-width: 760px; line-height: 1.7; color: #777; font-size: 0.88em;
+    }}
+    body.light-mode .footer-mission {{ color: #666; }}
+    .footer-donate-wrap {{ display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }}
+    .footer-donate-label {{ color: #666; font-size: 0.82em; }}
+    .footer-donate-btn {{
+        display: inline-block; padding: 10px 24px;
+        background: #B30000; color: #fff !important;
+        font-weight: bold; text-decoration: none;
+        border-radius: 4px; font-size: 0.88em;
+        letter-spacing: 0.04em; transition: background 0.18s;
+    }}
+    .footer-donate-btn:hover {{ background: #8a0000; }}
+
+    .footer-divider {{
+        border: 0; height: 1px;
+        background: #1e1e1e; margin: 0;
+    }}
+    body.light-mode .footer-divider {{ background: #ddd; }}
+
+    .footer-grid {{
+        max-width: 1400px; margin: 0 auto;
+        padding: 32px 32px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 32px;
+    }}
+    @media (max-width: 900px) {{
+        .footer-grid {{ grid-template-columns: repeat(2, 1fr); gap: 24px; padding: 24px 18px; }}
+    }}
+    @media (max-width: 520px) {{
+        .footer-grid {{ grid-template-columns: 1fr; }}
+    }}
+    .footer-col h3 {{
+        font-size: 0.78em; font-weight: bold; letter-spacing: 0.1em;
+        text-transform: uppercase; color: #aaa;
+        margin-bottom: 14px; padding-bottom: 6px;
+        border-bottom: 1px solid #1e1e1e;
+    }}
+    body.light-mode .footer-col h3 {{ color: #444; border-bottom-color: #ddd; }}
+    .footer-col ul {{ list-style: none; margin: 0; padding: 0; }}
+    .footer-col ul li {{ margin-bottom: 8px; }}
+    .footer-col ul li a {{
+        color: #777; text-decoration: none; font-size: 0.84em;
+        transition: color 0.15s;
+    }}
+    .footer-col ul li a:hover {{ color: #fff; }}
+    body.light-mode .footer-col ul li a {{ color: #666; }}
+    body.light-mode .footer-col ul li a:hover {{ color: #000; }}
+
+    .footer-social {{
+        max-width: 1400px; margin: 0 auto;
+        padding: 22px 32px;
+        display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    }}
+    .footer-social-label {{
+        font-size: 0.78em; font-weight: bold; letter-spacing: 0.08em;
+        text-transform: uppercase; color: #aaa;
+    }}
+    body.light-mode .footer-social-label {{ color: #555; }}
+    .footer-social-icons {{ display: flex; gap: 10px; }}
+    .social-icon {{
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 36px; height: 36px; border: 1px solid #333;
+        border-radius: 50%; color: #aaa; text-decoration: none;
+        font-size: 0.85em; font-weight: bold;
+        transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }}
+    .social-icon:hover {{ border-color: #fff; color: #fff; background: #1a1a1a; }}
+    body.light-mode .social-icon {{ border-color: #ccc; color: #555; }}
+    body.light-mode .social-icon:hover {{ border-color: #333; color: #000; background: #eee; }}
+
+    .footer-stay-informed {{
+        max-width: 1400px; margin: 0 auto;
+        padding: 0 32px 24px 32px;
+        display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    }}
+    .footer-si-label {{
+        font-size: 0.78em; font-weight: bold; letter-spacing: 0.08em;
+        text-transform: uppercase; color: #aaa;
+    }}
+    body.light-mode .footer-si-label {{ color: #555; }}
+    .footer-si-links {{ display: flex; gap: 10px; flex-wrap: wrap; }}
+    .footer-app-btn {{
+        display: inline-block; padding: 7px 14px;
+        border: 1px solid #333; border-radius: 20px;
+        color: #888; text-decoration: none; font-size: 0.78em;
+        transition: border-color 0.15s, color 0.15s;
+    }}
+    .footer-app-btn:hover {{ border-color: #888; color: #fff; }}
+    body.light-mode .footer-app-btn {{ border-color: #ccc; color: #666; }}
+    body.light-mode .footer-app-btn:hover {{ border-color: #555; color: #000; }}
+
+    .footer-bottom {{
+        max-width: 1400px; margin: 0 auto;
+        padding: 22px 32px 40px 32px;
+        text-align: center;
+    }}
+    .footer-copyright {{
+        font-size: 0.82em; color: #555; margin-bottom: 6px;
+    }}
+    body.light-mode .footer-copyright {{ color: #777; }}
+    .footer-update {{
+        font-size: 0.76em; color: #444; margin-bottom: 14px;
+    }}
+    body.light-mode .footer-update {{ color: #999; }}
+    .footer-bottom-links {{
+        display: flex; flex-wrap: wrap; justify-content: center;
+        gap: 6px 18px; margin-bottom: 16px;
+    }}
+    .footer-bottom-links a {{
+        color: #555; text-decoration: none; font-size: 0.78em;
+        transition: color 0.15s;
+    }}
+    .footer-bottom-links a:hover {{ color: #fff; }}
+    body.light-mode .footer-bottom-links a {{ color: #777; }}
+    body.light-mode .footer-bottom-links a:hover {{ color: #000; }}
+    .footer-disclaimer {{
+        font-size: 0.73em; color: #3a3a3a; line-height: 1.6; max-width: 800px; margin: 0 auto;
+    }}
+    body.light-mode .footer-disclaimer {{ color: #aaa; }}
+
     </style>
 </head>
 <body>
@@ -3255,16 +3436,23 @@ html_parts.append(f"""<!DOCTYPE html>
     <a href="#section-culture"  class="nav-culture">Culture</a>
     <div class="light-toggle-wrap">
         <span class="nav-updated-ago" id="nav-updated-ago" title="Time since last update"></span>
-        <span class="light-toggle-label">Dark/Light Mode</span>
+        <span class="light-toggle-label">Light/Dark Mode</span>
         <label class="toggle-switch" title="Toggle light/dark mode">
             <input type="checkbox" id="light-mode-toggle">
             <span class="toggle-slider"></span>
         </label>
     </div>
     <div class="video-toggle-wrap">
-        <span class="video-toggle-label">Video Feeds</span>
-        <label class="toggle-switch" title="Toggle video feeds on/off">
-            <input type="checkbox" id="video-feed-toggle" checked>
+        <span class="video-toggle-label">Live News Videos</span>
+        <label class="toggle-switch" title="Toggle live news videos on/off">
+            <input type="checkbox" id="video-feed-toggle">
+            <span class="toggle-slider"></span>
+        </label>
+    </div>
+    <div class="video-toggle-wrap" id="waiting-room-wrap">
+        <span class="video-toggle-label">Waiting Room</span>
+        <label class="toggle-switch" title="Waiting Room Mode: rotates audio across all feeds every 5 minutes">
+            <input type="checkbox" id="waiting-room-toggle">
             <span class="toggle-slider"></span>
         </label>
     </div>
@@ -3284,10 +3472,8 @@ if show_breaking_banner:
         ("US", us_breaking + us_recent),
         ("Middle East", middle_breaking + middle_recent),
         ("World", world_breaking + world_recent),
-        ("Tech", tech_breaking + tech_recent),
         ("Business", business_breaking + business_recent),
         ("Sports", sports_breaking + sports_recent),
-        ("Culture", culture_breaking + culture_recent),
     ]:
         for _ts, _ttl, _src, _lnk in _sec_items:
             if _lnk not in _link_to_section:
@@ -3487,13 +3673,13 @@ if top_stories or daily_briefing:
     ts_html += '''<!-- ══ VIDEO BANNER — desktop only, hidden on mobile via CSS ══ -->
 <div class="banner">
     <div class="video-grid">
-        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/eXsNZKcYqV4?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/_6dRRfnYJws?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/QliL4CGc7iY?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/pykpO5kQJ98?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/YDvsBbKfLPA?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/vfszY1JYbMc?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/8F3XTORhaQQ?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/_6dRRfnYJws?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/iEpJwprxDdk?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJj3l8Bg&autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
@@ -3504,13 +3690,13 @@ if top_stories or daily_briefing:
 
 # ── Build sections in user-preferred order (default order, JS reorders on page) ──
 SECTION_DATA = [
-    ("section-us",       "us-color",       us_breaking,       us_recent,       "Breaking US News",                  "Today&#39;s US Headlines"),
-    ("section-mideast",  "mideast-color",  middle_breaking,   middle_recent,   "Middle East Breaking News",         "Today&#39;s Middle East Headlines"),
-    ("section-world",    "world-color",    world_breaking,    world_recent,    "Asia, Europe &amp; World Breaking", "Today&#39;s Asia, Europe &amp; World Headlines"),
-    ("section-tech",     "tech-color",     tech_breaking,     tech_recent,     "Tech &amp; Life Breaking News",     "Today&#39;s Tech &amp; Life Headlines"),
-    ("section-business", "business-color", business_breaking, business_recent, "Business Breaking News",            "Today&#39;s Business Headlines"),
-    ("section-sports",   "sports-color",   sports_breaking,   sports_recent,   "Sports Breaking News",              "Today&#39;s Sports Headlines"),
-    ("section-culture",  "culture-color",  culture_breaking,  culture_recent,  "Culture Breaking News",             "Today&#39;s Culture Headlines"),
+    ("section-us",       "us-color",       us_breaking,       us_recent,       "&#128313; US News",            "&#128198; US Headlines"),
+    ("section-mideast",  "mideast-color",  middle_breaking,   middle_recent,   "&#128313; Middle East",        "&#128198; Middle East Headlines"),
+    ("section-world",    "world-color",    world_breaking,    world_recent,    "&#128313; World",              "&#128198; World Headlines"),
+    ("section-tech",     "tech-color",     tech_breaking,     tech_recent,     "&#128313; Tech &amp; Life",    "&#128198; Tech &amp; Life Headlines"),
+    ("section-business", "business-color", business_breaking, business_recent, "&#128313; Business",           "&#128198; Business Headlines"),
+    ("section-sports",   "sports-color",   sports_breaking,   sports_recent,   "&#128313; Sports",             "&#128198; Sports Headlines"),
+    ("section-culture",  "culture-color",  culture_breaking,  culture_recent,  "&#128313; Culture",            "&#128198; Culture Headlines"),
 ]
 html_parts.append('<div id="sections-wrapper">\n')
 for i, (sid, sc, bi, ri, bt, rt) in enumerate(SECTION_DATA):
@@ -3541,34 +3727,66 @@ if (!IS_MOBILE) {
     });
 }
 
-var PLACEHOLDER_VID = 'x-K_xTqtFCw';
-var PLACEHOLDER_SRC = 'https://www.youtube.com/embed/x-K_xTqtFCw?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1';
-var _stallTimers = {};  // track per-player stall timers
+var BACKUP_FEEDS = [
+    'https://www.youtube.com/embed/_6dRRfnYJws?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+    'https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+    'https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJj3l8Bg&autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+];
+var _backupIdx = 0;
+var _stallTimers = {};
 
+// ── Red border: show on inset whose audio is active ──
 function _setAudioActive(activePlayer) {
-    // Remove audio-active from all insets, add to the active one
     document.querySelectorAll('.youtube-inset').forEach(function(inset) {
         inset.classList.remove('audio-active');
+        inset.style.outline = '';
     });
     if (activePlayer) {
-        var iframe = activePlayer.getIframe ? activePlayer.getIframe() : null;
-        if (iframe && iframe.parentElement) {
-            iframe.parentElement.classList.add('audio-active');
-        }
+        try {
+            var iframe = activePlayer.getIframe ? activePlayer.getIframe() : null;
+            if (iframe && iframe.parentElement) {
+                iframe.parentElement.classList.add('audio-active');
+                iframe.parentElement.style.outline = '3px solid #B30000';
+                iframe.parentElement.style.outlineOffset = '2px';
+            }
+        } catch(e) {}
     }
+}
+
+// ── Mute all other players when one goes unmuted ──
+function _muteAllExcept(activePlayer) {
+    players.forEach(function(p) {
+        if (p !== activePlayer) {
+            try { p.mute(); } catch(e) {}
+        }
+    });
+}
+
+function _getBackupSrc() {
+    var src = BACKUP_FEEDS[_backupIdx % BACKUP_FEEDS.length];
+    _backupIdx++;
+    return src;
+}
+
+function _swapToBackup(player, idx) {
+    _clearStallTimer(idx);
+    try {
+        var iframe = player.getIframe ? player.getIframe() : null;
+        if (iframe) {
+            var backup = _getBackupSrc();
+            // Make sure we're not swapping to the same src
+            if (iframe.src && iframe.src.indexOf(backup.split('?')[0].split('/').pop()) === -1) {
+                iframe.src = backup;
+            }
+        }
+    } catch(e) {}
 }
 
 function _startStallTimer(player, idx) {
     _clearStallTimer(idx);
     _stallTimers[idx] = setTimeout(function() {
-        // 20 minutes of stall/error — swap to placeholder
-        try {
-            var iframe = player.getIframe ? player.getIframe() : null;
-            if (iframe && iframe.src.indexOf(PLACEHOLDER_VID) === -1) {
-                iframe.src = PLACEHOLDER_SRC;
-            }
-        } catch(e) {}
-    }, 20 * 60 * 1000);
+        _swapToBackup(player, idx);
+    }, 30 * 1000);  // 30 seconds stall → swap to backup
 }
 
 function _clearStallTimer(idx) {
@@ -3583,71 +3801,63 @@ function onYouTubeIframeAPIReady() {
                 events: {
                     onReady: function(e) {
                         e.target.mute();
-                        // Start stall timer immediately — clear it when video plays
                         _startStallTimer(e.target, idx);
                     },
                     onStateChange: function(e) {
                         var state = e.data;
                         if (state === YT.PlayerState.PLAYING) {
                             _clearStallTimer(idx);
-                            // Red border: show on the video that has audio unmuted
-                            if (!e.target.isMuted()) {
-                                _setAudioActive(e.target);
-                            } else {
-                                // This player started playing but is muted — mute others too
-                                players.forEach(function(other) {
-                                    if (other !== e.target) other.mute();
-                                });
-                            }
-                        } else if (state === YT.PlayerState.PAUSED ||
-                                   state === YT.PlayerState.ENDED ||
+                            // Check mute state — if unmuted, enforce single-audio and show border
+                            try {
+                                if (!e.target.isMuted()) {
+                                    _muteAllExcept(e.target);
+                                    _setAudioActive(e.target);
+                                }
+                            } catch(err) {}
+                        } else if (state === YT.PlayerState.ENDED ||
+                                   state === YT.PlayerState.PAUSED ||
                                    state === -1) {
-                            // Stalled / ended / unstarted — start stall timer
+                            // -1 = unstarted (dead/unavailable stream)
                             _startStallTimer(e.target, idx);
-                            // If this was the audio-active one, clear the border
-                            var iframe2 = e.target.getIframe ? e.target.getIframe() : null;
-                            if (iframe2 && iframe2.parentElement &&
-                                iframe2.parentElement.classList.contains('audio-active')) {
-                                iframe2.parentElement.classList.remove('audio-active');
-                            }
+                            // Clear border if this was the active audio
+                            try {
+                                var iframeEl = e.target.getIframe ? e.target.getIframe() : null;
+                                if (iframeEl && iframeEl.parentElement &&
+                                    iframeEl.parentElement.classList.contains('audio-active')) {
+                                    iframeEl.parentElement.classList.remove('audio-active');
+                                    iframeEl.parentElement.style.outline = '';
+                                }
+                            } catch(err) {}
                         }
                     },
                     onError: function(e) {
-                        // Error on this player — swap to placeholder immediately
+                        // Error (bad video ID, private, removed) → immediate backup swap
                         _clearStallTimer(idx);
-                        try {
-                            var iframe3 = e.target.getIframe ? e.target.getIframe() : null;
-                            if (iframe3 && iframe3.src.indexOf(PLACEHOLDER_VID) === -1) {
-                                iframe3.src = PLACEHOLDER_SRC;
-                            }
-                        } catch(err) {}
+                        _swapToBackup(e.target, idx);
                     }
                 }
             });
             players.push(p);
         });
-    }, 1200);
+    }, 1500);
 }
 
-// Listen for user unmute clicks to set audio-active border
-// (YT API onStateChange alone doesn't fire on mute/unmute, so we watch clicks too)
-document.addEventListener('click', function(e) {
-    var inset = e.target.closest('.youtube-inset');
-    if (!inset) return;
-    // Give YT half a second to process, then check mute states
-    setTimeout(function() {
-        var activeP = null;
-        players.forEach(function(p) {
-            try {
-                var iframe = p.getIframe ? p.getIframe() : null;
-                if (iframe && iframe.parentElement === inset && !p.isMuted()) {
-                    activeP = p;
-                }
-            } catch(e) {}
-        });
-        if (activeP) _setAudioActive(activeP);
-    }, 500);
-});
+// ── Poll mute state every 2 seconds to catch YT player's own unmute button ──
+setInterval(function() {
+    if (IS_MOBILE || !players.length) return;
+    var unmutedPlayer = null;
+    players.forEach(function(p) {
+        try {
+            if (!p.isMuted || p.isMuted()) return;
+            var state = p.getPlayerState ? p.getPlayerState() : -1;
+            if (state === YT.PlayerState.PLAYING) unmutedPlayer = p;
+        } catch(e) {}
+    });
+    if (unmutedPlayer) {
+        _muteAllExcept(unmutedPlayer);
+        _setAudioActive(unmutedPlayer);
+    }
+}, 2000);
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -3694,18 +3904,20 @@ document.addEventListener('DOMContentLoaded', function() {
     var floatBtn = document.getElementById('float-mode-btn');
     if (!toggle) return;
     function setMode(on) {
-        if (on) { document.body.classList.add('light-mode'); toggle.checked = true; }
-        else     { document.body.classList.remove('light-mode'); toggle.checked = false; }
+        if (on) { document.body.classList.add('light-mode'); toggle.checked = false; }
+        else     { document.body.classList.remove('light-mode'); toggle.checked = true; }
         var iconLabel = document.getElementById('mode-icon-label');
         if (iconLabel) iconLabel.textContent = on ? '💡' : '🌙';
-        if (floatBtn) floatBtn.textContent = on ? '💡' : '🌙';
+        if (floatBtn) floatBtn.textContent = on ? '🌙' : '💡';
         try { localStorage.setItem(LKEY, on ? '1' : '0'); } catch(e) {}
     }
-    // Restore preference
+    // Restore preference — default is LIGHT MODE
     var saved = null;
     try { saved = localStorage.getItem(LKEY); } catch(e) {}
-    if (saved === '1') setMode(true);
-    toggle.addEventListener('change', function() { setMode(toggle.checked); });
+    if (saved === '0') setMode(false);  // user explicitly chose dark
+    else setMode(true);                  // default: light mode
+    // toggle.checked=false means light; checked=true means dark
+    toggle.addEventListener('change', function() { setMode(!toggle.checked); });
     if (floatBtn) floatBtn.addEventListener('click', function() { setMode(!document.body.classList.contains('light-mode')); });
 })();
 
@@ -3716,34 +3928,64 @@ document.addEventListener('DOMContentLoaded', function() {
     var banner  = document.querySelector('.banner');
     if (!vtoggle || !banner) return;
 
+    // Store original data-src values for each iframe so we can restore them
+    var _iframeSrcs = [];
+    banner.querySelectorAll('.youtube-inset').forEach(function(inset, i) {
+        var iframe = inset.querySelector('iframe');
+        if (iframe) {
+            // Store original src (already activated) or data-src
+            _iframeSrcs[i] = iframe.src || iframe.getAttribute('data-src') || '';
+        }
+    });
+
+    // LEFT position (unchecked) = videos ON; RIGHT (checked) = videos OFF
     function setVideoMode(on) {
         if (on) {
-            banner.style.display = '';
-            vtoggle.checked = true;
-            // Re-activate iframes if they haven't been loaded yet
-            banner.querySelectorAll('iframe[data-src]').forEach(function(iframe) {
-                iframe.src = iframe.getAttribute('data-src');
-                iframe.removeAttribute('data-src');
+            // Restore iframes — re-inject src to restart streams
+            banner.querySelectorAll('.youtube-inset').forEach(function(inset, i) {
+                var iframe = inset.querySelector('iframe');
+                if (!iframe) {
+                    // Recreate iframe if it was removed
+                    iframe = document.createElement('iframe');
+                    iframe.setAttribute('allow', 'autoplay; encrypted-media');
+                    iframe.setAttribute('allowfullscreen', '');
+                    inset.appendChild(iframe);
+                }
+                var src = _iframeSrcs[i] || '';
+                if (src) iframe.src = src;
             });
+            banner.style.display = '';
+            vtoggle.checked = false;  // left = on
         } else {
+            // ACTUALLY destroy iframes — remove src entirely to kill streams
+            banner.querySelectorAll('.youtube-inset').forEach(function(inset) {
+                var iframe = inset.querySelector('iframe');
+                if (iframe) {
+                    iframe.src = 'about:blank';
+                    iframe.removeAttribute('src');
+                    // Remove from DOM to fully kill the process
+                    inset.removeChild(iframe);
+                }
+            });
             banner.style.display = 'none';
-            vtoggle.checked = false;
+            vtoggle.checked = true;   // right = off
         }
         try { localStorage.setItem(VKEY, on ? '1' : '0'); } catch(e) {}
     }
 
-    // Restore saved preference (default: ON)
+    // Restore saved preference (default: ON = left position = unchecked)
     var saved = null;
     try { saved = localStorage.getItem(VKEY); } catch(e) {}
     if (saved === '0') {
-        // Videos were off last time — hide banner but don't load iframes
-        banner.style.display = 'none';
-        vtoggle.checked = false;
-        // Keep data-src so iframes aren't loaded at all when off
+        setVideoMode(false);  // user had it off
+    } else {
+        vtoggle.checked = false;  // default: ON, slider left
     }
-    // If saved === '1' or null (first visit), videos stay on (default state)
 
-    vtoggle.addEventListener('change', function() { setVideoMode(vtoggle.checked); });
+    vtoggle.addEventListener('change', function() {
+        // checked = right = OFF; unchecked = left = ON
+        setVideoMode(!vtoggle.checked);
+    });
 })();
 
 // ── NEWS SEARCH BAR — two-tier: live filter first, Google News fallback ──
@@ -4104,6 +4346,96 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(checkForUpdates, 10000); // first check after 10s
 })();
 
+// ── WAITING ROOM MODE — rotates audio across feeds every 5 minutes ──
+(function() {
+    var wrToggle = document.getElementById('waiting-room-toggle');
+    if (!wrToggle) return;
+    var WR_INTERVAL = 5 * 60 * 1000; // 5 minutes
+    var _wrTimer = null;
+    var _wrIndex = 0;
+
+    function _getActiveFeedCount() {
+        return document.querySelectorAll('.youtube-inset iframe').length;
+    }
+
+    function _activateAudioForIndex(idx) {
+        var insets = document.querySelectorAll('.youtube-inset');
+        var total = insets.length;
+        if (!total) return;
+        var targetIdx = idx % total;
+
+        // Remove all active borders
+        insets.forEach(function(inset) {
+            inset.classList.remove('audio-active');
+            inset.style.outline = '';
+        });
+
+        // Mute all players first
+        if (window.players && window.players.length) {
+            window.players.forEach(function(p) {
+                try { p.mute(); } catch(e) {}
+            });
+            // Unmute target player
+            var targetPlayer = window.players[targetIdx];
+            if (targetPlayer) {
+                try {
+                    targetPlayer.unMute();
+                    targetPlayer.setVolume(80);
+                } catch(e) {}
+            }
+        }
+
+        // Apply red border to active inset
+        var activeInset = insets[targetIdx];
+        if (activeInset) {
+            activeInset.classList.add('audio-active');
+            activeInset.style.outline = '3px solid #B30000';
+            activeInset.style.outlineOffset = '2px';
+            // Smooth scroll the video into view
+            activeInset.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    }
+
+    function startWaitingRoom() {
+        if (_wrTimer) clearInterval(_wrTimer);
+        _wrIndex = 0;
+        _activateAudioForIndex(_wrIndex);
+        _wrTimer = setInterval(function() {
+            _wrIndex++;
+            var total = _getActiveFeedCount();
+            if (_wrIndex >= total) _wrIndex = 0;
+            _activateAudioForIndex(_wrIndex);
+        }, WR_INTERVAL);
+    }
+
+    function stopWaitingRoom() {
+        if (_wrTimer) { clearInterval(_wrTimer); _wrTimer = null; }
+        // Mute everything and remove borders
+        if (window.players && window.players.length) {
+            window.players.forEach(function(p) { try { p.mute(); } catch(e) {} });
+        }
+        document.querySelectorAll('.youtube-inset').forEach(function(inset) {
+            inset.classList.remove('audio-active');
+            inset.style.outline = '';
+        });
+    }
+
+    wrToggle.addEventListener('change', function() {
+        if (wrToggle.checked) {
+            // Make sure video feeds are visible
+            var banner = document.querySelector('.banner');
+            var vtoggle = document.getElementById('video-feed-toggle');
+            if (banner && banner.style.display === 'none') {
+                if (vtoggle) { vtoggle.checked = false; }
+                banner.style.display = '';
+            }
+            startWaitingRoom();
+        } else {
+            stopWaitingRoom();
+        }
+    });
+})();
+
 }); // end DOMContentLoaded
 
 
@@ -4112,22 +4444,141 @@ document.addEventListener('DOMContentLoaded', function() {
 </body></html>
 """)
 
-html_parts.append(f'''<footer class="site-footer">
+html_parts.append(f'''
+<!-- ══ PROFESSIONAL FOOTER ══ -->
+<footer class="site-footer">
     <button class="back-to-top-btn" onclick="window.scrollTo({{top:0,behavior:\'smooth\'}})">&#8679; Back to Top</button>
-    <div style="margin-top:28px;">
-        <h1>The Mitchell Post</h1>
-        <span class="byline">By Sean Mitchell</span>
-        <span class="mission">Curated news from reliable sources updated regularly.</span>
-        <span class="update">Last updated: {update_time}</span>
+
+    <!-- Masthead -->
+    <div class="footer-masthead">
+        <div class="footer-logo-block">
+            <span class="footer-logo-mp">MP</span>
+            <div class="footer-logo-text">
+                <strong>The Mitchell Post</strong>
+                <span>Advancing the Power of Independent News</span>
+            </div>
+        </div>
+        <p class="footer-mission">
+            The Mitchell Post is an independent news aggregator dedicated to factual,
+            multi-source reporting. We pull from the world\'s most trusted outlets to
+            bring you comprehensive coverage across politics, global affairs, technology,
+            business, sports, and culture — updated continuously.
+        </p>
+        <div class="footer-donate-wrap">
+            <p class="footer-donate-label">Support independent journalism</p>
+            <a class="footer-donate-btn" href="https://buymeacoffee.com" target="_blank" rel="noopener">&#9829; Donate / Support Us</a>
+        </div>
     </div>
+
+    <hr class="footer-divider">
+
+    <!-- Four-column link grid -->
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h3>About</h3>
+            <ul>
+                <li><a href="#">About The Mitchell Post</a></li>
+                <li><a href="#">Our Mission</a></li>
+                <li><a href="#">How We Curate News</a></li>
+                <li><a href="#">Source Standards</a></li>
+                <li><a href="#">News Values &amp; Principles</a></li>
+                <li><a href="#">Our Role in the Information Ecosystem</a></li>
+                <li><a href="#">Corrections Policy</a></li>
+                <li><a href="#">AI Use Disclosure</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>Legal &amp; Privacy</h3>
+            <ul>
+                <li><a href="#">Terms of Use</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Cookie Policy</a></li>
+                <li><a href="#">Accessibility Statement</a></li>
+                <li><a href="#">Do Not Sell or Share My Personal Information</a></li>
+                <li><a href="#">Limit Use &amp; Disclosure of Sensitive Personal Information</a></li>
+                <li><a href="#">CA Notice of Collection</a></li>
+                <li><a href="#">EU/EEA Regulatory Notice</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>Connect</h3>
+            <ul>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Advertise With Us</a></li>
+                <li><a href="#">Submit a Tip</a></li>
+                <li><a href="#">Newsletters</a></li>
+                <li><a href="#">RSS Feed</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Site Feedback</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>Sections</h3>
+            <ul>
+                <li><a href="#section-us">US News</a></li>
+                <li><a href="#section-mideast">Middle East</a></li>
+                <li><a href="#section-world">Asia, Europe &amp; World</a></li>
+                <li><a href="#section-tech">Tech &amp; Life</a></li>
+                <li><a href="#section-business">Business</a></li>
+                <li><a href="#section-sports">Sports</a></li>
+                <li><a href="#section-culture">Culture</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <hr class="footer-divider">
+
+    <!-- Follow Us -->
+    <div class="footer-social">
+        <span class="footer-social-label">Follow Us</span>
+        <div class="footer-social-icons">
+            <a href="#" aria-label="X / Twitter" title="X / Twitter" class="social-icon">&#120143;</a>
+            <a href="#" aria-label="Facebook" title="Facebook" class="social-icon">f</a>
+            <a href="#" aria-label="Instagram" title="Instagram" class="social-icon">&#9641;</a>
+            <a href="#" aria-label="YouTube" title="YouTube" class="social-icon">&#9654;</a>
+            <a href="#" aria-label="LinkedIn" title="LinkedIn" class="social-icon">in</a>
+        </div>
+    </div>
+
+    <!-- Stay Informed (app + newsletter) -->
+    <div class="footer-stay-informed">
+        <span class="footer-si-label">Stay Informed</span>
+        <div class="footer-si-links">
+            <a href="#" class="footer-app-btn">&#8595; Download the App (iOS)</a>
+            <a href="#" class="footer-app-btn">&#8595; Download the App (Android)</a>
+            <a href="#" class="footer-app-btn">&#9993; Newsletters</a>
+        </div>
+    </div>
+
+    <hr class="footer-divider">
+
+    <!-- Bottom strip -->
+    <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2026 The Mitchell Post &mdash; By Sean Mitchell. All rights reserved.</p>
+        <p class="footer-update">Last updated: {update_time}</p>
+        <div class="footer-bottom-links">
+            <a href="#">Advertise</a>
+            <a href="#">Advertising Guidelines</a>
+            <a href="#">Purchase Licensing Rights</a>
+            <a href="#">Cookies</a>
+            <a href="#">Terms &amp; Conditions</a>
+            <a href="#">Privacy</a>
+            <a href="#">Copyright</a>
+            <a href="#">Digital Accessibility</a>
+            <a href="#">Data Disclosure and Sources</a>
+        </div>
+        <p class="footer-disclaimer">All quotes delayed a minimum of 15 minutes. The Mitchell Post aggregates content from third-party sources. All linked articles remain the property of their respective publishers.</p>
+    </div>
+
+    <!-- Set as Homepage -->
     <div class="homepage-wrap">
-        <button class="set-homepage-btn" id="set-homepage-btn" onclick="document.getElementById(\'homepage-instructions\').style.display=document.getElementById(\'homepage-instructions\').style.display===\'block\'?\'none\':\'block\'">🏠 Set as My Homepage</button>
+        <button class="set-homepage-btn" id="set-homepage-btn" onclick="document.getElementById(\'homepage-instructions\').style.display=document.getElementById(\'homepage-instructions\').style.display===\'block\'?\'none\':\'block\'">&#127968; Set as My Homepage</button>
         <div id="homepage-instructions" class="homepage-instructions" style="display:none">
             <strong>How to set The Mitchell Post as your homepage:</strong><br>
-            <span class="hp-browser"><b>Chrome:</b> Settings → On startup → Open a specific page → Add <code>https://theseanmitchell.github.io/TheMitchellPost/</code></span><br>
-            <span class="hp-browser"><b>Firefox:</b> Settings → Home → Homepage → Custom URLs → paste the URL above</span><br>
-            <span class="hp-browser"><b>Safari:</b> Preferences → General → Homepage → paste the URL above</span><br>
-            <span class="hp-browser"><b>Edge:</b> Settings → Start, home, and new tabs → Open these pages → Add the URL above</span>
+            <span class="hp-browser"><b>Chrome:</b> Settings &#8594; On startup &#8594; Open a specific page &#8594; Add <code>https://theseanmitchell.github.io/TheMitchellPost/</code></span><br>
+            <span class="hp-browser"><b>Firefox:</b> Settings &#8594; Home &#8594; Homepage &#8594; Custom URLs &#8594; paste the URL above</span><br>
+            <span class="hp-browser"><b>Safari:</b> Preferences &#8594; General &#8594; Homepage &#8594; paste the URL above</span><br>
+            <span class="hp-browser"><b>Edge:</b> Settings &#8594; Start, home, and new tabs &#8594; Open these pages &#8594; Add the URL above</span>
         </div>
     </div>
 </footer>
