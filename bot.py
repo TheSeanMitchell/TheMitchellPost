@@ -3612,101 +3612,6 @@ html_parts.append(f"""<!DOCTYPE html>
     }}
     body.light-mode .footer-disclaimer {{ color: #aaa; }}
 
-
-    /* ── Waiting Room fullscreen button ── */
-    .wr-fullscreen-btn {{
-        background: none; border: 1px solid #444; border-radius: 4px;
-        color: #aaaaaa; font-size: 0.72em; padding: 4px 10px;
-        letter-spacing: 0.05em; text-transform: uppercase;
-        cursor: pointer; white-space: nowrap; font-weight: bold;
-        transition: border-color 0.15s, color 0.15s, background 0.15s;
-    }}
-    .wr-fullscreen-btn:hover {{ border-color: #B30000; color: #fff; background: rgba(179,0,0,0.15); }}
-    body.light-mode .wr-fullscreen-btn {{ border-color: #ccc; color: #444; }}
-    body.light-mode .wr-fullscreen-btn:hover {{ border-color: #B30000; color: #000; }}
-
-    /* ── Waiting Room fullscreen overlay ── */
-    #wr-overlay {{
-        display: none;
-        position: fixed; inset: 0; z-index: 99999;
-        background: #000;
-        flex-direction: column;
-    }}
-    #wr-overlay.wr-active {{ display: flex; }}
-    #wr-overlay-header {{
-        display: flex; align-items: center; justify-content: space-between;
-        padding: 10px 18px; background: #0a0a0a;
-        border-bottom: 2px solid #B30000; flex-shrink: 0;
-    }}
-    #wr-overlay-title {{
-        font-size: 0.85em; font-weight: bold; letter-spacing: 0.1em;
-        text-transform: uppercase; color: #fff;
-    }}
-    #wr-overlay-subtitle {{
-        font-size: 0.7em; color: #888; margin-left: 12px; letter-spacing: 0.04em;
-    }}
-    #wr-overlay-close {{
-        background: none; border: 1px solid #444; border-radius: 4px;
-        color: #aaa; font-size: 0.82em; padding: 5px 14px; cursor: pointer;
-        transition: border-color 0.15s, color 0.15s;
-        letter-spacing: 0.06em;
-    }}
-    #wr-overlay-close:hover {{ border-color: #fff; color: #fff; }}
-    #wr-grid {{
-        flex: 1; display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        gap: 6px; padding: 10px;
-        overflow: hidden;
-    }}
-    .wr-cell {{
-        position: relative; background: #0a0a0a; border-radius: 4px;
-        overflow: hidden; border: 2px solid transparent;
-        transition: border-color 0.3s;
-    }}
-    .wr-cell iframe {{
-        width: 100%; height: 100%; border: none; display: block;
-    }}
-    .wr-cell-label {{
-        position: absolute; bottom: 0; left: 0; right: 0;
-        background: rgba(0,0,0,0.65); color: #ddd; font-size: 0.68em;
-        padding: 3px 8px; letter-spacing: 0.04em; text-align: center;
-        text-transform: uppercase;
-    }}
-    @media (max-width: 900px) {{
-        #wr-grid {{
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(5, 1fr);
-        }}
-    }}
-
-    /* ── AI Section Summary ── */
-    .section-ai-summary {{
-        max-width: 1400px; margin: 0 auto 4px auto; padding: 0 20px;
-    }}
-    .section-ai-summary-inner {{
-        background: #0f0f0f; border-left: 3px solid #444;
-        padding: 10px 16px; border-radius: 0 4px 4px 0;
-        font-size: 0.84em; color: #bbb; line-height: 1.7;
-        position: relative; min-height: 38px;
-    }}
-    .section-ai-label {{
-        font-size: 0.68em; font-weight: bold; letter-spacing: 0.1em;
-        text-transform: uppercase; color: #555; display: block;
-        margin-bottom: 4px;
-    }}
-    .section-ai-text {{ color: #bbb; }}
-    .section-ai-loading {{
-        color: #555; font-style: italic; font-size: 0.9em;
-    }}
-    .section-ai-error {{ color: #664444; font-style: italic; font-size: 0.85em; }}
-    body.light-mode .section-ai-summary-inner {{
-        background: #f5f5f5; border-left-color: #ccc; color: #444;
-    }}
-    body.light-mode .section-ai-label {{ color: #aaa; }}
-    body.light-mode .section-ai-text {{ color: #333; }}
-    body.light-mode .section-ai-loading {{ color: #bbb; }}
-
     </style>
 </head>
 <body>
@@ -3716,7 +3621,7 @@ html_parts.append(f"""<!DOCTYPE html>
     <a href="#" class="site-name" aria-label="Back to top">The Mitchell Post</a>
     <a href="#section-us"       class="nav-us">US News</a>
     <a href="#section-mideast"  class="nav-mideast">Middle East</a>
-    <a href="#section-world"    class="nav-world">World</a>
+    <a href="#section-world"    class="nav-world">Asia, Europe &amp; World</a>
     <a href="#section-tech"     class="nav-tech">Tech &amp; Life</a>
     <a href="#section-business" class="nav-business">Business</a>
     <a href="#section-sports"   class="nav-sports">Sports</a>
@@ -3737,25 +3642,13 @@ html_parts.append(f"""<!DOCTYPE html>
         </label>
     </div>
     <div class="video-toggle-wrap" id="waiting-room-wrap">
-        <button class="wr-fullscreen-btn" id="wr-fullscreen-btn" title="Waiting Room — fullscreen video wall (ESC to exit)">
-            &#9654; Waiting Room
-        </button>
+        <span class="video-toggle-label">Waiting Room</span>
+        <label class="toggle-switch" title="Waiting Room Mode: rotates audio across all feeds every 5 minutes">
+            <input type="checkbox" id="waiting-room-toggle">
+            <span class="toggle-slider"></span>
+        </label>
     </div>
 </nav>
-
-<!-- ══ WAITING ROOM FULLSCREEN OVERLAY ══ -->
-<div id="wr-overlay">
-    <div id="wr-overlay-header">
-        <div>
-            <span id="wr-overlay-title">&#9654; Waiting Room</span>
-            <span id="wr-overlay-subtitle">The Mitchell Post — Live News Feeds</span>
-        </div>
-        <button id="wr-overlay-close">&#x2715; Exit (ESC)</button>
-    </div>
-    <div id="wr-grid">
-        <!-- Cells injected by JS from existing video sources -->
-    </div>
-</div>
 
 <!-- ══ FLOATING LIGHT/DARK TOGGLE (mobile only) ══ -->
 <button class="float-mode-btn" id="float-mode-btn" aria-label="Toggle light/dark mode">🌙</button>
@@ -3812,9 +3705,6 @@ def section_block(section_id, color_class, breaking_items, recent_items,
     r_summary = source_summary(recent_items) if recent_items else ''
     b_content = render_column(breaking_items) if breaking_items else '<p style="color:#666">No breaking news in the last 3 hours.</p>\n'
     r_content = render_column(recent_items) if recent_items else '<p style="color:#666">No additional headlines right now.</p>\n'
-    # Build headline list for AI summary prompt (top 15 most recent titles)
-    all_section_titles = [it[1] for it in sorted(breaking_items + recent_items, key=lambda x: x[0], reverse=True)[:15]]
-    ai_headlines_json = __import__('json').dumps(all_section_titles)
     return (
         f'<div id="{section_id}" class="section-wrap">\n'
         f'<div class="container">\n'
@@ -3825,16 +3715,6 @@ def section_block(section_id, color_class, breaking_items, recent_items,
         f'</div>\n'
         f'</div>\n'
         f'</div>\n'
-        f'<div class="section-ai-summary" id="{section_id}-ai-wrap">'
-        f'<div class="section-ai-summary-inner">'
-        f'<span class="section-ai-label">&#x2728; AI Summary</span>'
-        f'<span class="section-ai-text" id="{section_id}-ai-text">'
-        f'<span class="section-ai-loading">Generating summary&#x2026;</span>'
-        f'</span>'
-        f'</div>'
-        f'</div>'
-        f'<script>window._aiSections = window._aiSections || {{}};'
-        f'window._aiSections["{section_id}"] = {ai_headlines_json};</script>\n'
         f'<div id="{section_id}-cols" class="section-columns">\n'
         f'<div class="container">\n'
         f'<div class="column">\n'
@@ -4658,160 +4538,150 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(checkForUpdates, 10000); // first check after 10s
 })();
 
-// ── WAITING ROOM MODE — Fullscreen video wall ──
-// Builds a full-screen overlay with all 10 video feeds tiled as a grid.
-// No audio automation attempted. User controls audio within each feed naturally.
-// ESC or the Exit button closes the overlay and returns to the normal site.
+// ── WAITING ROOM MODE — postMessage approach, no YT API needed ──
+// Uses YouTube's iframe postMessage API to unmute/mute iframes directly.
+// Also: passive message listener sets red border on whichever iframe sends
+// an onStateChange=1 (playing) + volume>0 signal.
 (function() {
-    var openBtn  = document.getElementById('wr-fullscreen-btn');
-    var overlay  = document.getElementById('wr-overlay');
-    var closeBtn = document.getElementById('wr-overlay-close');
-    var grid     = document.getElementById('wr-grid');
-    if (!openBtn || !overlay || !closeBtn || !grid) return;
+    var wrToggle = document.getElementById('waiting-room-toggle');
+    if (!wrToggle) return;
 
-    // ── Source list: same feeds as the banner, same order ──
-    var WR_SOURCES = [
-        { src: 'https://www.youtube.com/embed/iipR5yUp36o?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1', label: 'Feed 1' },
-        { src: 'https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 2' },
-        { src: 'https://www.youtube.com/embed/QliL4CGc7iY?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 3' },
-        { src: 'https://www.youtube.com/embed/pykpO5kQJ98?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 4' },
-        { src: 'https://www.youtube.com/embed/YDvsBbKfLPA?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 5' },
-        { src: 'https://www.youtube.com/embed/vfszY1JYbMc?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 6' },
-        { src: 'https://www.youtube.com/embed/_6dRRfnYJws?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 7' },
-        { src: 'https://www.youtube.com/embed/iEpJwprxDdk?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 8' },
-        { src: 'https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 9' },
-        { src: 'https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJj3l8Bg&autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1', label: 'Feed 10' },
-    ];
+    var WR_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
+    var _wrTimer = null;
+    var _wrIdx   = 0;
+    var _wrLabel = null; // floating label showing which channel is active
 
-    var _built = false;
+    function _getInsets() {
+        return Array.from(document.querySelectorAll('.youtube-inset'));
+    }
 
-    function buildGrid() {
-        if (_built) return;
-        _built = true;
-        WR_SOURCES.forEach(function(feed) {
-            var cell = document.createElement('div');
-            cell.className = 'wr-cell';
-            var iframe = document.createElement('iframe');
-            iframe.src = feed.src;
-            iframe.setAttribute('allow', 'autoplay; encrypted-media; fullscreen');
-            iframe.setAttribute('allowfullscreen', '');
-            iframe.frameBorder = '0';
-            var label = document.createElement('div');
-            label.className = 'wr-cell-label';
-            label.textContent = feed.label;
-            cell.appendChild(iframe);
-            cell.appendChild(label);
-            grid.appendChild(cell);
+    function _postToIframe(iframe, data) {
+        try { iframe.contentWindow.postMessage(JSON.stringify(data), '*'); } catch(e) {}
+    }
+
+    function _muteAll() {
+        _getInsets().forEach(function(inset) {
+            var iframe = inset.querySelector('iframe');
+            if (iframe) _postToIframe(iframe, { event: 'command', func: 'mute', args: [] });
+            inset.classList.remove('audio-active');
+            inset.style.outline = '';
         });
     }
 
-    function openWR() {
-        buildGrid();
-        overlay.classList.add('wr-active');
-        document.body.style.overflow = 'hidden';
-        // Try native Fullscreen API
-        try {
-            if (overlay.requestFullscreen) overlay.requestFullscreen();
-            else if (overlay.webkitRequestFullscreen) overlay.webkitRequestFullscreen();
-            else if (overlay.mozRequestFullScreen) overlay.mozRequestFullScreen();
-        } catch(e) {}
+    function _unmuteAt(idx) {
+        var insets = _getInsets();
+        if (!insets.length) return;
+        var target = insets[idx % insets.length];
+        if (!target) return;
+        var iframe = target.querySelector('iframe');
+        // Mute all first
+        _muteAll();
+        // Unmute and set volume on target
+        if (iframe) {
+            _postToIframe(iframe, { event: 'command', func: 'unMute',    args: [] });
+            _postToIframe(iframe, { event: 'command', func: 'setVolume', args: [85] });
+        }
+        // Apply red border
+        target.classList.add('audio-active');
+        target.style.outline      = '3px solid #B30000';
+        target.style.outlineOffset = '2px';
+        // Update floating label
+        if (_wrLabel) {
+            _wrLabel.textContent = 'Waiting Room: Feed ' + ((idx % insets.length) + 1) + ' of ' + insets.length;
+            _wrLabel.style.display = 'block';
+        }
     }
 
-    function closeWR() {
-        overlay.classList.remove('wr-active');
-        document.body.style.overflow = '';
-        // Exit native fullscreen if active
-        try {
-            if (document.exitFullscreen && document.fullscreenElement) document.exitFullscreen();
-            else if (document.webkitExitFullscreen && document.webkitFullscreenElement) document.webkitExitFullscreen();
-        } catch(e) {}
+    function _startWR() {
+        if (_wrTimer) clearInterval(_wrTimer);
+        // Make sure videos are visible
+        var banner = document.querySelector('.banner');
+        if (banner && banner.style.display === 'none') {
+            banner.style.display = '';
+            var vtoggle = document.getElementById('video-feed-toggle');
+            if (vtoggle) vtoggle.checked = false;
+        }
+        _wrIdx = 0;
+        _unmuteAt(_wrIdx);
+        _wrTimer = setInterval(function() {
+            _wrIdx++;
+            var total = _getInsets().length;
+            if (_wrIdx >= total) _wrIdx = 0;
+            _unmuteAt(_wrIdx);
+        }, WR_INTERVAL_MS);
     }
 
-    openBtn.addEventListener('click', openWR);
-    closeBtn.addEventListener('click', closeWR);
+    function _stopWR() {
+        if (_wrTimer) { clearInterval(_wrTimer); _wrTimer = null; }
+        _muteAll();
+        if (_wrLabel) _wrLabel.style.display = 'none';
+    }
 
-    // ESC key exits
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && overlay.classList.contains('wr-active')) closeWR();
+    // Create floating status label
+    _wrLabel = document.createElement('div');
+    _wrLabel.style.cssText = [
+        'display:none','position:fixed','bottom:20px','left:50%',
+        'transform:translateX(-50%)','background:#B30000','color:#fff',
+        'padding:6px 18px','border-radius:4px','font-size:0.8em',
+        'font-weight:bold','z-index:9998','letter-spacing:0.04em',
+        'box-shadow:0 2px 10px rgba(0,0,0,0.4)'
+    ].join(';');
+    document.body.appendChild(_wrLabel);
+
+    wrToggle.addEventListener('change', function() {
+        if (wrToggle.checked) _startWR();
+        else _stopWR();
     });
 
-    // Also close if browser exits its own fullscreen (e.g. user presses ESC in native FS)
-    document.addEventListener('fullscreenchange', function() {
-        if (!document.fullscreenElement && overlay.classList.contains('wr-active')) closeWR();
-    });
-    document.addEventListener('webkitfullscreenchange', function() {
-        if (!document.webkitFullscreenElement && overlay.classList.contains('wr-active')) closeWR();
-    });
-
-})();
-
-
-// ── AI SECTION SUMMARIES ──
-// Calls Anthropic API for each section's headlines and renders a prose summary.
-// Staggered so they don't all fire simultaneously.
-(function() {
-    var sections = window._aiSections || {};
-    var sectionIds = Object.keys(sections);
-    if (!sectionIds.length) return;
-
-    var SECTION_LABELS = {
-        'section-us':       'US News',
-        'section-mideast':  'Middle East',
-        'section-world':    'World',
-        'section-tech':     'Tech & Life',
-        'section-business': 'Business',
-        'section-sports':   'Sports',
-        'section-culture':  'Culture',
-    };
-
-    function summarizeSection(sectionId, headlines, delay) {
-        setTimeout(function() {
-            var textEl = document.getElementById(sectionId + '-ai-text');
-            if (!textEl || !headlines || !headlines.length) return;
-
-            var label = SECTION_LABELS[sectionId] || sectionId;
-            var prompt = (
-                'You are a concise news editor. Below are the top current headlines for the ' + label + ' section ' +
-                'of a news aggregator. Write a short, flowing prose summary (2-4 sentences maximum) that gives the ' +
-                'reader the essential picture of what is happening right now in this section. ' +
-                'Be factual, neutral, and direct — no fluff, no bullet points, no headers. ' +
-                'Do not start with "Here is" or "This section". Just write the summary.\n\n' +
-                'Headlines:\n' + headlines.slice(0, 12).map(function(h, i) { return (i+1) + '. ' + h; }).join('\n')
-            );
-
-            fetch('https://api.anthropic.com/v1/messages', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    model: 'claude-sonnet-4-20250514',
-                    max_tokens: 180,
-                    messages: [{ role: 'user', content: prompt }]
-                })
-            })
-            .then(function(r) {
-                if (!r.ok) throw new Error('API ' + r.status);
-                return r.json();
-            })
-            .then(function(data) {
-                var text = (data.content && data.content[0] && data.content[0].text) || '';
-                text = text.trim();
-                if (text && textEl) {
-                    textEl.innerHTML = '<span class="section-ai-text">' +
-                        text.replace(/</g,'&lt;').replace(/>/g,'&gt;') +
-                        '</span>';
-                }
-            })
-            .catch(function(err) {
-                if (textEl) {
-                    textEl.innerHTML = '<span class="section-ai-error">Summary unavailable.</span>';
+    // ── Passive red-border listener: detect when user manually unmutes any iframe ──
+    // YT iframes post messages back; we watch for volume/playing signals
+    window.addEventListener('message', function(e) {
+        if (!e.data || typeof e.data !== 'string') return;
+        var data;
+        try { data = JSON.parse(e.data); } catch(x) { return; }
+        // YT sends {event:'infoDelivery', info:{volume, muted, playerState}}
+        if (data.event !== 'infoDelivery' || !data.info) return;
+        var info = data.info;
+        var isPlaying = (info.playerState === 1);
+        var isUnmuted = (typeof info.muted !== 'undefined' && !info.muted && info.volume > 0);
+        if (isPlaying && isUnmuted) {
+            // Find which iframe sent this message
+            var iframes = document.querySelectorAll('.youtube-inset iframe');
+            iframes.forEach(function(iframe) {
+                if (iframe.contentWindow === e.source) {
+                    // Clear all borders
+                    document.querySelectorAll('.youtube-inset').forEach(function(inset) {
+                        inset.classList.remove('audio-active');
+                        inset.style.outline = '';
+                    });
+                    // Set border on this one
+                    var parent = iframe.parentElement;
+                    if (parent) {
+                        parent.classList.add('audio-active');
+                        parent.style.outline       = '3px solid #B30000';
+                        parent.style.outlineOffset = '2px';
+                    }
+                    // Mute all other iframes via postMessage
+                    iframes.forEach(function(other) {
+                        if (other !== iframe) {
+                            _postToIframe(other, { event:'command', func:'mute', args:[] });
+                        }
+                    });
                 }
             });
-        }, delay);
-    }
-
-    // Stagger each section call by 1.2 seconds to avoid rate limiting
-    sectionIds.forEach(function(id, i) {
-        summarizeSection(id, sections[id], i * 1200);
+        }
+        // If muted or paused, clear border for this source
+        if (typeof info.muted !== 'undefined' && info.muted) {
+            document.querySelectorAll('.youtube-inset iframe').forEach(function(iframe) {
+                if (iframe.contentWindow === e.source) {
+                    var parent = iframe.parentElement;
+                    if (parent && parent.classList.contains('audio-active')) {
+                        parent.classList.remove('audio-active');
+                        parent.style.outline = '';
+                    }
+                }
+            });
+        }
     });
 
 })();
@@ -4897,7 +4767,7 @@ html_parts.append(f'''
             <ul>
                 <li><a href="#section-us">US News</a></li>
                 <li><a href="#section-mideast">Middle East</a></li>
-                <li><a href="#section-world">World</a></li>
+                <li><a href="#section-world">Asia, Europe &amp; World</a></li>
                 <li><a href="#section-tech">Tech &amp; Life</a></li>
                 <li><a href="#section-business">Business</a></li>
                 <li><a href="#section-sports">Sports</a></li>
@@ -5008,7 +4878,7 @@ try:
     sections = [
         ("US News",               us_breaking + us_recent),
         ("Middle East",           middle_breaking + middle_recent),
-        ("World",  world_breaking + world_recent),
+        ("Asia, Europe & World",  world_breaking + world_recent),
         ("Tech & Life",           tech_breaking + tech_recent),
         ("Business",              business_breaking + business_recent),
         ("Sports",                sports_breaking + sports_recent),
@@ -5028,7 +4898,7 @@ try:
         "version":       "1.1",
         "title":         "The Mitchell Post",
         "home_page_url": "https://mitchellpost.github.io",
-        "description":   "Curated news across US, Middle East, World, Tech, Sports, and Culture",
+        "description":   "Curated news across US, Middle East, Asia/Europe/World, Tech, Sports, and Culture",
         "updated":       (datetime.utcnow()).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "items": feed_items
     }
