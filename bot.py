@@ -3630,7 +3630,6 @@ html_parts.append(f"""<!DOCTYPE html>
         display: none;
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
-        width: 100%; height: 100%;
         z-index: 99999;
         background: #000;
         flex-direction: column;
@@ -3638,7 +3637,6 @@ html_parts.append(f"""<!DOCTYPE html>
     }}
     #wr-overlay.wr-open {{ display: flex; }}
 
-    /* Header: fixed 40px strip */
     #wr-header {{
         width: 100%;
         height: 40px;
@@ -3652,19 +3650,18 @@ html_parts.append(f"""<!DOCTYPE html>
         box-sizing: border-box;
         gap: 12px;
         overflow: hidden;
+        z-index: 2;
     }}
-    #wr-header-left {{ display: flex; align-items: center; gap: 12px; min-width: 0; overflow: hidden; }}
+    #wr-header-left {{ display: flex; align-items: center; gap: 12px; overflow: hidden; }}
     #wr-title {{
         font-size: 0.82em; font-weight: bold; letter-spacing: 0.1em;
         text-transform: uppercase; color: #fff; white-space: nowrap; flex-shrink: 0;
     }}
-    #wr-subtitle {{ font-size: 0.65em; color: #555; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }}
+    #wr-subtitle {{ font-size: 0.65em; color: #555; white-space: nowrap; overflow: hidden; }}
     #wr-close-btn {{
-        flex-shrink: 0;
-        background: none; border: 1px solid #333; border-radius: 3px;
+        flex-shrink: 0; background: none; border: 1px solid #333; border-radius: 3px;
         color: #888; font-size: 0.72em; padding: 4px 12px; cursor: pointer;
-        letter-spacing: 0.04em; white-space: nowrap;
-        transition: border-color 0.15s, color 0.15s;
+        letter-spacing: 0.04em; white-space: nowrap; transition: border-color 0.15s, color 0.15s;
     }}
     #wr-close-btn:hover {{ border-color: #fff; color: #fff; }}
     #wr-close-btn kbd {{
@@ -3672,56 +3669,56 @@ html_parts.append(f"""<!DOCTYPE html>
         border-radius: 2px; padding: 0 3px; margin-left: 3px;
     }}
 
-    /* Grid: occupies ALL space below the 40px header */
-    #wr-grid {{
-        /* Take exactly the remaining height */
-        width: 100%;
-        height: calc(100% - 40px);
+    /*
+     * WR GRID STRATEGY — Scale-to-fit 16:9 tiles
+     * ─────────────────────────────────────────────
+     * Each cell is a true 16:9 box (padding-top: 56.25%).
+     * The grid is given a fixed pixel width/height in JS so that
+     * 5×2 tiles of exact 16:9 aspect ratio tile perfectly.
+     * The entire #wr-stage (which wraps the grid) is centered,
+     * and JS scales it with transform:scale() to fill the viewport.
+     */
+    #wr-stage {{
         flex: 1 1 0;
         min-height: 0;
-        /* 5 columns × 2 rows, zero gap for max fill */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: #000;
+    }}
+    #wr-grid {{
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         grid-template-rows: repeat(2, 1fr);
         gap: 2px;
-        padding: 2px;
-        box-sizing: border-box;
         background: #111;
+        /* width and height set by JS to exact 16:9 tile dimensions */
+        transform-origin: center center;
     }}
-
-    /* Cell: must have explicit height so the iframe can reference it */
     .wr-cell {{
         position: relative;
-        /* height is given by the grid row, but we also set 100% so children can ref it */
-        width: 100%;
-        height: 100%;
-        min-height: 0;
-        min-width: 0;
-        overflow: hidden;
         background: #000;
+        overflow: hidden;
+        /* 16:9 aspect ratio via padding trick */
+        width: 100%;
+        padding-top: 56.25%;
     }}
-
-    /* iframe: pinned to all four corners of the cell — completely fills it */
     .wr-cell iframe {{
         position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
+        top: 0; left: 0;
         width: 100%;
         height: 100%;
         border: none;
         display: block;
-        background: #000;
     }}
-
-    /* Feed number label in top-left corner */
     .wr-cell-num {{
         position: absolute; top: 5px; left: 7px; z-index: 10;
         background: rgba(0,0,0,0.7); color: #666;
-        font-size: 0.58em; font-weight: bold; letter-spacing: 0.08em;
+        font-size: 0.6em; font-weight: bold; letter-spacing: 0.08em;
         padding: 2px 5px; border-radius: 2px; text-transform: uppercase;
-        pointer-events: none; white-space: nowrap;
+        pointer-events: none;
     }}
-
-    /* Mobile: 2 columns × 5 rows */
     @media (max-width: 900px) {{
         #wr-grid {{
             grid-template-columns: repeat(2, 1fr);
@@ -3764,7 +3761,9 @@ html_parts.append(f"""<!DOCTYPE html>
         </div>
         <button id="wr-close-btn">&#x2715;&nbsp;Exit&nbsp;<kbd>ESC</kbd></button>
     </div>
-    <div id="wr-grid"></div>
+    <div id="wr-stage">
+        <div id="wr-grid"></div>
+    </div>
 </div>
 
 <!-- ══ STICKY NAVIGATION BAR ══ -->
@@ -4911,37 +4910,43 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 
 
-// ── WAITING ROOM — fullscreen video wall ──
-// Opens a full-screen overlay with all 10 feeds tiled in a 5x2 grid.
-// No audio automation — user clicks whichever feed they want to hear.
-// ESC or the Exit button returns to the site.
+// ── WAITING ROOM — fullscreen video wall, scale-to-fit 16:9 tiles ──
 (function() {
     var openBtn  = document.getElementById('wr-fullscreen-btn');
     var overlay  = document.getElementById('wr-overlay');
     var closeBtn = document.getElementById('wr-close-btn');
     var grid     = document.getElementById('wr-grid');
-    if (!openBtn || !overlay || !closeBtn || !grid) return;
+    var stage    = document.getElementById('wr-stage');
+    if (!openBtn || !overlay || !closeBtn || !grid || !stage) return;
+
+    var COLS = 5, ROWS = 2;   // 5×2 grid
+    var ASPECT = 16 / 9;      // each cell is exactly 16:9
 
     var _Q = '&vq=hd1080&autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1';
     var WR_FEEDS = [
-        { src: 'https://www.youtube.com/embed/iipR5yUp36o?' + _Q, label: 'Feed 1' },
-        { src: 'https://www.youtube.com/embed/Ap-UM1O9RBU?'  + _Q, label: 'Feed 2' },
-        { src: 'https://www.youtube.com/embed/QliL4CGc7iY?'  + _Q, label: 'Feed 3' },
-        { src: 'https://www.youtube.com/embed/pykpO5kQJ98?'  + _Q, label: 'Feed 4' },
-        { src: 'https://www.youtube.com/embed/YDvsBbKfLPA?'  + _Q, label: 'Feed 5' },
-        { src: 'https://www.youtube.com/embed/vfszY1JYbMc?'  + _Q, label: 'Feed 6' },
-        { src: 'https://www.youtube.com/embed/_6dRRfnYJws?'  + _Q, label: 'Feed 7' },
-        { src: 'https://www.youtube.com/embed/iEpJwprxDdk?'  + _Q, label: 'Feed 8' },
-        { src: 'https://www.youtube.com/embed/LuKwFajn37U?'  + _Q, label: 'Feed 9' },
+        { src: 'https://www.youtube.com/embed/iipR5yUp36o?' + _Q, label: 'Feed 1'  },
+        { src: 'https://www.youtube.com/embed/Ap-UM1O9RBU?'  + _Q, label: 'Feed 2'  },
+        { src: 'https://www.youtube.com/embed/QliL4CGc7iY?'  + _Q, label: 'Feed 3'  },
+        { src: 'https://www.youtube.com/embed/pykpO5kQJ98?'  + _Q, label: 'Feed 4'  },
+        { src: 'https://www.youtube.com/embed/YDvsBbKfLPA?'  + _Q, label: 'Feed 5'  },
+        { src: 'https://www.youtube.com/embed/vfszY1JYbMc?'  + _Q, label: 'Feed 6'  },
+        { src: 'https://www.youtube.com/embed/_6dRRfnYJws?'  + _Q, label: 'Feed 7'  },
+        { src: 'https://www.youtube.com/embed/iEpJwprxDdk?'  + _Q, label: 'Feed 8'  },
+        { src: 'https://www.youtube.com/embed/LuKwFajn37U?'  + _Q, label: 'Feed 9'  },
         { src: 'https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJj3l8Bg' + _Q, label: 'Feed 10' },
     ];
+
+    // Mobile: flip to 2 cols × 5 rows
+    function _isMobile() { return window.innerWidth <= 900; }
+    function _cols() { return _isMobile() ? 2 : COLS; }
+    function _rows() { return _isMobile() ? 5 : ROWS; }
 
     var _built = false;
     function buildGrid() {
         if (_built) return;
         _built = true;
         WR_FEEDS.forEach(function(feed) {
-            var cell = document.createElement('div');
+            var cell   = document.createElement('div');
             cell.className = 'wr-cell';
             var iframe = document.createElement('iframe');
             iframe.src = feed.src;
@@ -4957,79 +4962,112 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    function _forceWRLayout() {
-        // Measure and explicitly set pixel heights so grid rows fill completely
-        var oh = overlay.offsetHeight;  // total overlay height in px
-        var hh = document.getElementById('wr-header') ? document.getElementById('wr-header').offsetHeight : 40;
-        var gridH = oh - hh;
-        if (gridH < 10) gridH = oh; // fallback
-        grid.style.height = gridH + 'px';
-        // Force each cell to have explicit height = gridH/2 rows
-        var cells = grid.querySelectorAll('.wr-cell');
-        var cellH = Math.floor(gridH / 2);
-        cells.forEach(function(c) { c.style.height = cellH + 'px'; });
+    /*
+     * scaleGrid()
+     * ───────────
+     * Computes a pixel grid size where every cell is exactly 16:9,
+     * then scales the entire grid (via transform:scale) to fill the
+     * available stage area. YouTube will fill a true 16:9 iframe
+     * edge-to-edge with no black bars.
+     */
+    function scaleGrid() {
+        var cols = _cols(), rows = _rows();
+        grid.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
+        grid.style.gridTemplateRows    = 'repeat(' + rows + ', 1fr)';
+
+        var stageW = stage.offsetWidth  || window.innerWidth;
+        var stageH = stage.offsetHeight || (window.innerHeight - 40);
+
+        // Natural grid size: each cell is stageW/cols wide, height = width/ASPECT
+        // Try fitting by width first
+        var cellW = stageW / cols;
+        var cellH = cellW / ASPECT;
+        var gridW = stageW;
+        var gridH = cellH * rows;
+        var scale = 1;
+
+        if (gridH > stageH) {
+            // Doesn't fit height — fit by height instead
+            cellH = stageH / rows;
+            cellW = cellH * ASPECT;
+            gridW = cellW * cols;
+            gridH = stageH;
+        }
+
+        // Scale to fill: stretch whichever dimension is smaller to touch its edge
+        var scaleX = stageW / gridW;
+        var scaleY = stageH / gridH;
+        scale = Math.min(scaleX, scaleY);  // use min so nothing gets clipped
+
+        // Set the grid to its natural pixel size, then scale up
+        grid.style.width     = gridW + 'px';
+        grid.style.height    = gridH + 'px';
+        grid.style.transform = 'scale(' + scale + ')';
     }
 
     function openWR() {
         buildGrid();
         overlay.classList.add('wr-open');
         document.body.style.overflow = 'hidden';
-        // Initial layout pass
-        _forceWRLayout();
-        // Request native fullscreen
-        setTimeout(function() {
-            try {
-                if (overlay.requestFullscreen)            overlay.requestFullscreen();
-                else if (overlay.webkitRequestFullscreen) overlay.webkitRequestFullscreen();
-                else if (overlay.mozRequestFullScreen)    overlay.mozRequestFullScreen();
-            } catch(e) {}
-            // Re-measure after fullscreen transition completes (browser resizes to screen)
-            setTimeout(_forceWRLayout, 300);
-            setTimeout(_forceWRLayout, 700);  // second pass for slow transitions
-        }, 50);
+        // Initial scale pass
+        requestAnimationFrame(function() {
+            scaleGrid();
+            // Try native fullscreen
+            setTimeout(function() {
+                try {
+                    if (overlay.requestFullscreen)            overlay.requestFullscreen();
+                    else if (overlay.webkitRequestFullscreen) overlay.webkitRequestFullscreen();
+                    else if (overlay.mozRequestFullScreen)    overlay.mozRequestFullScreen();
+                } catch(e) {}
+                // Re-scale after fullscreen settles
+                setTimeout(scaleGrid, 300);
+                setTimeout(scaleGrid, 700);
+            }, 50);
+        });
     }
 
     function closeWR() {
         overlay.classList.remove('wr-open');
         document.body.style.overflow = '';
-        // Reset inline pixel heights so CSS takes over cleanly next open
-        grid.style.height = '';
-        grid.querySelectorAll('.wr-cell').forEach(function(c) { c.style.height = ''; });
+        grid.style.width = grid.style.height = grid.style.transform = '';
         try {
-            if (document.fullscreenElement && document.exitFullscreen)                  document.exitFullscreen();
-            else if (document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
+            if (document.fullscreenElement && document.exitFullscreen)
+                document.exitFullscreen();
+            else if (document.webkitFullscreenElement && document.webkitExitFullscreen)
+                document.webkitExitFullscreen();
         } catch(e) {}
     }
 
     openBtn.addEventListener('click', openWR);
     closeBtn.addEventListener('click', closeWR);
+
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && overlay.classList.contains('wr-open')) closeWR();
     });
     document.addEventListener('fullscreenchange', function() {
         if (document.fullscreenElement) {
-            // Just entered fullscreen — re-measure now that screen dimensions are final
-            setTimeout(_forceWRLayout, 200);
-            setTimeout(_forceWRLayout, 600);
+            setTimeout(scaleGrid, 200);
+            setTimeout(scaleGrid, 600);
         } else if (overlay.classList.contains('wr-open')) {
             closeWR();
         }
     });
     document.addEventListener('webkitfullscreenchange', function() {
         if (document.webkitFullscreenElement) {
-            setTimeout(_forceWRLayout, 200);
-            setTimeout(_forceWRLayout, 600);
+            setTimeout(scaleGrid, 200);
+            setTimeout(scaleGrid, 600);
         } else if (overlay.classList.contains('wr-open')) {
             closeWR();
         }
     });
-    // Re-fit if window resizes while WR is open (e.g. browser chrome toggling)
     window.addEventListener('resize', function() {
         if (overlay.classList.contains('wr-open')) {
             clearTimeout(window._wrResizeTimer);
-            window._wrResizeTimer = setTimeout(_forceWRLayout, 150);
+            window._wrResizeTimer = setTimeout(scaleGrid, 120);
         }
     });
+
+})();
 })();
 
 }); // end DOMContentLoaded
