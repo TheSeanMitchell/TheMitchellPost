@@ -234,6 +234,21 @@ RAW_ME_KEYWORDS = [
     "nuclear","nuclear energy","kurds","northern iraq","nowruz","top leaders",
     "energy fallout","humanitarian","humanitarian aid","nuclear submarine",
 
+    # ── 2026 Iran war & ME crisis keywords (breaking news) ──
+    "2026 iran war","us israel iran","operation midnight hammer","b-2 stealth bomber iran",
+    "khamenei death","supreme leader killed","irgc leadership","iran regime collapse",
+    "iran protest 2026","iranian revolution 2026","tehran uprising",
+    "strait of hormuz closed","hormuz blockade 2026","oil tanker seized",
+    "natanz destroyed","fordow strike","iranian nuclear facilities bombed",
+    "iran retaliation","iran missile barrage","iran drone swarm",
+    "us bases attacked qatar","us bases uae attacked","bahrain base strike",
+    "hezbollah escalation 2026","southern lebanon strike","beirut 2026",
+    "hamas hostage deal","gaza ceasefire 2026","rafah 2026","west bank escalation",
+    "saudi iran normalization","arab league 2026","mbs 2026",
+    "global oil shock 2026","energy crisis europe","lng shortage",
+    "world war three","ww3 fears","nuclear escalation risk","regional war",
+    "iran expats exodus","gulf diaspora","dubai evacuation","qatar evacuation",
+
     "Iran tensions","OPEC meeting","barrel of oil","refinery fire","shale oil","naval blockade",
     "Tomahawk missile","Red Sea","Houthi rebels","fracking boom","strategic petroleum reserve","SPR release",
     "centrifuge","THAAD system","Patriot missile","Soleimani strike","Qasem Soleimani","Baghdad airport",
@@ -483,6 +498,33 @@ RAW_US_KEYWORDS = [
     "state budget tightening 2026","revenues decline 2026","spending needs rise 2026",
     "transportation funding 2026","emergency management 2026","public health policy 2026",
     "medicaid changes 2026","trump accounts savings","trumprx policy","credit card interest cap",
+
+    # ── 2026 trending US news keywords (from current polling & news data) ──
+    "iran war 2026","us iran war","strait of hormuz closure","operation midnight hammer",
+    "iran nuclear sites","bunker buster strike","b-2 bomber iran","khamenei killed",
+    "iran oil shock","oil price spike 2026","global energy crisis 2026","gas prices surge",
+    "trump tariffs supreme court","tariffs ruled unconstitutional","tariff pause",
+    "trump approval rating 2026","trump second term","jd vance 2026","maga midterms",
+    "2026 midterm elections","house flip 2026","senate 2026","democrat wave",
+    "republican hold senate","generic ballot","midterm polling","swing district",
+    "cpac 2026","cpac dallas","steve bannon","matt gaetz iran",
+    "epstein files 2026","epstein investigation","epstein client","ghislaine maxwell",
+    "ice enforcement 2026","abolish ice","deportation flights 2026","sanctuary city crackdown",
+    "doge spending cuts","elon musk government","department of government efficiency",
+    "federal layoffs 2026","government workforce reduction","bureaucracy cuts",
+    "social security cuts","medicaid cuts 2026","entitlement reform 2026",
+    "inflation 2026","grocery prices","cost of living crisis","stagflation risk 2026",
+    "recession 2026","stock market crash 2026","s&p 500 decline","dow jones 2026",
+    "federal reserve rate cut 2026","interest rates 2026","mortgage rates",
+    "ai jobs impact","ai regulation 2026","chatgpt 2026","openai","anthropic",
+    "no kings protest","anti trump protest 2026","protest march 2026","civil unrest",
+    "tiger woods arrest","celebrity legal","kash patel","pete hegseth",
+    "kristi noem fired","cabinet shake 2026","trump cabinet",
+    "ukraine ceasefire 2026","ukraine peace deal","nato 2026","russia ukraine 2026",
+    "china tariffs 2026","trade war china","us china relations 2026","taiwan 2026",
+    "supreme court tariff ruling","supreme court 2026","scotus 2026",
+    "measles outbreak 2026","vaccine hesitancy 2026","public health emergency",
+    "winter olympics 2026","super bowl 2026","world cup usa 2026",
 
     "war","oil","immigration","campaign","US Navy","aircraft carrier",
     "Persian Gulf","Iran tensions","ballistic missile","hypersonic missile","joint exercises","troop deployment",
@@ -755,6 +797,32 @@ RAW_SPORTS_KEYWORDS = [
     "overtime","brackets","huge lead","all-time","champ","champion","boxer","fighter",
     "competition","chess","surfing","surfing event","surfing events","surf",
     "f1","race","races","racing","f1 race","f1 races","f1 racing",
+
+    # ── 2026 sports trending keywords ──
+    "world cup 2026","fifa world cup 2026","world cup usa canada mexico",
+    "world cup host city","world cup schedule 2026","world cup bracket 2026",
+    "march madness 2026","ncaa tournament 2026","final four 2026","ncaa bracket 2026",
+    "nba playoffs 2026","nba finals 2026","nba mvp 2026","nba trade deadline",
+    "nfl draft 2026","nfl offseason 2026","super bowl lxi","super bowl 2027",
+    "mlb opening day 2026","world series 2026","mlb trade deadline 2026",
+    "stanley cup 2026","nhl playoffs 2026","nhl trade deadline",
+    "winter olympics 2026","milan cortina 2026","olympic games italy",
+    "caitlin clark","angel reese","paige bueckers wnba","wnba season 2026",
+    "victor wembanyama","luka doncic trade","lebron james retirement",
+    "patrick mahomes","travis kelce","jalen hurts super bowl",
+    "masters 2026","pga championship 2026","us open golf 2026","ryder cup 2026",
+    "wimbledon 2026","us open tennis 2026","french open 2026","australian open 2026",
+    "novak djokovic","carlos alcaraz","jannik sinner","coco gauff",
+    "aryna sabalenka 2026","iga swiatek 2026",
+    "formula 1 2026","f1 season 2026","max verstappen","lewis hamilton ferrari",
+    "ufc 2026","conor mcgregor return","jake paul boxing","mike tyson",
+    "tiger woods car crash","tiger woods legal","tiger woods 2026",
+    "horse racing 2026","kentucky derby 2026","triple crown",
+    "transfer window 2026","premier league 2026","champions league final 2026",
+    "erling haaland","kylian mbappe","lamine yamal","jude bellingham",
+    "copa america 2026","concacaf 2026","usmnt world cup","uswnt",
+    "commonwealth games 2026","glasgow 2026","asian games 2026",
+    "sports gambling 2026","sports betting expansion","nil deals 2026",
 ]
 SPORTS_KEYWORDS = set(kw.lower() for kw in RAW_SPORTS_KEYWORDS)
 
@@ -943,6 +1011,32 @@ RAW_TECH_KEYWORDS = [
     "beneficial ownership","corporate transparency act","FinCEN rule","crypto mixer","Tornado Cash sanction","privacy coin",
     "dark web market","shadow ban lift","encrypted app","Signal use","Wickr","Telegram channel",
     "fact check debunk","post truth era","fake news epidemic","disinformation age","information warfare","hybrid threat",
+
+    # ── 2026 tech & science trending keywords ──
+    "gpt-5","gpt 5","openai gpt5","claude 4","gemini ultra","llm benchmark 2026",
+    "ai agents 2026","agentic ai","autonomous ai","ai coding assistant",
+    "cursor ai","github copilot","devin ai","software engineer replaced",
+    "ai search","perplexity ai","ai overviews google","search engine disruption",
+    "deepseek ai","china ai model","us china ai race","export controls chips",
+    "nvidia blackwell","nvidia gb200","jensen huang","nvidia earnings 2026",
+    "tsmc arizona","intel foundry","samsung chip","chip shortage 2026",
+    "humanoid robot","figure robot","boston dynamics","tesla optimus","1x robot",
+    "self driving car 2026","waymo expansion","tesla fsd","autonomous vehicle crash",
+    "apple intelligence","apple ai","wwdc 2026","iphone 18","apple vision pro 2",
+    "meta ai glasses","ray ban meta","spatial computing 2026",
+    "spacex starship 2026","starship test","moon landing 2026","nasa artemis 2026",
+    "quantum computing breakthrough","google willow chip","ibm quantum",
+    "nuclear fusion 2026","helion energy","commonwealth fusion","iter progress",
+    "crispr 2026","gene therapy","longevity research","aging reversal","ozempic research",
+    "electric vehicle 2026","ev sales decline","ev tariff","ford ev losses",
+    "solid state battery","sodium battery","battery range breakthrough",
+    "deepfake detection","ai generated video","sora openai","video generation ai",
+    "social media regulation 2026","tiktok ban 2026","tiktok us","bytedance",
+    "x twitter 2026","elon musk x","bluesky growth","threads instagram",
+    "cybersecurity attack 2026","ransomware 2026","data breach 2026","salt typhoon",
+    "post quantum encryption","quantum cryptography","nist standards",
+    "5g expansion","6g research","starlink v2","satellite internet coverage",
+    "climate tech 2026","carbon capture scale","direct air capture","geothermal energy",
 ]
 TECH_KEYWORDS = set(kw.lower() for kw in RAW_TECH_KEYWORDS)
 
@@ -1223,6 +1317,38 @@ RAW_CULTURE_KEYWORDS = [
     "Masters Tournament 2026","Wimbledon 2026 tennis","Diwali 2026","Lollapalooza 2026",
     "Ultra Music Festival 2026","Stagecoach 2026","BottleRock 2026","Sundance 2027",
     "Commonwealth Games Glasgow 2026","Asian Games Japan 2026",
+
+    # ── 2026 culture & entertainment trending keywords ──
+    "avengers doomsday 2026","avengers secret wars","marvel 2026","mcu phase 6",
+    "mission impossible final reckoning","tom cruise final film",
+    "minecraft movie 2026","minecraft film","wicked part 2","wicked for good",
+    "the odyssey film christopher nolan","nolan 2026","interstellar sequel",
+    "thunderbolts marvel","fantastic four 2026","x-men reboot",
+    "oscar nominations 2026","academy awards 2026","golden globes 2026",
+    "cannes 2026","sundance 2026","tribeca 2026","sxsw 2026",
+    "grammy 2026","billboard music awards 2026","vma 2026","amas 2026",
+    "taylor swift tour 2026","taylor swift album 2026","ttpd era tour",
+    "beyonce cowboy carter tour","beyonce 2026","renaissance film",
+    "sabrina carpenter","chappell roan","charli xcx brat summer",
+    "kendrick lamar super bowl","kendrick lamar 2026","drake lawsuit",
+    "bad bunny 2026","bad bunny world tour","peso pluma 2026",
+    "met gala 2026","met gala theme","met gala red carpet 2026",
+    "paris fashion week 2026","milan fashion week 2026","nyfw 2026",
+    "kate middleton 2026","prince william 2026","royal family 2026","king charles 2026",
+    "pope election 2026","conclave 2026","new pope","vatican 2026",
+    "sean combs trial","diddy trial","diddy verdict",
+    "celebrity death 2026","ozzy osbourne","celebrity legal 2026",
+    "labubu collectible","pop mart","blind box toy","collectible craze",
+    "netflix hit 2026","squid game season 3","stranger things final","wednesday season 2",
+    "hbo max 2026","the last of us season 2","house of dragon season 3",
+    "prime video 2026","fallout season 2","the boys final season",
+    "streaming wars 2026","streaming bundle","cord cutting 2026",
+    "tiktok trend 2026","viral challenge","social media star",
+    "ai art controversy","ai music","suno ai music","udio music generation",
+    "bookstore renaissance","booktok 2026","romantasy genre","colleen hoover",
+    "coachella 2026","coachella lineup","glastonbury 2026","lollapalooza 2026",
+    "world cup culture","host city celebration","fan zone 2026",
+    "america 250","us 250th birthday","semiquincentennial","july 4 2026",
 ]
 CULTURE_KEYWORDS = set(kw.lower() for kw in RAW_CULTURE_KEYWORDS)
 
@@ -1361,6 +1487,35 @@ RAW_WORLD_KEYWORDS = [
     "Wimbledon 2026","Cannes Film Festival 2026","Oktoberfest 2026","Songkran 2026","Hajj 2026",
     "Cherry Blossom Japan","Yi Peng lantern festival","Loy Krathong","Nowruz","Vesak","Ashura",
     "Rio Carnival","Venice Carnival","Glastonbury 2026","Edinburgh Military Tattoo",
+
+    # ── 2026 world trending keywords ──
+    "iran war impact europe","iran oil shock europe","energy crisis 2026 europe",
+    "nato iran response","article 5 nato","nato emergency summit",
+    "russia ukraine 2026","ukraine ceasefire","zelenskyy peace deal",
+    "trump putin deal","ukraine territory concessions","nato ukraine membership",
+    "russia sanctions 2026","russian economy","ruble collapse","russia isolation",
+    "china economy 2026","china slowdown","china property crisis","evergrande",
+    "xi jinping 2026","china national congress","pla military buildup",
+    "taiwan strait 2026","taiwan tensions","china taiwan blockade","taiwan election",
+    "south china sea 2026","philippine china clash","us navy south china sea",
+    "north korea missile 2026","kim jong un","dprk nuclear test","north korea icbm",
+    "india pakistan 2026","kashmir tension","india china border","modi 2026",
+    "uk general election 2026","keir starmer","uk economy","uk labour policy",
+    "germany election 2026","afd germany","german coalition","merz chancellor",
+    "france politics 2026","macron 2026","le pen 2026","france snap election",
+    "eu economic slowdown","eurozone recession","ecb rate cut 2026",
+    "migration crisis europe","boat crossings","asylum seekers europe","schengen crisis",
+    "japan yen 2026","bank of japan","yen intervention","nikkei 2026",
+    "india economy 2026","india gdp growth","make in india","india manufacturing",
+    "indonesia election 2026","prabowo subianto","asean 2026","asean summit",
+    "africa coup 2026","sahel conflict","sudan war","ethiopia conflict",
+    "global south 2026","brics expansion","brics currency","dollar alternative",
+    "un security council 2026","veto power","un reform","security council deadlock",
+    "climate summit 2026","cop31","paris agreement compliance","net zero 2026",
+    "world bank imf 2026","global debt crisis","sovereign debt","emerging market crisis",
+    "pope francis health","new pope 2026","conclave","catholic church",
+    "mexico sheinbaum 2026","mexico us relations","cartel state department",
+    "canada election 2026","mark carney","canada us tariffs","canadian dollar",
 ]
 WORLD_KEYWORDS = set(kw.lower() for kw in RAW_WORLD_KEYWORDS)
 
@@ -1673,6 +1828,36 @@ RAW_BUSINESS_KEYWORDS = [
     "spousal lifetime access trust","slat","qualified opportunity zone fund","qoz",
     "like kind exchange","boot","basis","cost basis","adjusted cost basis",
     "step up in basis","carryover basis","gift basis","inherited basis",
+
+    # ── 2026 business & markets trending keywords ──
+    "tariff impact earnings","tariff recession","trade war earnings","supply chain tariff",
+    "trump tariffs stock market","tariff inflation","consumer price tariff",
+    "s&p 500 2026","nasdaq 2026","dow jones 2026","stock market outlook 2026",
+    "federal reserve 2026","fed rate cut 2026","powell 2026","fomc decision",
+    "recession probability 2026","soft landing 2026","stagflation 2026",
+    "oil price 2026","brent crude 2026","wti crude shock","energy market 2026",
+    "nvidia earnings 2026","apple earnings 2026","microsoft earnings 2026",
+    "google earnings 2026","meta earnings 2026","amazon earnings 2026",
+    "tesla earnings 2026","tesla stock 2026","elon musk tesla","robotaxi launch",
+    "magnificent seven stocks","big tech correction","tech selloff 2026",
+    "ipo 2026","ipo market recovery","spac 2026","unicorn ipo",
+    "private equity 2026","buyout market","credit market 2026","junk bonds",
+    "bitcoin 2026","bitcoin price 2026","crypto market 2026","bitcoin etf flows",
+    "ethereum 2026","solana 2026","crypto regulation sec","coinbase 2026",
+    "commercial real estate 2026","office market 2026","office vacancy","cre distress",
+    "housing market 2026","home prices 2026","mortgage rates 2026","housing affordability",
+    "bank earnings 2026","jpmorgan earnings","goldman sachs 2026","bank stress test",
+    "us dollar 2026","dollar index","dollar weakening","de-dollarization",
+    "gold price 2026","gold record high","safe haven assets","gold etf",
+    "job market 2026","unemployment 2026","layoffs 2026","tech layoffs",
+    "ai economy impact","automation jobs 2026","white collar ai replacement",
+    "small business tariff impact","small business confidence","main street economy",
+    "consumer spending 2026","retail sales 2026","consumer debt","credit card delinquency",
+    "doge savings claims","government spending cuts impact","deficit 2026",
+    "us china trade decoupling","friend shoring","nearshoring mexico",
+    "semiconductor supply chain","chips act results","us chip production",
+    "warren buffett portfolio 2026","berkshire hathaway 2026","buffett successor",
+    "sovereign wealth fund us","us sovereign wealth fund","trump investment fund",
 ]
 BUSINESS_KEYWORDS = set(kw.lower() for kw in RAW_BUSINESS_KEYWORDS)
 
@@ -2275,7 +2460,21 @@ def _fetch_one_source(source_name, url, pattern, block_pat, is_sports_excluded):
                 if title_matches_keywords(title_lower, pattern):
                     ts_struct = entry.get('published_parsed') or entry.get('updated_parsed')
                     ts = calendar.timegm(ts_struct) if ts_struct else time.time()
-                    results.append((ts, raw_title, source_name, link))
+                    # PRO10 #3: extract thumbnail from RSS media tags
+                    img_url = ""
+                    try:
+                        mc = entry.get("media_content", [])
+                        if mc and isinstance(mc, list):
+                            img_url = mc[0].get("url", "")
+                        if not img_url:
+                            enc = entry.get("enclosures", [])
+                            if enc and isinstance(enc, list):
+                                img_url = enc[0].get("href", "")
+                        if not img_url:
+                            img_url = entry.get("media_thumbnail", [{}])[0].get("url", "")
+                    except Exception:
+                        img_url = ""
+                    results.append((ts, raw_title, source_name, link, img_url))
                     seen_local.add(norm_title)
                     count += 1
             break
@@ -2516,13 +2715,29 @@ def render_column(items):
             hot_dot = '<span class="new-dot" title="Published in the last 30 minutes">&#9679;</span> ' if is_hot else ''
             safe_dtitle = display_title.replace('"', '&quot;')
             anchor_id = "hl-" + hashlib.md5(link.encode()).hexdigest()[:8]
+            # PRO10 #3: thumbnail
+            img_url = cluster[0][4] if len(cluster[0]) > 4 else ""
+            img_html = f'<img class="hl-thumb" src="{img_url}" alt="" loading="lazy">' if img_url else ''
+            # PRO10 #9: share buttons
+            enc_link = link.replace("'", "%27")
+            enc_title = display_title[:80].replace("'", "%27")
+            share_html = (
+                '<div class="hl-share-row">'
+                + '<button class="hl-share-btn" data-copy="' + enc_link + '">Copy Link</button>'
+                + '<a class="hl-share-btn" href="https://twitter.com/intent/tweet?url=' + enc_link + '&amp;text=' + enc_title + '" target="_blank" rel="noopener">&#120143; Share</a>'
+                + '<a class="hl-share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=' + enc_link + '" target="_blank" rel="noopener">LinkedIn</a>'
+                + '<a class="hl-share-btn" href="mailto:?subject=' + enc_title + '&body=' + enc_link + '">Email</a>'
+                + '</div>'
+            )
             out += (
                 f'<div id="{anchor_id}" class="headline" data-link="{link}" data-ts="{int(ts)}">'
+                f'{img_html}'
                 f'{hot_dot}'
                 f'<span class="title">{display_title}</span>'
                 f' <span class="ts-label">{time_str}</span>'
                 f' <span class="src-label">\u2014 {friendly}</span>'
                 f' <a class="link" href="{link}" target="_blank">[Full Article]</a>'
+                f'{share_html}'
                 f'</div>\n'
             )
         else:
@@ -2683,7 +2898,10 @@ html_parts.append(f"""<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Mitchell Post</title>
+    <title>The Mitchell Post — Pro10 Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="alternate" type="application/rss+xml" title="The Mitchell Post RSS Feed" href="feed.xml">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%23121212'/><rect x='2' y='2' width='60' height='60' rx='7' fill='none' stroke='%23B30000' stroke-width='3'/><text x='32' y='46' font-family='Arial,sans-serif' font-size='28' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'>MP</text></svg>">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -2693,13 +2911,13 @@ html_parts.append(f"""<!DOCTYPE html>
     /* ── Reset & base ── */
     * {{ box-sizing: border-box; margin: 0; padding: 0; }}
     html {{ scroll-behavior: smooth; }}
-    body {{ background: #121212; color: #FFFFFF; font-family: Arial, sans-serif; line-height: 1.6;
-            padding-top: 48px; font-size: 15px; }}
+    body {{ background: #000000; color: #FFFFFF; font-family: 'Inter', Arial, sans-serif; line-height: 1.68;
+            padding-top: 0px; font-size: 15px; }}
     body.large-text {{ font-size: 19px; }}
 
     /* ── Sticky nav bar ── */
     .sticky-nav {{
-        position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+        position: sticky; top: 0; left: 0; right: 0; z-index: 1000;
         background: #0A0A0A; border-bottom: 2px solid #B30000;
         display: flex; align-items: center; gap: 0; height: 48px;
         padding: 0 16px; overflow-x: auto; white-space: nowrap;
@@ -2772,8 +2990,16 @@ html_parts.append(f"""<!DOCTYPE html>
 
     /* ── Section titles and layout ── */
     .section-title {{
-        font-size: 1.6em; margin: 0 0 6px; font-weight: bold;
+        font-size: 1.4em; margin: 0 0 6px; font-weight: 700;
         text-decoration: underline; text-decoration-thickness: 2px;
+        display: flex; align-items: center; gap: 8px;
+        letter-spacing: 0.07em; text-transform: uppercase;
+        font-family: 'Inter', Arial, sans-serif;
+    }}
+    .sec-dot {{
+        display: inline-block; width: 12px; height: 12px;
+        border-radius: 50%; flex-shrink: 0; margin-right: 2px;
+        box-shadow: 0 0 4px rgba(255,255,255,0.15);
     }}
     .section-title.us-color     {{ color: {SECTION_COLORS["us"]};       text-decoration-color: {SECTION_COLORS["us"]}; }}
     .section-title.mideast-color{{ color: {SECTION_COLORS["mideast"]};  text-decoration-color: {SECTION_COLORS["mideast"]}; }}
@@ -2792,7 +3018,7 @@ html_parts.append(f"""<!DOCTYPE html>
         border-bottom: 1px solid #222222; line-height: 1.5;
     }}
     .headline.seen-item {{ opacity: 0.55; }}
-    .title {{ color: #FFFFFF; font-size: 1em; }}
+    .title {{ color: #FFFFFF; font-size: 1em; font-family: 'Playfair Display', Georgia, serif; font-weight: 700; line-height: 1.4; }}
     .ts-label {{ color: #888888; font-size: 0.78em; margin-left: 4px; }}
     .src-label {{ color: #666666; font-size: 0.88em; }}
     .new-dot {{ color: #FFFFFF; font-size: 0.55em; vertical-align: middle; margin-right: 2px; }}
@@ -3420,9 +3646,262 @@ html_parts.append(f"""<!DOCTYPE html>
     }}
     body.light-mode .footer-disclaimer {{ color: #aaa; }}
 
+
+    /* ══ PRO10 UPGRADES CSS ══ */
+
+    /* #2 — Masthead */
+    .mp-masthead {{
+        background: #000; border-bottom: 3px solid #B30000;
+        padding: 18px 24px 14px 24px; text-align: center;
+        position: relative;
+    }}
+    .mp-masthead-inner {{
+        max-width: 1400px; margin: 0 auto;
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 16px; flex-wrap: wrap;
+    }}
+    .mp-masthead-left, .mp-masthead-right {{
+        flex: 1; min-width: 120px;
+    }}
+    .mp-masthead-right {{ text-align: right; }}
+    .mp-edition-tag {{
+        font-family: 'Inter', sans-serif; font-size: 0.7em;
+        letter-spacing: 0.14em; text-transform: uppercase;
+        color: #B30000; font-weight: 700;
+        border: 1px solid #B30000; padding: 2px 8px; border-radius: 2px;
+    }}
+    .mp-masthead-center {{ flex: 2; text-align: center; }}
+    .mp-masthead-title {{
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 2.8em; font-weight: 800; color: #FFFFFF;
+        letter-spacing: 0.01em; line-height: 1.1; margin: 0;
+        text-shadow: 0 2px 12px rgba(179,0,0,0.25);
+    }}
+    .mp-masthead-tagline {{
+        font-family: 'Inter', sans-serif; font-size: 0.72em;
+        color: #888; letter-spacing: 0.1em; text-transform: uppercase;
+        margin: 4px 0 0 0; font-weight: 400;
+    }}
+    .mp-masthead-date {{
+        display: block; font-family: 'Inter', sans-serif;
+        font-size: 0.78em; color: #aaa; font-weight: 500;
+        letter-spacing: 0.03em;
+    }}
+    .mp-masthead-updated {{
+        display: block; font-size: 0.68em; color: #555;
+        letter-spacing: 0.05em; text-transform: uppercase;
+        margin-top: 3px;
+    }}
+    body.light-mode .mp-masthead {{ background: #fff; border-bottom-color: #B30000; }}
+    body.light-mode .mp-masthead-title {{ color: #111; text-shadow: none; }}
+    body.light-mode .mp-masthead-tagline {{ color: #888; }}
+    body.light-mode .mp-masthead-date {{ color: #555; }}
+    body.light-mode .mp-masthead-updated {{ color: #999; }}
+    @media (max-width: 900px) {{
+        .mp-masthead {{ padding: 12px 14px; }}
+        .mp-masthead-title {{ font-size: 1.9em; }}
+        .mp-masthead-left, .mp-masthead-right {{ display: none; }}
+        .mp-masthead-tagline {{ font-size: 0.68em; }}
+    }}
+
+    /* #4 — Market Ticker */
+    .mp-ticker-wrap {{
+        background: #0a0a0a; border-bottom: 1px solid #1a1a1a;
+        padding: 5px 16px; display: flex; align-items: center;
+        gap: 12px; overflow: hidden; font-family: 'Inter', sans-serif;
+        font-size: 0.76em; white-space: nowrap;
+    }}
+    .mp-ticker-label {{
+        font-weight: 700; letter-spacing: 0.1em; color: #B30000;
+        font-size: 0.78em; flex-shrink: 0;
+    }}
+    .mp-ticker-scroll {{
+        flex: 1; overflow: hidden; display: flex; gap: 10px; align-items: center;
+    }}
+    .mp-tick {{ color: #ccc; }}
+    .mp-tick .tv {{ font-weight: 700; }}
+    .mp-tick .tv.up {{ color: #22c55e; }}
+    .mp-tick .tv.dn {{ color: #ef4444; }}
+    .mp-tick-sep {{ color: #333; }}
+    .mp-ticker-note {{ font-size: 0.72em; color: #444; flex-shrink: 0; }}
+    body.light-mode .mp-ticker-wrap {{ background: #f5f5f5; border-bottom-color: #ddd; }}
+    body.light-mode .mp-tick {{ color: #333; }}
+    body.light-mode .mp-ticker-note {{ color: #aaa; }}
+    @media (max-width: 900px) {{ .mp-ticker-wrap {{ display: none; }} }}
+
+
+    /* #3 — Headline thumbnails */
+    .hl-thumb {{
+        float: right; margin: 0 0 6px 12px;
+        width: 120px; height: 68px; object-fit: cover;
+        border-radius: 3px; background: #1a1a1a;
+        flex-shrink: 0;
+    }}
+    @media (max-width: 900px) {{
+        .hl-thumb {{ width: 80px; height: 46px; margin-left: 8px; }}
+    }}
+    body.light-mode .hl-thumb {{ background: #eee; }}
+
+    /* #5 — Reading Progress Bar */
+    .mp-progress-bar {{
+        position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+        background: linear-gradient(90deg, #B30000, #ff4444);
+        z-index: 9999; transition: width 0.1s linear;
+        pointer-events: none;
+    }}
+
+    /* #6 — Section Ribbon Dividers */
+    .pro-section-ribbon {{
+        background: #0d0d0d; border-top: 1px solid #1a1a1a;
+        border-bottom: 1px solid #1a1a1a;
+        padding: 8px 20px; margin: 28px 0;
+        display: flex; align-items: center; gap: 14px;
+        font-family: 'Inter', sans-serif;
+    }}
+    .pro-ribbon-dot {{
+        width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+    }}
+    .pro-ribbon-name {{
+        font-size: 0.72em; font-weight: 700; letter-spacing: 0.12em;
+        text-transform: uppercase; color: #ccc;
+    }}
+    .pro-ribbon-meta {{
+        font-size: 0.68em; color: #555; margin-left: auto;
+        letter-spacing: 0.04em;
+    }}
+    body.light-mode .pro-section-ribbon {{ background: #f8f8f8; border-color: #e0e0e0; }}
+    body.light-mode .pro-ribbon-name {{ color: #333; }}
+    body.light-mode .pro-ribbon-meta {{ color: #aaa; }}
+
+    /* #7 — Most-Read Sidebar Rail */
+    .mp-rail-wrap {{
+        position: sticky; top: 60px; width: 260px; flex-shrink: 0;
+        background: #0a0a0a; border: 1px solid #1a1a1a;
+        border-radius: 4px; padding: 0; overflow: hidden;
+        font-family: 'Inter', sans-serif; align-self: flex-start;
+        display: none; /* shown via JS once clicks accumulate */
+    }}
+    .mp-rail-header {{
+        background: #B30000; padding: 8px 14px;
+        font-size: 0.7em; font-weight: 700; letter-spacing: 0.1em;
+        text-transform: uppercase; color: #fff;
+    }}
+    .mp-rail-item {{
+        display: flex; gap: 10px; align-items: flex-start;
+        padding: 10px 14px; border-bottom: 1px solid #141414;
+        cursor: pointer; transition: background 0.15s;
+    }}
+    .mp-rail-item:hover {{ background: #141414; }}
+    .mp-rail-num {{
+        font-size: 1.1em; font-weight: 800; color: #B30000;
+        flex-shrink: 0; line-height: 1.3; width: 20px;
+    }}
+    .mp-rail-title {{
+        font-size: 0.8em; color: #ddd; line-height: 1.45;
+        font-family: 'Playfair Display', serif;
+    }}
+    .mp-rail-tag {{
+        font-size: 0.62em; font-weight: 700; letter-spacing: 0.08em;
+        text-transform: uppercase; color: #666; display: block;
+        margin-top: 3px; font-family: 'Inter', sans-serif;
+    }}
+    body.light-mode .mp-rail-wrap {{ background: #fafafa; border-color: #e0e0e0; }}
+    body.light-mode .mp-rail-title {{ color: #222; }}
+    body.light-mode .mp-rail-tag {{ color: #999; }}
+    body.light-mode .mp-rail-item:hover {{ background: #f0f0f0; }}
+    @media (max-width: 1340px) {{ .mp-rail-wrap {{ display: none !important; }} }}
+
+    /* #8 — Per-section OLED color washes */
+    body:not(.light-mode) #section-us       .headline {{ background: rgba(179,0,0,0.025); }}
+    body:not(.light-mode) #section-mideast  .headline {{ background: rgba(192,80,0,0.025); }}
+    body:not(.light-mode) #section-world    .headline {{ background: rgba(46,125,154,0.025); }}
+    body:not(.light-mode) #section-tech     .headline {{ background: rgba(0,95,158,0.025); }}
+    body:not(.light-mode) #section-business .headline {{ background: rgba(139,105,20,0.025); }}
+    body:not(.light-mode) #section-sports   .headline {{ background: rgba(0,107,60,0.025); }}
+    body:not(.light-mode) #section-culture  .headline {{ background: rgba(107,0,107,0.025); }}
+
+    /* #9 — Share row on hover */
+    .headline {{ position: relative; }}
+    .hl-share-row {{
+        display: none; margin-top: 6px; gap: 8px; flex-wrap: wrap;
+    }}
+    .headline:hover .hl-share-row {{ display: flex; }}
+    .hl-share-btn {{
+        font-size: 0.7em; padding: 3px 10px; border: 1px solid #333;
+        border-radius: 12px; background: none; color: #888;
+        cursor: pointer; font-family: 'Inter', sans-serif;
+        letter-spacing: 0.03em; transition: border-color 0.15s, color 0.15s;
+        text-decoration: none; display: inline-block;
+    }}
+    .hl-share-btn:hover {{ border-color: #B30000; color: #fff; }}
+    body.light-mode .hl-share-btn {{ border-color: #ccc; color: #555; }}
+    body.light-mode .hl-share-btn:hover {{ border-color: #B30000; color: #000; }}
+
+    /* #10 — Skeleton shimmer loader */
+    .mp-skeleton-wrap {{
+        max-width: 1400px; margin: 20px auto; padding: 0 20px;
+        display: none; /* shown by JS before content paints */
+    }}
+    .mp-skeleton-line {{
+        height: 14px; border-radius: 3px; margin-bottom: 10px;
+        background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+        background-size: 200% 100%;
+        animation: mp-shimmer 1.4s infinite;
+    }}
+    .mp-skeleton-line.wide {{ width: 90%; }}
+    .mp-skeleton-line.med  {{ width: 65%; }}
+    .mp-skeleton-line.thin {{ width: 40%; }}
+    @keyframes mp-shimmer {{
+        0%   {{ background-position: 200% 0; }}
+        100% {{ background-position: -200% 0; }}
+    }}
+    body.light-mode .mp-skeleton-line {{
+        background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+        background-size: 200% 100%;
+    }}
+
     </style>
 </head>
 <body>
+
+<!-- ══ PRO10: MASTHEAD HERO HEADER ══ -->
+<div class="mp-masthead">
+    <div class="mp-masthead-inner">
+        <div class="mp-masthead-left">
+            <span class="mp-edition-tag">Digital Edition</span>
+        </div>
+        <div class="mp-masthead-center">
+            <h1 class="mp-masthead-title">The Mitchell Post</h1>
+            <p class="mp-masthead-tagline">Advancing the Power of Independent News</p>
+        </div>
+        <div class="mp-masthead-right">
+            <span class="mp-masthead-date" id="mp-masthead-date"></span>
+            <span class="mp-masthead-updated">Updated continuously</span>
+        </div>
+    </div>
+</div>
+
+<!-- ══ PRO10: MARKET TICKER BAR (#4) ══ -->
+<div class="mp-ticker-wrap" id="mp-ticker-wrap">
+    <div class="mp-ticker-label">MARKETS</div>
+    <div class="mp-ticker-scroll" id="mp-ticker-scroll">
+        <span class="mp-tick" id="tick-spx">S&amp;P 500 <span class="tv">—</span></span>
+        <span class="mp-tick-sep">|</span>
+        <span class="mp-tick" id="tick-ndx">NASDAQ <span class="tv">—</span></span>
+        <span class="mp-tick-sep">|</span>
+        <span class="mp-tick" id="tick-dji">DOW <span class="tv">—</span></span>
+        <span class="mp-tick-sep">|</span>
+        <span class="mp-tick" id="tick-btc">BTC <span class="tv">—</span></span>
+        <span class="mp-tick-sep">|</span>
+        <span class="mp-tick" id="tick-gold">GOLD <span class="tv">—</span></span>
+        <span class="mp-tick-sep">|</span>
+        <span class="mp-tick" id="tick-oil">OIL <span class="tv">—</span></span>
+    </div>
+    <span class="mp-ticker-note">Delayed 15 min</span>
+</div>
+
+<!-- ══ PRO10: READING PROGRESS BAR (#5) ══ -->
+<div class="mp-progress-bar" id="mp-progress-bar"></div>
 
 <!-- ══ STICKY NAVIGATION BAR ══ -->
 <nav class="sticky-nav">
@@ -3673,7 +4152,7 @@ if top_stories or daily_briefing:
     ts_html += '''<!-- ══ VIDEO BANNER — desktop only, hidden on mobile via CSS ══ -->
 <div class="banner">
     <div class="video-grid">
-        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/_6dRRfnYJws?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/iipR5yUp36o?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/QliL4CGc7iY?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div class="youtube-inset"><iframe data-src="https://www.youtube.com/embed/pykpO5kQJ98?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
@@ -3690,19 +4169,56 @@ if top_stories or daily_briefing:
 
 # ── Build sections in user-preferred order (default order, JS reorders on page) ──
 SECTION_DATA = [
-    ("section-us",       "us-color",       us_breaking,       us_recent,       "&#128313; US News",            "&#128198; US Headlines"),
-    ("section-mideast",  "mideast-color",  middle_breaking,   middle_recent,   "&#128313; Middle East",        "&#128198; Middle East Headlines"),
-    ("section-world",    "world-color",    world_breaking,    world_recent,    "&#128313; World",              "&#128198; World Headlines"),
-    ("section-tech",     "tech-color",     tech_breaking,     tech_recent,     "&#128313; Tech &amp; Life",    "&#128198; Tech &amp; Life Headlines"),
-    ("section-business", "business-color", business_breaking, business_recent, "&#128313; Business",           "&#128198; Business Headlines"),
-    ("section-sports",   "sports-color",   sports_breaking,   sports_recent,   "&#128313; Sports",             "&#128198; Sports Headlines"),
-    ("section-culture",  "culture-color",  culture_breaking,  culture_recent,  "&#128313; Culture",            "&#128198; Culture Headlines"),
+    ("section-us",       "us-color",       us_breaking,       us_recent,       '<span class="sec-dot" style="background:#B30000"></span>US &mdash; LAST 3 HOURS',           '<span class="sec-dot" style="background:#B30000"></span>US &mdash; 24-HOUR HEADLINES'),
+    ("section-mideast",  "mideast-color",  middle_breaking,   middle_recent,   '<span class="sec-dot" style="background:#C05000"></span>MIDDLE EAST &mdash; LAST 3 HOURS',  '<span class="sec-dot" style="background:#C05000"></span>MIDDLE EAST &mdash; 24-HOUR HEADLINES'),
+    ("section-world",    "world-color",    world_breaking,    world_recent,    '<span class="sec-dot" style="background:#2E7D9A"></span>WORLD &mdash; LAST 3 HOURS',         '<span class="sec-dot" style="background:#2E7D9A"></span>WORLD &mdash; 24-HOUR HEADLINES'),
+    ("section-tech",     "tech-color",     tech_breaking,     tech_recent,     '<span class="sec-dot" style="background:#005F9E"></span>TECH &amp; LIFE &mdash; LAST 3 HOURS','<span class="sec-dot" style="background:#005F9E"></span>TECH &amp; LIFE &mdash; 24-HOUR HEADLINES'),
+    ("section-business", "business-color", business_breaking, business_recent, '<span class="sec-dot" style="background:#8B6914"></span>BUSINESS &mdash; LAST 3 HOURS',     '<span class="sec-dot" style="background:#8B6914"></span>BUSINESS &mdash; 24-HOUR HEADLINES'),
+    ("section-sports",   "sports-color",   sports_breaking,   sports_recent,   '<span class="sec-dot" style="background:#006B3C"></span>SPORTS &mdash; LAST 3 HOURS',       '<span class="sec-dot" style="background:#006B3C"></span>SPORTS &mdash; 24-HOUR HEADLINES'),
+    ("section-culture",  "culture-color",  culture_breaking,  culture_recent,  '<span class="sec-dot" style="background:#6B006B"></span>CULTURE &mdash; LAST 3 HOURS',      '<span class="sec-dot" style="background:#6B006B"></span>CULTURE &mdash; 24-HOUR HEADLINES'),
 ]
 html_parts.append('<div id="sections-wrapper">\n')
+# PRO10: skeleton shimmer placeholder (hidden until JS removes it)
+html_parts.append('''<div class="mp-skeleton-wrap" id="mp-skeleton">
+''' + '\n'.join([
+    '<div class="mp-skeleton-line wide"></div>',
+    '<div class="mp-skeleton-line med"></div>',
+    '<div class="mp-skeleton-line thin"></div>',
+    '<div class="mp-skeleton-line wide"></div>',
+    '<div class="mp-skeleton-line med"></div>',
+]) + '''
+</div>\n''')
+_SECTION_COLORS_RIBBON = {
+    "section-us":       "#B30000",
+    "section-mideast":  "#C05000",
+    "section-world":    "#2E7D9A",
+    "section-tech":     "#005F9E",
+    "section-business": "#8B6914",
+    "section-sports":   "#006B3C",
+    "section-culture":  "#6B006B",
+}
+_SECTION_LABELS = {
+    "section-us":       "US News",
+    "section-mideast":  "Middle East",
+    "section-world":    "World",
+    "section-tech":     "Tech & Life",
+    "section-business": "Business",
+    "section-sports":   "Sports",
+    "section-culture":  "Culture",
+}
 for i, (sid, sc, bi, ri, bt, rt) in enumerate(SECTION_DATA):
     html_parts.append(section_block(sid, sc, bi, ri, bt, rt))
     if i < len(SECTION_DATA) - 1:
-        html_parts.append('<hr class="top-divider">\n')
+        _rc = _SECTION_COLORS_RIBBON.get(SECTION_DATA[i+1][0], "#444")
+        _rl = _SECTION_LABELS.get(SECTION_DATA[i+1][0], "")
+        _total = len(bi) + len(ri)
+        html_parts.append(
+            f'<div class="pro-section-ribbon">'
+            f'<span class="pro-ribbon-dot" style="background:{_rc}"></span>'
+            f'<span class="pro-ribbon-name">{_rl}</span>'
+            f'<span class="pro-ribbon-meta">{_total} headlines</span>'
+            f'</div>\n'
+        )
 html_parts.append('</div>\n')
 
 html_parts.append("""
@@ -3860,6 +4376,29 @@ setInterval(function() {
 }, 2000);
 
 document.addEventListener('DOMContentLoaded', function() {
+
+// ── PRO10 #9: Copy-link button handler ──
+document.addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-copy]');
+    if (!btn) return;
+    var url = btn.getAttribute('data-copy');
+    if (!url) return;
+    navigator.clipboard.writeText(url).then(function() {
+        var orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(function() { btn.textContent = orig; }, 1500);
+    }).catch(function() {
+        // fallback for older browsers
+        var ta = document.createElement('textarea');
+        ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        var orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(function() { btn.textContent = orig; }, 1500);
+    });
+});
 
 // ── MRO CARD SMOOTH SCROLL ──
 (function() {
@@ -4346,97 +4885,317 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(checkForUpdates, 10000); // first check after 10s
 })();
 
-// ── WAITING ROOM MODE — rotates audio across feeds every 5 minutes ──
+// ── WAITING ROOM MODE — postMessage approach, no YT API needed ──
+// Uses YouTube's iframe postMessage API to unmute/mute iframes directly.
+// Also: passive message listener sets red border on whichever iframe sends
+// an onStateChange=1 (playing) + volume>0 signal.
 (function() {
     var wrToggle = document.getElementById('waiting-room-toggle');
     if (!wrToggle) return;
-    var WR_INTERVAL = 5 * 60 * 1000; // 5 minutes
+
+    var WR_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
     var _wrTimer = null;
-    var _wrIndex = 0;
+    var _wrIdx   = 0;
+    var _wrLabel = null; // floating label showing which channel is active
 
-    function _getActiveFeedCount() {
-        return document.querySelectorAll('.youtube-inset iframe').length;
+    function _getInsets() {
+        return Array.from(document.querySelectorAll('.youtube-inset'));
     }
 
-    function _activateAudioForIndex(idx) {
-        var insets = document.querySelectorAll('.youtube-inset');
-        var total = insets.length;
-        if (!total) return;
-        var targetIdx = idx % total;
+    function _postToIframe(iframe, data) {
+        try { iframe.contentWindow.postMessage(JSON.stringify(data), '*'); } catch(e) {}
+    }
 
-        // Remove all active borders
-        insets.forEach(function(inset) {
+    function _muteAll() {
+        _getInsets().forEach(function(inset) {
+            var iframe = inset.querySelector('iframe');
+            if (iframe) _postToIframe(iframe, { event: 'command', func: 'mute', args: [] });
             inset.classList.remove('audio-active');
             inset.style.outline = '';
         });
+    }
 
-        // Mute all players first
-        if (window.players && window.players.length) {
-            window.players.forEach(function(p) {
-                try { p.mute(); } catch(e) {}
-            });
-            // Unmute target player
-            var targetPlayer = window.players[targetIdx];
-            if (targetPlayer) {
-                try {
-                    targetPlayer.unMute();
-                    targetPlayer.setVolume(80);
-                } catch(e) {}
-            }
+    function _unmuteAt(idx) {
+        var insets = _getInsets();
+        if (!insets.length) return;
+        var target = insets[idx % insets.length];
+        if (!target) return;
+        var iframe = target.querySelector('iframe');
+        // Mute all first
+        _muteAll();
+        // Unmute and set volume on target
+        if (iframe) {
+            _postToIframe(iframe, { event: 'command', func: 'unMute',    args: [] });
+            _postToIframe(iframe, { event: 'command', func: 'setVolume', args: [85] });
         }
-
-        // Apply red border to active inset
-        var activeInset = insets[targetIdx];
-        if (activeInset) {
-            activeInset.classList.add('audio-active');
-            activeInset.style.outline = '3px solid #B30000';
-            activeInset.style.outlineOffset = '2px';
-            // Smooth scroll the video into view
-            activeInset.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        // Apply red border
+        target.classList.add('audio-active');
+        target.style.outline      = '3px solid #B30000';
+        target.style.outlineOffset = '2px';
+        // Update floating label
+        if (_wrLabel) {
+            _wrLabel.textContent = 'Waiting Room: Feed ' + ((idx % insets.length) + 1) + ' of ' + insets.length;
+            _wrLabel.style.display = 'block';
         }
     }
 
-    function startWaitingRoom() {
+    function _startWR() {
         if (_wrTimer) clearInterval(_wrTimer);
-        _wrIndex = 0;
-        _activateAudioForIndex(_wrIndex);
+        // Make sure videos are visible
+        var banner = document.querySelector('.banner');
+        if (banner && banner.style.display === 'none') {
+            banner.style.display = '';
+            var vtoggle = document.getElementById('video-feed-toggle');
+            if (vtoggle) vtoggle.checked = false;
+        }
+        _wrIdx = 0;
+        _unmuteAt(_wrIdx);
         _wrTimer = setInterval(function() {
-            _wrIndex++;
-            var total = _getActiveFeedCount();
-            if (_wrIndex >= total) _wrIndex = 0;
-            _activateAudioForIndex(_wrIndex);
-        }, WR_INTERVAL);
+            _wrIdx++;
+            var total = _getInsets().length;
+            if (_wrIdx >= total) _wrIdx = 0;
+            _unmuteAt(_wrIdx);
+        }, WR_INTERVAL_MS);
     }
 
-    function stopWaitingRoom() {
+    function _stopWR() {
         if (_wrTimer) { clearInterval(_wrTimer); _wrTimer = null; }
-        // Mute everything and remove borders
-        if (window.players && window.players.length) {
-            window.players.forEach(function(p) { try { p.mute(); } catch(e) {} });
-        }
-        document.querySelectorAll('.youtube-inset').forEach(function(inset) {
-            inset.classList.remove('audio-active');
-            inset.style.outline = '';
-        });
+        _muteAll();
+        if (_wrLabel) _wrLabel.style.display = 'none';
     }
+
+    // Create floating status label
+    _wrLabel = document.createElement('div');
+    _wrLabel.style.cssText = [
+        'display:none','position:fixed','bottom:20px','left:50%',
+        'transform:translateX(-50%)','background:#B30000','color:#fff',
+        'padding:6px 18px','border-radius:4px','font-size:0.8em',
+        'font-weight:bold','z-index:9998','letter-spacing:0.04em',
+        'box-shadow:0 2px 10px rgba(0,0,0,0.4)'
+    ].join(';');
+    document.body.appendChild(_wrLabel);
 
     wrToggle.addEventListener('change', function() {
-        if (wrToggle.checked) {
-            // Make sure video feeds are visible
-            var banner = document.querySelector('.banner');
-            var vtoggle = document.getElementById('video-feed-toggle');
-            if (banner && banner.style.display === 'none') {
-                if (vtoggle) { vtoggle.checked = false; }
-                banner.style.display = '';
-            }
-            startWaitingRoom();
-        } else {
-            stopWaitingRoom();
+        if (wrToggle.checked) _startWR();
+        else _stopWR();
+    });
+
+    // ── Passive red-border listener: detect when user manually unmutes any iframe ──
+    // YT iframes post messages back; we watch for volume/playing signals
+    window.addEventListener('message', function(e) {
+        if (!e.data || typeof e.data !== 'string') return;
+        var data;
+        try { data = JSON.parse(e.data); } catch(x) { return; }
+        // YT sends {event:'infoDelivery', info:{volume, muted, playerState}}
+        if (data.event !== 'infoDelivery' || !data.info) return;
+        var info = data.info;
+        var isPlaying = (info.playerState === 1);
+        var isUnmuted = (typeof info.muted !== 'undefined' && !info.muted && info.volume > 0);
+        if (isPlaying && isUnmuted) {
+            // Find which iframe sent this message
+            var iframes = document.querySelectorAll('.youtube-inset iframe');
+            iframes.forEach(function(iframe) {
+                if (iframe.contentWindow === e.source) {
+                    // Clear all borders
+                    document.querySelectorAll('.youtube-inset').forEach(function(inset) {
+                        inset.classList.remove('audio-active');
+                        inset.style.outline = '';
+                    });
+                    // Set border on this one
+                    var parent = iframe.parentElement;
+                    if (parent) {
+                        parent.classList.add('audio-active');
+                        parent.style.outline       = '3px solid #B30000';
+                        parent.style.outlineOffset = '2px';
+                    }
+                    // Mute all other iframes via postMessage
+                    iframes.forEach(function(other) {
+                        if (other !== iframe) {
+                            _postToIframe(other, { event:'command', func:'mute', args:[] });
+                        }
+                    });
+                }
+            });
+        }
+        // If muted or paused, clear border for this source
+        if (typeof info.muted !== 'undefined' && info.muted) {
+            document.querySelectorAll('.youtube-inset iframe').forEach(function(iframe) {
+                if (iframe.contentWindow === e.source) {
+                    var parent = iframe.parentElement;
+                    if (parent && parent.classList.contains('audio-active')) {
+                        parent.classList.remove('audio-active');
+                        parent.style.outline = '';
+                    }
+                }
+            });
         }
     });
+
 })();
 
 }); // end DOMContentLoaded
+
+
+// ══════════════════════════════════════
+// PRO10 UPGRADES — JavaScript
+// ══════════════════════════════════════
+
+// ── #2: Masthead live date ──
+(function() {
+    var el = document.getElementById('mp-masthead-date');
+    if (!el) return;
+    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var d = new Date();
+    el.textContent = days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+})();
+
+// ── #4: Market Ticker — live data via public APIs ──
+(function() {
+    var tickers = [
+        { id:'tick-spx',  symbol:'SPY',   label:'S&P 500' },
+        { id:'tick-ndx',  symbol:'QQQ',   label:'NASDAQ'  },
+        { id:'tick-dji',  symbol:'DIA',   label:'DOW'     },
+        { id:'tick-btc',  symbol:'BTC-USD',label:'BTC'    },
+        { id:'tick-gold', symbol:'GLD',   label:'GOLD'    },
+        { id:'tick-oil',  symbol:'USO',   label:'OIL'     },
+    ];
+    // Use Yahoo Finance v8 JSON (public, no key needed, delayed)
+    function fetchTick(sym, id, label) {
+        fetch('https://query1.finance.yahoo.com/v8/finance/chart/' + sym + '?interval=1d&range=2d')
+            .then(function(r){ return r.json(); })
+            .then(function(d){
+                var meta = d.chart && d.chart.result && d.chart.result[0] && d.chart.result[0].meta;
+                if (!meta) return;
+                var price = meta.regularMarketPrice;
+                var prev  = meta.previousClose || meta.chartPreviousClose;
+                if (!price || !prev) return;
+                var chg = ((price - prev) / prev * 100).toFixed(2);
+                var cls = parseFloat(chg) >= 0 ? 'up' : 'dn';
+                var sign = parseFloat(chg) >= 0 ? '+' : '';
+                var priceStr = price >= 1000 ? price.toFixed(0) : price.toFixed(2);
+                var el = document.getElementById(id);
+                if (el) {
+                    el.innerHTML = label + ' <span class="tv ' + cls + '">' + priceStr + ' (' + sign + chg + '%)</span>';
+                }
+            })
+            .catch(function(){});
+    }
+    // Stagger fetches to avoid rate limit
+    tickers.forEach(function(t, i) {
+        setTimeout(function(){ fetchTick(t.symbol, t.id, t.label); }, i * 600);
+    });
+    // Refresh every 5 minutes
+    setInterval(function() {
+        tickers.forEach(function(t, i) {
+            setTimeout(function(){ fetchTick(t.symbol, t.id, t.label); }, i * 600);
+        });
+    }, 5 * 60 * 1000);
+})();
+
+// ── #5: Reading Progress Bar ──
+(function() {
+    var bar = document.getElementById('mp-progress-bar');
+    if (!bar) return;
+    function updateBar() {
+        var scrollTop  = window.pageYOffset || document.documentElement.scrollTop;
+        var docHeight  = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var pct = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
+        bar.style.width = pct + '%';
+    }
+    window.addEventListener('scroll', updateBar, { passive: true });
+    updateBar();
+})();
+
+// ── #7: Most-Read Rail (session click tracker) ──
+(function() {
+    var RAIL_KEY = 'mp_rail_clicks';
+    var clicks = {};
+    try { var raw = localStorage.getItem(RAIL_KEY); if (raw) clicks = JSON.parse(raw); } catch(e) {}
+
+    function saveClicks() { try { localStorage.setItem(RAIL_KEY, JSON.stringify(clicks)); } catch(e) {} }
+
+    function getSectionForEl(el) {
+        var wrap = el.closest('[id^="section-"]');
+        if (!wrap) return '';
+        var id = wrap.id;
+        var map = {
+            'section-us':'US','section-mideast':'Middle East','section-world':'World',
+            'section-tech':'Tech','section-business':'Business',
+            'section-sports':'Sports','section-culture':'Culture'
+        };
+        return map[id] || '';
+    }
+
+    document.addEventListener('click', function(e) {
+        var link = e.target.closest('.link');
+        if (!link) return;
+        var headline = link.closest('.headline');
+        if (!headline) return;
+        var titleEl = headline.querySelector('.title');
+        var lnk = link.href || headline.getAttribute('data-link') || '';
+        if (!titleEl || !lnk || lnk === '#') return;
+        var key = lnk;
+        clicks[key] = {
+            count: (clicks[key] ? clicks[key].count : 0) + 1,
+            title: titleEl.textContent.trim().slice(0, 90),
+            section: getSectionForEl(headline),
+            link: lnk,
+            ts: Date.now()
+        };
+        saveClicks();
+        renderRail();
+    });
+
+    function renderRail() {
+        var rail = document.getElementById('mp-most-read-rail');
+        if (!rail) return;
+        var list = Object.values(clicks)
+            .filter(function(c){ return c.count > 0; })
+            .sort(function(a,b){ return b.count - a.count || b.ts - a.ts; })
+            .slice(0, 10);
+        if (list.length < 2) { rail.style.display = 'none'; return; }
+        rail.style.display = 'block';
+        var inner = rail.querySelector('#mp-rail-list');
+        if (!inner) return;
+        inner.innerHTML = '';
+        list.forEach(function(item, i) {
+            var div = document.createElement('div');
+            div.className = 'mp-rail-item';
+            div.setAttribute('data-href', item.link);
+            div.addEventListener('click', function() { window.open(this.getAttribute('data-href'), '_blank'); });
+            div.innerHTML = '<span class="mp-rail-num">' + (i+1) + '</span>'
+                + '<div><span class="mp-rail-title">' + item.title + '</span>'
+                + '<span class="mp-rail-tag">' + item.section + ' &middot; ' + item.count + ' click' + (item.count !== 1 ? 's':'') + '</span></div>';
+            inner.appendChild(div);
+        });
+    }
+
+    // Build rail DOM
+    var railWrap = document.createElement('div');
+    railWrap.id = 'mp-most-read-rail';
+    railWrap.className = 'mp-rail-wrap';
+    railWrap.style.display = 'none';
+    railWrap.innerHTML = '<div class="mp-rail-header">&#9650; Most Read This Session</div><div id="mp-rail-list"></div>';
+    // Insert into page as a sidebar beside sections-wrapper
+    var sw = document.getElementById('sections-wrapper');
+    if (sw) {
+        var outer = document.createElement('div');
+        outer.style.cssText = 'display:flex;gap:24px;max-width:1660px;margin:0 auto;align-items:flex-start;padding:0 20px;';
+        sw.parentNode.insertBefore(outer, sw);
+        outer.appendChild(sw);
+        outer.appendChild(railWrap);
+    }
+    renderRail();
+})();
+
+// ── #10: Skeleton — hide immediately once content is ready ──
+(function() {
+    var skel = document.getElementById('mp-skeleton');
+    if (skel) skel.style.display = 'none'; // content already rendered server-side
+})();
+
+
 
 
 </script>
