@@ -3625,98 +3625,53 @@ html_parts.append(f"""<!DOCTYPE html>
     body.light-mode .wr-fullscreen-btn {{ border-color: #ccc; color: #555; }}
     body.light-mode .wr-fullscreen-btn:hover {{ border-color: #B30000; color: #000; }}
 
-    /* ── Waiting Room Fullscreen Overlay ── */
+    /* ── Waiting Room fullscreen overlay ── */
     #wr-overlay {{
-        display: none;
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 99999;
-        background: #000;
-        flex-direction: column;
-        overflow: hidden;
+        display: none; position: fixed; inset: 0; z-index: 99999;
+        background: #000; flex-direction: column;
     }}
     #wr-overlay.wr-open {{ display: flex; }}
-
     #wr-header {{
-        width: 100%;
-        height: 40px;
-        flex: 0 0 40px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 14px;
-        background: #080808;
-        border-bottom: 2px solid #B30000;
-        box-sizing: border-box;
-        gap: 12px;
-        overflow: hidden;
-        z-index: 2;
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 8px 16px; background: #0a0a0a;
+        border-bottom: 2px solid #B30000; flex-shrink: 0; gap: 12px;
     }}
-    #wr-header-left {{ display: flex; align-items: center; gap: 12px; overflow: hidden; }}
+    #wr-header-left {{ display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }}
     #wr-title {{
-        font-size: 0.82em; font-weight: bold; letter-spacing: 0.1em;
-        text-transform: uppercase; color: #fff; white-space: nowrap; flex-shrink: 0;
+        font-size: 0.9em; font-weight: bold; letter-spacing: 0.1em;
+        text-transform: uppercase; color: #fff;
     }}
-    #wr-subtitle {{ font-size: 0.65em; color: #555; white-space: nowrap; overflow: hidden; }}
+    #wr-subtitle {{ font-size: 0.68em; color: #666; letter-spacing: 0.03em; }}
     #wr-close-btn {{
-        flex-shrink: 0; background: none; border: 1px solid #333; border-radius: 3px;
-        color: #888; font-size: 0.72em; padding: 4px 12px; cursor: pointer;
-        letter-spacing: 0.04em; white-space: nowrap; transition: border-color 0.15s, color 0.15s;
+        background: none; border: 1px solid #444; border-radius: 3px;
+        color: #aaa; font-size: 0.78em; padding: 5px 14px; cursor: pointer;
+        letter-spacing: 0.04em; transition: border-color 0.15s, color 0.15s;
+        flex-shrink: 0; white-space: nowrap;
     }}
     #wr-close-btn:hover {{ border-color: #fff; color: #fff; }}
     #wr-close-btn kbd {{
-        font-size: 0.85em; background: #1a1a1a; border: 1px solid #333;
-        border-radius: 2px; padding: 0 3px; margin-left: 3px;
-    }}
-
-    /*
-     * WR GRID STRATEGY — Scale-to-fit 16:9 tiles
-     * ─────────────────────────────────────────────
-     * Each cell is a true 16:9 box (padding-top: 56.25%).
-     * The grid is given a fixed pixel width/height in JS so that
-     * 5×2 tiles of exact 16:9 aspect ratio tile perfectly.
-     * The entire #wr-stage (which wraps the grid) is centered,
-     * and JS scales it with transform:scale() to fill the viewport.
-     */
-    #wr-stage {{
-        flex: 1 1 0;
-        min-height: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        background: #000;
+        font-size: 0.85em; background: #222; border: 1px solid #444;
+        border-radius: 2px; padding: 0 4px; margin-left: 4px;
     }}
     #wr-grid {{
-        display: grid;
+        flex: 1; display: grid;
         grid-template-columns: repeat(5, 1fr);
         grid-template-rows: repeat(2, 1fr);
-        gap: 2px;
-        background: #111;
-        /* width and height set by JS to exact 16:9 tile dimensions */
-        transform-origin: center center;
+        gap: 5px; padding: 8px; min-height: 0;
     }}
     .wr-cell {{
-        position: relative;
-        background: #000;
-        overflow: hidden;
-        /* 16:9 aspect ratio via padding trick */
-        width: 100%;
-        padding-top: 56.25%;
+        position: relative; background: #0a0a0a;
+        border-radius: 3px; overflow: hidden;
+        border: 2px solid #1a1a1a;
     }}
     .wr-cell iframe {{
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%;
-        height: 100%;
-        border: none;
-        display: block;
+        width: 100%; height: 100%; border: none; display: block;
     }}
     .wr-cell-num {{
-        position: absolute; top: 5px; left: 7px; z-index: 10;
-        background: rgba(0,0,0,0.7); color: #666;
-        font-size: 0.6em; font-weight: bold; letter-spacing: 0.08em;
-        padding: 2px 5px; border-radius: 2px; text-transform: uppercase;
+        position: absolute; top: 6px; left: 8px;
+        background: rgba(0,0,0,0.7); color: #888;
+        font-size: 0.65em; font-weight: bold; letter-spacing: 0.06em;
+        padding: 2px 6px; border-radius: 2px; text-transform: uppercase;
         pointer-events: none;
     }}
     @media (max-width: 900px) {{
@@ -3761,9 +3716,7 @@ html_parts.append(f"""<!DOCTYPE html>
         </div>
         <button id="wr-close-btn">&#x2715;&nbsp;Exit&nbsp;<kbd>ESC</kbd></button>
     </div>
-    <div id="wr-stage">
-        <div id="wr-grid"></div>
-    </div>
+    <div id="wr-grid"></div>
 </div>
 
 <!-- ══ STICKY NAVIGATION BAR ══ -->
@@ -4910,43 +4863,36 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 
 
-// ── WAITING ROOM — fullscreen video wall, scale-to-fit 16:9 tiles ──
+// ── WAITING ROOM — fullscreen video wall ──
+// Opens a full-screen overlay with all 10 feeds tiled in a 5x2 grid.
+// No audio automation — user clicks whichever feed they want to hear.
+// ESC or the Exit button returns to the site.
 (function() {
     var openBtn  = document.getElementById('wr-fullscreen-btn');
     var overlay  = document.getElementById('wr-overlay');
     var closeBtn = document.getElementById('wr-close-btn');
     var grid     = document.getElementById('wr-grid');
-    var stage    = document.getElementById('wr-stage');
-    if (!openBtn || !overlay || !closeBtn || !grid || !stage) return;
+    if (!openBtn || !overlay || !closeBtn || !grid) return;
 
-    var COLS = 5, ROWS = 2;   // 5×2 grid
-    var ASPECT = 16 / 9;      // each cell is exactly 16:9
-
-    var _Q = '&vq=hd1080&autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1';
     var WR_FEEDS = [
-        { src: 'https://www.youtube.com/embed/iipR5yUp36o?' + _Q, label: 'Feed 1'  },
-        { src: 'https://www.youtube.com/embed/Ap-UM1O9RBU?'  + _Q, label: 'Feed 2'  },
-        { src: 'https://www.youtube.com/embed/QliL4CGc7iY?'  + _Q, label: 'Feed 3'  },
-        { src: 'https://www.youtube.com/embed/pykpO5kQJ98?'  + _Q, label: 'Feed 4'  },
-        { src: 'https://www.youtube.com/embed/YDvsBbKfLPA?'  + _Q, label: 'Feed 5'  },
-        { src: 'https://www.youtube.com/embed/vfszY1JYbMc?'  + _Q, label: 'Feed 6'  },
-        { src: 'https://www.youtube.com/embed/_6dRRfnYJws?'  + _Q, label: 'Feed 7'  },
-        { src: 'https://www.youtube.com/embed/iEpJwprxDdk?'  + _Q, label: 'Feed 8'  },
-        { src: 'https://www.youtube.com/embed/LuKwFajn37U?'  + _Q, label: 'Feed 9'  },
-        { src: 'https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJj3l8Bg' + _Q, label: 'Feed 10' },
+        { src: 'https://www.youtube.com/embed/iipR5yUp36o?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1', label: 'Feed 1' },
+        { src: 'https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 2' },
+        { src: 'https://www.youtube.com/embed/QliL4CGc7iY?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 3' },
+        { src: 'https://www.youtube.com/embed/pykpO5kQJ98?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 4' },
+        { src: 'https://www.youtube.com/embed/YDvsBbKfLPA?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 5' },
+        { src: 'https://www.youtube.com/embed/vfszY1JYbMc?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 6' },
+        { src: 'https://www.youtube.com/embed/_6dRRfnYJws?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 7' },
+        { src: 'https://www.youtube.com/embed/iEpJwprxDdk?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 8' },
+        { src: 'https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 9' },
+        { src: 'https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJj3l8Bg&autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1', label: 'Feed 10' },
     ];
-
-    // Mobile: flip to 2 cols × 5 rows
-    function _isMobile() { return window.innerWidth <= 900; }
-    function _cols() { return _isMobile() ? 2 : COLS; }
-    function _rows() { return _isMobile() ? 5 : ROWS; }
 
     var _built = false;
     function buildGrid() {
         if (_built) return;
         _built = true;
         WR_FEEDS.forEach(function(feed) {
-            var cell   = document.createElement('div');
+            var cell = document.createElement('div');
             cell.className = 'wr-cell';
             var iframe = document.createElement('iframe');
             iframe.src = feed.src;
@@ -4962,112 +4908,37 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    /*
-     * scaleGrid()
-     * ───────────
-     * Computes a pixel grid size where every cell is exactly 16:9,
-     * then scales the entire grid (via transform:scale) to fill the
-     * available stage area. YouTube will fill a true 16:9 iframe
-     * edge-to-edge with no black bars.
-     */
-    function scaleGrid() {
-        var cols = _cols(), rows = _rows();
-        grid.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
-        grid.style.gridTemplateRows    = 'repeat(' + rows + ', 1fr)';
-
-        var stageW = stage.offsetWidth  || window.innerWidth;
-        var stageH = stage.offsetHeight || (window.innerHeight - 40);
-
-        // Natural grid size: each cell is stageW/cols wide, height = width/ASPECT
-        // Try fitting by width first
-        var cellW = stageW / cols;
-        var cellH = cellW / ASPECT;
-        var gridW = stageW;
-        var gridH = cellH * rows;
-        var scale = 1;
-
-        if (gridH > stageH) {
-            // Doesn't fit height — fit by height instead
-            cellH = stageH / rows;
-            cellW = cellH * ASPECT;
-            gridW = cellW * cols;
-            gridH = stageH;
-        }
-
-        // Scale to fill: stretch whichever dimension is smaller to touch its edge
-        var scaleX = stageW / gridW;
-        var scaleY = stageH / gridH;
-        scale = Math.min(scaleX, scaleY);  // use min so nothing gets clipped
-
-        // Set the grid to its natural pixel size, then scale up
-        grid.style.width     = gridW + 'px';
-        grid.style.height    = gridH + 'px';
-        grid.style.transform = 'scale(' + scale + ')';
-    }
-
     function openWR() {
         buildGrid();
         overlay.classList.add('wr-open');
         document.body.style.overflow = 'hidden';
-        // Initial scale pass
-        requestAnimationFrame(function() {
-            scaleGrid();
-            // Try native fullscreen
-            setTimeout(function() {
-                try {
-                    if (overlay.requestFullscreen)            overlay.requestFullscreen();
-                    else if (overlay.webkitRequestFullscreen) overlay.webkitRequestFullscreen();
-                    else if (overlay.mozRequestFullScreen)    overlay.mozRequestFullScreen();
-                } catch(e) {}
-                // Re-scale after fullscreen settles
-                setTimeout(scaleGrid, 300);
-                setTimeout(scaleGrid, 700);
-            }, 50);
-        });
+        try {
+            if (overlay.requestFullscreen)            overlay.requestFullscreen();
+            else if (overlay.webkitRequestFullscreen) overlay.webkitRequestFullscreen();
+            else if (overlay.mozRequestFullScreen)    overlay.mozRequestFullScreen();
+        } catch(e) {}
     }
 
     function closeWR() {
         overlay.classList.remove('wr-open');
         document.body.style.overflow = '';
-        grid.style.width = grid.style.height = grid.style.transform = '';
         try {
-            if (document.fullscreenElement && document.exitFullscreen)
-                document.exitFullscreen();
-            else if (document.webkitFullscreenElement && document.webkitExitFullscreen)
-                document.webkitExitFullscreen();
+            if (document.fullscreenElement && document.exitFullscreen)               document.exitFullscreen();
+            else if (document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
         } catch(e) {}
     }
 
     openBtn.addEventListener('click', openWR);
     closeBtn.addEventListener('click', closeWR);
-
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && overlay.classList.contains('wr-open')) closeWR();
     });
     document.addEventListener('fullscreenchange', function() {
-        if (document.fullscreenElement) {
-            setTimeout(scaleGrid, 200);
-            setTimeout(scaleGrid, 600);
-        } else if (overlay.classList.contains('wr-open')) {
-            closeWR();
-        }
+        if (!document.fullscreenElement && overlay.classList.contains('wr-open')) closeWR();
     });
     document.addEventListener('webkitfullscreenchange', function() {
-        if (document.webkitFullscreenElement) {
-            setTimeout(scaleGrid, 200);
-            setTimeout(scaleGrid, 600);
-        } else if (overlay.classList.contains('wr-open')) {
-            closeWR();
-        }
+        if (!document.webkitFullscreenElement && overlay.classList.contains('wr-open')) closeWR();
     });
-    window.addEventListener('resize', function() {
-        if (overlay.classList.contains('wr-open')) {
-            clearTimeout(window._wrResizeTimer);
-            window._wrResizeTimer = setTimeout(scaleGrid, 120);
-        }
-    });
-
-})();
 })();
 
 }); // end DOMContentLoaded
