@@ -3612,16 +3612,119 @@ html_parts.append(f"""<!DOCTYPE html>
     }}
     body.light-mode .footer-disclaimer {{ color: #aaa; }}
 
+
+    /* ── Waiting Room fullscreen button (nav) ── */
+    .wr-fullscreen-btn {{
+        background: none; border: 1px solid #3a3a3a; border-radius: 3px;
+        color: #aaa; font-size: 0.72em; font-weight: bold;
+        padding: 4px 10px; cursor: pointer; white-space: nowrap;
+        letter-spacing: 0.05em; text-transform: uppercase;
+        transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }}
+    .wr-fullscreen-btn:hover {{ border-color: #B30000; color: #fff; background: rgba(179,0,0,0.12); }}
+    body.light-mode .wr-fullscreen-btn {{ border-color: #ccc; color: #555; }}
+    body.light-mode .wr-fullscreen-btn:hover {{ border-color: #B30000; color: #000; }}
+
+    /* ── Waiting Room fullscreen overlay ── */
+    #wr-overlay {{
+        display: none; position: fixed; inset: 0; z-index: 99999;
+        background: #000; flex-direction: column;
+    }}
+    #wr-overlay.wr-open {{ display: flex; }}
+    #wr-header {{
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 8px 16px; background: #0a0a0a;
+        border-bottom: 2px solid #B30000; flex-shrink: 0; gap: 12px;
+    }}
+    #wr-header-left {{ display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }}
+    #wr-title {{
+        font-size: 0.9em; font-weight: bold; letter-spacing: 0.1em;
+        text-transform: uppercase; color: #fff;
+    }}
+    #wr-subtitle {{ font-size: 0.68em; color: #666; letter-spacing: 0.03em; }}
+    #wr-close-btn {{
+        background: none; border: 1px solid #444; border-radius: 3px;
+        color: #aaa; font-size: 0.78em; padding: 5px 14px; cursor: pointer;
+        letter-spacing: 0.04em; transition: border-color 0.15s, color 0.15s;
+        flex-shrink: 0; white-space: nowrap;
+    }}
+    #wr-close-btn:hover {{ border-color: #fff; color: #fff; }}
+    #wr-close-btn kbd {{
+        font-size: 0.85em; background: #222; border: 1px solid #444;
+        border-radius: 2px; padding: 0 4px; margin-left: 4px;
+    }}
+    #wr-grid {{
+        flex: 1; display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 5px; padding: 8px; min-height: 0;
+    }}
+    .wr-cell {{
+        position: relative; background: #0a0a0a;
+        border-radius: 3px; overflow: hidden;
+        border: 2px solid #1a1a1a;
+    }}
+    .wr-cell iframe {{
+        width: 100%; height: 100%; border: none; display: block;
+    }}
+    .wr-cell-num {{
+        position: absolute; top: 6px; left: 8px;
+        background: rgba(0,0,0,0.7); color: #888;
+        font-size: 0.65em; font-weight: bold; letter-spacing: 0.06em;
+        padding: 2px 6px; border-radius: 2px; text-transform: uppercase;
+        pointer-events: none;
+    }}
+    @media (max-width: 900px) {{
+        #wr-grid {{
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+        }}
+    }}
+
+    /* ── AI Section Summary bar ── */
+    .section-ai-bar {{
+        max-width: 1400px; margin: 0 auto 6px auto; padding: 0 20px;
+    }}
+    .section-ai-bar-inner {{
+        border-left: 3px solid #2a2a2a;
+        background: #0c0c0c; padding: 9px 14px;
+        border-radius: 0 3px 3px 0;
+        font-size: 0.83em; line-height: 1.7; color: #999;
+    }}
+    .ai-bar-label {{
+        font-size: 0.65em; font-weight: bold; letter-spacing: 0.12em;
+        text-transform: uppercase; color: #444; display: inline-block;
+        margin-right: 8px; vertical-align: middle;
+    }}
+    .ai-bar-text {{ color: #bbb; }}
+    body.light-mode .section-ai-bar-inner {{
+        background: #f7f7f7; border-left-color: #ddd; color: #666;
+    }}
+    body.light-mode .ai-bar-label {{ color: #bbb; }}
+    body.light-mode .ai-bar-text {{ color: #444; }}
+
     </style>
 </head>
 <body>
+
+<!-- ══ WAITING ROOM FULLSCREEN OVERLAY ══ -->
+<div id="wr-overlay" role="dialog" aria-modal="true" aria-label="Waiting Room video wall">
+    <div id="wr-header">
+        <div id="wr-header-left">
+            <span id="wr-title">&#9654; Waiting Room</span>
+            <span id="wr-subtitle">The Mitchell Post &mdash; Live News Feeds &mdash; click any feed to unmute</span>
+        </div>
+        <button id="wr-close-btn">&#x2715;&nbsp;Exit&nbsp;<kbd>ESC</kbd></button>
+    </div>
+    <div id="wr-grid"></div>
+</div>
 
 <!-- ══ STICKY NAVIGATION BAR ══ -->
 <nav class="sticky-nav">
     <a href="#" class="site-name" aria-label="Back to top">The Mitchell Post</a>
     <a href="#section-us"       class="nav-us">US News</a>
     <a href="#section-mideast"  class="nav-mideast">Middle East</a>
-    <a href="#section-world"    class="nav-world">Asia, Europe &amp; World</a>
+    <a href="#section-world"    class="nav-world">World</a>
     <a href="#section-tech"     class="nav-tech">Tech &amp; Life</a>
     <a href="#section-business" class="nav-business">Business</a>
     <a href="#section-sports"   class="nav-sports">Sports</a>
@@ -3642,11 +3745,10 @@ html_parts.append(f"""<!DOCTYPE html>
         </label>
     </div>
     <div class="video-toggle-wrap" id="waiting-room-wrap">
-        <span class="video-toggle-label">Waiting Room</span>
-        <label class="toggle-switch" title="Waiting Room Mode: rotates audio across all feeds every 5 minutes">
-            <input type="checkbox" id="waiting-room-toggle">
-            <span class="toggle-slider"></span>
-        </label>
+        <button class="wr-fullscreen-btn" id="wr-fullscreen-btn"
+                title="Waiting Room — fullscreen all video feeds (ESC to exit)">
+            &#9654; Waiting Room
+        </button>
     </div>
 </nav>
 
@@ -3699,12 +3801,88 @@ if show_breaking_banner:
 
 html_parts.append("")  # Video banner moved below MRO strip — see after search bar
 
+
+# ====================== AI SECTION SUMMARIES (build-time, server-side) ======================
+# Uses the anthropic Python package to generate a short prose summary for each section.
+# Summaries are baked directly into the HTML — no client-side API calls needed.
+
+def generate_ai_summary(section_label, items, max_headlines=12):
+    """Call Claude to summarize top headlines for a section. Returns plain text or empty string."""
+    if not items:
+        return ""
+    titles = [it[1] for it in sorted(items, key=lambda x: x[0], reverse=True)[:max_headlines]]
+    if not titles:
+        return ""
+    prompt = (
+        f"You are a concise news editor. Below are the top current headlines for the {section_label} section "
+        "of a live news aggregator. Write a short, flowing prose summary of 2 to 3 sentences that gives the "
+        "reader the essential picture of what is happening right now in this section. "
+        "Be factual, neutral, and direct. No bullet points, no headers, no fluff. "
+        'Do not start with "Here is" or "This section". Just write the summary directly.\n\n'
+        "Headlines:\n" + "\n".join(f"{i+1}. {t}" for i, t in enumerate(titles))
+    )
+    try:
+        import anthropic as _anthropic
+        _client = _anthropic.Anthropic()  # reads ANTHROPIC_API_KEY from environment
+        msg = _client.messages.create(
+            model="claude-haiku-4-5-20251001",  # fastest + cheapest — perfect for summaries
+            max_tokens=120,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        return msg.content[0].text.strip() if msg.content else ""
+    except Exception as e:
+        print(f"  AI summary failed for {section_label}: {e}")
+        return ""
+
+# Generate all 7 section summaries in parallel for speed
+print("Generating AI section summaries...")
+import concurrent.futures as _cf
+
+_SUMMARY_INPUTS = [
+    ("section-us",       "US News",      us_breaking + us_recent),
+    ("section-mideast",  "Middle East",  middle_breaking + middle_recent),
+    ("section-world",    "World",        world_breaking + world_recent),
+    ("section-tech",     "Tech & Life",  tech_breaking + tech_recent),
+    ("section-business", "Business",     business_breaking + business_recent),
+    ("section-sports",   "Sports",       sports_breaking + sports_recent),
+    ("section-culture",  "Culture",      culture_breaking + culture_recent),
+]
+AI_SUMMARIES = {}
+def _gen_summary(args):
+    sid, label, items = args
+    return sid, generate_ai_summary(label, items)
+
+try:
+    with _cf.ThreadPoolExecutor(max_workers=7) as _ex:
+        for sid, summary in _ex.map(_gen_summary, _SUMMARY_INPUTS):
+            AI_SUMMARIES[sid] = summary
+            status = f"{len(summary)} chars" if summary else "empty"
+            print(f"  Summary [{sid}]: {status}")
+except Exception as _e:
+    print(f"  AI summaries skipped: {_e}")
+    AI_SUMMARIES = {sid: "" for sid, _, _ in _SUMMARY_INPUTS}
+
+print("AI summaries done.")
+
 def section_block(section_id, color_class, breaking_items, recent_items,
                   breaking_title, recent_title):
     b_summary = source_summary(breaking_items) if breaking_items else ''
     r_summary = source_summary(recent_items) if recent_items else ''
     b_content = render_column(breaking_items) if breaking_items else '<p style="color:#666">No breaking news in the last 3 hours.</p>\n'
     r_content = render_column(recent_items) if recent_items else '<p style="color:#666">No additional headlines right now.</p>\n'
+    # Pull the pre-generated AI summary for this section
+    ai_text = AI_SUMMARIES.get(section_id, "")
+    if ai_text:
+        safe_ai = ai_text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+        ai_bar_html = (
+            f'<div class="section-ai-bar">'
+            f'<div class="section-ai-bar-inner">'
+            f'<span class="ai-bar-label">&#x2728; Overview</span>'
+            f'<span class="ai-bar-text">{safe_ai}</span>'
+            f'</div></div>\n'
+        )
+    else:
+        ai_bar_html = ""
     return (
         f'<div id="{section_id}" class="section-wrap">\n'
         f'<div class="container">\n'
@@ -3715,6 +3893,7 @@ def section_block(section_id, color_class, breaking_items, recent_items,
         f'</div>\n'
         f'</div>\n'
         f'</div>\n'
+        f'{ai_bar_html}'
         f'<div id="{section_id}-cols" class="section-columns">\n'
         f'<div class="container">\n'
         f'<div class="column">\n'
@@ -4120,62 +4299,59 @@ document.addEventListener('DOMContentLoaded', function() {
     var banner  = document.querySelector('.banner');
     if (!vtoggle || !banner) return;
 
-    // Store original data-src values for each iframe so we can restore them
-    var _iframeSrcs = [];
-    banner.querySelectorAll('.youtube-inset').forEach(function(inset, i) {
-        var iframe = inset.querySelector('iframe');
-        if (iframe) {
-            // Store original src (already activated) or data-src
-            _iframeSrcs[i] = iframe.src || iframe.getAttribute('data-src') || '';
-        }
-    });
+    // Hardcoded feed URLs — the definitive source list, never lost
+    var _FEED_SRCS = [
+        'https://www.youtube.com/embed/iipR5yUp36o?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+        'https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+        'https://www.youtube.com/embed/QliL4CGc7iY?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+        'https://www.youtube.com/embed/pykpO5kQJ98?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+        'https://www.youtube.com/embed/YDvsBbKfLPA?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+        'https://www.youtube.com/embed/vfszY1JYbMc?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+        'https://www.youtube.com/embed/_6dRRfnYJws?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+        'https://www.youtube.com/embed/iEpJwprxDdk?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+        'https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+        'https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJj3l8Bg&autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+    ];
 
     // LEFT position (unchecked) = videos ON; RIGHT (checked) = videos OFF
     function setVideoMode(on) {
         if (on) {
-            // Restore iframes — re-inject src to restart streams
-            banner.querySelectorAll('.youtube-inset').forEach(function(inset, i) {
-                var iframe = inset.querySelector('iframe');
-                if (!iframe) {
-                    // Recreate iframe if it was removed
-                    iframe = document.createElement('iframe');
-                    iframe.setAttribute('allow', 'autoplay; encrypted-media');
-                    iframe.setAttribute('allowfullscreen', '');
-                    inset.appendChild(iframe);
-                }
-                var src = _iframeSrcs[i] || '';
-                if (src) iframe.src = src;
+            // Rebuild iframes from hardcoded source list — guaranteed correct URLs
+            var insets = banner.querySelectorAll('.youtube-inset');
+            insets.forEach(function(inset, i) {
+                var existing = inset.querySelector('iframe');
+                if (existing) return; // already live, leave it
+                var iframe = document.createElement('iframe');
+                iframe.src = _FEED_SRCS[i] || _FEED_SRCS[0];
+                iframe.setAttribute('allow', 'autoplay; encrypted-media');
+                iframe.setAttribute('allowfullscreen', '');
+                iframe.style.cssText = 'width:100%;height:100%;border:none;display:block;';
+                inset.appendChild(iframe);
             });
             banner.style.display = '';
-            vtoggle.checked = false;  // left = on
+            vtoggle.checked = false;
         } else {
-            // ACTUALLY destroy iframes — remove src entirely to kill streams
-            banner.querySelectorAll('.youtube-inset').forEach(function(inset) {
-                var iframe = inset.querySelector('iframe');
-                if (iframe) {
-                    iframe.src = 'about:blank';
-                    iframe.removeAttribute('src');
-                    // Remove from DOM to fully kill the process
-                    inset.removeChild(iframe);
-                }
+            // Kill iframes completely — stop network traffic
+            banner.querySelectorAll('.youtube-inset iframe').forEach(function(iframe) {
+                iframe.src = 'about:blank';
+                if (iframe.parentNode) iframe.parentNode.removeChild(iframe);
             });
             banner.style.display = 'none';
-            vtoggle.checked = true;   // right = off
+            vtoggle.checked = true;
         }
         try { localStorage.setItem(VKEY, on ? '1' : '0'); } catch(e) {}
     }
 
-    // Restore saved preference (default: ON = left position = unchecked)
+    // Default: ON (videos visible, slider left/unchecked)
     var saved = null;
     try { saved = localStorage.getItem(VKEY); } catch(e) {}
     if (saved === '0') {
-        setVideoMode(false);  // user had it off
-    } else {
-        vtoggle.checked = false;  // default: ON, slider left
+        // User previously turned off — hide banner but iframes already loaded by YT block above, kill them
+        setVideoMode(false);
     }
+    // else: videos already running from the YT loader block, nothing to do
 
     vtoggle.addEventListener('change', function() {
-        // checked = right = OFF; unchecked = left = ON
         setVideoMode(!vtoggle.checked);
     });
 })();
@@ -4686,6 +4862,85 @@ document.addEventListener('DOMContentLoaded', function() {
 
 })();
 
+
+// ── WAITING ROOM — fullscreen video wall ──
+// Opens a full-screen overlay with all 10 feeds tiled in a 5x2 grid.
+// No audio automation — user clicks whichever feed they want to hear.
+// ESC or the Exit button returns to the site.
+(function() {
+    var openBtn  = document.getElementById('wr-fullscreen-btn');
+    var overlay  = document.getElementById('wr-overlay');
+    var closeBtn = document.getElementById('wr-close-btn');
+    var grid     = document.getElementById('wr-grid');
+    if (!openBtn || !overlay || !closeBtn || !grid) return;
+
+    var WR_FEEDS = [
+        { src: 'https://www.youtube.com/embed/iipR5yUp36o?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1', label: 'Feed 1' },
+        { src: 'https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 2' },
+        { src: 'https://www.youtube.com/embed/QliL4CGc7iY?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 3' },
+        { src: 'https://www.youtube.com/embed/pykpO5kQJ98?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 4' },
+        { src: 'https://www.youtube.com/embed/YDvsBbKfLPA?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 5' },
+        { src: 'https://www.youtube.com/embed/vfszY1JYbMc?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 6' },
+        { src: 'https://www.youtube.com/embed/_6dRRfnYJws?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 7' },
+        { src: 'https://www.youtube.com/embed/iEpJwprxDdk?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 8' },
+        { src: 'https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 9' },
+        { src: 'https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJj3l8Bg&autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1', label: 'Feed 10' },
+    ];
+
+    var _built = false;
+    function buildGrid() {
+        if (_built) return;
+        _built = true;
+        WR_FEEDS.forEach(function(feed) {
+            var cell = document.createElement('div');
+            cell.className = 'wr-cell';
+            var iframe = document.createElement('iframe');
+            iframe.src = feed.src;
+            iframe.setAttribute('allow', 'autoplay; encrypted-media; fullscreen');
+            iframe.setAttribute('allowfullscreen', '');
+            iframe.frameBorder = '0';
+            var lbl = document.createElement('div');
+            lbl.className = 'wr-cell-num';
+            lbl.textContent = feed.label;
+            cell.appendChild(iframe);
+            cell.appendChild(lbl);
+            grid.appendChild(cell);
+        });
+    }
+
+    function openWR() {
+        buildGrid();
+        overlay.classList.add('wr-open');
+        document.body.style.overflow = 'hidden';
+        try {
+            if (overlay.requestFullscreen)            overlay.requestFullscreen();
+            else if (overlay.webkitRequestFullscreen) overlay.webkitRequestFullscreen();
+            else if (overlay.mozRequestFullScreen)    overlay.mozRequestFullScreen();
+        } catch(e) {}
+    }
+
+    function closeWR() {
+        overlay.classList.remove('wr-open');
+        document.body.style.overflow = '';
+        try {
+            if (document.fullscreenElement && document.exitFullscreen)               document.exitFullscreen();
+            else if (document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
+        } catch(e) {}
+    }
+
+    openBtn.addEventListener('click', openWR);
+    closeBtn.addEventListener('click', closeWR);
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && overlay.classList.contains('wr-open')) closeWR();
+    });
+    document.addEventListener('fullscreenchange', function() {
+        if (!document.fullscreenElement && overlay.classList.contains('wr-open')) closeWR();
+    });
+    document.addEventListener('webkitfullscreenchange', function() {
+        if (!document.webkitFullscreenElement && overlay.classList.contains('wr-open')) closeWR();
+    });
+})();
+
 }); // end DOMContentLoaded
 
 
@@ -4767,7 +5022,7 @@ html_parts.append(f'''
             <ul>
                 <li><a href="#section-us">US News</a></li>
                 <li><a href="#section-mideast">Middle East</a></li>
-                <li><a href="#section-world">Asia, Europe &amp; World</a></li>
+                <li><a href="#section-world">World</a></li>
                 <li><a href="#section-tech">Tech &amp; Life</a></li>
                 <li><a href="#section-business">Business</a></li>
                 <li><a href="#section-sports">Sports</a></li>
@@ -4878,7 +5133,7 @@ try:
     sections = [
         ("US News",               us_breaking + us_recent),
         ("Middle East",           middle_breaking + middle_recent),
-        ("Asia, Europe & World",  world_breaking + world_recent),
+        ("World",  world_breaking + world_recent),
         ("Tech & Life",           tech_breaking + tech_recent),
         ("Business",              business_breaking + business_recent),
         ("Sports",                sports_breaking + sports_recent),
@@ -4898,7 +5153,7 @@ try:
         "version":       "1.1",
         "title":         "The Mitchell Post",
         "home_page_url": "https://mitchellpost.github.io",
-        "description":   "Curated news across US, Middle East, Asia/Europe/World, Tech, Sports, and Culture",
+        "description":   "Curated news across US, Middle East, World, Tech, Sports, and Culture",
         "updated":       (datetime.utcnow()).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "items": feed_items
     }
