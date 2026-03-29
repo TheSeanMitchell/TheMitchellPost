@@ -3626,54 +3626,89 @@ html_parts.append(f"""<!DOCTYPE html>
     body.light-mode .wr-fullscreen-btn:hover {{ border-color: #B30000; color: #000; }}
 
     /* ── Waiting Room fullscreen overlay ── */
+    /* ── Waiting Room overlay: true fullscreen fill ── */
     #wr-overlay {{
-        display: none; position: fixed; inset: 0; z-index: 99999;
-        background: #000; flex-direction: column;
+        display: none;
+        position: fixed; inset: 0; z-index: 99999;
+        background: #000;
+        flex-direction: column;
+        /* Explicit height ensures grid children can stretch to fill */
+        width: 100vw; height: 100vh;
+        overflow: hidden;
     }}
     #wr-overlay.wr-open {{ display: flex; }}
+
     #wr-header {{
         display: flex; align-items: center; justify-content: space-between;
-        padding: 8px 16px; background: #0a0a0a;
-        border-bottom: 2px solid #B30000; flex-shrink: 0; gap: 12px;
+        padding: 6px 14px; background: #080808;
+        border-bottom: 2px solid #B30000;
+        flex-shrink: 0; gap: 12px;
+        height: 40px; /* fixed header height so grid gets the rest */
     }}
-    #wr-header-left {{ display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }}
+    #wr-header-left {{ display: flex; align-items: baseline; gap: 12px; flex-wrap: nowrap; overflow: hidden; }}
     #wr-title {{
-        font-size: 0.9em; font-weight: bold; letter-spacing: 0.1em;
-        text-transform: uppercase; color: #fff;
+        font-size: 0.82em; font-weight: bold; letter-spacing: 0.1em;
+        text-transform: uppercase; color: #fff; white-space: nowrap;
     }}
-    #wr-subtitle {{ font-size: 0.68em; color: #666; letter-spacing: 0.03em; }}
+    #wr-subtitle {{ font-size: 0.65em; color: #555; letter-spacing: 0.02em; white-space: nowrap; }}
     #wr-close-btn {{
-        background: none; border: 1px solid #444; border-radius: 3px;
-        color: #aaa; font-size: 0.78em; padding: 5px 14px; cursor: pointer;
+        background: none; border: 1px solid #333; border-radius: 3px;
+        color: #888; font-size: 0.72em; padding: 4px 12px; cursor: pointer;
         letter-spacing: 0.04em; transition: border-color 0.15s, color 0.15s;
         flex-shrink: 0; white-space: nowrap;
     }}
     #wr-close-btn:hover {{ border-color: #fff; color: #fff; }}
     #wr-close-btn kbd {{
-        font-size: 0.85em; background: #222; border: 1px solid #444;
-        border-radius: 2px; padding: 0 4px; margin-left: 4px;
+        font-size: 0.85em; background: #1a1a1a; border: 1px solid #333;
+        border-radius: 2px; padding: 0 4px; margin-left: 3px;
     }}
+
+    /* Grid: fills ALL remaining height after the 40px header */
     #wr-grid {{
-        flex: 1; display: grid;
+        flex: 1;
+        display: grid;
         grid-template-columns: repeat(5, 1fr);
         grid-template-rows: repeat(2, 1fr);
-        gap: 5px; padding: 8px; min-height: 0;
+        gap: 3px;
+        padding: 3px;
+        /* Critical: min-height:0 lets flex children shrink below content size */
+        min-height: 0;
+        /* Also set explicit height as fallback for older browsers */
+        height: calc(100vh - 40px);
+        box-sizing: border-box;
     }}
+
+    /* Each cell stretches to fill its grid area completely */
     .wr-cell {{
-        position: relative; background: #0a0a0a;
-        border-radius: 3px; overflow: hidden;
-        border: 2px solid #1a1a1a;
+        position: relative;
+        background: #050505;
+        overflow: hidden;
+        border: 1px solid #111;
+        border-radius: 2px;
+        /* Force cell to fill grid track — no min-height collapsing */
+        min-height: 0;
+        min-width: 0;
     }}
+
+    /* iframe fills the cell absolutely — no aspect-ratio constraints */
     .wr-cell iframe {{
-        width: 100%; height: 100%; border: none; display: block;
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
     }}
+
     .wr-cell-num {{
-        position: absolute; top: 6px; left: 8px;
-        background: rgba(0,0,0,0.7); color: #888;
-        font-size: 0.65em; font-weight: bold; letter-spacing: 0.06em;
-        padding: 2px 6px; border-radius: 2px; text-transform: uppercase;
+        position: absolute; top: 5px; left: 7px; z-index: 2;
+        background: rgba(0,0,0,0.65); color: #666;
+        font-size: 0.6em; font-weight: bold; letter-spacing: 0.08em;
+        padding: 2px 5px; border-radius: 2px; text-transform: uppercase;
         pointer-events: none;
     }}
+
+    /* Mobile: 2 columns, 5 rows */
     @media (max-width: 900px) {{
         #wr-grid {{
             grid-template-columns: repeat(2, 1fr);
@@ -4874,17 +4909,18 @@ document.addEventListener('DOMContentLoaded', function() {
     var grid     = document.getElementById('wr-grid');
     if (!openBtn || !overlay || !closeBtn || !grid) return;
 
+    var _Q = '&vq=hd1080&autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1';
     var WR_FEEDS = [
-        { src: 'https://www.youtube.com/embed/iipR5yUp36o?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1', label: 'Feed 1' },
-        { src: 'https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 2' },
-        { src: 'https://www.youtube.com/embed/QliL4CGc7iY?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 3' },
-        { src: 'https://www.youtube.com/embed/pykpO5kQJ98?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 4' },
-        { src: 'https://www.youtube.com/embed/YDvsBbKfLPA?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 5' },
-        { src: 'https://www.youtube.com/embed/vfszY1JYbMc?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 6' },
-        { src: 'https://www.youtube.com/embed/_6dRRfnYJws?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 7' },
-        { src: 'https://www.youtube.com/embed/iEpJwprxDdk?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 8' },
-        { src: 'https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 9' },
-        { src: 'https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJj3l8Bg&autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1', label: 'Feed 10' },
+        { src: 'https://www.youtube.com/embed/iipR5yUp36o?' + _Q, label: 'Feed 1' },
+        { src: 'https://www.youtube.com/embed/Ap-UM1O9RBU?'  + _Q, label: 'Feed 2' },
+        { src: 'https://www.youtube.com/embed/QliL4CGc7iY?'  + _Q, label: 'Feed 3' },
+        { src: 'https://www.youtube.com/embed/pykpO5kQJ98?'  + _Q, label: 'Feed 4' },
+        { src: 'https://www.youtube.com/embed/YDvsBbKfLPA?'  + _Q, label: 'Feed 5' },
+        { src: 'https://www.youtube.com/embed/vfszY1JYbMc?'  + _Q, label: 'Feed 6' },
+        { src: 'https://www.youtube.com/embed/_6dRRfnYJws?'  + _Q, label: 'Feed 7' },
+        { src: 'https://www.youtube.com/embed/iEpJwprxDdk?'  + _Q, label: 'Feed 8' },
+        { src: 'https://www.youtube.com/embed/LuKwFajn37U?'  + _Q, label: 'Feed 9' },
+        { src: 'https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJj3l8Bg' + _Q, label: 'Feed 10' },
     ];
 
     var _built = false;
@@ -4912,11 +4948,21 @@ document.addEventListener('DOMContentLoaded', function() {
         buildGrid();
         overlay.classList.add('wr-open');
         document.body.style.overflow = 'hidden';
-        try {
-            if (overlay.requestFullscreen)            overlay.requestFullscreen();
-            else if (overlay.webkitRequestFullscreen) overlay.webkitRequestFullscreen();
-            else if (overlay.mozRequestFullScreen)    overlay.mozRequestFullScreen();
-        } catch(e) {}
+        // Force layout before fullscreen so grid dimensions are correct
+        overlay.style.display = 'flex';
+        // Short delay lets browser paint the flex layout before going fullscreen
+        setTimeout(function() {
+            try {
+                if (overlay.requestFullscreen)            overlay.requestFullscreen();
+                else if (overlay.webkitRequestFullscreen) overlay.webkitRequestFullscreen();
+                else if (overlay.mozRequestFullScreen)    overlay.mozRequestFullScreen();
+            } catch(e) {}
+            // Force grid reflow after fullscreen transition completes
+            setTimeout(function() {
+                var g = document.getElementById('wr-grid');
+                if (g) { g.style.display = 'none'; void g.offsetHeight; g.style.display = 'grid'; }
+            }, 400);
+        }, 60);
     }
 
     function closeWR() {
