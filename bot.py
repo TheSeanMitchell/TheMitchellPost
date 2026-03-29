@@ -2460,21 +2460,7 @@ def _fetch_one_source(source_name, url, pattern, block_pat, is_sports_excluded):
                 if title_matches_keywords(title_lower, pattern):
                     ts_struct = entry.get('published_parsed') or entry.get('updated_parsed')
                     ts = calendar.timegm(ts_struct) if ts_struct else time.time()
-                    # PRO10 #3: extract thumbnail from RSS media tags
-                    img_url = ""
-                    try:
-                        mc = entry.get("media_content", [])
-                        if mc and isinstance(mc, list):
-                            img_url = mc[0].get("url", "")
-                        if not img_url:
-                            enc = entry.get("enclosures", [])
-                            if enc and isinstance(enc, list):
-                                img_url = enc[0].get("href", "")
-                        if not img_url:
-                            img_url = entry.get("media_thumbnail", [{}])[0].get("url", "")
-                    except Exception:
-                        img_url = ""
-                    results.append((ts, raw_title, source_name, link, img_url))
+                    results.append((ts, raw_title, source_name, link))
                     seen_local.add(norm_title)
                     count += 1
             break
@@ -2715,29 +2701,13 @@ def render_column(items):
             hot_dot = '<span class="new-dot" title="Published in the last 30 minutes">&#9679;</span> ' if is_hot else ''
             safe_dtitle = display_title.replace('"', '&quot;')
             anchor_id = "hl-" + hashlib.md5(link.encode()).hexdigest()[:8]
-            # PRO10 #3: thumbnail
-            img_url = cluster[0][4] if len(cluster[0]) > 4 else ""
-            img_html = f'<img class="hl-thumb" src="{img_url}" alt="" loading="lazy">' if img_url else ''
-            # PRO10 #9: share buttons
-            enc_link = link.replace("'", "%27")
-            enc_title = display_title[:80].replace("'", "%27")
-            share_html = (
-                '<div class="hl-share-row">'
-                + '<button class="hl-share-btn" data-copy="' + enc_link + '">Copy Link</button>'
-                + '<a class="hl-share-btn" href="https://twitter.com/intent/tweet?url=' + enc_link + '&amp;text=' + enc_title + '" target="_blank" rel="noopener">&#120143; Share</a>'
-                + '<a class="hl-share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=' + enc_link + '" target="_blank" rel="noopener">LinkedIn</a>'
-                + '<a class="hl-share-btn" href="mailto:?subject=' + enc_title + '&body=' + enc_link + '">Email</a>'
-                + '</div>'
-            )
             out += (
                 f'<div id="{anchor_id}" class="headline" data-link="{link}" data-ts="{int(ts)}">'
-                f'{img_html}'
                 f'{hot_dot}'
                 f'<span class="title">{display_title}</span>'
                 f' <span class="ts-label">{time_str}</span>'
                 f' <span class="src-label">\u2014 {friendly}</span>'
                 f' <a class="link" href="{link}" target="_blank">[Full Article]</a>'
-                f'{share_html}'
                 f'</div>\n'
             )
         else:
@@ -2898,10 +2868,7 @@ html_parts.append(f"""<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Mitchell Post — Pro10 Edition</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>The Mitchell Post</title>
     <link rel="alternate" type="application/rss+xml" title="The Mitchell Post RSS Feed" href="feed.xml">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%23121212'/><rect x='2' y='2' width='60' height='60' rx='7' fill='none' stroke='%23B30000' stroke-width='3'/><text x='32' y='46' font-family='Arial,sans-serif' font-size='28' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'>MP</text></svg>">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -2911,13 +2878,13 @@ html_parts.append(f"""<!DOCTYPE html>
     /* ── Reset & base ── */
     * {{ box-sizing: border-box; margin: 0; padding: 0; }}
     html {{ scroll-behavior: smooth; }}
-    body {{ background: #000000; color: #FFFFFF; font-family: 'Inter', Arial, sans-serif; line-height: 1.68;
-            padding-top: 0px; font-size: 15px; }}
+    body {{ background: #121212; color: #FFFFFF; font-family: Arial, sans-serif; line-height: 1.6;
+            padding-top: 48px; font-size: 15px; }}
     body.large-text {{ font-size: 19px; }}
 
     /* ── Sticky nav bar ── */
     .sticky-nav {{
-        position: sticky; top: 0; left: 0; right: 0; z-index: 1000;
+        position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
         background: #0A0A0A; border-bottom: 2px solid #B30000;
         display: flex; align-items: center; gap: 0; height: 48px;
         padding: 0 16px; overflow-x: auto; white-space: nowrap;
@@ -2990,11 +2957,10 @@ html_parts.append(f"""<!DOCTYPE html>
 
     /* ── Section titles and layout ── */
     .section-title {{
-        font-size: 1.4em; margin: 0 0 6px; font-weight: 700;
+        font-size: 1.6em; margin: 0 0 6px; font-weight: bold;
         text-decoration: underline; text-decoration-thickness: 2px;
         display: flex; align-items: center; gap: 8px;
-        letter-spacing: 0.07em; text-transform: uppercase;
-        font-family: 'Inter', Arial, sans-serif;
+        letter-spacing: 0.04em; text-transform: uppercase;
     }}
     .sec-dot {{
         display: inline-block; width: 12px; height: 12px;
@@ -3018,7 +2984,7 @@ html_parts.append(f"""<!DOCTYPE html>
         border-bottom: 1px solid #222222; line-height: 1.5;
     }}
     .headline.seen-item {{ opacity: 0.55; }}
-    .title {{ color: #FFFFFF; font-size: 1em; font-family: 'Playfair Display', Georgia, serif; font-weight: 700; line-height: 1.4; }}
+    .title {{ color: #FFFFFF; font-size: 1em; }}
     .ts-label {{ color: #888888; font-size: 0.78em; margin-left: 4px; }}
     .src-label {{ color: #666666; font-size: 0.88em; }}
     .new-dot {{ color: #FFFFFF; font-size: 0.55em; vertical-align: middle; margin-right: 2px; }}
@@ -3646,262 +3612,9 @@ html_parts.append(f"""<!DOCTYPE html>
     }}
     body.light-mode .footer-disclaimer {{ color: #aaa; }}
 
-
-    /* ══ PRO10 UPGRADES CSS ══ */
-
-    /* #2 — Masthead */
-    .mp-masthead {{
-        background: #000; border-bottom: 3px solid #B30000;
-        padding: 18px 24px 14px 24px; text-align: center;
-        position: relative;
-    }}
-    .mp-masthead-inner {{
-        max-width: 1400px; margin: 0 auto;
-        display: flex; align-items: center; justify-content: space-between;
-        gap: 16px; flex-wrap: wrap;
-    }}
-    .mp-masthead-left, .mp-masthead-right {{
-        flex: 1; min-width: 120px;
-    }}
-    .mp-masthead-right {{ text-align: right; }}
-    .mp-edition-tag {{
-        font-family: 'Inter', sans-serif; font-size: 0.7em;
-        letter-spacing: 0.14em; text-transform: uppercase;
-        color: #B30000; font-weight: 700;
-        border: 1px solid #B30000; padding: 2px 8px; border-radius: 2px;
-    }}
-    .mp-masthead-center {{ flex: 2; text-align: center; }}
-    .mp-masthead-title {{
-        font-family: 'Playfair Display', Georgia, serif;
-        font-size: 2.8em; font-weight: 800; color: #FFFFFF;
-        letter-spacing: 0.01em; line-height: 1.1; margin: 0;
-        text-shadow: 0 2px 12px rgba(179,0,0,0.25);
-    }}
-    .mp-masthead-tagline {{
-        font-family: 'Inter', sans-serif; font-size: 0.72em;
-        color: #888; letter-spacing: 0.1em; text-transform: uppercase;
-        margin: 4px 0 0 0; font-weight: 400;
-    }}
-    .mp-masthead-date {{
-        display: block; font-family: 'Inter', sans-serif;
-        font-size: 0.78em; color: #aaa; font-weight: 500;
-        letter-spacing: 0.03em;
-    }}
-    .mp-masthead-updated {{
-        display: block; font-size: 0.68em; color: #555;
-        letter-spacing: 0.05em; text-transform: uppercase;
-        margin-top: 3px;
-    }}
-    body.light-mode .mp-masthead {{ background: #fff; border-bottom-color: #B30000; }}
-    body.light-mode .mp-masthead-title {{ color: #111; text-shadow: none; }}
-    body.light-mode .mp-masthead-tagline {{ color: #888; }}
-    body.light-mode .mp-masthead-date {{ color: #555; }}
-    body.light-mode .mp-masthead-updated {{ color: #999; }}
-    @media (max-width: 900px) {{
-        .mp-masthead {{ padding: 12px 14px; }}
-        .mp-masthead-title {{ font-size: 1.9em; }}
-        .mp-masthead-left, .mp-masthead-right {{ display: none; }}
-        .mp-masthead-tagline {{ font-size: 0.68em; }}
-    }}
-
-    /* #4 — Market Ticker */
-    .mp-ticker-wrap {{
-        background: #0a0a0a; border-bottom: 1px solid #1a1a1a;
-        padding: 5px 16px; display: flex; align-items: center;
-        gap: 12px; overflow: hidden; font-family: 'Inter', sans-serif;
-        font-size: 0.76em; white-space: nowrap;
-    }}
-    .mp-ticker-label {{
-        font-weight: 700; letter-spacing: 0.1em; color: #B30000;
-        font-size: 0.78em; flex-shrink: 0;
-    }}
-    .mp-ticker-scroll {{
-        flex: 1; overflow: hidden; display: flex; gap: 10px; align-items: center;
-    }}
-    .mp-tick {{ color: #ccc; }}
-    .mp-tick .tv {{ font-weight: 700; }}
-    .mp-tick .tv.up {{ color: #22c55e; }}
-    .mp-tick .tv.dn {{ color: #ef4444; }}
-    .mp-tick-sep {{ color: #333; }}
-    .mp-ticker-note {{ font-size: 0.72em; color: #444; flex-shrink: 0; }}
-    body.light-mode .mp-ticker-wrap {{ background: #f5f5f5; border-bottom-color: #ddd; }}
-    body.light-mode .mp-tick {{ color: #333; }}
-    body.light-mode .mp-ticker-note {{ color: #aaa; }}
-    @media (max-width: 900px) {{ .mp-ticker-wrap {{ display: none; }} }}
-
-
-    /* #3 — Headline thumbnails */
-    .hl-thumb {{
-        float: right; margin: 0 0 6px 12px;
-        width: 120px; height: 68px; object-fit: cover;
-        border-radius: 3px; background: #1a1a1a;
-        flex-shrink: 0;
-    }}
-    @media (max-width: 900px) {{
-        .hl-thumb {{ width: 80px; height: 46px; margin-left: 8px; }}
-    }}
-    body.light-mode .hl-thumb {{ background: #eee; }}
-
-    /* #5 — Reading Progress Bar */
-    .mp-progress-bar {{
-        position: fixed; top: 0; left: 0; height: 3px; width: 0%;
-        background: linear-gradient(90deg, #B30000, #ff4444);
-        z-index: 9999; transition: width 0.1s linear;
-        pointer-events: none;
-    }}
-
-    /* #6 — Section Ribbon Dividers */
-    .pro-section-ribbon {{
-        background: #0d0d0d; border-top: 1px solid #1a1a1a;
-        border-bottom: 1px solid #1a1a1a;
-        padding: 8px 20px; margin: 28px 0;
-        display: flex; align-items: center; gap: 14px;
-        font-family: 'Inter', sans-serif;
-    }}
-    .pro-ribbon-dot {{
-        width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
-    }}
-    .pro-ribbon-name {{
-        font-size: 0.72em; font-weight: 700; letter-spacing: 0.12em;
-        text-transform: uppercase; color: #ccc;
-    }}
-    .pro-ribbon-meta {{
-        font-size: 0.68em; color: #555; margin-left: auto;
-        letter-spacing: 0.04em;
-    }}
-    body.light-mode .pro-section-ribbon {{ background: #f8f8f8; border-color: #e0e0e0; }}
-    body.light-mode .pro-ribbon-name {{ color: #333; }}
-    body.light-mode .pro-ribbon-meta {{ color: #aaa; }}
-
-    /* #7 — Most-Read Sidebar Rail */
-    .mp-rail-wrap {{
-        position: sticky; top: 60px; width: 260px; flex-shrink: 0;
-        background: #0a0a0a; border: 1px solid #1a1a1a;
-        border-radius: 4px; padding: 0; overflow: hidden;
-        font-family: 'Inter', sans-serif; align-self: flex-start;
-        display: none; /* shown via JS once clicks accumulate */
-    }}
-    .mp-rail-header {{
-        background: #B30000; padding: 8px 14px;
-        font-size: 0.7em; font-weight: 700; letter-spacing: 0.1em;
-        text-transform: uppercase; color: #fff;
-    }}
-    .mp-rail-item {{
-        display: flex; gap: 10px; align-items: flex-start;
-        padding: 10px 14px; border-bottom: 1px solid #141414;
-        cursor: pointer; transition: background 0.15s;
-    }}
-    .mp-rail-item:hover {{ background: #141414; }}
-    .mp-rail-num {{
-        font-size: 1.1em; font-weight: 800; color: #B30000;
-        flex-shrink: 0; line-height: 1.3; width: 20px;
-    }}
-    .mp-rail-title {{
-        font-size: 0.8em; color: #ddd; line-height: 1.45;
-        font-family: 'Playfair Display', serif;
-    }}
-    .mp-rail-tag {{
-        font-size: 0.62em; font-weight: 700; letter-spacing: 0.08em;
-        text-transform: uppercase; color: #666; display: block;
-        margin-top: 3px; font-family: 'Inter', sans-serif;
-    }}
-    body.light-mode .mp-rail-wrap {{ background: #fafafa; border-color: #e0e0e0; }}
-    body.light-mode .mp-rail-title {{ color: #222; }}
-    body.light-mode .mp-rail-tag {{ color: #999; }}
-    body.light-mode .mp-rail-item:hover {{ background: #f0f0f0; }}
-    @media (max-width: 1340px) {{ .mp-rail-wrap {{ display: none !important; }} }}
-
-    /* #8 — Per-section OLED color washes */
-    body:not(.light-mode) #section-us       .headline {{ background: rgba(179,0,0,0.025); }}
-    body:not(.light-mode) #section-mideast  .headline {{ background: rgba(192,80,0,0.025); }}
-    body:not(.light-mode) #section-world    .headline {{ background: rgba(46,125,154,0.025); }}
-    body:not(.light-mode) #section-tech     .headline {{ background: rgba(0,95,158,0.025); }}
-    body:not(.light-mode) #section-business .headline {{ background: rgba(139,105,20,0.025); }}
-    body:not(.light-mode) #section-sports   .headline {{ background: rgba(0,107,60,0.025); }}
-    body:not(.light-mode) #section-culture  .headline {{ background: rgba(107,0,107,0.025); }}
-
-    /* #9 — Share row on hover */
-    .headline {{ position: relative; }}
-    .hl-share-row {{
-        display: none; margin-top: 6px; gap: 8px; flex-wrap: wrap;
-    }}
-    .headline:hover .hl-share-row {{ display: flex; }}
-    .hl-share-btn {{
-        font-size: 0.7em; padding: 3px 10px; border: 1px solid #333;
-        border-radius: 12px; background: none; color: #888;
-        cursor: pointer; font-family: 'Inter', sans-serif;
-        letter-spacing: 0.03em; transition: border-color 0.15s, color 0.15s;
-        text-decoration: none; display: inline-block;
-    }}
-    .hl-share-btn:hover {{ border-color: #B30000; color: #fff; }}
-    body.light-mode .hl-share-btn {{ border-color: #ccc; color: #555; }}
-    body.light-mode .hl-share-btn:hover {{ border-color: #B30000; color: #000; }}
-
-    /* #10 — Skeleton shimmer loader */
-    .mp-skeleton-wrap {{
-        max-width: 1400px; margin: 20px auto; padding: 0 20px;
-        display: none; /* shown by JS before content paints */
-    }}
-    .mp-skeleton-line {{
-        height: 14px; border-radius: 3px; margin-bottom: 10px;
-        background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
-        background-size: 200% 100%;
-        animation: mp-shimmer 1.4s infinite;
-    }}
-    .mp-skeleton-line.wide {{ width: 90%; }}
-    .mp-skeleton-line.med  {{ width: 65%; }}
-    .mp-skeleton-line.thin {{ width: 40%; }}
-    @keyframes mp-shimmer {{
-        0%   {{ background-position: 200% 0; }}
-        100% {{ background-position: -200% 0; }}
-    }}
-    body.light-mode .mp-skeleton-line {{
-        background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
-        background-size: 200% 100%;
-    }}
-
     </style>
 </head>
 <body>
-
-<!-- ══ PRO10: MASTHEAD HERO HEADER ══ -->
-<div class="mp-masthead">
-    <div class="mp-masthead-inner">
-        <div class="mp-masthead-left">
-            <span class="mp-edition-tag">Digital Edition</span>
-        </div>
-        <div class="mp-masthead-center">
-            <h1 class="mp-masthead-title">The Mitchell Post</h1>
-            <p class="mp-masthead-tagline">Advancing the Power of Independent News</p>
-        </div>
-        <div class="mp-masthead-right">
-            <span class="mp-masthead-date" id="mp-masthead-date"></span>
-            <span class="mp-masthead-updated">Updated continuously</span>
-        </div>
-    </div>
-</div>
-
-<!-- ══ PRO10: MARKET TICKER BAR (#4) ══ -->
-<div class="mp-ticker-wrap" id="mp-ticker-wrap">
-    <div class="mp-ticker-label">MARKETS</div>
-    <div class="mp-ticker-scroll" id="mp-ticker-scroll">
-        <span class="mp-tick" id="tick-spx">S&amp;P 500 <span class="tv">—</span></span>
-        <span class="mp-tick-sep">|</span>
-        <span class="mp-tick" id="tick-ndx">NASDAQ <span class="tv">—</span></span>
-        <span class="mp-tick-sep">|</span>
-        <span class="mp-tick" id="tick-dji">DOW <span class="tv">—</span></span>
-        <span class="mp-tick-sep">|</span>
-        <span class="mp-tick" id="tick-btc">BTC <span class="tv">—</span></span>
-        <span class="mp-tick-sep">|</span>
-        <span class="mp-tick" id="tick-gold">GOLD <span class="tv">—</span></span>
-        <span class="mp-tick-sep">|</span>
-        <span class="mp-tick" id="tick-oil">OIL <span class="tv">—</span></span>
-    </div>
-    <span class="mp-ticker-note">Delayed 15 min</span>
-</div>
-
-<!-- ══ PRO10: READING PROGRESS BAR (#5) ══ -->
-<div class="mp-progress-bar" id="mp-progress-bar"></div>
 
 <!-- ══ STICKY NAVIGATION BAR ══ -->
 <nav class="sticky-nav">
@@ -4178,47 +3891,10 @@ SECTION_DATA = [
     ("section-culture",  "culture-color",  culture_breaking,  culture_recent,  '<span class="sec-dot" style="background:#6B006B"></span>CULTURE &mdash; LAST 3 HOURS',      '<span class="sec-dot" style="background:#6B006B"></span>CULTURE &mdash; 24-HOUR HEADLINES'),
 ]
 html_parts.append('<div id="sections-wrapper">\n')
-# PRO10: skeleton shimmer placeholder (hidden until JS removes it)
-html_parts.append('''<div class="mp-skeleton-wrap" id="mp-skeleton">
-''' + '\n'.join([
-    '<div class="mp-skeleton-line wide"></div>',
-    '<div class="mp-skeleton-line med"></div>',
-    '<div class="mp-skeleton-line thin"></div>',
-    '<div class="mp-skeleton-line wide"></div>',
-    '<div class="mp-skeleton-line med"></div>',
-]) + '''
-</div>\n''')
-_SECTION_COLORS_RIBBON = {
-    "section-us":       "#B30000",
-    "section-mideast":  "#C05000",
-    "section-world":    "#2E7D9A",
-    "section-tech":     "#005F9E",
-    "section-business": "#8B6914",
-    "section-sports":   "#006B3C",
-    "section-culture":  "#6B006B",
-}
-_SECTION_LABELS = {
-    "section-us":       "US News",
-    "section-mideast":  "Middle East",
-    "section-world":    "World",
-    "section-tech":     "Tech & Life",
-    "section-business": "Business",
-    "section-sports":   "Sports",
-    "section-culture":  "Culture",
-}
 for i, (sid, sc, bi, ri, bt, rt) in enumerate(SECTION_DATA):
     html_parts.append(section_block(sid, sc, bi, ri, bt, rt))
     if i < len(SECTION_DATA) - 1:
-        _rc = _SECTION_COLORS_RIBBON.get(SECTION_DATA[i+1][0], "#444")
-        _rl = _SECTION_LABELS.get(SECTION_DATA[i+1][0], "")
-        _total = len(bi) + len(ri)
-        html_parts.append(
-            f'<div class="pro-section-ribbon">'
-            f'<span class="pro-ribbon-dot" style="background:{_rc}"></span>'
-            f'<span class="pro-ribbon-name">{_rl}</span>'
-            f'<span class="pro-ribbon-meta">{_total} headlines</span>'
-            f'</div>\n'
-        )
+        html_parts.append('<hr class="top-divider">\n')
 html_parts.append('</div>\n')
 
 html_parts.append("""
@@ -4376,29 +4052,6 @@ setInterval(function() {
 }, 2000);
 
 document.addEventListener('DOMContentLoaded', function() {
-
-// ── PRO10 #9: Copy-link button handler ──
-document.addEventListener('click', function(e) {
-    var btn = e.target.closest('[data-copy]');
-    if (!btn) return;
-    var url = btn.getAttribute('data-copy');
-    if (!url) return;
-    navigator.clipboard.writeText(url).then(function() {
-        var orig = btn.textContent;
-        btn.textContent = 'Copied!';
-        setTimeout(function() { btn.textContent = orig; }, 1500);
-    }).catch(function() {
-        // fallback for older browsers
-        var ta = document.createElement('textarea');
-        ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
-        document.body.appendChild(ta); ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        var orig = btn.textContent;
-        btn.textContent = 'Copied!';
-        setTimeout(function() { btn.textContent = orig; }, 1500);
-    });
-});
 
 // ── MRO CARD SMOOTH SCROLL ──
 (function() {
@@ -5034,168 +4687,6 @@ document.addEventListener('click', function(e) {
 })();
 
 }); // end DOMContentLoaded
-
-
-// ══════════════════════════════════════
-// PRO10 UPGRADES — JavaScript
-// ══════════════════════════════════════
-
-// ── #2: Masthead live date ──
-(function() {
-    var el = document.getElementById('mp-masthead-date');
-    if (!el) return;
-    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    var d = new Date();
-    el.textContent = days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
-})();
-
-// ── #4: Market Ticker — live data via public APIs ──
-(function() {
-    var tickers = [
-        { id:'tick-spx',  symbol:'SPY',   label:'S&P 500' },
-        { id:'tick-ndx',  symbol:'QQQ',   label:'NASDAQ'  },
-        { id:'tick-dji',  symbol:'DIA',   label:'DOW'     },
-        { id:'tick-btc',  symbol:'BTC-USD',label:'BTC'    },
-        { id:'tick-gold', symbol:'GLD',   label:'GOLD'    },
-        { id:'tick-oil',  symbol:'USO',   label:'OIL'     },
-    ];
-    // Use Yahoo Finance v8 JSON (public, no key needed, delayed)
-    function fetchTick(sym, id, label) {
-        fetch('https://query1.finance.yahoo.com/v8/finance/chart/' + sym + '?interval=1d&range=2d')
-            .then(function(r){ return r.json(); })
-            .then(function(d){
-                var meta = d.chart && d.chart.result && d.chart.result[0] && d.chart.result[0].meta;
-                if (!meta) return;
-                var price = meta.regularMarketPrice;
-                var prev  = meta.previousClose || meta.chartPreviousClose;
-                if (!price || !prev) return;
-                var chg = ((price - prev) / prev * 100).toFixed(2);
-                var cls = parseFloat(chg) >= 0 ? 'up' : 'dn';
-                var sign = parseFloat(chg) >= 0 ? '+' : '';
-                var priceStr = price >= 1000 ? price.toFixed(0) : price.toFixed(2);
-                var el = document.getElementById(id);
-                if (el) {
-                    el.innerHTML = label + ' <span class="tv ' + cls + '">' + priceStr + ' (' + sign + chg + '%)</span>';
-                }
-            })
-            .catch(function(){});
-    }
-    // Stagger fetches to avoid rate limit
-    tickers.forEach(function(t, i) {
-        setTimeout(function(){ fetchTick(t.symbol, t.id, t.label); }, i * 600);
-    });
-    // Refresh every 5 minutes
-    setInterval(function() {
-        tickers.forEach(function(t, i) {
-            setTimeout(function(){ fetchTick(t.symbol, t.id, t.label); }, i * 600);
-        });
-    }, 5 * 60 * 1000);
-})();
-
-// ── #5: Reading Progress Bar ──
-(function() {
-    var bar = document.getElementById('mp-progress-bar');
-    if (!bar) return;
-    function updateBar() {
-        var scrollTop  = window.pageYOffset || document.documentElement.scrollTop;
-        var docHeight  = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        var pct = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
-        bar.style.width = pct + '%';
-    }
-    window.addEventListener('scroll', updateBar, { passive: true });
-    updateBar();
-})();
-
-// ── #7: Most-Read Rail (session click tracker) ──
-(function() {
-    var RAIL_KEY = 'mp_rail_clicks';
-    var clicks = {};
-    try { var raw = localStorage.getItem(RAIL_KEY); if (raw) clicks = JSON.parse(raw); } catch(e) {}
-
-    function saveClicks() { try { localStorage.setItem(RAIL_KEY, JSON.stringify(clicks)); } catch(e) {} }
-
-    function getSectionForEl(el) {
-        var wrap = el.closest('[id^="section-"]');
-        if (!wrap) return '';
-        var id = wrap.id;
-        var map = {
-            'section-us':'US','section-mideast':'Middle East','section-world':'World',
-            'section-tech':'Tech','section-business':'Business',
-            'section-sports':'Sports','section-culture':'Culture'
-        };
-        return map[id] || '';
-    }
-
-    document.addEventListener('click', function(e) {
-        var link = e.target.closest('.link');
-        if (!link) return;
-        var headline = link.closest('.headline');
-        if (!headline) return;
-        var titleEl = headline.querySelector('.title');
-        var lnk = link.href || headline.getAttribute('data-link') || '';
-        if (!titleEl || !lnk || lnk === '#') return;
-        var key = lnk;
-        clicks[key] = {
-            count: (clicks[key] ? clicks[key].count : 0) + 1,
-            title: titleEl.textContent.trim().slice(0, 90),
-            section: getSectionForEl(headline),
-            link: lnk,
-            ts: Date.now()
-        };
-        saveClicks();
-        renderRail();
-    });
-
-    function renderRail() {
-        var rail = document.getElementById('mp-most-read-rail');
-        if (!rail) return;
-        var list = Object.values(clicks)
-            .filter(function(c){ return c.count > 0; })
-            .sort(function(a,b){ return b.count - a.count || b.ts - a.ts; })
-            .slice(0, 10);
-        if (list.length < 2) { rail.style.display = 'none'; return; }
-        rail.style.display = 'block';
-        var inner = rail.querySelector('#mp-rail-list');
-        if (!inner) return;
-        inner.innerHTML = '';
-        list.forEach(function(item, i) {
-            var div = document.createElement('div');
-            div.className = 'mp-rail-item';
-            div.setAttribute('data-href', item.link);
-            div.addEventListener('click', function() { window.open(this.getAttribute('data-href'), '_blank'); });
-            div.innerHTML = '<span class="mp-rail-num">' + (i+1) + '</span>'
-                + '<div><span class="mp-rail-title">' + item.title + '</span>'
-                + '<span class="mp-rail-tag">' + item.section + ' &middot; ' + item.count + ' click' + (item.count !== 1 ? 's':'') + '</span></div>';
-            inner.appendChild(div);
-        });
-    }
-
-    // Build rail DOM
-    var railWrap = document.createElement('div');
-    railWrap.id = 'mp-most-read-rail';
-    railWrap.className = 'mp-rail-wrap';
-    railWrap.style.display = 'none';
-    railWrap.innerHTML = '<div class="mp-rail-header">&#9650; Most Read This Session</div><div id="mp-rail-list"></div>';
-    // Insert into page as a sidebar beside sections-wrapper
-    var sw = document.getElementById('sections-wrapper');
-    if (sw) {
-        var outer = document.createElement('div');
-        outer.style.cssText = 'display:flex;gap:24px;max-width:1660px;margin:0 auto;align-items:flex-start;padding:0 20px;';
-        sw.parentNode.insertBefore(outer, sw);
-        outer.appendChild(sw);
-        outer.appendChild(railWrap);
-    }
-    renderRail();
-})();
-
-// ── #10: Skeleton — hide immediately once content is ready ──
-(function() {
-    var skel = document.getElementById('mp-skeleton');
-    if (skel) skel.style.display = 'none'; // content already rendered server-side
-})();
-
-
 
 
 </script>
