@@ -4109,12 +4109,12 @@ if top_stories or daily_briefing:
             seen_headlines.add(norm)
             combined_cards.append((sl, cl, ns, lts, lt, ll))
 
-    # ── Stagger: guarantee one card from every section before any repeats ──
-    # If a section has no multi-source cluster, pull its top solo headline as a fallback.
-    ALL_MRO_SECTIONS = ["US","Middle East","World","Tech","Business","Sports","Culture"]
+    # ── MRO Layout: 7 guaranteed (one per section, tab order) + 3 most popular = 10 total ──
+    # Tab order matches the nav bar: US, Middle East, World, Tech & Life, Business, Sports, Culture
+    TAB_ORDER = ["US","Middle East","World","Tech","Business","Sports","Culture"]
 
-    # Build a fallback single-headline card for each section (best available item)
-    _section_solo_fallback = {}
+    # Build best available card per section (cluster first, solo fallback)
+    _best_per_section = {}
     _solo_section_items = [
         ("US",          us_breaking + us_recent),
         ("Middle East", middle_breaking + middle_recent),
@@ -4124,36 +4124,31 @@ if top_stories or daily_briefing:
         ("Sports",      sports_breaking + sports_recent),
         ("Culture",     culture_breaking + culture_recent),
     ]
+
+    # First try to find each section's top cluster card from combined_cards
+    for section in TAB_ORDER:
+        for card in combined_cards:
+            if card[0] == section and section not in _best_per_section:
+                _best_per_section[section] = card
+                break
+
+    # For any section still missing, fall back to its top solo headline
     for _sec_label, _sec_items in _solo_section_items:
-        if _sec_items:
+        if _sec_label not in _best_per_section and _sec_items:
             _best = sorted(_sec_items, key=lambda x: x[0], reverse=True)[0]
             _ts, _ttl, _src, _lnk = _best
-            _norm = normalize_title(_ttl)
-            # Only use as fallback if not already in combined_cards
-            _already_in = any(normalize_title(c[4]) == _norm for c in combined_cards)
-            if not _already_in:
-                _section_solo_fallback[_sec_label] = (_sec_label, [_best], 1, _ts, _ttl, _lnk)
+            _best_per_section[_sec_label] = (_sec_label, [_best], 1, _ts, _ttl, _lnk)
 
-    def _stagger_cards(raw_cards):
-        first_pass = []
-        claimed = set()
-        # First pass: pick the highest-ranked card from each section
-        for section in ALL_MRO_SECTIONS:
-            for card in raw_cards:
-                if card[0] == section and section not in claimed:
-                    first_pass.append(card)
-                    claimed.add(section)
-                    break
-        # For any section still missing, inject the solo fallback
-        for section in ALL_MRO_SECTIONS:
-            if section not in claimed and section in _section_solo_fallback:
-                first_pass.append(_section_solo_fallback[section])
-                claimed.add(section)
-        # Second pass: remaining popular cards (already deduped), up to 7 more
-        second_pass = [c for c in raw_cards if c not in first_pass]
-        return (first_pass + second_pass)[:14]
+    # Build first 7 in strict tab order
+    first_seven = [_best_per_section[s] for s in TAB_ORDER if s in _best_per_section]
 
-    combined_cards = _stagger_cards(combined_cards)
+    # Last 3: most popular cards NOT already in first_seven (by source count desc)
+    _first_seven_norms = {normalize_title(c[4]) for c in first_seven}
+    remaining = [c for c in combined_cards if normalize_title(c[4]) not in _first_seven_norms]
+    remaining.sort(key=lambda c: c[2], reverse=True)  # sort by source count
+    last_three = remaining[:3]
+
+    combined_cards = first_seven + last_three  # exactly 10
 
     # ── Derive live page-section order from staggered MRO cards ──
     _MRO_SECTION_ID_MAP = {
@@ -4174,9 +4169,9 @@ if top_stories or daily_briefing:
         if sid not in _derived_order:
             _derived_order.append(sid)
 
-    # Split into two columns of up to 7 each (guaranteed 7 sections + up to 7 popular extras)
-    col1_cards = combined_cards[:7]
-    col2_cards = combined_cards[7:14]
+    # Split into two columns of 5
+    col1_cards = combined_cards[:5]
+    col2_cards = combined_cards[5:10]
 
     def render_mro_cards(cards):
         html = ''
