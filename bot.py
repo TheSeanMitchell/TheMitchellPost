@@ -260,6 +260,55 @@ RAW_ME_KEYWORDS = [
     "uranium stockpile","two state framework","grain deal","Black Sea grain corridor","wheat export","fertilizer shortage",
     "global hunger","famine risk","Horn of Africa","drought famine","aid convoy","humanitarian corridor",
     "access denial","siege tactic","starvation weapon","war crime charge","ICC investigation","genocide convention",
+    # ── New ME keywords from April 2026 updates ──
+    "iran war","us israeli attacks","trump iran strategy","hormuz crisis","gulf states attacks",
+    "kuwait airport fire","kuwait refinery hit","bahrain missiles downed","uae missile defense",
+    "iran attacks gulf","iran attacks israel","trump finish iran job",
+    "iran missile strike uss abraham lincoln","iran cruise missile attack",
+    "iaf strikes 400 iranian targets","iran fires major missile salvo",
+    "prevent regional crisis","wider war engulf","dramatic impacts globe",
+    "unifil peacekeepers beirut","tribute fallen","middle east crisis month two",
+    "collapse iran influence","new spectrum conflicts","fragile ceasefires",
+    "regional rivalries","tenuous israel iran ceasefire","genocidal campaign gaza",
+    "post assad syria","fragile dawn","resumption war israel iran",
+    "evolving dynamics hotspots","geopolitical security trends",
+    "military doctrine middle east fire","durable iran israel ceasefire",
+    "joint israeli us strikes iran","iran subsequent retaliation",
+    "security council middle east","sharp escalation hostilities",
+    "humanitarian access gaza","wider war middle east",
+    "karaj deadly strike","enriched uranium seize","mina al ahmadi refinery",
+    "desalination plant attack","iran children hospital","tehran children hospital",
+    "iranian retaliation karaj","houthis barrage","hezbollah operation",
+    "iran war day","us soldiers gulf","iranian deaths tehran",
+    "enghelab square protests","supreme leader portrait",
+    "irgc commander killed","culture impunity","iran death penalty",
+    "lebanese icc","baharestan esfahan","isfahan strikes",
+    "uss george hw bush","destroyer strike group",
+    "iran nuclear sites bombed","natanz destroyed","fordow strike",
+    "drone swarm iran","us bases qatar attacked","us bases uae",
+    "bahrain base strike","hezbollah escalation beirut",
+    "oil tanker seized","strait hormuz closed","hormuz blockade",
+    "oil price spike","brent crude surge","global oil shock",
+    "iran retaliation israel","missile barrage iran",
+    "operation midnight hammer","b-2 stealth bomber","b-2 bomber iran",
+    "khamenei death","supreme leader killed","irgc leadership collapse",
+    "iran protest","tehran uprising","iranian revolution",
+    "enriched uranium seized","karaj bridge strike",
+    "pakistan lng shortage iran","china teapot refineries",
+    "india ocean iran war","us sinks iranian","indian ocean war iran",
+    "born usa iran","trump birthright iran","iran war ramps",
+    "pope leo iran","american pope iran","off ramp war iran",
+    "macron lee hormuz","macron criticises trump iran","hormuz reopen",
+    "gulf investments geopolitical","qatar energy iran",
+    "saudi missile defense","uae intercept drones","qatar tanker attack",
+    "kuwait fire desalination","oman muscat statement","bahrain manama airport",
+    "iran regime change","iran opposition forces","iran regime stability",
+    "iran succession crisis","iran power struggle","iran hardliners reformists",
+    "iran internet blackout","iran economic collapse","iran shadow fleet",
+    "iran drone exports","iran russia drone deal","iran proxy network",
+    "axis of resistance","bunker buster iran",
+    "israel death by hanging","btselem dehumanization",
+    "war crimes palestinians","dehumanization report",
 ]
 ME_KEYWORDS = set(kw.lower() for kw in RAW_ME_KEYWORDS)
 
@@ -712,6 +761,64 @@ RAW_US_KEYWORDS = [
     "Juneau","Hartford","Dover","Frankfort","Annapolis","Lansing","Saint Paul","Jefferson City","Helena",
     "Carson City","Concord","Trenton","Santa Fe","Albany","Bismarck","Harrisburg","Pierre","Montpelier",
     "Olympia","Charleston","Cheyenne",
+    # ── New US keywords from April 2026 updates ──
+    "trump administration","trump iran war","trump fires pam bondi","pam bondi ousted",
+    "trump ousts army chief","randy george fired","army chief resignation",
+    "pete hegseth defense secretary","hegseth ousts generals","hegseth oust army chief",
+    "supreme court birthright citizenship","trump birthright ban",
+    "supreme court skeptical birthright","biden pardons undermine",
+    "ed martin prosecutor","ed martin interim us attorney",
+    "partial government shutdown","homeland security funding",
+    "republicans shutdown plan","trump national address iran",
+    "trump threatens nato exit","artemis ii launch","artemis ii astronauts",
+    "historic moon mission","tiger woods bodycam","tiger woods dui arrest",
+    "tiger woods florida crash","severe weather tornadoes",
+    "midwest tornadoes","south tornadoes","trump mixed messages iran",
+    "another vietnam iran","us forces iran ground troops",
+    "trump iran operations end soon","artemis ii earth orbit","nasa moon base plans",
+    "chuck schumer dhs shutdown","pope leo off ramp","pope leo iran war",
+    "trump severe attacks","trump ceasefire claims","trump iran debacle",
+    "lawless ice cbp","ice violations camp","milwaukee leaders ice",
+    "ice inspectors violations","detention standards camp east montana",
+    "trump belated case war iran","trump administration sues states",
+    "regulate prediction markets","attorney general pam bondi departure",
+    "todd blanche acting ag","acting attorney general","blanche acting role",
+    "pam bondi out doj","trump fires loyal friend",
+    "army chief general randy george","donald trump ceasefire claims",
+    "nato exit threat","pete hegseth decision oust",
+    "donald trump live announcement","trump unveils global tariffs",
+    "restore fairness tariffs","big psychological boost democrats",
+    "democrats string elections","wisconsin election",
+    "israel takes new territory gaza","squeezing hamas netanyahu",
+    "seized corridor land","trump allied prosecutor","undermine biden pardons",
+    "unorthodox move attorney","washington questioning former president",
+    "joseph r biden jr family","former white house clemency",
+    "todd blanche searches","no kings protest","anti trump protest 2026",
+    "protest march 2026","civil unrest us","doge spending cuts",
+    "elon musk government efficiency","department of government efficiency",
+    "federal layoffs 2026","government workforce reduction","bureaucracy cuts",
+    "social security cuts","medicaid cuts 2026","entitlement reform 2026",
+    "doge savings claims","government spending cuts impact",
+    "kash patel","pete hegseth news","kristi noem","cabinet shake 2026",
+    "trump cabinet 2026","ed martin unorthodox",
+    "trump tariffs supreme court","tariffs ruled unconstitutional","tariff pause",
+    "trump approval rating 2026","trump second term","jd vance 2026","maga midterms",
+    "2026 midterm elections","house flip 2026","senate 2026","democrat wave",
+    "republican hold senate","generic ballot","midterm polling","swing district",
+    "ice enforcement 2026","abolish ice","deportation flights 2026",
+    "sanctuary city crackdown","measles outbreak 2026","vaccine hesitancy 2026",
+    "public health emergency us","one big beautiful bill",
+    "make america healthy again","maha policy","trumprx","trump accounts savings",
+    "credit card interest cap","special senate elections","state budget tightening",
+    "house seat special","democrat outperform","blue wave",
+    "us journalist kidnapped","shelly kittleson","us centcom refutes",
+    "fifth day iran conflict us","us central command",
+    "child care costs us","gas prices rise iran us",
+    "us rejects irgc claim","us fighter jet qeshm",
+    "birth right citizenship","us navy south china sea",
+    "trump tariffs foreign policy","us grand strategy",
+    "america first doctrine","peace through strength","maximum pressure",
+    "deter china strategy","first island chain strategy",
 ]
 US_KEYWORDS = set(kw.lower() for kw in RAW_US_KEYWORDS)
 
@@ -823,6 +930,42 @@ RAW_SPORTS_KEYWORDS = [
     "copa america 2026","concacaf 2026","usmnt world cup","uswnt",
     "commonwealth games 2026","glasgow 2026","asian games 2026",
     "sports gambling 2026","sports betting expansion","nil deals 2026",
+    # ── New Sports keywords from April 2026 updates ──
+    "lakers vs thunder","lakers oklahoma city","uconn south carolina",
+    "uconn huskies women","pirates konnor griffin","pirates extension griffin",
+    "fa cup predictions sutton","fa cup quarter finals",
+    "f1 racing qualifying","f1 thorny issues","chelsea fernandez dropped",
+    "tottenham de zerbi","county championship radio","carabao cup final",
+    "ncaa final four","ncaa tournament expansion","mens college basketball",
+    "womens college basketball","mlb jackie robinson day","uci womens worldtour",
+    "dwars door vlaanderen","world mens curling championship","candidates tournament chess",
+    "ncaa march madness","ncaa womens basketball","sec women basketball tournament",
+    "nfl draft class","lakers thunder game","uconn final four",
+    "chelsea line cross","tottenham turnaround","maverick untamed cherki",
+    "rosenior fernandez","de zerbi tottenham","sutton fa cup",
+    "swiss leicester title","county championship day one",
+    "new f1 rules","football underdog","carabao cup final impact",
+    "jose mourinho","pep guardiola","jurgen klopp","mikel arteta",
+    "flauhjae johnson","sabrina ionescu","aja wilson","breanna stewart",
+    "napheesa collier","aliyah boston","cameron brink","juju watkins",
+    "kirk cousins contract","atlanta falcons","nfl free agency",
+    "nba scoring","nba champion","mlb pitcher","pitcher strikeout",
+    "horse racing derby","triple crown race","preakness stakes","belmont stakes",
+    "ufc title fight","boxing heavyweight","wbc title","ibf champion",
+    "athletics track field","marathon major","boston marathon","chicago marathon",
+    "cycling stage race","vuelta espana","giro ditalia","paris roubaix",
+    "swimming world record","gymnastics worlds","weightlifting championships",
+    "rowing worlds","canoe sprint","volleyball nations league",
+    "rugby six nations","rugby championship","rugby world cup qualifier",
+    "cricket test match","cricket one day","cricket t20","ipl cricket",
+    "australian open winner","french open champion","wimbledon champion",
+    "us open champion tennis","atp finals","wta finals",
+    "super bowl ring","nfl combine","nfl pro bowl","nfl hall of fame",
+    "nba all star","nba draft lottery","nba championship ring",
+    "world series champion","mlb hall of fame","mlb no hitter",
+    "stanley cup champion","nhl all star","nhl award",
+    "premier league table","la liga table","bundesliga table",
+    "serie a table","ligue 1 table","mls cup","concacaf champions cup",
 ]
 SPORTS_KEYWORDS = set(kw.lower() for kw in RAW_SPORTS_KEYWORDS)
 
@@ -3966,8 +4109,40 @@ if top_stories or daily_briefing:
             seen_headlines.add(norm)
             combined_cards.append((sl, cl, ns, lts, lt, ll))
 
-    # Trim to 10
-    combined_cards = combined_cards[:10]
+    # ── Stagger: guarantee one card from every section before any repeats ──
+    def _stagger_cards(raw_cards):
+        ALL_SECTIONS = ["US","Middle East","World","Tech","Business","Sports","Culture"]
+        first_pass = []
+        claimed = set()
+        for section in ALL_SECTIONS:
+            for card in raw_cards:
+                if card[0] == section and section not in claimed:
+                    first_pass.append(card)
+                    claimed.add(section)
+                    break
+        second_pass = [c for c in raw_cards if c not in first_pass]
+        return (first_pass + second_pass)[:10]
+
+    combined_cards = _stagger_cards(combined_cards)
+
+    # ── Derive live page-section order from staggered MRO cards ──
+    _MRO_SECTION_ID_MAP = {
+        "US":"section-us","Middle East":"section-mideast","World":"section-world",
+        "Tech":"section-tech","Business":"section-business",
+        "Sports":"section-sports","Culture":"section-culture",
+    }
+    _DEFAULT_SECTION_ORDER = [
+        "section-us","section-mideast","section-world","section-tech",
+        "section-business","section-sports","section-culture",
+    ]
+    _derived_order = []
+    for sl, _cl, _ns, _lts, _lt, _ll in combined_cards:
+        sid = _MRO_SECTION_ID_MAP.get(sl)
+        if sid and sid not in _derived_order:
+            _derived_order.append(sid)
+    for sid in _DEFAULT_SECTION_ORDER:
+        if sid not in _derived_order:
+            _derived_order.append(sid)
 
     # Split into two columns of 5
     col1_cards = combined_cards[:5]
@@ -4059,16 +4234,50 @@ if top_stories or daily_briefing:
     html_parts.append(ts_html)
 
 
-# ── Build sections in user-preferred order (default order, JS reorders on page) ──
+# ── Build sections ordered by live MRO popularity ──
+# The section whose story ranks highest in "Most Reported On" appears first on the page.
+# _derived_order is computed above from the staggered MRO cards.
+_ALL_SECTION_DATA = {
+    "section-us":       ("us-color",       us_breaking,       us_recent,
+                         '<span class="sec-dot" style="background:#B30000"></span>US &mdash; LAST 3 HOURS',
+                         '<span class="sec-dot" style="background:#B30000"></span>US &mdash; 24-HOUR HEADLINES'),
+    "section-mideast":  ("mideast-color",  middle_breaking,   middle_recent,
+                         '<span class="sec-dot" style="background:#C05000"></span>MIDDLE EAST &mdash; LAST 3 HOURS',
+                         '<span class="sec-dot" style="background:#C05000"></span>MIDDLE EAST &mdash; 24-HOUR HEADLINES'),
+    "section-world":    ("world-color",    world_breaking,    world_recent,
+                         '<span class="sec-dot" style="background:#2E7D9A"></span>WORLD &mdash; LAST 3 HOURS',
+                         '<span class="sec-dot" style="background:#2E7D9A"></span>WORLD &mdash; 24-HOUR HEADLINES'),
+    "section-tech":     ("tech-color",     tech_breaking,     tech_recent,
+                         '<span class="sec-dot" style="background:#005F9E"></span>TECH &amp; LIFE &mdash; LAST 3 HOURS',
+                         '<span class="sec-dot" style="background:#005F9E"></span>TECH &amp; LIFE &mdash; 24-HOUR HEADLINES'),
+    "section-business": ("business-color", business_breaking, business_recent,
+                         '<span class="sec-dot" style="background:#8B6914"></span>BUSINESS &mdash; LAST 3 HOURS',
+                         '<span class="sec-dot" style="background:#8B6914"></span>BUSINESS &mdash; 24-HOUR HEADLINES'),
+    "section-sports":   ("sports-color",   sports_breaking,   sports_recent,
+                         '<span class="sec-dot" style="background:#006B3C"></span>SPORTS &mdash; LAST 3 HOURS',
+                         '<span class="sec-dot" style="background:#006B3C"></span>SPORTS &mdash; 24-HOUR HEADLINES'),
+    "section-culture":  ("culture-color",  culture_breaking,  culture_recent,
+                         '<span class="sec-dot" style="background:#6B006B"></span>CULTURE &mdash; LAST 3 HOURS',
+                         '<span class="sec-dot" style="background:#6B006B"></span>CULTURE &mdash; 24-HOUR HEADLINES'),
+}
+
+# Use MRO-derived order if available, otherwise fall back to default
+try:
+    _ordered_section_ids = _derived_order
+except NameError:
+    _ordered_section_ids = [
+        "section-us","section-mideast","section-world","section-tech",
+        "section-business","section-sports","section-culture",
+    ]
+
 SECTION_DATA = [
-    ("section-us",       "us-color",       us_breaking,       us_recent,       '<span class="sec-dot" style="background:#B30000"></span>US &mdash; LAST 3 HOURS',           '<span class="sec-dot" style="background:#B30000"></span>US &mdash; 24-HOUR HEADLINES'),
-    ("section-mideast",  "mideast-color",  middle_breaking,   middle_recent,   '<span class="sec-dot" style="background:#C05000"></span>MIDDLE EAST &mdash; LAST 3 HOURS',  '<span class="sec-dot" style="background:#C05000"></span>MIDDLE EAST &mdash; 24-HOUR HEADLINES'),
-    ("section-world",    "world-color",    world_breaking,    world_recent,    '<span class="sec-dot" style="background:#2E7D9A"></span>WORLD &mdash; LAST 3 HOURS',         '<span class="sec-dot" style="background:#2E7D9A"></span>WORLD &mdash; 24-HOUR HEADLINES'),
-    ("section-tech",     "tech-color",     tech_breaking,     tech_recent,     '<span class="sec-dot" style="background:#005F9E"></span>TECH &amp; LIFE &mdash; LAST 3 HOURS','<span class="sec-dot" style="background:#005F9E"></span>TECH &amp; LIFE &mdash; 24-HOUR HEADLINES'),
-    ("section-business", "business-color", business_breaking, business_recent, '<span class="sec-dot" style="background:#8B6914"></span>BUSINESS &mdash; LAST 3 HOURS',     '<span class="sec-dot" style="background:#8B6914"></span>BUSINESS &mdash; 24-HOUR HEADLINES'),
-    ("section-sports",   "sports-color",   sports_breaking,   sports_recent,   '<span class="sec-dot" style="background:#006B3C"></span>SPORTS &mdash; LAST 3 HOURS',       '<span class="sec-dot" style="background:#006B3C"></span>SPORTS &mdash; 24-HOUR HEADLINES'),
-    ("section-culture",  "culture-color",  culture_breaking,  culture_recent,  '<span class="sec-dot" style="background:#6B006B"></span>CULTURE &mdash; LAST 3 HOURS',      '<span class="sec-dot" style="background:#6B006B"></span>CULTURE &mdash; 24-HOUR HEADLINES'),
+    (sid,) + _ALL_SECTION_DATA[sid]
+    for sid in _ordered_section_ids
+    if sid in _ALL_SECTION_DATA
 ]
+
+print(f"  Section page order (MRO-driven): {[s[0] for s in SECTION_DATA]}")
+
 html_parts.append('<div id="sections-wrapper">\n')
 for i, (sid, sc, bi, ri, bt, rt) in enumerate(SECTION_DATA):
     html_parts.append(section_block(sid, sc, bi, ri, bt, rt))
