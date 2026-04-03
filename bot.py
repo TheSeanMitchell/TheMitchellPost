@@ -4110,18 +4110,48 @@ if top_stories or daily_briefing:
             combined_cards.append((sl, cl, ns, lts, lt, ll))
 
     # ── Stagger: guarantee one card from every section before any repeats ──
+    # If a section has no multi-source cluster, pull its top solo headline as a fallback.
+    ALL_MRO_SECTIONS = ["US","Middle East","World","Tech","Business","Sports","Culture"]
+
+    # Build a fallback single-headline card for each section (best available item)
+    _section_solo_fallback = {}
+    _solo_section_items = [
+        ("US",          us_breaking + us_recent),
+        ("Middle East", middle_breaking + middle_recent),
+        ("World",       world_breaking + world_recent),
+        ("Tech",        tech_breaking + tech_recent),
+        ("Business",    business_breaking + business_recent),
+        ("Sports",      sports_breaking + sports_recent),
+        ("Culture",     culture_breaking + culture_recent),
+    ]
+    for _sec_label, _sec_items in _solo_section_items:
+        if _sec_items:
+            _best = sorted(_sec_items, key=lambda x: x[0], reverse=True)[0]
+            _ts, _ttl, _src, _lnk = _best
+            _norm = normalize_title(_ttl)
+            # Only use as fallback if not already in combined_cards
+            _already_in = any(normalize_title(c[4]) == _norm for c in combined_cards)
+            if not _already_in:
+                _section_solo_fallback[_sec_label] = (_sec_label, [_best], 1, _ts, _ttl, _lnk)
+
     def _stagger_cards(raw_cards):
-        ALL_SECTIONS = ["US","Middle East","World","Tech","Business","Sports","Culture"]
         first_pass = []
         claimed = set()
-        for section in ALL_SECTIONS:
+        # First pass: pick the highest-ranked card from each section
+        for section in ALL_MRO_SECTIONS:
             for card in raw_cards:
                 if card[0] == section and section not in claimed:
                     first_pass.append(card)
                     claimed.add(section)
                     break
+        # For any section still missing, inject the solo fallback
+        for section in ALL_MRO_SECTIONS:
+            if section not in claimed and section in _section_solo_fallback:
+                first_pass.append(_section_solo_fallback[section])
+                claimed.add(section)
+        # Second pass: remaining popular cards (already deduped), up to 7 more
         second_pass = [c for c in raw_cards if c not in first_pass]
-        return (first_pass + second_pass)[:10]
+        return (first_pass + second_pass)[:14]
 
     combined_cards = _stagger_cards(combined_cards)
 
@@ -4144,9 +4174,9 @@ if top_stories or daily_briefing:
         if sid not in _derived_order:
             _derived_order.append(sid)
 
-    # Split into two columns of 5
-    col1_cards = combined_cards[:5]
-    col2_cards = combined_cards[5:10]
+    # Split into two columns of up to 7 each (guaranteed 7 sections + up to 7 popular extras)
+    col1_cards = combined_cards[:7]
+    col2_cards = combined_cards[7:14]
 
     def render_mro_cards(cards):
         html = ''
