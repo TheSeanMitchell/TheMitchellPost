@@ -1184,7 +1184,7 @@ RAW_TECH_KEYWORDS = [
 TECH_KEYWORDS = set(kw.lower() for kw in RAW_TECH_KEYWORDS)
 
 RAW_CULTURE_KEYWORDS = [
-    "celebrity news","celebrity gossip","hollywood news","red carpet fashion",
+    "celebrity news","wireless festival","celebrity gossip","hollywood news","red carpet fashion",
     "awards show coverage","oscars red carpet","golden globes fashion","emmys fashion",
     "met gala looks","fashion week paris","fashion week milan","fashion week new york",
     "fashion week london","haute couture","ready to wear fashion","runway shows",
