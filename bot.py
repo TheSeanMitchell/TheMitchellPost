@@ -2928,23 +2928,14 @@ print("Building canonical cluster sets...")
 
 def _build_section_clusters(breaking_items, recent_items):
     """
-    Build two separate cluster sets (breaking and recent) from pre-combined items,
-    but first build a COMBINED set to find the globally best cluster per story,
-    then split rendered output by time window.
-    Returns (breaking_clusters, recent_clusters, combined_clusters_for_mro)
+    Build one canonical combined cluster set from the full 24h item pool.
+    The breaking/recent visual split is done at render time by comparing each
+    cluster's lead-article timestamp against the 3-hour window — this way a
+    story reported by 6 sources across both windows stays together as one group.
+    Returns (combined_clusters,) — a single list used for both rendering and MRO.
     """
     combined = breaking_items + recent_items
-    # Canonical combined clustering for MRO — authoritative source of truth
-    combined_clusters = cluster_items(combined, min_shared=3)
-
-    # For rendering we split by time window. We re-run clustering on each window
-    # BUT we seed with the same min_shared so the grouping logic is identical.
-    # Items that appeared in a combined cluster will cluster the same way within
-    # their window (or solo if their match is in the other window).
-    breaking_clusters = cluster_items(breaking_items, min_shared=3)
-    recent_clusters   = cluster_items(recent_items,   min_shared=3)
-
-    return breaking_clusters, recent_clusters, combined_clusters
+    return cluster_items(combined, min_shared=3)
 
 SECTION_CLUSTERS = {}
 _CLUSTER_INPUTS = [
@@ -2957,18 +2948,13 @@ _CLUSTER_INPUTS = [
     ("culture",  culture_breaking, culture_recent),
 ]
 for _sid, _bi, _ri in _CLUSTER_INPUTS:
-    _bc, _rc, _cc = _build_section_clusters(_bi, _ri)
+    _cc = _build_section_clusters(_bi, _ri)
     SECTION_CLUSTERS[_sid] = {
-        "breaking": _bc,
-        "recent":   _rc,
-        "combined": _cc,   # used exclusively by MRO
+        "combined": _cc,   # used for both rendering AND MRO — single source of truth
     }
-    _multi_b = sum(1 for cl in _bc if len(cl) > 1)
-    _multi_r = sum(1 for cl in _rc if len(cl) > 1)
     _multi_c = sum(1 for cl in _cc if len(cl) > 1)
-    print(f"  [{_sid}] breaking={len(_bc)} clusters ({_multi_b} multi), "
-          f"recent={len(_rc)} clusters ({_multi_r} multi), "
-          f"combined={len(_cc)} clusters ({_multi_c} multi-source)")
+    _total_items = sum(len(cl) for cl in _cc)
+    print(f"  [{_sid}] {len(_cc)} clusters ({_multi_c} multi-source, {_total_items} total items)")
 
 print("Canonical clusters done.")
 
@@ -4082,15 +4068,37 @@ print("AI summaries done.")
 
 def section_block(section_id, color_class, breaking_items, recent_items,
                   breaking_title, recent_title):
-    # Use pre-built canonical clusters so the rendered source counts exactly match MRO
+    # Use canonical COMBINED clusters for rendering.
+    # We split clusters into the "breaking" column vs "recent" column based on
+    # the lead article's timestamp — but the FULL cluster (all sources) always
+    # stays together in whichever column its most-recent article belongs to.
+    # This is the only way to guarantee that a "6 sources" MRO card shows all
+    # 6 sources when the user jumps to it, even when those sources span both windows.
     _sid = section_id.replace("section-", "")
-    _bc = SECTION_CLUSTERS[_sid]["breaking"]
-    _rc = SECTION_CLUSTERS[_sid]["recent"]
+    _combined_clusters = SECTION_CLUSTERS[_sid]["combined"]
 
-    b_summary = source_summary(breaking_items) if breaking_items else ''
-    r_summary = source_summary(recent_items) if recent_items else ''
-    b_content = render_clusters(_bc) if _bc else '<p style="color:#666">No breaking news in the last 3 hours.</p>\n'
-    r_content = render_clusters(_rc) if _rc else '<p style="color:#666">No additional headlines right now.</p>\n'
+    now = time.time()
+    _breaking_threshold = 3 * 3600  # 3 hours
+
+    # Split combined clusters by lead-article age
+    _b_clusters = []
+    _r_clusters = []
+    for _cl in _combined_clusters:
+        _cl.sort(key=lambda x: x[0], reverse=True)
+        _lead_age = now - _cl[0][0]
+        if _lead_age <= _breaking_threshold:
+            _b_clusters.append(_cl)
+        else:
+            _r_clusters.append(_cl)
+
+    # Count individual items for the source summary
+    _b_items = [item for cl in _b_clusters for item in cl]
+    _r_items = [item for cl in _r_clusters for item in cl]
+
+    b_summary = source_summary(_b_items) if _b_items else ''
+    r_summary = source_summary(_r_items) if _r_items else ''
+    b_content = render_clusters(_b_clusters) if _b_clusters else '<p style="color:#666">No breaking news in the last 3 hours.</p>\n'
+    r_content = render_clusters(_r_clusters) if _r_clusters else '<p style="color:#666">No additional headlines right now.</p>\n'
     # Pull the pre-generated AI summary for this section
     ai_text = AI_SUMMARIES.get(section_id, "")
     if ai_text:
@@ -4305,25 +4313,23 @@ if top_stories or daily_briefing:
             _derived_order.append(sid)
 
     # ── Build a lookup of every anchor that will actually appear on the rendered page ──
-    # Key = md5 hash of the lead link; Value = anchor ID prefix ("cl" or "hl")
-    # This lets render_mro_cards emit the correct anchor even when a combined-cluster
-    # lead renders as a solo headline in the breaking/recent split.
+    # Key = md5 hash of a link; Value = "cl" (cluster lead) or "hl" (solo headline)
+    # We scan the combined clusters and compute the anchor ID that render_clusters will emit.
     _page_anchor_index = {}  # link_hash -> "cl" | "hl"
     for _sec_id_key in ["us","mideast","world","tech","business","sports","culture"]:
-        for _col_key in ["breaking","recent"]:
-            for _page_cl in SECTION_CLUSTERS[_sec_id_key][_col_key]:
-                if not _page_cl:
-                    continue
-                _page_cl.sort(key=lambda x: x[0], reverse=True)
-                _page_lead_link = _page_cl[0][3]
-                _page_hash = hashlib.md5(_page_lead_link.encode()).hexdigest()[:8]
-                _type = "cl" if len(_page_cl) > 1 else "hl"
-                _page_anchor_index[_page_hash] = _type
-                # Also index every non-lead item in the cluster as pointing to the cluster anchor
-                for _item in _page_cl[1:]:
-                    _item_hash = hashlib.md5(_item[3].encode()).hexdigest()[:8]
-                    if _item_hash not in _page_anchor_index:
-                        _page_anchor_index[_item_hash] = _type  # same cluster
+        for _page_cl in SECTION_CLUSTERS[_sec_id_key]["combined"]:
+            if not _page_cl:
+                continue
+            _page_cl.sort(key=lambda x: x[0], reverse=True)
+            _page_lead_link = _page_cl[0][3]
+            _page_hash = hashlib.md5(_page_lead_link.encode()).hexdigest()[:8]
+            _type = "cl" if len(_page_cl) > 1 else "hl"
+            _page_anchor_index[_page_hash] = _type
+            # Also index every non-lead item in the cluster — they share the cluster anchor
+            for _item in _page_cl[1:]:
+                _item_hash = hashlib.md5(_item[3].encode()).hexdigest()[:8]
+                if _item_hash not in _page_anchor_index:
+                    _page_anchor_index[_item_hash] = _type
 
     # Split into two columns of 5
     col1_cards = combined_cards[:5]
@@ -5190,52 +5196,63 @@ document.addEventListener('DOMContentLoaded', function() {
         { src: 'https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJj3l8Bg&autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1&enablejsapi=1', label: 'Feed 10' },
     ];
 
+    // ── Hardcoded main-page feed URLs — the definitive restore list ──
+    // These must match exactly the data-src / src values in the banner HTML.
+    var MAIN_FEED_SRCS = [
+        'https://www.youtube.com/embed/iipR5yUp36o?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+        'https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+        'https://www.youtube.com/embed/QliL4CGc7iY?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+        'https://www.youtube.com/embed/pykpO5kQJ98?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+        'https://www.youtube.com/embed/YDvsBbKfLPA?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+        'https://www.youtube.com/embed/vfszY1JYbMc?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+        'https://www.youtube.com/embed/_6dRRfnYJws?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+        'https://www.youtube.com/embed/iEpJwprxDdk?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+        'https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+        'https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJj3l8Bg&autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
+    ];
+
     // ── Main-page video suspend / restore ──
-    // We save the src list and then blank all main-page iframes before opening WR.
     var _mainBannerVisible = false;
-    var _savedMainSrcs = [];  // indexed by position in .banner .youtube-inset iframe
 
     function _suspendMainVideos() {
         var banner = document.querySelector('.banner');
         if (!banner) return;
         _mainBannerVisible = (banner.style.display !== 'none');
-        var iframes = banner.querySelectorAll('.youtube-inset iframe');
-        _savedMainSrcs = [];
-        iframes.forEach(function(iframe) {
-            _savedMainSrcs.push(iframe.src || '');
-            // Blank the iframe — this immediately stops all network streams and audio
-            iframe.src = 'about:blank';
-        });
-        // Also clear any players array so the YT API doesn't try to manage dead iframes
+        // Destroy YT API players first so they don't fight us
         if (window.players && window.players.length) {
             window.players.forEach(function(p) { try { p.destroy(); } catch(e) {} });
             window.players = [];
         }
+        // Blank every iframe — immediately halts all network streams and audio
+        banner.querySelectorAll('.youtube-inset iframe').forEach(function(iframe) {
+            iframe.src = 'about:blank';
+        });
     }
 
     function _restoreMainVideos() {
         var banner = document.querySelector('.banner');
         if (!banner) return;
-        if (!_mainBannerVisible) {
-            // Was hidden before WR opened — leave it hidden
-            return;
-        }
+        if (!_mainBannerVisible) return;  // was hidden before WR — leave hidden
         banner.style.display = '';
-        var iframes = banner.querySelectorAll('.youtube-inset iframe');
-        iframes.forEach(function(iframe, i) {
-            var src = _savedMainSrcs[i] || '';
-            if (src && src !== 'about:blank') {
-                iframe.src = src;
-            }
+        // Rebuild each iframe from the hardcoded source list — reliable, never stale
+        var insets = banner.querySelectorAll('.youtube-inset');
+        insets.forEach(function(inset, i) {
+            // Remove any existing iframe (may be blanked)
+            var old = inset.querySelector('iframe');
+            if (old) inset.removeChild(old);
+            var iframe = document.createElement('iframe');
+            iframe.src = MAIN_FEED_SRCS[i] || MAIN_FEED_SRCS[0];
+            iframe.setAttribute('allow', 'autoplay; encrypted-media');
+            iframe.setAttribute('allowfullscreen', '');
+            iframe.setAttribute('frameborder', '0');
+            iframe.style.cssText = 'width:100%;height:100%;border:none;display:block;';
+            inset.appendChild(iframe);
         });
-        // Reset saved state
-        _savedMainSrcs = [];
     }
 
     // ── WR grid build / destroy ──
     function _buildWRGrid() {
-        // Clear any leftover cells from a previous session
-        grid.innerHTML = '';
+        grid.innerHTML = '';  // clear any previous session
         WR_FEEDS.forEach(function(feed) {
             var cell = document.createElement('div');
             cell.className = 'wr-cell';
@@ -5254,13 +5271,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function _destroyWRGrid() {
-        // Blank each iframe before removing — immediately stops audio/network
-        var iframes = grid.querySelectorAll('iframe');
-        iframes.forEach(function(iframe) {
+        // Blank each iframe synchronously — stops audio/network immediately
+        grid.querySelectorAll('iframe').forEach(function(iframe) {
             iframe.src = 'about:blank';
         });
-        // Small delay lets browser acknowledge the blank before DOM removal
-        setTimeout(function() { grid.innerHTML = ''; }, 80);
+        // Clear DOM synchronously after blanking
+        grid.innerHTML = '';
     }
 
     // ── Open / Close ──
@@ -5269,8 +5285,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function openWR() {
         if (_wrIsOpen) return;
         _wrIsOpen = true;
-        _suspendMainVideos();         // kill 10 main-page streams first
-        _buildWRGrid();               // then start 10 WR streams
+        _suspendMainVideos();   // kill main-page streams first (sync)
+        _buildWRGrid();         // start WR streams
         overlay.classList.add('wr-open');
         document.body.style.overflow = 'hidden';
         try {
@@ -5285,17 +5301,17 @@ document.addEventListener('DOMContentLoaded', function() {
         _wrIsOpen = false;
         overlay.classList.remove('wr-open');
         document.body.style.overflow = '';
-        _destroyWRGrid();             // kill 10 WR streams
-        // Wait a tick so browser processes blank srcs before restoring main page iframes
-        setTimeout(function() {
-            _restoreMainVideos();     // then restore 10 main-page streams
-        }, 150);
+        _destroyWRGrid();       // kill WR streams (sync)
+        // Exit fullscreen before restoring main feeds
         try {
             if (document.fullscreenElement && document.exitFullscreen)
                 document.exitFullscreen();
             else if (document.webkitFullscreenElement && document.webkitExitFullscreen)
                 document.webkitExitFullscreen();
         } catch(e) {}
+        // Restore main-page iframes after a short delay so the browser has
+        // fully processed the WR iframe removals and fullscreen exit
+        setTimeout(function() { _restoreMainVideos(); }, 300);
     }
 
     openBtn.addEventListener('click', openWR);
