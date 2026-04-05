@@ -3800,15 +3800,19 @@ html_parts.append(f"""<!DOCTYPE html>
         flex: 1; display: grid;
         grid-template-columns: repeat(5, 1fr);
         grid-template-rows: repeat(2, 1fr);
-        gap: 5px; padding: 8px; min-height: 0;
+        gap: 3px; padding: 4px; min-height: 0;
     }}
     .wr-cell {{
-        position: relative; background: #0a0a0a;
-        border-radius: 3px; overflow: hidden;
-        border: 2px solid #1a1a1a;
+        position: relative; background: #000;
+        border-radius: 2px; overflow: hidden;
+        border: 1px solid #111;
+        /* Fill entire cell — no black bars */
+        display: flex; align-items: stretch;
     }}
     .wr-cell iframe {{
         width: 100%; height: 100%; border: none; display: block;
+        /* Stretch to fill; browsers treat iframe content as 16:9 internally */
+        flex: 1; min-height: 0;
     }}
     .wr-cell-num {{
         position: absolute; top: 6px; left: 8px;
@@ -4109,12 +4113,11 @@ if top_stories or daily_briefing:
             seen_headlines.add(norm)
             combined_cards.append((sl, cl, ns, lts, lt, ll))
 
-    # ── MRO Layout: 7 guaranteed (one per section, tab order) + 3 most popular = 10 total ──
-    # Tab order matches the nav bar: US, Middle East, World, Tech & Life, Business, Sports, Culture
+    # ── MRO Layout: 7 guaranteed (one per section, MRO popularity order) + 3 most popular = 10 total ──
+    # For EACH section we find the cluster with the MOST sources (not just the first/most-recent).
+    # This guarantees we never show a 1-source article when a 4-source cluster exists in the same section.
     TAB_ORDER = ["US","Middle East","World","Tech","Business","Sports","Culture"]
 
-    # Build best available card per section (cluster first, solo fallback)
-    _best_per_section = {}
     _solo_section_items = [
         ("US",          us_breaking + us_recent),
         ("Middle East", middle_breaking + middle_recent),
@@ -4125,22 +4128,40 @@ if top_stories or daily_briefing:
         ("Culture",     culture_breaking + culture_recent),
     ]
 
-    # First try to find each section's top cluster card from combined_cards
-    for section in TAB_ORDER:
-        for card in combined_cards:
-            if card[0] == section and section not in _best_per_section:
-                _best_per_section[section] = card
-                break
-
-    # For any section still missing, fall back to its top solo headline
+    # Build a per-section "best cluster" by scanning ALL clusters for that section,
+    # sorted by (source_count DESC, recency DESC). This ensures the most-reported story wins.
+    _best_per_section = {}
     for _sec_label, _sec_items in _solo_section_items:
-        if _sec_label not in _best_per_section and _sec_items:
+        if not _sec_items:
+            continue
+        _sec_clusters = cluster_items(_sec_items, min_shared=3)
+        # Score: primary = number of sources, secondary = recency of lead article
+        _sec_clusters_scored = []
+        for _cl in _sec_clusters:
+            _cl.sort(key=lambda x: x[0], reverse=True)
+            _n = len(_cl)
+            _lead_ts = _cl[0][0]
+            _sec_clusters_scored.append((_n, _lead_ts, _cl))
+        # Sort: most sources first, then most recent as tiebreaker
+        _sec_clusters_scored.sort(key=lambda x: (x[0], x[1]), reverse=True)
+        if _sec_clusters_scored:
+            _n, _lead_ts, _cl = _sec_clusters_scored[0]
+            _lead_ts2, _lead_title, _lead_source, _lead_link = _cl[0]
+            _best_per_section[_sec_label] = (_sec_label, _cl, _n, _lead_ts2, _lead_title, _lead_link)
+        else:
+            # No cluster at all — fall back to the single most-recent headline
             _best = sorted(_sec_items, key=lambda x: x[0], reverse=True)[0]
             _ts, _ttl, _src, _lnk = _best
             _best_per_section[_sec_label] = (_sec_label, [_best], 1, _ts, _ttl, _lnk)
 
-    # Build first 7 in strict tab order
-    first_seven = [_best_per_section[s] for s in TAB_ORDER if s in _best_per_section]
+    # Order the first 7 by their cluster source count (most-reported section first),
+    # then by lead article recency as tiebreaker — this drives the page section order too.
+    _ordered_by_popularity = sorted(
+        [_best_per_section[s] for s in TAB_ORDER if s in _best_per_section],
+        key=lambda c: (c[2], c[3]),  # (source_count, lead_ts) both desc
+        reverse=True
+    )
+    first_seven = _ordered_by_popularity
 
     # Last 3: most popular cards NOT already in first_seven (by source count desc)
     _first_seven_norms = {normalize_title(c[4]) for c in first_seven}
@@ -4150,7 +4171,7 @@ if top_stories or daily_briefing:
 
     combined_cards = first_seven + last_three  # exactly 10
 
-    # ── Derive live page-section order from staggered MRO cards ──
+    # ── Derive live page-section order: sections are ordered by their MRO source count (most-reported first) ──
     _MRO_SECTION_ID_MAP = {
         "US":"section-us","Middle East":"section-mideast","World":"section-world",
         "Tech":"section-tech","Business":"section-business",
@@ -4160,11 +4181,18 @@ if top_stories or daily_briefing:
         "section-us","section-mideast","section-world","section-tech",
         "section-business","section-sports","section-culture",
     ]
+    # Build derived order from the popularity-sorted first_seven
     _derived_order = []
-    for sl, _cl, _ns, _lts, _lt, _ll in combined_cards:
+    for sl, _cl, _ns, _lts, _lt, _ll in first_seven:
         sid = _MRO_SECTION_ID_MAP.get(sl)
         if sid and sid not in _derived_order:
             _derived_order.append(sid)
+    # Then from last_three (for any section not yet in the list)
+    for sl, _cl, _ns, _lts, _lt, _ll in last_three:
+        sid = _MRO_SECTION_ID_MAP.get(sl)
+        if sid and sid not in _derived_order:
+            _derived_order.append(sid)
+    # Fill any remaining sections in default order
     for sid in _DEFAULT_SECTION_ORDER:
         if sid not in _derived_order:
             _derived_order.append(sid)
@@ -4948,158 +4976,63 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(checkForUpdates, 10000); // first check after 10s
 })();
 
-// ── WAITING ROOM MODE — postMessage approach, no YT API needed ──
-// Uses YouTube's iframe postMessage API to unmute/mute iframes directly.
-// Also: passive message listener sets red border on whichever iframe sends
-// an onStateChange=1 (playing) + volume>0 signal.
+// ── MAIN-PAGE AUDIO SINGLE-SOURCE ENFORCEMENT ──
+// When a user unmutes a main-page video, mute all other main-page videos.
+// This block handles ONLY the .banner iframes (main page), not WR iframes.
 (function() {
-    var wrToggle = document.getElementById('waiting-room-toggle');
-    if (!wrToggle) return;
-
-    var WR_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
-    var _wrTimer = null;
-    var _wrIdx   = 0;
-    var _wrLabel = null; // floating label showing which channel is active
-
-    function _getInsets() {
-        return Array.from(document.querySelectorAll('.youtube-inset'));
-    }
-
-    function _postToIframe(iframe, data) {
+    function _postToMainIframe(iframe, data) {
         try { iframe.contentWindow.postMessage(JSON.stringify(data), '*'); } catch(e) {}
     }
-
-    function _muteAll() {
-        _getInsets().forEach(function(inset) {
-            var iframe = inset.querySelector('iframe');
-            if (iframe) _postToIframe(iframe, { event: 'command', func: 'mute', args: [] });
-            inset.classList.remove('audio-active');
-            inset.style.outline = '';
-        });
-    }
-
-    function _unmuteAt(idx) {
-        var insets = _getInsets();
-        if (!insets.length) return;
-        var target = insets[idx % insets.length];
-        if (!target) return;
-        var iframe = target.querySelector('iframe');
-        // Mute all first
-        _muteAll();
-        // Unmute and set volume on target
-        if (iframe) {
-            _postToIframe(iframe, { event: 'command', func: 'unMute',    args: [] });
-            _postToIframe(iframe, { event: 'command', func: 'setVolume', args: [85] });
-        }
-        // Apply red border
-        target.classList.add('audio-active');
-        target.style.outline      = '3px solid #B30000';
-        target.style.outlineOffset = '2px';
-        // Update floating label
-        if (_wrLabel) {
-            _wrLabel.textContent = 'Waiting Room: Feed ' + ((idx % insets.length) + 1) + ' of ' + insets.length;
-            _wrLabel.style.display = 'block';
-        }
-    }
-
-    function _startWR() {
-        if (_wrTimer) clearInterval(_wrTimer);
-        // Make sure videos are visible
-        var banner = document.querySelector('.banner');
-        if (banner && banner.style.display === 'none') {
-            banner.style.display = '';
-            var vtoggle = document.getElementById('video-feed-toggle');
-            if (vtoggle) vtoggle.checked = false;
-        }
-        _wrIdx = 0;
-        _unmuteAt(_wrIdx);
-        _wrTimer = setInterval(function() {
-            _wrIdx++;
-            var total = _getInsets().length;
-            if (_wrIdx >= total) _wrIdx = 0;
-            _unmuteAt(_wrIdx);
-        }, WR_INTERVAL_MS);
-    }
-
-    function _stopWR() {
-        if (_wrTimer) { clearInterval(_wrTimer); _wrTimer = null; }
-        _muteAll();
-        if (_wrLabel) _wrLabel.style.display = 'none';
-    }
-
-    // Create floating status label
-    _wrLabel = document.createElement('div');
-    _wrLabel.style.cssText = [
-        'display:none','position:fixed','bottom:20px','left:50%',
-        'transform:translateX(-50%)','background:#B30000','color:#fff',
-        'padding:6px 18px','border-radius:4px','font-size:0.8em',
-        'font-weight:bold','z-index:9998','letter-spacing:0.04em',
-        'box-shadow:0 2px 10px rgba(0,0,0,0.4)'
-    ].join(';');
-    document.body.appendChild(_wrLabel);
-
-    wrToggle.addEventListener('change', function() {
-        if (wrToggle.checked) _startWR();
-        else _stopWR();
-    });
-
-    // ── Passive red-border listener: detect when user manually unmutes any iframe ──
-    // YT iframes post messages back; we watch for volume/playing signals
     window.addEventListener('message', function(e) {
         if (!e.data || typeof e.data !== 'string') return;
         var data;
         try { data = JSON.parse(e.data); } catch(x) { return; }
-        // YT sends {event:'infoDelivery', info:{volume, muted, playerState}}
         if (data.event !== 'infoDelivery' || !data.info) return;
         var info = data.info;
         var isPlaying = (info.playerState === 1);
         var isUnmuted = (typeof info.muted !== 'undefined' && !info.muted && info.volume > 0);
-        if (isPlaying && isUnmuted) {
-            // Find which iframe sent this message
-            var iframes = document.querySelectorAll('.youtube-inset iframe');
-            iframes.forEach(function(iframe) {
-                if (iframe.contentWindow === e.source) {
-                    // Clear all borders
-                    document.querySelectorAll('.youtube-inset').forEach(function(inset) {
+        if (!isPlaying || !isUnmuted) {
+            // If muted, clear border
+            if (typeof info.muted !== 'undefined' && info.muted) {
+                document.querySelectorAll('.banner .youtube-inset').forEach(function(inset) {
+                    var iframe = inset.querySelector('iframe');
+                    if (iframe && iframe.contentWindow === e.source) {
                         inset.classList.remove('audio-active');
                         inset.style.outline = '';
-                    });
-                    // Set border on this one
-                    var parent = iframe.parentElement;
-                    if (parent) {
-                        parent.classList.add('audio-active');
-                        parent.style.outline       = '3px solid #B30000';
-                        parent.style.outlineOffset = '2px';
                     }
-                    // Mute all other iframes via postMessage
-                    iframes.forEach(function(other) {
-                        if (other !== iframe) {
-                            _postToIframe(other, { event:'command', func:'mute', args:[] });
-                        }
-                    });
-                }
-            });
+                });
+            }
+            return;
         }
-        // If muted or paused, clear border for this source
-        if (typeof info.muted !== 'undefined' && info.muted) {
-            document.querySelectorAll('.youtube-inset iframe').forEach(function(iframe) {
-                if (iframe.contentWindow === e.source) {
-                    var parent = iframe.parentElement;
-                    if (parent && parent.classList.contains('audio-active')) {
-                        parent.classList.remove('audio-active');
-                        parent.style.outline = '';
-                    }
-                }
-            });
-        }
+        var mainIframes = document.querySelectorAll('.banner .youtube-inset iframe');
+        var activeInset = null;
+        mainIframes.forEach(function(iframe) {
+            if (iframe.contentWindow === e.source) {
+                activeInset = iframe.closest('.youtube-inset');
+            }
+        });
+        if (!activeInset) return; // Not a main-page iframe
+        // Clear all borders then mute all others
+        document.querySelectorAll('.banner .youtube-inset').forEach(function(inset) {
+            inset.classList.remove('audio-active');
+            inset.style.outline = '';
+            var f = inset.querySelector('iframe');
+            if (f && inset !== activeInset) {
+                _postToMainIframe(f, {event:'command', func:'mute', args:[]});
+            }
+        });
+        activeInset.classList.add('audio-active');
+        activeInset.style.outline = '3px solid #B30000';
+        activeInset.style.outlineOffset = '2px';
     });
-
 })();
 
 
 // ── WAITING ROOM — fullscreen video wall ──
-// Opens a full-screen overlay with all 10 feeds tiled in a 5x2 grid.
-// No audio automation — user clicks whichever feed they want to hear.
+// On OPEN:  destroys main-page iframes (stops 10 streams) then starts 10 WR streams.
+// On CLOSE: destroys WR iframes (stops 10 streams) then restores main-page iframes.
+// This ensures exactly 10 streams are ever running at once — never 20.
+// No audio automation inside WR — user clicks whichever feed they want to hear.
 // ESC or the Exit button returns to the site.
 (function() {
     var openBtn  = document.getElementById('wr-fullscreen-btn');
@@ -5109,22 +5042,64 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!openBtn || !overlay || !closeBtn || !grid) return;
 
     var WR_FEEDS = [
-        { src: 'https://www.youtube.com/embed/iipR5yUp36o?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1', label: 'Feed 1' },
-        { src: 'https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 2' },
-        { src: 'https://www.youtube.com/embed/QliL4CGc7iY?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 3' },
-        { src: 'https://www.youtube.com/embed/pykpO5kQJ98?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 4' },
-        { src: 'https://www.youtube.com/embed/YDvsBbKfLPA?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 5' },
-        { src: 'https://www.youtube.com/embed/vfszY1JYbMc?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 6' },
-        { src: 'https://www.youtube.com/embed/_6dRRfnYJws?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 7' },
-        { src: 'https://www.youtube.com/embed/iEpJwprxDdk?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 8' },
-        { src: 'https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1',  label: 'Feed 9' },
-        { src: 'https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJj3l8Bg&autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1', label: 'Feed 10' },
+        { src: 'https://www.youtube.com/embed/iipR5yUp36o?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1&enablejsapi=1', label: 'Feed 1' },
+        { src: 'https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1&enablejsapi=1',  label: 'Feed 2' },
+        { src: 'https://www.youtube.com/embed/QliL4CGc7iY?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1&enablejsapi=1',  label: 'Feed 3' },
+        { src: 'https://www.youtube.com/embed/pykpO5kQJ98?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1&enablejsapi=1',  label: 'Feed 4' },
+        { src: 'https://www.youtube.com/embed/YDvsBbKfLPA?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1&enablejsapi=1',  label: 'Feed 5' },
+        { src: 'https://www.youtube.com/embed/vfszY1JYbMc?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1&enablejsapi=1',  label: 'Feed 6' },
+        { src: 'https://www.youtube.com/embed/_6dRRfnYJws?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1&enablejsapi=1',  label: 'Feed 7' },
+        { src: 'https://www.youtube.com/embed/iEpJwprxDdk?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1&enablejsapi=1',  label: 'Feed 8' },
+        { src: 'https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1&enablejsapi=1',  label: 'Feed 9' },
+        { src: 'https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJj3l8Bg&autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1&enablejsapi=1', label: 'Feed 10' },
     ];
 
-    var _built = false;
-    function buildGrid() {
-        if (_built) return;
-        _built = true;
+    // ── Main-page video suspend / restore ──
+    // We save the src list and then blank all main-page iframes before opening WR.
+    var _mainBannerVisible = false;
+    var _savedMainSrcs = [];  // indexed by position in .banner .youtube-inset iframe
+
+    function _suspendMainVideos() {
+        var banner = document.querySelector('.banner');
+        if (!banner) return;
+        _mainBannerVisible = (banner.style.display !== 'none');
+        var iframes = banner.querySelectorAll('.youtube-inset iframe');
+        _savedMainSrcs = [];
+        iframes.forEach(function(iframe) {
+            _savedMainSrcs.push(iframe.src || '');
+            // Blank the iframe — this immediately stops all network streams and audio
+            iframe.src = 'about:blank';
+        });
+        // Also clear any players array so the YT API doesn't try to manage dead iframes
+        if (window.players && window.players.length) {
+            window.players.forEach(function(p) { try { p.destroy(); } catch(e) {} });
+            window.players = [];
+        }
+    }
+
+    function _restoreMainVideos() {
+        var banner = document.querySelector('.banner');
+        if (!banner) return;
+        if (!_mainBannerVisible) {
+            // Was hidden before WR opened — leave it hidden
+            return;
+        }
+        banner.style.display = '';
+        var iframes = banner.querySelectorAll('.youtube-inset iframe');
+        iframes.forEach(function(iframe, i) {
+            var src = _savedMainSrcs[i] || '';
+            if (src && src !== 'about:blank') {
+                iframe.src = src;
+            }
+        });
+        // Reset saved state
+        _savedMainSrcs = [];
+    }
+
+    // ── WR grid build / destroy ──
+    function _buildWRGrid() {
+        // Clear any leftover cells from a previous session
+        grid.innerHTML = '';
         WR_FEEDS.forEach(function(feed) {
             var cell = document.createElement('div');
             cell.className = 'wr-cell';
@@ -5132,7 +5107,7 @@ document.addEventListener('DOMContentLoaded', function() {
             iframe.src = feed.src;
             iframe.setAttribute('allow', 'autoplay; encrypted-media; fullscreen');
             iframe.setAttribute('allowfullscreen', '');
-            iframe.frameBorder = '0';
+            iframe.setAttribute('frameborder', '0');
             var lbl = document.createElement('div');
             lbl.className = 'wr-cell-num';
             lbl.textContent = feed.label;
@@ -5142,8 +5117,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    function _destroyWRGrid() {
+        // Blank each iframe before removing — immediately stops audio/network
+        var iframes = grid.querySelectorAll('iframe');
+        iframes.forEach(function(iframe) {
+            iframe.src = 'about:blank';
+        });
+        // Small delay lets browser acknowledge the blank before DOM removal
+        setTimeout(function() { grid.innerHTML = ''; }, 80);
+    }
+
+    // ── Open / Close ──
+    var _wrIsOpen = false;
+
     function openWR() {
-        buildGrid();
+        if (_wrIsOpen) return;
+        _wrIsOpen = true;
+        _suspendMainVideos();         // kill 10 main-page streams first
+        _buildWRGrid();               // then start 10 WR streams
         overlay.classList.add('wr-open');
         document.body.style.overflow = 'hidden';
         try {
@@ -5154,24 +5145,68 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function closeWR() {
+        if (!_wrIsOpen) return;
+        _wrIsOpen = false;
         overlay.classList.remove('wr-open');
         document.body.style.overflow = '';
+        _destroyWRGrid();             // kill 10 WR streams
+        // Wait a tick so browser processes blank srcs before restoring main page iframes
+        setTimeout(function() {
+            _restoreMainVideos();     // then restore 10 main-page streams
+        }, 150);
         try {
-            if (document.fullscreenElement && document.exitFullscreen)               document.exitFullscreen();
-            else if (document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
+            if (document.fullscreenElement && document.exitFullscreen)
+                document.exitFullscreen();
+            else if (document.webkitFullscreenElement && document.webkitExitFullscreen)
+                document.webkitExitFullscreen();
         } catch(e) {}
     }
 
     openBtn.addEventListener('click', openWR);
     closeBtn.addEventListener('click', closeWR);
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && overlay.classList.contains('wr-open')) closeWR();
+        if (e.key === 'Escape' && _wrIsOpen) closeWR();
     });
     document.addEventListener('fullscreenchange', function() {
-        if (!document.fullscreenElement && overlay.classList.contains('wr-open')) closeWR();
+        if (!document.fullscreenElement && _wrIsOpen) closeWR();
     });
     document.addEventListener('webkitfullscreenchange', function() {
-        if (!document.webkitFullscreenElement && overlay.classList.contains('wr-open')) closeWR();
+        if (!document.webkitFullscreenElement && _wrIsOpen) closeWR();
+    });
+
+    // ── Single-audio enforcement inside WR ──
+    // Listen for postMessage from YT iframes inside the WR grid.
+    // When one feed unmutes, mute all others and show a red border.
+    window.addEventListener('message', function(e) {
+        if (!_wrIsOpen) return;
+        if (!e.data || typeof e.data !== 'string') return;
+        var data;
+        try { data = JSON.parse(e.data); } catch(x) { return; }
+        if (data.event !== 'infoDelivery' || !data.info) return;
+        var info = data.info;
+        var isPlaying = (info.playerState === 1);
+        var isUnmuted = (typeof info.muted !== 'undefined' && !info.muted && info.volume > 0);
+        if (!isPlaying || !isUnmuted) return;
+        var wrIframes = grid.querySelectorAll('iframe');
+        var activeCell = null;
+        wrIframes.forEach(function(iframe) {
+            if (iframe.contentWindow === e.source) {
+                activeCell = iframe.closest('.wr-cell');
+            }
+        });
+        if (!activeCell) return;
+        // Clear borders, mute others
+        grid.querySelectorAll('.wr-cell').forEach(function(cell) {
+            cell.style.outline = '';
+            if (cell !== activeCell) {
+                var f = cell.querySelector('iframe');
+                if (f) {
+                    try { f.contentWindow.postMessage(JSON.stringify({event:'command',func:'mute',args:[]}), '*'); } catch(ex) {}
+                }
+            }
+        });
+        activeCell.style.outline = '3px solid #B30000';
+        activeCell.style.outlineOffset = '-3px';
     });
 })();
 
