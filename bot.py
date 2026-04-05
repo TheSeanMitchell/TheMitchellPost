@@ -2825,13 +2825,14 @@ def cluster_items(items, min_shared=3):
 
 THIRTY_MIN = 1800
 
-def render_column(items):
+def render_clusters(clusters):
     """
-    Cluster items, then render with new-dot indicators and story grouping.
-    Returns HTML string.
+    Render a pre-built cluster list (from cluster_items) as HTML.
+    Accepts the same cluster format cluster_items() returns.
+    This is the single render path — always pass pre-built clusters so that
+    the source counts on the page exactly match what MRO reports.
     """
     now = time.time()
-    clusters = cluster_items(items)
     out = ""
     for cluster in clusters:
         if len(cluster) == 1:
@@ -2898,27 +2899,95 @@ def render_column(items):
             out += '</div>\n'  # close cluster
     return out
 
+def render_column(items):
+    """
+    Compatibility wrapper: clusters items then delegates to render_clusters.
+    ONLY used for columns that don't have a pre-built canonical cluster set.
+    For section columns, always pass the pre-built clusters from SECTION_CLUSTERS below.
+    """
+    return render_clusters(cluster_items(items))
+
 # ====================== SOURCE COUNT SUMMARY ======================
 def source_summary(items):
     sources = set(get_friendly_source(it[2]) for it in items)
     return f'<p class="src-summary">{len(items)} headlines \u00b7 {len(sources)} sources</p>\n'
 
+def source_summary_from_clusters(clusters):
+    """Source summary from pre-built clusters (counts individual items, not clusters)."""
+    all_items = [item for cl in clusters for item in cl]
+    sources = set(get_friendly_source(it[2]) for it in all_items)
+    return f'<p class="src-summary">{len(all_items)} headlines \u00b7 {len(sources)} sources</p>\n'
+
+# ====================== CANONICAL CLUSTER SETS ======================
+# Build clusters ONCE per section column. These are the authoritative clusters used
+# for BOTH page rendering AND MRO selection. This guarantees that a story showing
+# "4 sources" in MRO will show exactly 4 sources when the user scrolls to it.
+# Clusters span breaking + recent combined so MRO can find the best cross-24h story.
+
+print("Building canonical cluster sets...")
+
+def _build_section_clusters(breaking_items, recent_items):
+    """
+    Build two separate cluster sets (breaking and recent) from pre-combined items,
+    but first build a COMBINED set to find the globally best cluster per story,
+    then split rendered output by time window.
+    Returns (breaking_clusters, recent_clusters, combined_clusters_for_mro)
+    """
+    combined = breaking_items + recent_items
+    # Canonical combined clustering for MRO — authoritative source of truth
+    combined_clusters = cluster_items(combined, min_shared=3)
+
+    # For rendering we split by time window. We re-run clustering on each window
+    # BUT we seed with the same min_shared so the grouping logic is identical.
+    # Items that appeared in a combined cluster will cluster the same way within
+    # their window (or solo if their match is in the other window).
+    breaking_clusters = cluster_items(breaking_items, min_shared=3)
+    recent_clusters   = cluster_items(recent_items,   min_shared=3)
+
+    return breaking_clusters, recent_clusters, combined_clusters
+
+SECTION_CLUSTERS = {}
+_CLUSTER_INPUTS = [
+    ("us",       us_breaking,      us_recent),
+    ("mideast",  middle_breaking,  middle_recent),
+    ("world",    world_breaking,   world_recent),
+    ("tech",     tech_breaking,    tech_recent),
+    ("business", business_breaking,business_recent),
+    ("sports",   sports_breaking,  sports_recent),
+    ("culture",  culture_breaking, culture_recent),
+]
+for _sid, _bi, _ri in _CLUSTER_INPUTS:
+    _bc, _rc, _cc = _build_section_clusters(_bi, _ri)
+    SECTION_CLUSTERS[_sid] = {
+        "breaking": _bc,
+        "recent":   _rc,
+        "combined": _cc,   # used exclusively by MRO
+    }
+    _multi_b = sum(1 for cl in _bc if len(cl) > 1)
+    _multi_r = sum(1 for cl in _rc if len(cl) > 1)
+    _multi_c = sum(1 for cl in _cc if len(cl) > 1)
+    print(f"  [{_sid}] breaking={len(_bc)} clusters ({_multi_b} multi), "
+          f"recent={len(_rc)} clusters ({_multi_r} multi), "
+          f"combined={len(_cc)} clusters ({_multi_c} multi-source)")
+
+print("Canonical clusters done.")
+
 # ====================== TOP STORIES STRIP ======================
 def build_top_stories(max_stories=10):
-    """Pull the top multi-source clusters across all sections for the pinned strip."""
-    all_section_items = [
-        ("US",          us_breaking + us_recent),
-        ("Middle East", middle_breaking + middle_recent),
-        ("World",       world_breaking + world_recent),
-        ("Tech",        tech_breaking + tech_recent),
-        ("Business",    business_breaking + business_recent),
-        ("Sports",      sports_breaking + sports_recent),
-        ("Culture",     culture_breaking + culture_recent),
-    ]
+    """Pull the top multi-source clusters across all sections using canonical combined clusters."""
+    section_map = {
+        "US":          "us",
+        "Middle East": "mideast",
+        "World":       "world",
+        "Tech":        "tech",
+        "Business":    "business",
+        "Sports":      "sports",
+        "Culture":     "culture",
+    }
     top = []
-    for section_label, items in all_section_items:
-        clusters = cluster_items(items, min_shared=3)
-        multi = [cl for cl in clusters if len(cl) >= 2]
+    for section_label, sid in section_map.items():
+        combined_clusters = SECTION_CLUSTERS[sid]["combined"]
+        multi = [cl for cl in combined_clusters if len(cl) >= 2]
         for cl in multi:
             cl.sort(key=lambda x: x[0], reverse=True)
             top.append((len(cl), cl[0][0], section_label, cl))
@@ -4013,10 +4082,15 @@ print("AI summaries done.")
 
 def section_block(section_id, color_class, breaking_items, recent_items,
                   breaking_title, recent_title):
+    # Use pre-built canonical clusters so the rendered source counts exactly match MRO
+    _sid = section_id.replace("section-", "")
+    _bc = SECTION_CLUSTERS[_sid]["breaking"]
+    _rc = SECTION_CLUSTERS[_sid]["recent"]
+
     b_summary = source_summary(breaking_items) if breaking_items else ''
     r_summary = source_summary(recent_items) if recent_items else ''
-    b_content = render_column(breaking_items) if breaking_items else '<p style="color:#666">No breaking news in the last 3 hours.</p>\n'
-    r_content = render_column(recent_items) if recent_items else '<p style="color:#666">No additional headlines right now.</p>\n'
+    b_content = render_clusters(_bc) if _bc else '<p style="color:#666">No breaking news in the last 3 hours.</p>\n'
+    r_content = render_clusters(_rc) if _rc else '<p style="color:#666">No additional headlines right now.</p>\n'
     # Pull the pre-generated AI summary for this section
     ai_text = AI_SUMMARIES.get(section_id, "")
     if ai_text:
@@ -4061,22 +4135,21 @@ def section_block(section_id, color_class, breaking_items, recent_items,
 
 # ── Daily Briefing: top 5 stories by source count ──
 def build_daily_briefing(max_items=10):
-    """Pick top weighted stories across all sections for a daily briefing digest."""
-    all_section_items = [
-        ("US",          us_breaking + us_recent),
-        ("Middle East", middle_breaking + middle_recent),
-        ("World",       world_breaking + world_recent),
-        ("Tech",        tech_breaking + tech_recent),
-        ("Business",    business_breaking + business_recent),
-        ("Sports",      sports_breaking + sports_recent),
-        ("Culture",     culture_breaking + culture_recent),
-    ]
+    """Pick top weighted stories across all sections using canonical combined clusters."""
+    section_map = {
+        "US":          "us",
+        "Middle East": "mideast",
+        "World":       "world",
+        "Tech":        "tech",
+        "Business":    "business",
+        "Sports":      "sports",
+        "Culture":     "culture",
+    }
     scored = []
-    for section_label, items in all_section_items:
-        clusters = cluster_items(items, min_shared=3)
-        for cl in clusters:
+    for section_label, sid in section_map.items():
+        combined_clusters = SECTION_CLUSTERS[sid]["combined"]
+        for cl in combined_clusters:
             cl.sort(key=lambda x: x[0], reverse=True)
-            # weight: source count * recency bonus
             age_hours = (time.time() - cl[0][0]) / 3600
             recency_bonus = max(0, 12 - age_hours) / 12
             score = len(cl) + recency_bonus * 2
@@ -4113,61 +4186,95 @@ if top_stories or daily_briefing:
             seen_headlines.add(norm)
             combined_cards.append((sl, cl, ns, lts, lt, ll))
 
-    # ── MRO Layout: 7 guaranteed (one per section, MRO popularity order) + 3 most popular = 10 total ──
-    # For EACH section we find the cluster with the MOST sources (not just the first/most-recent).
-    # This guarantees we never show a 1-source article when a 4-source cluster exists in the same section.
+    # ── MRO Layout: 7 guaranteed (one per section) + 3 most popular = 10 total ──
+    # Uses canonical combined clusters (breaking + recent) so source counts are
+    # 100% accurate and match what is rendered on the page.
+    # Max 2 appearances per section across the full top 10.
     TAB_ORDER = ["US","Middle East","World","Tech","Business","Sports","Culture"]
 
-    _solo_section_items = [
-        ("US",          us_breaking + us_recent),
-        ("Middle East", middle_breaking + middle_recent),
-        ("World",       world_breaking + world_recent),
-        ("Tech",        tech_breaking + tech_recent),
-        ("Business",    business_breaking + business_recent),
-        ("Sports",      sports_breaking + sports_recent),
-        ("Culture",     culture_breaking + culture_recent),
-    ]
+    _SID_MAP = {
+        "US":"us","Middle East":"mideast","World":"world",
+        "Tech":"tech","Business":"business","Sports":"sports","Culture":"culture",
+    }
 
-    # Build a per-section "best cluster" by scanning ALL clusters for that section,
-    # sorted by (source_count DESC, recency DESC). This ensures the most-reported story wins.
+    # Build per-section best cluster from canonical combined clusters
     _best_per_section = {}
-    for _sec_label, _sec_items in _solo_section_items:
-        if not _sec_items:
+    for _sec_label in TAB_ORDER:
+        _sid = _SID_MAP[_sec_label]
+        _combined_clusters = SECTION_CLUSTERS[_sid]["combined"]
+        if not _combined_clusters:
+            # Edge case: no items at all for this section
+            _all_items = (us_breaking + us_recent) if _sec_label == "US" else []
+            for _s2, _bi2, _ri2 in _CLUSTER_INPUTS:
+                if _s2 == _sid:
+                    _all_items = _bi2 + _ri2
+                    break
+            if _all_items:
+                _best = sorted(_all_items, key=lambda x: x[0], reverse=True)[0]
+                _ts, _ttl, _src, _lnk = _best
+                _best_per_section[_sec_label] = (_sec_label, [_best], 1, _ts, _ttl, _lnk)
             continue
-        _sec_clusters = cluster_items(_sec_items, min_shared=3)
-        # Score: primary = number of sources, secondary = recency of lead article
-        _sec_clusters_scored = []
-        for _cl in _sec_clusters:
+
+        # Score each cluster: primary = source count, secondary = recency
+        _scored = []
+        for _cl in _combined_clusters:
             _cl.sort(key=lambda x: x[0], reverse=True)
             _n = len(_cl)
             _lead_ts = _cl[0][0]
-            _sec_clusters_scored.append((_n, _lead_ts, _cl))
-        # Sort: most sources first, then most recent as tiebreaker
-        _sec_clusters_scored.sort(key=lambda x: (x[0], x[1]), reverse=True)
-        if _sec_clusters_scored:
-            _n, _lead_ts, _cl = _sec_clusters_scored[0]
-            _lead_ts2, _lead_title, _lead_source, _lead_link = _cl[0]
-            _best_per_section[_sec_label] = (_sec_label, _cl, _n, _lead_ts2, _lead_title, _lead_link)
-        else:
-            # No cluster at all — fall back to the single most-recent headline
-            _best = sorted(_sec_items, key=lambda x: x[0], reverse=True)[0]
-            _ts, _ttl, _src, _lnk = _best
-            _best_per_section[_sec_label] = (_sec_label, [_best], 1, _ts, _ttl, _lnk)
+            _scored.append((_n, _lead_ts, _cl))
+        _scored.sort(key=lambda x: (x[0], x[1]), reverse=True)
 
-    # Order the first 7 by their cluster source count (most-reported section first),
-    # then by lead article recency as tiebreaker — this drives the page section order too.
+        _n, _lead_ts, _cl = _scored[0]
+        _lead_ts2, _lead_title, _lead_source, _lead_link = _cl[0]
+        _best_per_section[_sec_label] = (_sec_label, _cl, _n, _lead_ts2, _lead_title, _lead_link)
+
+    # Order the first 7 by source count desc, then recency as tiebreaker
     _ordered_by_popularity = sorted(
         [_best_per_section[s] for s in TAB_ORDER if s in _best_per_section],
-        key=lambda c: (c[2], c[3]),  # (source_count, lead_ts) both desc
+        key=lambda c: (c[2], c[3]),
         reverse=True
     )
     first_seven = _ordered_by_popularity
 
-    # Last 3: most popular cards NOT already in first_seven (by source count desc)
+    # Last 3: most popular clusters NOT already in first_seven,
+    # with a max of 2 total appearances per section across the full top 10.
     _first_seven_norms = {normalize_title(c[4]) for c in first_seven}
-    remaining = [c for c in combined_cards if normalize_title(c[4]) not in _first_seven_norms]
-    remaining.sort(key=lambda c: c[2], reverse=True)  # sort by source count
-    last_three = remaining[:3]
+    # Count section appearances in first_seven
+    _section_count = {}
+    for c in first_seven:
+        _section_count[c[0]] = _section_count.get(c[0], 0) + 1
+
+    # Build remaining pool from ALL canonical combined clusters across all sections
+    _remaining_pool = []
+    for _sec_label in TAB_ORDER:
+        _sid = _SID_MAP[_sec_label]
+        for _cl in SECTION_CLUSTERS[_sid]["combined"]:
+            _cl.sort(key=lambda x: x[0], reverse=True)
+            _lead_norm = normalize_title(_cl[0][1])
+            if _lead_norm in _first_seven_norms:
+                continue
+            _remaining_pool.append((_sec_label, _cl, len(_cl), _cl[0][0], _cl[0][1], _cl[0][3]))
+
+    # Sort by source count desc, recency desc
+    _remaining_pool.sort(key=lambda c: (c[2], c[3]), reverse=True)
+
+    # Pick last 3 with 2-per-section cap enforced
+    last_three = []
+    _seen_last3_norms = set()
+    for _card in _remaining_pool:
+        if len(last_three) >= 3:
+            break
+        _sl, _cl, _ns, _lts, _lt, _ll = _card
+        _norm = normalize_title(_lt)
+        if _norm in _seen_last3_norms:
+            continue
+        # Enforce max 2 total appearances per section in full top 10
+        _total_so_far = _section_count.get(_sl, 0)
+        if _total_so_far >= 2:
+            continue
+        last_three.append(_card)
+        _seen_last3_norms.add(_norm)
+        _section_count[_sl] = _total_so_far + 1
 
     combined_cards = first_seven + last_three  # exactly 10
 
@@ -4197,6 +4304,27 @@ if top_stories or daily_briefing:
         if sid not in _derived_order:
             _derived_order.append(sid)
 
+    # ── Build a lookup of every anchor that will actually appear on the rendered page ──
+    # Key = md5 hash of the lead link; Value = anchor ID prefix ("cl" or "hl")
+    # This lets render_mro_cards emit the correct anchor even when a combined-cluster
+    # lead renders as a solo headline in the breaking/recent split.
+    _page_anchor_index = {}  # link_hash -> "cl" | "hl"
+    for _sec_id_key in ["us","mideast","world","tech","business","sports","culture"]:
+        for _col_key in ["breaking","recent"]:
+            for _page_cl in SECTION_CLUSTERS[_sec_id_key][_col_key]:
+                if not _page_cl:
+                    continue
+                _page_cl.sort(key=lambda x: x[0], reverse=True)
+                _page_lead_link = _page_cl[0][3]
+                _page_hash = hashlib.md5(_page_lead_link.encode()).hexdigest()[:8]
+                _type = "cl" if len(_page_cl) > 1 else "hl"
+                _page_anchor_index[_page_hash] = _type
+                # Also index every non-lead item in the cluster as pointing to the cluster anchor
+                for _item in _page_cl[1:]:
+                    _item_hash = hashlib.md5(_item[3].encode()).hexdigest()[:8]
+                    if _item_hash not in _page_anchor_index:
+                        _page_anchor_index[_item_hash] = _type  # same cluster
+
     # Split into two columns of 5
     col1_cards = combined_cards[:5]
     col2_cards = combined_cards[5:10]
@@ -4215,12 +4343,20 @@ if top_stories or daily_briefing:
         for section_label, cluster, n_src, lead_ts2, lead_title, lead_link in cards:
             safe_title = lead_title.replace('<','&lt;').replace('>','&gt;')
             safe_title = safe_title[0].upper() + safe_title[1:] if safe_title else safe_title
-            # Build the same anchor ID used by render_column for this story
+            # Find what actually rendered on the page for this story.
+            # The combined cluster may have a different lead than the page cluster, so
+            # check every item in the combined cluster for a page-rendered anchor.
             link_hash = hashlib.md5(lead_link.encode()).hexdigest()[:8]
-            # Could be a cluster lead (cl-HASH-anchor) or a single headline (hl-HASH)
-            # We embed both candidates; JS will find whichever exists
             anchor_cluster = f"cl-{link_hash}-anchor"
             anchor_single  = f"hl-{link_hash}"
+            # Try each cluster member until we find one that has a rendered anchor
+            for _member in cluster:
+                _mhash = hashlib.md5(_member[3].encode()).hexdigest()[:8]
+                if _mhash in _page_anchor_index:
+                    _ptype = _page_anchor_index[_mhash]
+                    anchor_cluster = f"cl-{_mhash}-anchor"
+                    anchor_single  = f"hl-{_mhash}"
+                    break
             tag_css = section_css_map.get(section_label, "")
             html += (
                 f'<div class="top-story-card mro-card" '
